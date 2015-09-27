@@ -1,4 +1,4 @@
-\documentclass{book}
+\documentclass[a5paper,10pt,marginnote=raggedouter]{book}
 \usepackage{polyglossia}  % Hyphenation
 \setmainlanguage{english}
 \setotherlanguages{french,italian}
@@ -22,15 +22,12 @@
 \usepackage{./main}       % Markup and design
 \input{./acronyms}        % Acronyms
 \begin{document}
-
 \frontmatter
 \title{Electronic Document Preparation\\Pocket Primer}
 \author{Vít Novotný}
 \maketitle
 \tableofcontents
-\mainmatter
-
-\fakechapter{Foreword}
+\chapter{Foreword}
 With the advent of the digital age, typesetting has become available to
 virtually anyone equipped with a personal computer. Beautiful text documents can
 now be crafted using free and consumer-grade software, which often obviates the
@@ -57,6 +54,7 @@ operating systems such as Windows. To try these examples out, the reader is
 advised to install a Unix-like environment, such as the Windows Cygwin, on their
 local machine or to use a Unix-like operating system, such as \Linux.
 
+\mainmatter
 \chapter{Writing}
 The essence of a document is the idea it represents. In the case of a text
 document, this idea is articulated through speech, which is transcribed using
@@ -117,14 +115,14 @@ the text programming languages of \acronym{FORTRAN} and \acronym{COBOL}. The
 digital representation of letters, digits and other characters was initially
 closely tied to each specific application and processor architecture, but with
 the advent of networking in 1960s, mutual intelligibility became a point of
-concern.\footnote{
+concern.\iffalse\footnote{
   \Acronym{EBCDIC} by \acronym{IBM} was the default encoding on
   \acroshort{IBM}'s System/360 mainframes and was in active use until the
   introduction of \acronym{PC} in 1981. In countries using Chinese ideographs,
   special encodings, such as Big5, \acronym{JIS}, and \acronym{EUC}, are used to
   this day. For brevity, the text focuses on the main stream of international
   encodings.
-}``We had over sixty different ways to represent characters in
+}\fi``We had over sixty different ways to represent characters in
 computers. It was a real Tower of Babel,'' explains \cite{brandel99}
 \person{Bob Berner}, an American computer scientist who worked at \acronym{IBM}
 during 1956--1962 and who drafted \acronym{ASCII}---a
@@ -240,12 +238,19 @@ numbers of the most common characters in the range from 0 to 65,535
 (\hexa{FFFF}) called \acronym{BMP}. The smallest unit of division in
 \acronym{UCS} are \termpl*{block}\acroindex[!block]{UCS}, which contain 256
 thematically related characters. \Acronym{UCS} encodings map character numbers
-to binary character codes. Three major encodings are specified in the
+to binary character codes.
+
+Three major encodings are specified in the
 \acronym{UCS} standard and its amendments \cite{iso93:am1,iso93:am2}:
 \begin{description}
-  \item[\acroshort{UTF}-32]\acroindex[!UTF-32@{\acroshort{UTF}-32}]{UTF}
-    Directly encodes \acronym{UCS} characters by transforming their code points
-    to four-byte integers. This encoding is also known as
+  \item[\acroshort{UTF}-32]\acroindex[!UTF-32@{\acroshort{UTF}-32}]{UTF}Directly%
+    \footnote{
+      Notable are also the seven-bit encodings of \acroshort{UTF}-7
+      \acroindex[!UTF-7@\acroshort{UTF}-7]{UTF} and \inx{Punycode}, which bring
+      Unicode support to protocols that were designed with the seven-bit
+      \acroshort{ASCII} in mind, such as e-mail.}
+    encodes \acronym{UCS} characters by transforming their code points to
+    four-byte integers. This encoding is also known as
     \acroshort{UCS}-4\acroindex[!UCS-4@{\acroshort{UCS}-4}]{UCS}.
   \item[\acroshort{UTF}-16]\acroindex[!UTF-16@{\acroshort{UTF}-16}]{UTF}
     Directly encodes characters within \acronym{BMP} by transforming their code
@@ -267,16 +272,12 @@ to binary character codes. Three major encodings are specified in the
     (\mbox{\hexa{80}--\hexa{FD}}). The encoding is illustrated in Figure
     \ref{fig:utf8}.
 \end{description}
-\acroshort{UTF}-32 is primarily used\footnote{
-  Notable are also the seven-bit encodings of \acroshort{UTF}-7
-  \acroindex[!UTF-7@\acroshort{UTF}-7]{UTF} and \inx{Punycode}, which bring
-  Unicode support to protocols that were designed with the seven-bit
-  \acroshort{ASCII} in mind, such as e-mail.}
-for the internal representation of individual \acronym{UCS} characters inside
-programs, \acroshort{UTF}-16 fulfills a similar role in applications that only
-work with \acronym{BMP}, and \acroshort{UTF}-8 is used for text storage and
-interchange. Since 2010, the majority of text content on the Web is encoded in
-\acroshort{ASCII} and \acroshort{UTF}-8 \cite{qsuccess15}.
+\acroshort{UTF}-32 is primarily used for the internal representation of
+individual \acronym{UCS} characters inside programs, \acroshort{UTF}-16 fulfills
+a similar role in applications that only work with \acronym{BMP}, and
+\acroshort{UTF}-8 is used for text storage and interchange. Since 2010, the
+majority of text content on the Web is encoded in \acroshort{ASCII} and
+\acroshort{UTF}-8 \cite{qsuccess15}.
 
   % A table explaining the UTF-8 encoding [fig:utf8]
   % Some examples of exotic glyphs in Unicode
@@ -516,8 +517,8 @@ version locally and its operation is fully dependent on the availability of the
 server. An example of centralized \acronym{VCS} is \acronym{SVN}\footnote{
   The authoritative resource on \acronym{SVN} is the \work{Version Control With
   Subversion} book, affectionately known as the \work*{Subversion
-  book}\index{Subversion book|see{Version Control With Subversion}}, which is
-  available in full at \url{http://svnbook.com/}.
+  book}\index{Subversion book|see{\work*{Version Control With Subversion}}},
+  which is available in full at \url{http://svnbook.com/}.
 }. By comparison,
 there is no designated server in decentralized \acronym{VCS} and the users can
 send and download new versions to and from any other user. The client software
@@ -905,11 +906,11 @@ application-specific metadata about the document---a technique known as
   \inputcode[xml]{examples/02/john.rd}
   \inputcode[text]{examples/02/john.nt}
   \inputcode[text]{examples/02/john.ttl}
-  \caption{Above is an example \acronym{RDF} document using \acronym{DC} and
-    \acronym{FOAF} ontologies in \acronym{RDF}/\acronym{XML}%
+  \separatorcaption{Above is an example \acronym{RDF} document using
+    \acronym{DC} and \acronym{FOAF} ontologies in \acronym{RDF}/\acronym{XML}%
     \filename{john.rd}, \inx{N-Triples}\filename{john.nt}, and \inx{Turtle}%
     \filename{john.ttl} serializations. Below is a graph representation of the
-    document.}\label{fig:rdf-doc}\bigskip
+    document.}\label{fig:rdf-doc}
   \input{examples/02/john.tex}
 \end{figure}
 
@@ -1086,17 +1087,17 @@ which represent different use cases.
 \section{Proofreading}
 \section{Printing and Binding}
 \section{Distribution}
+\backmatter
 
 % Bibliography
-\cleardoublepage
 \printbibliography[heading=bibintoc]
 
 % Acronyms
-\cleardoublepage
-\fakechapter{Acronyms}
+\chapter{Acronyms}
 \printacronyms[heading=none]
 
 % Index
+\cleardoublepage
 \def\index#1{} % Disable indexing
 \printindex    % Print the index
 \faketoc{Index}

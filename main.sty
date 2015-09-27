@@ -27,7 +27,14 @@
   \scshape\MakeLowercase{#2}}%                     %% a UCS character
   \if\relax#1\relax\else~(\hexa{#1})\fi}           %% #1 -- hexa, #2 -- name
 \def\scamp{{\footnotesize\&}}                      % A fake small-caps ampersand
-\def\footnote#1{\marginpar{\small\raggedright#1}}  % Margin footnotes
+\def\separatorcaption#1{{%                         % A caption that relates to
+  \setlength{\belowcaptionskip}{\abovecaptionskip}%%% material both below and
+  \caption{#1}}}                                   %% above
+\def\footnote#1{{%                                 % Margin note
+  \def\arg{#1}%
+  \let\marginnotesize\footnotesize
+  \marginpar[\marginnotesize\raggedleft\arg]%
+            {\marginnotesize\raggedright\arg}}}%
 \def\filename#1{ (\texttt{#1})}                    % Filenames in captions
 \DeclareRobustCommand{\work}{\@ifstar\work@\work@@}
 \def\work@#1{\textit{#1}}                          % Names of written works
@@ -125,12 +132,6 @@
 %% Faking chapters and TOC entries
 \def\faketoc#1{%                          % A forced TOC entry
   \addcontentsline{toc}{chapter}{#1}}
-\usepackage{afterpage}
-\def\fakechapter#1{%                      % An unnumbered chapter head
-  \chapter*{#1}
-  \markright{\MakeUppercase{#1}}
-  \afterpage{\markboth{\MakeUppercase{#1}}{\MakeUppercase{#1}}}
-  \faketoc{#1}}
 %% Acronyms
 \usepackage{acro}
 \newcommand{\defacronym}[3][]{%           % An acronym definition
@@ -151,6 +152,20 @@
   \index{#2@{\acs*{#2}}#1}}               %% #2 appended to the `\index` argument
 
 % Design
+%% Layout
+\hoffset=-17.4mm % Set up margins of 8mm (+2mm binding correction) inner,
+\voffset=-14.4mm %% 8mm outer, 11mm top, 22mm bottom
+\setlength{\topmargin}{0pt} %% Do not use any top margin
+\setlength{\footskip}{5mm+1em}
+\setlength{\headheight}{1em}
+\setlength{\headsep}{6mm}
+\setlength{\textheight}{%
+  \paperheight-\footskip-\headheight-\headsep-\topmargin-33mm}
+\setlength{\marginparsep}{4mm}
+\setlength{\textwidth}{100mm} %% Set up a measure that yields ~66 chars per line
+\setlength{\marginparwidth}{\paperwidth-\textwidth-\marginparsep-18mm}
+\setlength{\oddsidemargin}{2mm}
+\setlength{\evensidemargin}{\marginparwidth+\marginparsep}
 %% No em-spaces after full stops
 \frenchspacing
 %% No clubs and widows
@@ -192,14 +207,6 @@
 %%% No vertical spacing and indentation in lists
 \usepackage{enumitem}
 \setlist{noitemsep,leftmargin=0cm}
-%%% Description list runs into the margin
-\renewenvironment{description}{%
-  \begin{itemize}
-    \begingroup
-    \let\olditem\item
-    \renewcommand{\item}[1][]{\olditem[\textbf{##1}]}}{%
-    \endgroup
-  \end{itemize}}
 %% Code
 \setminted{breaklines=true}
 \usemintedstyle{default}
