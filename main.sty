@@ -35,9 +35,11 @@
   \scshape\MakeLowercase{#2}}%                     %% a UCS character
   \if\relax#1\relax\else~(\hexa{#1})\fi}           %% #1 -- hexa, #2 -- name
 \def\scamp{{\footnotesize\&}}                      % A fake small-caps ampersand
+\newlength\oldbelowcaptionskip
 \def\separatorcaption#1{%                          % A caption that relates to
-  \setlength{\belowcaptionskip}{\abovecaptionskip}%%% material both below and
-  \global\caption{#1}}
+  \setlength\oldbelowcaptionskip\belowcaptionskip  %% material both below and
+  \setlength\belowcaptionskip\abovecaptionskip
+  \caption{#1}\setlength\belowcaptionskip\oldbelowcaptionskip}
 \def\footnote#1{%                                  % Margin note
   \marginpar[{\footnotesize\raggedleft#1}]%
              {\footnotesize\raggedright#1}}%
@@ -60,9 +62,6 @@
   \fi}
 \let\filename\texttt                               % Filenames
 \def\filenamecap#1{ (\filename{#1})}               % Filenames in captions
-\DeclareRobustCommand{\work}{\@ifstar\work@\work@@}
-\def\work@#1{\textit{#1}}                          % Names of written works
-\def\work@@#1{\work*{#1}\index{#1@\work*{#1}}}     %% ... without indexing
 \let\tblhead\textit                                % The table heading style
 \def\inx#1{#1\index{#1}}                           % Leaky indexing
 \let\person\inx                                    % Person names
@@ -80,8 +79,28 @@
 \DeclareRobustCommand%      %% ... at the beginning of a sentence (`\Cliutil*`)
   {\Cliutil}{\@ifstar\Identifier\Cliutil@}
 \def\Cliutil@#1{%           %%% ... with indexing                  (`\Cliutil`)
-  \Cliutil*{#1}\index{#1@\Cliutil*{#1}}}
-\def\command{\cliutil*}               % A command
+  \Cliutil*{#1}\index{#1@\cliutil*{#1}}}
+\def\command{\cliutil*}                            % A command
+%% Macros for citing works in and outside of the bibliography
+\DeclareRobustCommand\work{\@ifstar\work@\work@@}  % Names of written works
+\def\work@@#1{%                                    %% ... with indexing
+  \work*{#1}\workindex{#1}}                        %%% [sortstring]{TeX name}
+\def\work@#1{\textit{#1}}                          %% ... w/o indexing
+\newcommand\workindex[2][]{%
+  \ifx\relax#1\relax
+    \def\work@sortstring{#2}%
+  \else
+    \def\work@sortstring{#1}%
+  \fi\workindex@{#2}}
+\def\workindex@#1{%                                %% ... only indexing
+  \index{\work@sortstring @\work*{#1}}}
+\DeclareFieldFormat*{citetitle}{\work*{#1}\workindex@{#1}}
+\newcommand\citework[2][]{%                        %% ... citation format
+  \ifx\relax#1\relax
+    \def\work@sortstring{#2}%
+  \else
+    \def\work@sortstring{#1}%
+  \fi\citetitle{#2}~\cite{#2}}
 %% Code
 \def\code@readhead:#1{%               % A helper macro that reads #1\relax and
   \if#1|%                             %% returns any tokens preceding a pipe (|)
@@ -175,12 +194,15 @@
 \def\Acronym#1{\Ac{#1}\acroindex{#1}}     %% ... at the beginning of a sentence
 \def\acrofirst#1{\acf{#1}\acroindex{#1}}  %% ... in the initial form 
 \def\acropl#1{\acp{#1}\acroindex{#1}}     %% ... in the plural form 
-\def\acroplfst#1{\acfp{#1}\acroindex{#1}} %% ... in the initial and plural form
+\def\acroplfst#1{\acfp{#1}\acroindex{#1}} %% ... in the initial plural form
 \def\acroshort#1{\acs*{#1}\acroindex{#1}} %% ... in the unexpanded form
 \def\acrolong#1{\acl{#1}\acroindex{#1}}   %% ... in the expanded form
 \def\acroflat#1{\textsc{\MakeLowercase{#1}}} %% ... that wasn't defined
 \newcommand{\acroindex}[2][]{%            % Puts an acronym entry into index with
   \index{#2@{\acs*{#2}}#1}}               %% #2 appended to the `\index` argument
+\usepackage{etoolbox}
+\preto\chapter\acresetall           % Consider acronyms forgotten after a chapter
+\preto\backmatter\acuseall          % Do not expand acronyms in the back matter
 
 % Design
 %% Layout
@@ -188,15 +210,16 @@
 \voffset=-14.4mm %% 8mm outer, 11mm top, 22mm bottom
 \setlength{\topmargin}{0pt} %% Do not reserve any space for the top margin
 \setlength{\footskip}{0pt}  %% Do not reserve any space for the footer
-\setlength{\headheight}{1.25em}
+\setlength{\headheight}{1.25em} %%% as the footer is unused on myheadings pages
 \setlength{\headsep}{4mm}
 \setlength{\textheight}{%
   \paperheight-\footskip-\headheight-\headsep-\topmargin-33mm}
-\setlength{\marginparsep}{4mm} %%% as the footer is unused on myheadings pages
+\setlength{\marginparsep}{4mm}
 \setlength{\textwidth}{100mm} %% Set up a measure that yields ~66 chars per line
 \setlength{\marginparwidth}{\paperwidth-\textwidth-\marginparsep-18mm}
 \setlength{\oddsidemargin}{2mm}
 \setlength{\evensidemargin}{\marginparwidth+\marginparsep}
+\setlength{\parskip}{1em} %% Set the paragraph indent to 1em
 %%% Running heads and page numbers
 \usepackage{fancyhdr}
 \fancypagestyle{plain}{%
@@ -214,9 +237,16 @@
   \fancyhead[LO]{\slshape\rightmark}%
   \fancyhead[LE,RO]{\thepage}}
 %%% Headings
-%\usepackage{titlesec}
-%\titleformat{\section}[block]{\scshape}{\thesection\quad}{0pt}{}[]
-%\titleformat{\subsection}[block]{\itshape}{\thesubsection\quad}{0pt}{}[]
+\iffalse % Use the original headings for now
+  \usepackage{titlesec}
+  \titleformat{\section}[block]{\scshape}{\thesection\quad}{0pt}{}[]
+  \titleformat{\subsection}[block]{\itshape}{\thesubsection\quad}{0pt}{}[]
+\fi
+%%% Index layout
+\usepackage[
+  indentunit=\parindent,  % The basic unit of index layout as well as ...
+  columnsep=\parindent    %% ... the column separator is the paragraph indent
+]{idxlayout}
 
 %% Acronyms
 \acsetup{

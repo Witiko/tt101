@@ -88,8 +88,8 @@ these specifics.
 
 On top of grammar and orthographic rules stand \termpl{style guide}, which, in
 order to improve consistency, codify how common language patterns are encoded.
-More comprehensive style guides---such as the \work{Chicago Manual of Style} or
-the \work{Oxford Style Manual}\footnote{
+More comprehensive style guides---such as \work{the Chicago Manual of Style} or
+\work{the Oxford Style Manual}\footnote{
   This document was prepared in accordance with \person{William Strunk}'s
   \work{Elements of Style}, an American English style guide for general use. 
 }---often go beyond writing and provide guidelines on design and typesetting as
@@ -98,8 +98,8 @@ well, making them an indispensable reference on the editorial tradition.
 Above all stand the \termpl*{typographic rule}\index{writing rules!typography},
 which specify how the resulting document should be typeset so that it doesn't
 disturb the eye of the reader. These, as well as the orthographic rules on
-hyphenation, can be left out of consideration during writing, for the realm of
-thought knows no type areas.
+hyphenation, can be left out of consideration during writing, as it is the page
+that should be formed around the writing and not the other way around.
 
 \section{Text Processing}
 Originally the domain of the pen, the quill, the stylus, and the more recent
@@ -511,7 +511,7 @@ hierarchy, aren't regular.\footnote{
   their attention to Perl self-referencing groups and look-aheads, which make it
   a simple matter to create expressions that match non-context-free formal
   languages.
-% It is easy to show that the Perl 5 regex of \code[text]{(?=(a(?-1)?b)c)
+% It is easy to show that the Perl 5 regex of \code{(?=(a(?-1)?b)c)
 % a+(b(?-1)?c)} generates the context-sensitive language of $a^nb^nc^n$ for
 % arbitrary characters $a,b,c$ with superscripts denoting repetition.
 } To disambiguate the term, these expressions are often called
@@ -521,15 +521,6 @@ hierarchy, aren't regular.\footnote{
   \input examples/01/regexs
   \label{tab:regexs}
 \end{table}
-
-  % Describe the ERE and BRE syntaxes [[tab:regexs]]
-  % <https://en.wikipedia.org/wiki/Regular_expression#Standards>
-  % <http://pubs.opengroup.org/onlinepubs/007908799/xbd/re.html>
-  % 
-  % Remark that many GNU utilities implement GNU versions of BRE and ERE, which
-  % add the ERE abilities to BRE and which enable back-references, word
-  % boundaries and more in ERE.
-  % <http://www.regular-expressions.info/gnu.html>
 
 %%% POSIX.2-1997: Regular Expressions
 %%%   <http://pubs.opengroup.org/onlinepubs/007908799/xbd/re.html>
@@ -555,8 +546,12 @@ value, directionality, and other properties defined by Unicode.
   % Show the character property Perl matching examples
   % <https://en.wikipedia.org/wiki/Regular_expression#Unicode>
 
-The most elementary text processing \acroshort{CLI} tool is \cliutil{grep},
-which makes it possible to search text files for fixed strings and regexes in
+The most elementary text processing \acroshort{CLI} tool is \cliutil{grep}%
+\footnote{
+  The authoritative resource on \cliutil{grep}, \cliutil{sed}, and \cliutil{awk}
+  is \citework{dougherty97}, which explains each tool as well as the
+  \acroshort{BRE} and \acroshort{ERE} syntaxes in full detail.
+}, which makes it possible to search text files for fixed strings and regexes in
 default of an advanced text editor. Unless configured otherwise, the tool will
 present lines that contain one or more matches to the user. A more advanced
 text-processing \acroshort{CLI} tool is \cliutil{sed}, which features a simple
@@ -566,8 +561,6 @@ programming language, albeit a more advanced one than that of \cliutil{sed}.
 Originally developed for the Research Unix during 1973--1977, \cliutil{grep},
 \cliutil{sed}, and \cliutil{awk} are available in various flavors for most
 operating systems.
-
-  % Showcase a simple and an extreme example of grep, sed and awk code
 
 %%% The true power of regular expressions
 %%%   <https://nikic.github.io/2012/06/15/The-true-power-of-regular-expressions.html>
@@ -601,10 +594,8 @@ download new versions to and from the server using a client software. The client
 software is \term*{thin} in the sense that it does not store more than one
 version locally and its operation is fully dependent on the availability of the
 server. An example of centralized \acronym{VCS} is \acronym{SVN}\footnote{
-  The authoritative resource on \acronym{SVN} is the \work{Version Control With
-  Subversion} book, affectionately known as the \work*{Subversion
-  book}\index{Subversion book|see{\work*{Version Control With Subversion}}},
-  which is available in full at \url{http://svnbook.red-bean.com/}.
+  The authoritative resource on \acronym{SVN} is \citework{sussman02},
+  affectionately known as \work{the Subversion book}.
 }. By comparison,
 there is no designated server in decentralized \acronym{VCS} and the users can
 send and download new versions to and from any other user. The client software
@@ -626,7 +617,7 @@ negatively impact the user experience. As a counter-measure, some \acropl{DPS}
 include \acronym{VCS} of their own, which can take the form of an internal
 function that records the changes directly into the output file, a separate
 \acronym{VCS} that provides a special support for the file format used by the
-\acronym{DPS}---such as \inx{Tortoise \acronym{SVN}} does for Microsoft Office
+\acronym{DPS}---such as \inx{Tortoise \acroshort{SVN}} does for Microsoft Office
 documents---, or a web service that enables real-time interactive
 collaboration---such as \inx{Office Online} or \inx{Google Docs}.
 
@@ -675,13 +666,14 @@ The situation engulfing digital typesetting was growing increasingly frustrating
 for publishers in the 1960s. The markup languages used by different typesetting
 systems varied wildly, and once a publisher had a large collection of documents
 typeset via a given company, switching to another one could be very costly
-venture. The companies would often take advantage of this situation, causing
-their prices to skyrocket. As a result of that, a demand for a universal markup
+venture. The companies would take advantage of this situation, causing their
+prices to skyrocket. As a result of that, a demand for a universal markup
 language emerged.
 
 This demand was met by a project developed\footnote{
   More information about the project can be found within
-  \textcite{goldfarb96,goldfarb97:whySGML}.
+  \citework{goldfarb96} and \citework[SGML: The Reason Why and the First
+  Published Hint]{goldfarb97:whySGML}.
 } at the Cambridge Scientific Center of \acronym{IBM} in the early 1970s. The
 project aimed at imbuing a text editor with the ability to query, edit, and
 display documents from a repository to allow the usage of computers in legal
@@ -691,9 +683,9 @@ These languages were not unified and many of them comprised largely presentation
 markup, which made information retrieval impossible without the use of
 heuristics. To resolve these issues, a unifying markup language called
 \acronym{GML} was drafted. The language was released \cite{goldfarb81}
-to the public in \cite{goldfarb81} and finally standardized in \citeyear{iso86}
-as \acronym{SGML}\footnote{
-  The authoritative resource on \acronym{SGML} is \textcite{goldfarb91}, which
+to the public in \citeyear{goldfarb81} and finally standardized in
+\citeyear{iso86} as \acronym{SGML}\footnote{
+  The authoritative resource on \acronym{SGML} is \citework{goldfarb91}, which
   includes the full text of the standard bearing extensive annotations.
 } \cite{iso86}.
 
@@ -819,7 +811,7 @@ superseded \acronym{SGML} in many applications. Some of the applications of
 \acronym{XML} for document preparation include DocBook\acroindex[!DocBook]{XML}%
 \footnote{
   The authoritative resource on the DocBook \acronym{XML} format is
-  \textcite{walsh10}. The book itself is written in DocBook and its source code
+  \citework{walsh10}. The book itself is written in DocBook and its source code
   is publicly available in full at \url{http://docbook.org}.
 }---a technical documentation format used for authoring books by publishers such
 as O'Reilly Media and for documenting software at companies such as Red Hat,
@@ -898,7 +890,7 @@ In case of an interactive application, this recommendation can be relaxed.
 \subsection{The Extensible Hypertext Markup Language}
 Ever since the release of \acronym{XML} in 1998, \acronym{W3C} entertained the
 idea of turning \acronym{HTML} into an application of \acronym{XML}, rather than
-\acronym{SGML}, as exemplified by the working draft of \textcite{raggett98}.
+\acronym{SGML}, as exemplified by the working draft of \citework{raggett98}.
 Unlike \acronym{HTML} parsers, which are complex in their acceptance of
 malformed content, \acronym{XML} parsers are required to draconianly refuse
 \acronym{XML} documents that aren't well-formed \cite[Section~1.2,
@@ -990,8 +982,8 @@ application-specific metadata about the document---a technique known as
 
 \begin{figure}
   \inputcode[xml]{examples/02/john.rd}
-  \inputcode[text]{examples/02/john.nt}
-  \inputcode[text]{examples/02/john.ttl}
+  \inputcode{examples/02/john.nt}
+  \inputcode{examples/02/john.ttl}
   \separatorcaption{Above is an example \acronym{RDF} document using
     \acronym{DC} and \acronym{FOAF} ontologies in \acronym{RDF}/\acronym{XML}%
     \filenamecap{john.rd}, \inx{N-Triples}\filenamecap{john.nt}, and
@@ -1024,7 +1016,7 @@ application-specific metadata about the document---a technique known as
 %%%   <http://www.w3.org/TR/rif-overview/>
         
 \section{Markup in Document Preparation Systems}
-Some of the existing markup is directly tied with specific \acroplfst{DPS}.
+Some of the existing markup is directly tied with specific \acropl{DPS}.
 These \acropl{DPS} can be dichotomized into \term*{batch-oriented}%
 \acroindex[!batch-oriented]{DPS}, which process marked up input
 text documents into printable output documents in a page description language on
@@ -1065,8 +1057,8 @@ vector graphics.
     width=0.975\textwidth]{examples/02/poe-groff.pdf}}
   \inputcode[groff]{examples/02/poe.groff}
   \caption{An excerpt from the beginning of \person{Edgar Allen Poe}'s
-    \work{Cask of Amontillado} formatted using the \identifier{mom}
-    macro package of \cliutil*{groff}.}
+    \work*{Cask of Amontillado}\workindex{the Cask of Amontillado} formatted
+    using the \identifier{mom} macro package of \cliutil*{groff}.}
   \label{fig:poe}
 \end{figure}
 
@@ -1081,10 +1073,10 @@ vector graphics.
 
 Another notable batch-oriented \acronym{DPS} is \TeX\index{TeX@\TeX}\footnote{
   The circumstances that led to the creation of \TeX\ and the surrounding tools
-  are thoroughly documented in \textcite{knuth98}.
+  are thoroughly documented in \citework{knuth98}.
 }, which was developed and consequently released to the public domain in 1970s
 by an American professor of computer science \person{Donald Knuth}, after he had
-received galley proofs for the second volume of his monograph, the \work{Art of
+received galley proofs for the second volume of his monograph, \work{the Art of
 Computer Programming}, and found the appearance of mathematical formulae
 distasteful. As a result, the typesetting of mathematics is a central theme in
 \TeX, rather than an afterthought, which differentiates it from most other

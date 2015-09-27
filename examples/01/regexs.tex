@@ -1,12 +1,4 @@
-{\def\regex#1{\code[text]{#1}}
-\def\match#1{\textcolor{red}{#1}}
-\let\meta\emph
-\def\regexTerm#1{\term*{#1}\acroindex[!#1]{BRE}\acroindex[!#1]{ERE}}
-\def\tablebegin{
-  \begin{tabularx}{\textwidth}{
-    X>{\raggedright}p{.57\textwidth}>{\raggedright\arraybackslash}
-    p{.18\textwidth}@{\smallskip}}}
-\footnotesize
+{\input examples/01/regexs-definitions
 \tablebegin
   \tblhead{\normalsize\acroshort{BRE} regex} &
     \tblhead{\normalsize Description} &
@@ -46,8 +38,8 @@
     \match{bea}r, glass \match{bea}ds \\
   \regex{be[^ea]} &
     A \regexTerm{non-matching list expression} contains a caret (\regex{^}) as
-    its first character and matches any character the corresponding matching
-    list expression would not match. & o\match{bea}h, \match{ben}d,
+    its first character and matches any character that the corresponding
+    matching list expression would not match. & o\match{bea}h, \match{ben}d,
     li\match{bel}a \\
   \regex{\^\*\.\\\$} & Backslash (\regex{\ }) is an
     \regexTerm{escape character} that either suppresses or activates the
@@ -56,26 +48,27 @@
   \regex{\(..\).*\1} & A \regexTerm{backreference} in the form of an
     escaped number \meta{n} $\in\langle1;9\rangle$ (\regex{\1}, \regex{\2},
     \ldots, \regex{\9}) matches anything the \meta{n}th subexpression matched.
-    & a\match{rara}una, \match{darda}nelles, \match{nationa}lity \\
-\end{tabularx}
+    & \match{ara ara}rauna, \match{darda}nelles, \match{nationa}lity \\
+\end{tabularx}}
 \separatorcaption{An informal description of the \acroshort{BRE} syntax
   (above) and the differences in the \acroshort{ERE} syntax (below)}
+{\input examples/01/regexs-definitions
 \tablebegin
   \tblhead{\normalsize\acroshort{ERE} regex} &
     \tblhead{\normalsize Description} &
     \tblhead{\normalsize Matches} \\ \hline
-    \regex{we{1,2}p} & Unlike in \acronym{BRE}, braces aren't escaped. &
+    \regex{we{1,2}p} & Unlike in \acropl{BRE}, braces aren't escaped. &
       \match{weep}s, \match{wep}t\\
   \regex{pe+rl?} & Plus sign (\regex{+}) and question mark (\regex{?}) are
     repetition operators equivalent to the interval expressions of
     \regex{\{1,\}} and \regex{\{0,1\}}. &
     \match{per}sona, \match{peer}, s\match{pee}ch, \match{perl} \\
   \regex{(}\meta{regex}\regex{)} &
-    Unlike in \acronym{BRE}, parentheses aren't escaped. & \meta{regex} \\
+    Unlike in \acropl{BRE}, parentheses aren't escaped. & \meta{regex} \\
   \regex{(on|t).} & Vertical line (\regex{|}) is an
     \regexTerm{alternation operator} that separates multiple regexes. The
     whole regex matches any of the alternative regexes. &
     \match{one}, \match{tw}o, \match{tr}ophy, \match{tr}uth \\
   \regex{(..).*\1} & \acropl{ERE} do not support backreferences. &
-    \match{a literal \textbackslash1} \\
+    \meta{undefined} \\
 \end{tabularx}}

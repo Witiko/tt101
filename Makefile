@@ -25,9 +25,9 @@ $(SUBMAKEFILES):
 # Typeset the text.
 $(OUTPUT).pdf: $(SOURCES) Makefile
 	$(TEX) $<
-	makeindex $(OUTPUT)
 	biber $(OUTPUT)
 	$(TEX) $<
+	makeindex $(OUTPUT)
 	$(TEX) $<
 
 # Remove auxiliary files and directories.
