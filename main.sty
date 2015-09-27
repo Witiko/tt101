@@ -11,7 +11,8 @@
   \else
     Linux%
   \fi\acroindex[!Linux]{GNU}}
-\def\foreign[#1]#2{\begin{#1}\textit{#2}\end{#1}}  % A foreign text
+\DeclareRobustCommand{\foreign}[2][]{%             % A foreign language text
+  \begin{#1}\textit{#2}\end{#1}}
 \usepackage{xcolor}
 \def\needscite{\textcolor{red}{[citation needed]}} % [Citation needed] reminder
 \def\hexa#1{%                                      % A hexadecimal number
@@ -30,15 +31,14 @@
 \def\separatorcaption#1{{%                         % A caption that relates to
   \setlength{\belowcaptionskip}{\abovecaptionskip}%%% material both below and
   \caption{#1}}}                                   %% above
-\def\footnote#1{{%                                 % Margin note
-  \def\arg{#1}%
-  \let\marginnotesize\footnotesize
-  \marginpar[\marginnotesize\raggedleft\arg]%
-            {\marginnotesize\raggedright\arg}}}%
+\def\footnote#1{%                                  % Margin note
+  \marginpar[{\footnotesize\raggedleft#1}]%
+             {\footnotesize\raggedright#1}}%
 \def\filename#1{ (\texttt{#1})}                    % Filenames in captions
 \DeclareRobustCommand{\work}{\@ifstar\work@\work@@}
 \def\work@#1{\textit{#1}}                          % Names of written works
 \def\work@@#1{\work*{#1}\index{#1@\work*{#1}}}     %% ... without indexing
+\let\tblhead\textit                                % The table heading style
 \def\inx#1{#1\index{#1}}                           % Leaky indexing
 \let\person\inx                                    % Person names
 \def\MakeTitlecase#1{{%                            % Turns the first character
@@ -132,6 +132,11 @@
 %% Faking chapters and TOC entries
 \def\faketoc#1{%                          % A forced TOC entry
   \addcontentsline{toc}{chapter}{#1}}
+\usepackage{afterpage}
+\def\fakechapter#1{%                      % An unnumbered chapter head
+  \chapter*{#1}
+  \markboth{\MakeUppercase{#1}}{\MakeUppercase{#1}}
+  \faketoc{#1}}
 %% Acronyms
 \usepackage{acro}
 \newcommand{\defacronym}[3][]{%           % An acronym definition
@@ -155,48 +160,38 @@
 %% Layout
 \hoffset=-17.4mm % Set up margins of 8mm (+2mm binding correction) inner,
 \voffset=-14.4mm %% 8mm outer, 11mm top, 22mm bottom
-\setlength{\topmargin}{0pt} %% Do not use any top margin
-\setlength{\footskip}{5mm+1em}
-\setlength{\headheight}{1em}
-\setlength{\headsep}{6mm}
+\setlength{\topmargin}{0pt} %% Do not reserve any space for the top margin
+\setlength{\footskip}{0pt}  %% Do not reserve any space for the footer
+\setlength{\headheight}{1.25em}
+\setlength{\headsep}{4mm}
 \setlength{\textheight}{%
   \paperheight-\footskip-\headheight-\headsep-\topmargin-33mm}
-\setlength{\marginparsep}{4mm}
+\setlength{\marginparsep}{4mm} %%% as the footer is unused on myheadings pages
 \setlength{\textwidth}{100mm} %% Set up a measure that yields ~66 chars per line
 \setlength{\marginparwidth}{\paperwidth-\textwidth-\marginparsep-18mm}
 \setlength{\oddsidemargin}{2mm}
 \setlength{\evensidemargin}{\marginparwidth+\marginparsep}
-%% No em-spaces after full stops
-\frenchspacing
-%% No clubs and widows
-\usepackage[all]{nowidow}
-%% Fonts
-\usepackage{fontspec}
-\usepackage{unicode-math}
-\setmainfont[
-  Numbers=OldStyle,
-  Ligatures=TeX
-]{TeX Gyre Pagella}
-\setmonofont[
-  Ligatures=TeX,
-  Scale=MatchLowercase,
-  AutoFakeSlant, % Fake the slant on the typewriter font
-  BoldItalicFeatures=FakeSlant
-]{Inconsolata}
-%%% Set up TeX Gyre Pagella as the math font with old style digits from the
-%%%% base TeX Gyre Pagella font for inline mathematics.
-\setmathfont[
-  math-style=ISO,
-  bold-style=ISO,
-  vargreek-shape=TeX
-]{texgyrepagella-math.otf}
-\setmathfont[
-  range=\mathup/{num},
-  Numbers=OldStyle
-]{TeX Gyre Pagella}
-\everydisplay={\setmathfont[range=\mathup/{num}]{texgyrepagella-math.otf}}
-%% Protrusion
-\usepackage[protrusion]{microtype}
+%%% Running heads and page numbers
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}% Hide the rule
+  \fancyhead[LE,RO]{\thepage}}
+\let\oldmaketitle\maketitle
+\def\maketitle{% Switch to the fancy pagestyle after the title page
+  \pagestyle{plain}
+  \oldmaketitle
+  \cleardoublepage
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0.4pt}% Show the rule
+  \fancyhead[RE]{\slshape\leftmark}%
+  \fancyhead[LO]{\slshape\rightmark}%
+  \fancyhead[LE,RO]{\thepage}}
+%%% Headings
+%\usepackage{titlesec}
+%\titleformat{\section}[block]{\scshape}{\thesection\quad}{0pt}{}[]
+%\titleformat{\subsection}[block]{\itshape}{\thesubsection\quad}{0pt}{}[]
+
 %% Acronyms
 \acsetup{
   first-long-format=\itshape,  % The formatting of an expanded acronym
@@ -218,3 +213,44 @@
   colorlinks,
   citecolor=blue
 ]{hyperref}
+
+% Typesetting
+%% General settings
+%% No em-spaces after full stops
+\frenchspacing % No em-spaces after full stops
+\usepackage[all]{nowidow} % No clubs and widows
+\emergencystretch 1em % Add up to 1em of stretchable glue to overfull lines
+\usepackage{marginfix} % Prevent margin notes bleeding into the bottom margin
+%% Hyphenation definitions
+\input ushyphex
+%% Fonts
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont[
+  Numbers=OldStyle,
+  Ligatures=TeX,
+  UprightFeatures={    SmallCapsFeatures={Letters=SmallCaps,LetterSpace=8} },
+  BoldFeatures={       SmallCapsFeatures={Letters=SmallCaps,LetterSpace=8} },
+  ItalicFeatures={     SmallCapsFeatures={Letters=SmallCaps,LetterSpace=8} },
+  BoldItalicFeatures={ SmallCapsFeatures={Letters=SmallCaps,LetterSpace=8} }
+]{TeX Gyre Pagella}
+\setmonofont[
+  Ligatures=TeX,
+  Scale=MatchLowercase,
+  AutoFakeSlant, % Fake the slant on the typewriter font
+  BoldItalicFeatures=FakeSlant
+]{Inconsolata}
+%%% Set up TeX Gyre Pagella as the math font with old style digits from the
+%%%% base TeX Gyre Pagella font for inline mathematics.
+\setmathfont[
+  math-style=ISO,
+  bold-style=ISO,
+  vargreek-shape=TeX
+]{texgyrepagella-math.otf}
+\setmathfont[
+  range=\mathup/{num},
+  Numbers=OldStyle
+]{TeX Gyre Pagella}
+\everydisplay={\setmathfont[range=\mathup/{num}]{texgyrepagella-math.otf}}
+%% Protrusion
+\usepackage[protrusion]{microtype}

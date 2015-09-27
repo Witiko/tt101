@@ -1,13 +1,17 @@
-\documentclass[a5paper,10pt,marginnote=raggedouter]{book}
+\documentclass[a5paper,10pt]{book}
+\usepackage{etex}         % Reserve room for 32 additional insertion classes
+\reserveinserts{32}       %% that will not be taken away by `\newcount` et al.
 \usepackage{polyglossia}  % Hyphenation
 \setmainlanguage{english}
-\setotherlanguages{french,italian}
+\setotherlanguages{french,italian,german}
 \usepackage{placeins}     % Float barriers
 \usepackage{tikz}         % Diagrams
 \usetikzlibrary{trees,arrows}
 \usepackage{fancyvrb}     % Manually colored verbatim
 \usepackage{float}        % Non-floating figures
 \usepackage{url}          % URLs
+\usepackage{tabularx}     % Tables
+\usepackage{booktabs}
 \usepackage[              % Bibliography
   backend=biber,
   style=numeric,
@@ -27,7 +31,8 @@
 \author{Vít Novotný}
 \maketitle
 \tableofcontents
-\chapter{Foreword}
+\mainmatter
+\fakechapter{Foreword}
 With the advent of the digital age, typesetting has become available to
 virtually anyone equipped with a personal computer. Beautiful text documents can
 now be crafted using free and consumer-grade software, which often obviates the
@@ -36,15 +41,12 @@ playing field of the Internet coupled with the rising popularity of digital-only
 documents then allows the author to bypass the publisher as well, if they so
 wish, without jeopardizing their chance of recognition.
 
-Documents are like tin-cans, conserving ideas for later consumption. The one you
-just opened contains an assortment of thoughts that should prove useful for any
-author who aspires to write, design, typeset, and distribute text
-documents---the most universal and common kind of documents in use. Each
-chapters describes one discrete step of document preparation along with
-practical examples and references to more detailed literature. Since document
-preparation is a broad, multidisciplinary subject, the primary goal of this text
-is to provide the reader with a general overview of the landscape and to provide
-pointers for those interested in further intellectual nourishment.
+This aim of this book is to provide a general overview of the tools and
+techniques tied with writing, designing, typesetting, and distributing text
+documents---the most universal form of knowledge preservation and transfer
+invented by man. Each chapter describes one discrete step of document
+preparation along with practical examples and references to literature for those
+interested in further study of the subject matter.
 
 Every chapter is filled with examples that illustrate the subject matter. These
 should be consulted whenever the concepts described in the text are unclear to
@@ -54,21 +56,21 @@ operating systems such as Windows. To try these examples out, the reader is
 advised to install a Unix-like environment, such as the Windows Cygwin, on their
 local machine or to use a Unix-like operating system, such as \Linux.
 
-\mainmatter
 \chapter{Writing}
 The essence of a document is the idea it represents. In the case of a text
 document, this idea is articulated through speech, which is transcribed using
-text, optionally accompanied by figures and then laid out on a sheet of paper
+text, optionally accompanied by figures, and then laid out on a sheet of paper
 according to a design. Since the text is typically independent on the design,
 whose task is to support and elicit the internal structure of the text, it is
 writing that is the logical first step in the text document creation.
 
-  % An example of a poem by Christian Morgenstern
-  % as an exception to the rule
-  % \caption{Exceptions that prove the rule about the separation of text
-  %   and design can sometimes be encountered in poetry. Above is Christian
-  %   Morgenstern's \work{Trichter}, where the text and its form are intimately
-  %   intertwined.}
+\begin{figure}
+  \input examples/01/trichter
+  \caption{Exceptions that prove the rule about the separation of text and
+    design can sometimes be encountered in poetry. Above is \person{Christian
+    Morgenstern}'s \work{\foreign[german]{Trichter}}, where the text and its
+    form are intimately intertwined.}
+\end{figure}
 
 The essentials of writing in any given natural language include \termpl*{grammar
 rule}\index{writing rules!grammar}, which specify the structure of spoken
@@ -83,22 +85,19 @@ needs to be translated first before writing down. A writer needs to recognize
 these specifics.
 
 On top of grammar and orthographic rules stand \termpl{style guide}, which, in
-order to improve consistency, codify how common language patterns are
-encoded.\footnote{
+order to improve consistency, codify how common language patterns are encoded.
+More comprehensive style guides---such as the \work{Chicago Manual of Style} or
+the \work{Oxford Style Manual}\footnote{
   This document was prepared in accordance with \person{William Strunk}'s
-  \work{Elements of Style}, an American English style guide for general use.
-} More comprehensive style guides---such as the \work{Chicago Manual of Style}
-or the \work{Oxford Style Manual}---often go beyond writing and provide
-guidelines on design and typesetting as well, making them an indispensable
-reference on the editorial tradition.
+  \work{Elements of Style}, an American English style guide for general use. 
+}---often go beyond writing and provide guidelines on design and typesetting as
+well, making them an indispensable reference on the editorial tradition.
 
 Above all stand the \termpl*{typographic rule}\index{writing rules!typography},
 which specify how the resulting document should be typeset so that it doesn't
 disturb the eye of the reader. These, as well as the orthographic rules on
-hyphenation, can be safely ignored during writing, for the realm of thought
-knows no type areas.
-
-  % An illustration of the journey of an idea from the author to the reader
+hyphenation, can be left out of consideration during writing, for the realm of
+thought knows no type areas.
 
 \section{Text Processing}
 Originally the domain of the pen, the quill, the stylus, and the more recent
@@ -130,20 +129,24 @@ during 1956--1962 and who drafted \acronym{ASCII}---a
 enabled computer networking on large scale.
 
 \subsubsection{ASCII}
-In \acronym{ASCII}, every character is represented by a number from 0 to 127,
+In \acronym{ASCII}, every character is represented by a number from zero to 127,
 which is transformed to a seven-bit integer called a \term{character code}.
-These 128 codes are used to encode \termpl{printable character}---spanning
-the letters of the English alphabet, digits, punctuation, and other
-symbols---and \termpl{control code}, as depicted in Table \ref{tab:ascii}.
-Unlike printable characters, control codes have no fixed visual representation
-or precise semantics and were used to implement application-specific
-communication protocols and text formatting. Unconstrained by the bandwidth and
-the storage limitations of the 1960s, today's communication protocols and text
-formats gravitate towards markup constructed from printable characters, which,
-unlike control codes, are easy to read and write by humans.
+These 128 codes are used to encode \termpl{printable character}---spanning the
+letters of the English alphabet, digits, punctuation, and other symbols---and
+\termpl{control code}, as depicted in Table \ref{tab:ascii}.  Unlike printable
+characters, control codes have no fixed visual representation or precise
+semantics and were used to implement application-specific communication
+protocols and text formatting. Unconstrained by the bandwidth and the storage
+limitations of the 1960s, today's communication protocols and text formats
+gravitate towards markup constructed from printable characters, which, unlike
+control codes, are easy to read and write by humans.
 
-  % The ASCII table (both the original and ANSI X3.4-1986: [tab:ascii]
-  %   <http://sliderule.mraiow.com/w/images/7/73/ASCII.pdf>
+\begin{table}
+  \input examples/01/ascii
+  \caption{The \acronym{ASCII} encoding, as specified in the \citeyear{asa86}
+    revision of the standard \cite{asa86}.}
+  \label{tab:ascii}
+\end{table}
 
 %%% ASCII, Other Standards
 %%%   <https://en.wikipedia.org/wiki/ASCII#Other_standards>
@@ -178,11 +181,11 @@ strings encoded in \acronym{ASCII}:
     number of characters stored in a memory region, and to perform basic
     operations, such as adjacent character retrieval or text truncation.
   \item Characters are alphabetically ordered. Character strings can therefore
-    be collated by the comparison of character code binary values.
-  \item Lower-case letters, upper-case letters, digits and control codes form
-    contiguous ranges of character codes, which simplifies classification.
+    be collated by comparing character code binary values.
+  \item Lowercase and uppercase letters, digits and control codes form
+    contiguous ranges of character codes, simplifying classification.
   \item There is precisely one way to encode any printable character. The
-    conversion between the lower- and upper-case letters is a matter of
+    conversion between the lower- and uppercase letters is a matter of
     inverting one bit.
 \end{itemize}
 This comes at the expense of support for non-English writing systems.
@@ -196,8 +199,6 @@ all major modern writing systems whose characters fit within the space of 128
 additional combinations was standardized in the
 \acroshort{ISO}/\acroshort{IEC} 8859 series released during 1986--2001.
 
-  % An example of the lower 128 bytes of the Latin-2 encoding (with citation)
-
 Compared to \acronym{ASCII}, eight-bit encodings introduced an additional level
 of complexity to text processing:
 \begin{itemize}
@@ -206,13 +207,13 @@ of complexity to text processing:
   \item Character strings can no longer be collated by character code
     comparison. Each encoding requires a separate mapping from character codes
     to sorting weights.
-  \item Classes of characters, such as upper-case letters, lower-case letters,
-    and punctuation, no longer form contiguous ranges and their position varies
+  \item Classes of characters, such as uppercase and lowercase letters or
+    punctuation, no longer form contiguous ranges and their position varies
     among encodings. This impedes character classification.
   \item Idiosyncrasies, such as the ligature of æ and invisible hyphenation
     hints, are included in several encodings, which makes it more difficult to
     determine character string equivalence. Among encodings that contain lower-
-    and upper-case letters, the algorithms for case conversion vary.
+    and uppercase letters, the algorithms for case conversion vary.
   \item There exists no standard mechanism to detect which encoding is being
     used. The distinction needs to be done on the application level using either
     heuristics or additional metadata. Consequently, no standard mechanism
@@ -240,17 +241,17 @@ numbers of the most common characters in the range from 0 to 65,535
 thematically related characters. \Acronym{UCS} encodings map character numbers
 to binary character codes.
 
-Three major encodings are specified in the
-\acronym{UCS} standard and its amendments \cite{iso93:am1,iso93:am2}:
+Three major encodings\footnote{
+  Notable are also the seven-bit encodings of \acroshort{UTF}-7
+  \acroindex[!UTF-7@\acroshort{UTF}-7]{UTF} and \inx{Punycode}, which bring
+  Unicode support to protocols that were designed with the seven-bit
+  \acroshort{ASCII} in mind, such as e-mail.}
+are specified in the \acronym{UCS} standard and its amendments
+\cite{iso93:am1,iso93:am2}:
 \begin{description}
-  \item[\acroshort{UTF}-32]\acroindex[!UTF-32@{\acroshort{UTF}-32}]{UTF}Directly%
-    \footnote{
-      Notable are also the seven-bit encodings of \acroshort{UTF}-7
-      \acroindex[!UTF-7@\acroshort{UTF}-7]{UTF} and \inx{Punycode}, which bring
-      Unicode support to protocols that were designed with the seven-bit
-      \acroshort{ASCII} in mind, such as e-mail.}
+  \item[\acroshort{UTF}-32]\acroindex[!UTF-32@{\acroshort{UTF}-32}]{UTF}Directly
     encodes \acronym{UCS} characters by transforming their code points to
-    four-byte integers. This encoding is also known as
+    four-byte integers. \acroshort{UTF}-32 is also known as
     \acroshort{UCS}-4\acroindex[!UCS-4@{\acroshort{UCS}-4}]{UCS}.
   \item[\acroshort{UTF}-16]\acroindex[!UTF-16@{\acroshort{UTF}-16}]{UTF}
     Directly encodes characters within \acronym{BMP} by transforming their code
@@ -305,7 +306,7 @@ heterogeneity of eight-bit encodings:
     code comparison, a collation algorithm \cite{unicode15:collation} and
     collation tables for major locales \cite{unicode15:cldr} are maintained by
     the Unicode Consortium.
-  \item Classes of characters---such as upper-case letters, lower-case letters,
+  \item Classes of characters---such as uppercase letters, lowercase letters,
     numbers, and punctuation---do not form contiguous ranges, but their position
     is directly specified by the standard \cite[sec.\,4.5]{unicode15}.
   \item Although idiosyncrasies---such as ligatures, invisible hyphenation
@@ -518,7 +519,7 @@ server. An example of centralized \acronym{VCS} is \acronym{SVN}\footnote{
   The authoritative resource on \acronym{SVN} is the \work{Version Control With
   Subversion} book, affectionately known as the \work*{Subversion
   book}\index{Subversion book|see{\work*{Version Control With Subversion}}},
-  which is available in full at \url{http://svnbook.com/}.
+  which is available in full at \url{http://svnbook.red-bean.com/}.
 }. By comparison,
 there is no designated server in decentralized \acronym{VCS} and the users can
 send and download new versions to and from any other user. The client software
@@ -604,9 +605,9 @@ crux was going to be the markup languages in which the documents were written.
 These languages were not unified and many of them comprised largely presentation
 markup, which made information retrieval impossible without the use of
 heuristics. To resolve these issues, a unifying markup language called
-\acronym{GML} was drafted. The language was later released \citeyear{goldfarb81}
-to the public \cite{goldfarb81} and finally standardized \citeyear{iso86} as
-\acronym{SGML}\footnote{
+\acronym{GML} was drafted. The language was released \cite{goldfarb81}
+to the public in \cite{goldfarb81} and finally standardized in \citeyear{iso86}
+as \acronym{SGML}\footnote{
   The authoritative resource on \acronym{SGML} is \textcite{goldfarb91}, which
   includes the full text of the standard bearing extensive annotations.
 } \cite{iso86}.
@@ -668,7 +669,7 @@ of \termpl*{schema language}\acroindex[!schema language]{XML}\footnote{
   A list of tools for the manipulation of files in \acronym{XML} schema
   languages is maintained on the web site of \acronym{W3C} at
   \url{http://www.w3.org/XML/Schema}.
-} for \acronym{XML}, such as \acroshort{W3C} \acroshort{XML} Schema
+} for \acronym{XML}, such as \acroshort{W3C} \acroshort{XML} Schema%
 \acroindex[!Schema]{XML}, \acronym{Relax NG}, or Schematron that can be used to
 check the validity of an \acroshort{XML} document instead of a \acronym{DTD}.
 The constrains imposed by either a \acronym{DTD} or a schema define an
@@ -796,8 +797,8 @@ eliminating the need for the presentation markup.
 During the same period, an initial version of a scripting language called
 \inx{JavaScript} \cite{ecma97} was drafted and incorporated into Netscape
 Navigator 2.0\footnote{
-  \inx{JScript} and \inx{VBScript} were direct competitors of JavaScript, but
-  they never saw implementation outside Microsoft browsers.
+  \inx{JScript} and \inx{VBScript} competed directly with JavaScript, but they
+  never saw implementation outside Microsoft browsers.
 } of the contemporary leading web browsers and a descendant of the original
 Mosaic browser. As a part of a joint effort to bring Java into web browsers by
 Sun Microsystems and Netscape Communications, JavaScript was supposed to
