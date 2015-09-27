@@ -2,10 +2,10 @@
 \ProvidesPackage{main}
 
 % Markup
-\usepackage{xcolor}
+%% Miscellaneous
 \def\foreign[#1]#2{\begin{#1}\textit{#2}\end{#1}}  % A foreign text
-\def\needscite{\textcolor{red}{%                   % [Citation needed] reminder
-  \textsuperscript{[citation needed]}}}
+\usepackage{xcolor}
+\def\needscite{\textcolor{red}{[citation needed]}} % [Citation needed] reminder
 \def\hexa#1{%                                      % A hexadecimal number
   {\let\ea\expandafter%
   \mbox{\ea\ea\ea\@gobble\hexapair#1\relax\relax\relax}}%
@@ -18,8 +18,7 @@
 \def\scamp{{\footnotesize\&}}                      % A fake small-caps ampersand
 \def\footnote#1{\marginpar{\small\raggedright#1}}  % Margin footnotes
 \def\filename#1{ (\texttt{#1})}                    % Filenames in captions
-\let\work\textit                                   % Names of written works
-\let\term\textit                                   % First occurances of terms
+\def\work#1{\index{#1}\textit{#1}}                 % Names of written works
 \def\inx#1{#1\index{#1}}                           % Leaky indexing
 \let\person\inx                                    % Person names
 \def\element#1{\mintinline{html}{<#1>}}            % An SGML or XML element
@@ -28,6 +27,26 @@
   \def\head##1##2\relax{##1}
   \def\tail##1##2\relax{##2}
   \identifier{\uppercase{\head#1\relax}\tail#1\relax}}}
+%% Terms
+\let\termstyle\textit
+\def\term{\@ifstar\term@@\term@}
+\def\term@#1{\term@@{#1}\index{#1}}      % First occurances of terms (`\term`)
+\def\term@@#1{\termstyle{#1}}            % ... w/o indexing          (`\term*`)
+\def\termpl{\@ifstar\termpl@@\termpl@}
+\def\termpl@#1{%                         % ... in plural              (`\termpl`)
+  \begingroup%                           % [#1]{#2} -- #2 has plural spelling #1
+  \def\textoutput##1]{%                  % {#1} -- #1 has plural spelling #1s
+    \termstyle{##1}\indexoutput}%
+  \def\indexoutput##1{%
+    \index{##1}\endgroup}%
+  \if#1[\expandafter\textoutput\else%
+  \endgroup\termstyle{#1s}\index{#1}\fi}
+\def\termpl@@#1{%                        % ... in plural w/o indexing (`\termpl*`)
+  \begingroup%                           % [#1]{#2} -- #2 has plural spelling #1
+  \def\textoutput##1]##2{%               % {#1} -- #1 has plural spelling #1s
+    \termstyle{##1}}%
+  \if#1[\expandafter\textoutput\else%
+  \endgroup\termstyle{#1s}\fi}
 %% Faking chapters and TOC entries
 \def\faketoc#1{%                          % A forced TOC entry
   \addcontentsline{toc}{chapter}{#1}}
@@ -41,12 +60,11 @@
 \usepackage{acro}
 \newcommand{\defacronym}[3][]{%           % An acronym definition
   \mdefacronym[#1]{#2}{#2}{#3}}  
-\newcommand{\mdefacronym}[4][]{%          % A manual acronym definition 
+\newcommand{\mdefacronym}[4][]{%          % A manual acronym definition
   \DeclareAcronym{#2}{%                   %   #1: options, #2: handle
     short={\MakeLowercase{#3}},%          %   #3: short form, #4: long form
-    long={#4},
-    long-plural-form={#4s},#1}}
- % An acronym formatting macro
+    long={#4},long-plural-form={#4s},#1}}
+% An acronym formatting macro
 \def\acronym#1{\ac{#1}\acroindex{#1}}     % An acronym
 \def\Acronym#1{\Ac{#1}\acroindex{#1}}     % ... at the beginning of a sentence
 \def\acrofirst#1{\acf{#1}\acroindex{#1}}  % ... in the initial form 
@@ -96,3 +114,5 @@
     \renewcommand{\item}[1][]{\olditem[\textbf{##1}]}}{%
     \endgroup
   \end{itemize}}
+%% Hypertext support
+\usepackage[colorlinks,citecolor=blue]{hyperref}
