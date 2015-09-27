@@ -1,4 +1,4 @@
-\documentclass[b5paper]{book}
+\documentclass{book}
 \usepackage{lmodern}
 \usepackage{polyglossia}
 \setmainlanguage{english}
@@ -14,12 +14,12 @@
     \chapter{Foreword}
       With the advent of the digital age, typesetting has become available to
       virtually anyone equipped with a personal computer. Beautiful documents
-      can now be crafted using free and consumer-grade software, which obviates
-      the need for the involvement of a professional typesetter. The level
-      playing field of the Internet coupled with the rising popularity of
-      digital-only documents then allows the aspiring author to bypass the
-      publisher as well, if they so wish, without jeopardizing their chance of
-      recognition.
+      can now be crafted using free and consumer-grade software, which often
+      obviates the need for the involvement of a professional designer and
+      typesetter. The level playing field of the Internet coupled with the
+      rising popularity of digital-only documents then allows the aspiring
+      author to bypass the publisher as well, if they so wish, without
+      jeopardizing their chance of recognition.
       
       This text is intended as a handbook for any author who aspires to write,
       design, typeset and distribute high-quality documents of their own making.
@@ -31,7 +31,7 @@
       independently by a different specialist. However, a lone author who is
       preparing a less complex document or who feels confident in their ability
       to multitask may find it more productive to interleave several steps of
-      the document preparation process and is fully encouraged to do so.
+      the document preparation process.
 
     \chapter{Writing}
       % Text encodings
@@ -43,15 +43,14 @@
       A manuscript can consist of a seamless river of words and still make
       perfect sense to the author. To truly capture its meaning in a clear and
       unambiguous manner, however, the manuscript will often need to be
-      supplemented with an additional set of annotations. At a more basic level,
-      this refers to the compliance with the orthographic rules, such as the
-      correct spelling, hyphenation, capitalization, word breaks and
-      punctuation, that are specific to the language of the document. It is not
-      unreasonable to expect that this basic compliance should be already met by
-      the manuscript. At a higher level, this consists of discovering and
-      marking up the inner order and logic of the text, so that the resulting
-      document can later be typeset in a way that visually reflects the
-      structure of the text.
+      supplemented with a set of annotations. At a more basic level, this refers
+      to the compliance with the orthographic rules, such as the correct
+      spelling, hyphenation, capitalization, word breaks and punctuation, that
+      are specific to the language of the document. It is not unreasonable to
+      expect that this basic compliance should be already met by the manuscript.
+      At a higher level, this consists of discovering and marking up the inner
+      order and the logic of the text, so that the resulting document can later
+      be typeset in a way that visually reflects the structure of the text.
       
       To this end, there exists a wealth of \emph{markup languages} that enable
       the enrichment of text with additional information and labels. Aside from
@@ -61,39 +60,39 @@
       which carries no semantic information. The usage of presentation markup
       instead of logical markup makes it impossible to separate the markup from
       the design of the document and to capture the logic of the text. As a
-      result, the unity of the design of each logical part of the document will
-      have to be ensured manually and future changes of design will become
-      tedious. It is for these reasons that the usage of visual markup is
+      result, the unity of the design of each logical part of the document would
+      have to be ensured manually and future changes of design would become
+      tedious. It is for these reasons that the usage of presentation markup is
       discouraged in favour of logical markup.
 
-      \section{The General Markup Language}
-        According to \cite{hlava11}, the situation engulfing digital typesetting
-        was growing increasingly frustrating for publishers in the 1960s. The
-        markup languages used by different typesetting systems varied wildly and
-        once a publisher had a large collection of documents typeset via a given
-        company, switching to another one could be very costly. The companies
-        would often take advantage of this situation, causing their prices to
-        skyrocket. As a result of that, a demand for a universal markup language
-        emerged.
+      \section{Meta Markup Languages}
+      \subsection{The General Markup Language}
+        As described in \cite{hlava11}, the situation engulfing digital
+        typesetting was growing increasingly frustrating for publishers in the
+        1960s. The markup languages used by different typesetting systems varied
+        wildly and once a publisher had a large collection of documents typeset
+        via a given company, switching to another one could be very costly. The
+        companies would often take advantage of this situation, causing their
+        prices to skyrocket. As a result of that, a demand for a universal
+        markup language emerged.
 
         This demand was met by a side product of a project developed\footnote{
           More information about the project can be found within the personal
           recollections of its co-author, Charles F. Goldfarb, in
           \cite{goldfarb96} and \cite{goldfarb97:whySGML}.
-        } at the IBM's Cambridge Scientific Center in the early 1970s. The
-        project aimed at imbuing a text editor with the ability to query, edit
-        and display documents from a repository to allow the usage of computers
-        in legal practice. Very early on in the development process, it became
-        clear that the main problem were going to be the markup languages in
-        which the documents were written. These languages weren't unified and,
-        rather than describing the logical structure of the documents, they
-        directly shaped their visual form, which made information retrieval
-        impossible without the use of heuristics. To resolve the issue, a
-        unifying markup language called the General Markup Language
-        (\acronym{GML}) was drafted as a solution to the decribed problem. The
-        language was later released to the public in \cite{goldfarb81} and
-        finally standardized\footnote{
-          The authoritative resource on the \article{SGML} language is
+        } at the \acronym{IBM}'s Cambridge Scientific Center in the early 1970s.
+        The project aimed at imbuing a text editor with the ability to query,
+        edit and display documents from a repository to allow the usage of
+        computers in legal practice. Very early on in the development process,
+        it became clear that the crux was going to be the markup languages in
+        which the documents were written. These languages were not unified and
+        many of them comprised largely presentation markup, which made
+        information retrieval impossible without the use of heuristics. To
+        resolve the issue, a unifying markup language called the General Markup
+        Language (\acronym{GML}) was drafted as a solution to the decribed
+        problem. The language was later released to the public in
+        \cite{goldfarb81} and finally standardized\footnote{
+          The authoritative resource on the \acronym{SGML} language is
           \cite{goldfarb91}, which includes the full text of the standard along
           with the author's extensive annotations.
         } as the Standard General Markup Language (\acronym{SGML}) within
@@ -101,7 +100,7 @@
 
         \acronym{SGML} documents consist of text mixed with \emph{tags}, which
         delimit meaningful sections of the document called \emph{elements}.
-        Tags can carry additional information in \emph{attributes}. A
+        Elements can carry additional information in \emph{attributes}. A
         \acronym{SGML} document can also contain miscellaneous processing
         instructions for the application as well as human-readable comments.
         Repeated strings of text can be declared as \emph{entities} that can
@@ -111,16 +110,79 @@
         Although the described structure is shared by all \acronym{SGML}
         documents, the actual syntax, as well as the restrictions with regards
         to the contents and the attributes of individual elements, are declared
-        within a Document Type Declaration (\acronym{DTD}) \emph{schema}. It is
-        worth noting that a \acronym{DTD} schema only declares the syntax of an
-        \acronym{SGML} document and the semantics of the individual elements and
-        their attributes are left to the interpretation of the parser processing
-        the document. A language declared by a \acronym{DTD} schema is called an
-        \emph{application} of \acronym{SGML}. An \acronym{SGML} document is
-        considered to be a valid instance of an \acronym{SGML} application, when
-        it conforms to the respective \acronym{DTD} schema.
+        within a Document Type Declaration (\acronym{DTD}), which can be
+        different for each document. It is worth noting that a \acronym{DTD}
+        only declares the syntax of an \acronym{SGML} document and the semantics
+        of the individual elements and their attributes are left to the
+        interpretation of the program processing the document. The syntax and
+        the constraints imposed by a \acronym{DTD} define an \emph{application}
+        of \acronym{SGML}. An \acronym{SGML} document is considered to be a
+        valid instance of an \acronym{SGML} application, when it conforms to the
+        respective \acronym{DTD}.
 
-      \section{The Hypertext Markup Language}
+      \subsection{The Extensible Markup Language}
+        Although \acronym{SGML} was designed to be the general format for data
+        exchange, the complexity of the specification and the lack of support
+        for Unicode proved to be a major hinderance preventing its wider
+        adoption and tool development. As a response, the World Wide Web
+        Consortium (W3C) published a specification of the Extensible Markup
+        Language (\acronym{XML}) within \cite{bray98} in 1998. Along with the
+        introduction of \acronym{XML}, the \acronym{SGML} specification received
+        a technical corrigendum of \cite{goldfarb97:webSGML}, which turned
+        \acronym{XML} into a proper subset of \acronym{SGML} restrained by an
+        \acronym{SGML} \acronym{DTD}.
+        
+        %%% A brief SGML tutorial <http://www.w3.org/TR/WD-html40-970708/intro/sgmltut.html>
+        %%% Comparison of SGML and XML <http://www.w3.org/TR/NOTE-sgml-xml>
+        
+        This \acronym{DTD} completely fixes the syntax of \acronym{XML}
+        documents, which makes it possible to differentiate two levels of
+        correctness. Specifically, an \acronym{XML} document is considered to be
+        \emph{well-formed}, when it conforms to the \acronym{SGML} \acronym{DTD}
+        that defines \acronym{XML}. An \acronym{XML} document is considered to
+        be \emph{valid} with regards to an \acronym{XML} \acronym{DTD}, when it
+        is well-formed and conforms to the said \acronym{XML} \acronym{DTD}.
+        Along with \acronym{DTD}s, there exists a wealth of \emph{schema}
+        languages for \acronym{XML}, such as \acronym{W3C XML} Schema, Regular
+        Language for \acronym{XML} Next Generation (\acronym{Relax NG}) or
+        Schematron that can be used to check the validity of an \acronym{XML}
+        document instead of a \acronym{DTD}. The constrains imposed by either a
+        \acronym{DTD} or a schema define an \emph{application}, \emph{language}
+        or \emph{format} of \acronym{XML}.
+
+          % Examples of various XML schema languages and DTD
+          % Examples of validity testing
+        
+        Along with schema languages, other languages supplementary languages
+        also exist, such as XPointer, XPath and XQuery for addressing sets of
+        elements (fragments) within a \acronym{XML} document or Cascading Style
+        Sheet language (\acronym{CSS}) for specifying the visual properties of a
+        \acronym{XML} document. While some of these languages may not be
+        \acronym{XML} languages, they are nevertheless linked to and used within
+        documents of various \acronym{XML} formats and form an important part of
+        the \acronym{XML} ecosystem.
+
+        Due to the reduced complexity of \acronym{XML} compared to
+        \acronym{SGML}, the language was adopted by specialists and the general
+        public alike and has superseded \acronym{SGML} in many applications.
+        Some of the applications of \acronym{XML} for document
+        preparation include DocBook\footnote{
+          The authoritative resource on the DocBook \acronym{XML} format is
+          \cite{walsh10}. The book itself is written in DocBook and its source
+          code is publicly available at the Web page at
+          \url{http://docbook.org}.
+        }---a technical documentation format used for authoring books by
+        publishers such as O'Reilly Media and for documenting software at
+        companies such as Red Hat, \acronym{SUSE} or Sun Microsystems---,
+        Text Encoding Initiative (\acronym{TEI})---a general text encoding
+        format for the use in the academic field of digital humanities---,
+        or Mathematical Markup Language (\acronym{MathML})---a format for
+        describing mathematical formulae. Other \acronym{XML} applications, such
+        as \acronym{XHTML} and \acronym{RDF/XML}, will be described in Section
+        \ref{sec:www-markup}.
+        
+      \section{Markup on the World Wide Web}\label{sec:www-markup}
+      \subsection{The Hypertext Markup Language}
         In 1989, Timothy John Berners-Lee proposed in \cite{bernerslee89} a
         decentralized system for sharing linked documents within \acronym{CERN}.
         The system laid foundation for today's World Wide Web (Web) and earned
@@ -133,16 +195,19 @@
         Consortium (\acronym{W3C}), which has since been developing the
         standards for the Web.
         
+        %%% On SGML and HTML <http://www.w3.org/TR/html4/intro/sgmltut.html>
+        %%% On the various meanings of <tag /> <https://utcc.utoronto.ca/~cks/space/blog/web/ShortTagsMeanings>
+
         The first standard version of \acronym{HTML} was published as
         \cite{rfc1866} in 1995. As the Web was becoming ubiquitous, it began
-        accumulating documents that weren't valid instances of \acronym{HTML},
-        since most Web browsers, when faced with a malformed document, would act
-        in accordance with the Postel's law and attempt to render the document
-        despite its deficiencies. In an attempt to unify the way malformed
-        \acronym{HTML} documents were rendered across the Web browsers,
-        \acronym{W3C} standardized this behaviour as a part of \cite{berjon14}
-        in 2014. As a result, the current version of \acronym{HTML} is no longer
-        strictly an application of \acronym{SGML}.
+        accumulating an increasing number of documents that weren't valid
+        instances of \acronym{HTML}, since most Web browsers, when faced with a
+        malformed document, would act in accordance with the Postel's law and
+        try to render the document despite its deficiencies. In an attempt to
+        unify the way malformed \acronym{HTML} documents were rendered across
+        the Web browsers, \acronym{W3C} standardized this behaviour as a part of
+        \cite{berjon14} in 2014. As a result, the current version of
+        \acronym{HTML} is no longer strictly an application of \acronym{SGML}.
 
           % Example of a valid HTML5 document that is an invalid SGML
           % application instance (overlapping tags)
@@ -150,53 +215,69 @@
         Initially, \acronym{HTML} comprised a mixture of logical and
         presentation markup with fixed visual interpretation. In 1996 a
         specification of a Cascading Style Sheet (\acronym{CSS}) language was
-        published by \acronym{W3C} within \cite{lie96}. \acronym{CSS} enabled
+        published by \acronym{W3C} within \cite{lie96}. The language enabled
         the specification of the visual properties of any element, which allowed
-        for the separation of document markup and design.
+        for the separation of document markup and design, effectively
+        eliminating the need for the presentation markup.
 
-          % Example of the usage of CSS
+          % Example of the usage of CSS in favour of presentation markup
 
         During the same period, an initial version of a scripting language
         called JavaScript was drafted and incorporated into Netscape Navigator
-        2.0, one of the contemporary leading web browsers. Standardized within
-        \cite{ecma1} in 1997, JavaScript blurs the line between static documents
-        and interactive applications and remains the predominant client-side
-        programming language for the Web. However, since the support of
-        JavaScript by a Web browser is fully optional, an HTML document should
-        not depend on it so as to remain widely accessible. In case of an
-        interactive application, this recommendation can be relaxed.
+        2.0, one of the contemporary leading web browsers. As a part of a
+        joint effort to bring Java into web browsers by Sun Microsystems and
+        Netscape Communications, JavaScript was supposed (see
+        \cite{js-announcement}) to complement Java applets -- a role it has
+        since outgrown. Standardized within \cite{ecma1} in 1997, JavaScript
+        blurs the line between static documents and interactive applications and
+        remains the predominant client-side programming language for the Web.
+        However, since the support of JavaScript by a Web browser is fully
+        optional, it is considered a good practice to use it chiefly for the
+        enrichment of an already self-sufficient \acronym{HTML} document. In
+        case of an interactive application, this recommendation can be relaxed.
 
           % Example of the usage of JavaScript
           % Relevant literature
 
-      \section{The Extensible Markup Language}
-        Although \acronym{SGML} was designed to be the general format for data
-        exchange, the complexity of the specification and the lack of support
-        for Unicode proved to be a major hinderance preventing its wider
-        adoption and tool development. As a response, \acronym{W3C} published a
-        specification of the Extensible Markup Language (\acronym{XML}) within
-        \cite{bray98} in 1998. Along with the introduction of \acronym{XML}, the
-        \acronym{SGML} specification received a technical corrigendum of
-        \cite{goldfarb97:webSGML}, which turned \acronym{XML} into a proper
-        subset of \acronym{SGML} defined in terms of an \acronym{SGML}
-        \acronym{DTD} schema. This schema completely fixes the syntax of
-        \acronym{XML} documents, which makes it possible to use two models of
-        correctness. Specifically, an \acronym{XML} document is considered to be
-        \emph{well-formed}, when it conforms to the \acronym{SGML} \acronym{DTD}
-        schema that defines \acronym{XML}. An \acronym{XML} document is
-        considered to be \emph{valid} with regards to an \acronym{XML} schema,
-        when it is well-formed and conforms to the said \acronym{XML} schema.
-        Along with \acronym{DTD}, there exists a wealth of alternative schema
-        languages for \acronym{XML} that can be used to check the validity of an
-        \acronym{XML} document.
+      \subsection{The Extensible Hypertext Markup Language}
 
-          % Examples of various XML schema languages
+      \subsection{Linked Data and Microdata}
+        % (v) Not the primary function of linked data, though
+        The primary fundament of the Web was the idea of links forming edges
+        between documents. The exponential growth of data present on the Web
+        propelled the evolution of search engines, which try their best to
+        return relevant documents to a given search query. To overcome the
+        limitations in the analysis of documents primarily intended to be read
+        by humans rather than machines, a proposal was made by ???  to create
+        additional mark-up, which would imbue links with additional information
+        regarding the relationship between the documents and which would add
+        machine-friendly structured information to a document.
+        
+        %%% Tim Berners-Lee: The next web <http://www.ted.com/talks/tim_berners_lee_on_the_next_web>
+        %%% DBpedia <http://wiki.dbpedia.org/>
+        %%% Quepy: Natural language questions -> database query language translation framework <https://quepy.readthedocs.org>
+        %%% Linked Data - Connect Distributed Data across the Web <http://linkeddata.org/>
+        
+        % <a href="..." rel="..."
+        % Linked Data and RDF (XML, RDFa and JSON-L serialization)
+        % See "Semantic Web"
 
-      % Linked Data and RDF (XML, RDFa and JSON-L serialization)
-      % LaTeX
-      % Lightweight Markup Languages
+      \section{Markup in document processing systems}
+        % Batch-oriented
+          % troff / groff / nroff / runoff, UNIX manpages
+          % LaTeX
+          % lout
+        % WYSIWYG
+          % Word, OpenOffice, Adobe InDesign, Scribus
+          %%% Style basics in Word <https://support.office.com/en-nz/article/Style-basics-in-Word-d382f84d-5c38-4444-98a5-9cbb6ede1ba4>
+          %%% InDesign Help / Paragraph and character style <https://helpx.adobe.com/indesign/using/paragraph-character-styles.html>
+          %%% Format text with Paragraph Styles <https://helpx.adobe.com/indesign/how-to/indesign-formatting-text-paragraph-styles.html>
+
+      \section{Lightweight markup languages}
+        %%% Lightweight markup language <https://en.wikipedia.org/wiki/Lightweight_markup_language>
 
     \chapter{Design}
+      % XML -- CSS, XSL, XSLT
     \chapter{Typesetting}
     \chapter{Proofreading}
     \chapter{Printing}

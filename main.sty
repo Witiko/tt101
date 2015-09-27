@@ -1,4 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{main}
 % Markup definitions
-\let\acronym=\textsc
+\usepackage{textcase}
+\def\acronym#1{\textsc{\MakeTextLowercase{#1}}}
+\def\footnote#1{\marginpar{\small\raggedright#1}}
+\usepackage{url}\let\oldurl=\url
+\def\url#1{\texttt{<\oldurl{#1}>}}
