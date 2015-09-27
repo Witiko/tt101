@@ -1,9 +1,21 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{main}
-\frenchspacing
-% Markup definitions
+
+% Markup
+%% Acronyms
 \usepackage{textcase}
 \def\acronym#1{\textsc{\MakeTextLowercase{#1}}}
+%% Footnotes
 \def\footnote#1{\marginpar{\small\raggedright#1}}
+%% URLs
 \usepackage{url}\let\oldurl=\url
 \def\url#1{\texttt{<\oldurl{#1}>}}
+%% Filenames in captions
+\def\filename#1{ (\texttt{#1})}
+%% Embedded code
+\let\oldminted\minted
+\def\minted[#1]{\oldminted[gobble=12,#1]}
+
+% Design
+%% No em-spaces after full stops
+\frenchspacing

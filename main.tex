@@ -1,10 +1,15 @@
 \documentclass{book}
-\usepackage{lmodern}
-\usepackage{polyglossia}
+\usepackage{polyglossia}  % Hyphenation
 \setmainlanguage{english}
+\usepackage{minted}       % Source code typesettings
+\usepackage{placeins}     % Float barriers
+\usepackage{tikz}         % Diagrams
+\usetikzlibrary{trees}
+\usepackage{fancyvrb}     % Manually colored verbatim
+\usepackage{float}        % Non-floating figures
 \usepackage{./main}
 \title{Electronic Document Preparation: An Author's Cookbook}
-\author{Petr Sojka, Vít Novotný}
+\author{Vít Novotný}
 \date{\today}
 \begin{document}
   \frontmatter
@@ -23,15 +28,11 @@
       
       This text is intended as a handbook for any author who aspires to write,
       design, typeset and distribute high-quality documents of their own making.
-      Each chapters describes one discrete step in the process of the creation
-      of a document and their order corresponds to the realities of document
-      preparation, allowing the author to break the process down to manageable
-      parts and tackle each of them separately. This also allows for the
-      separation of labour, where each part of the process can be completed
-      independently by a different specialist. However, a lone author who is
-      preparing a less complex document or who feels confident in their ability
-      to multitask may find it more productive to interleave several steps of
-      the document preparation process.
+      Each chapters describes one discrete step of document creation along with
+      the relevant tools and literature. Since document preparation is a broad,
+      multidisciplinary subject, the main goal of this text is to provide the
+      reader with a general overview of the landscape and to provide references
+      to more detailed literature for those interested in further study.
 
     \chapter{Writing}
       % Text encodings
@@ -61,23 +62,22 @@
       carries no semantic information. The usage of presentation markup instead
       of logical markup makes it impossible to separate the markup from the
       design of the document and to capture the logic of the text. As a result,
-      the unity of the design of each logical part of the document would have to
+      the unity in the design of each logical part of the document would have to
       be ensured manually and future changes of design would become tedious. It
       is for these reasons that the usage of presentation markup is discouraged
       in favour of logical markup.
 
       \section{Meta Markup Languages}
       \subsection{The General Markup Language}
-        As described in \cite{hlava11}, the situation engulfing digital
-        typesetting was growing increasingly frustrating for publishers in the
-        1960s. The markup languages used by different typesetting systems varied
-        wildly and once a publisher had a large collection of documents typeset
-        via a given company, switching to another one could be very costly. The
-        companies would often take advantage of this situation, causing their
-        prices to skyrocket. As a result of that, a demand for a universal
-        markup language emerged.
+        The situation engulfing digital typesetting was growing increasingly
+        frustrating for publishers in the 1960s. The markup languages used by
+        different typesetting systems varied wildly and once a publisher had a
+        large collection of documents typeset via a given company, switching to
+        another one could be very costly venture. The companies would often take
+        advantage of this situation, causing their prices to skyrocket. As a
+        result of that, a demand for a universal markup language emerged.
 
-        This demand was met by a side product of a project developed\footnote{
+        This demand was met by a project developed\footnote{
           More information about the project can be found within the personal
           recollections of its co-author, Charles F. Goldfarb, in
           \cite{goldfarb96} and \cite{goldfarb97:whySGML}.
@@ -90,7 +90,7 @@
         many of them comprised largely presentation markup, which made
         information retrieval impossible without the use of heuristics. To
         resolve the issue, a unifying markup language called the General Markup
-        Language (\acronym{GML}) was drafted as a solution to the decribed
+        Language (\acronym{GML}) was drafted as a solution to the described
         problem. The language was later released to the public in
         \cite{goldfarb81} and finally standardized\footnote{
           The authoritative resource on the \acronym{SGML} language is
@@ -101,12 +101,12 @@
 
         \acronym{SGML} documents consist of text mixed with \emph{tags}, which
         delimit meaningful sections of the document called \emph{elements}.
-        Elements can carry additional information in \emph{attributes}. A
-        \acronym{SGML} document can also contain miscellaneous processing
-        instructions for the application as well as human-readable comments.
-        Repeated strings of text can be declared as \emph{entities} that can
-        consequently be used throughout the document in place of the original
-        strings.
+        Elements can carry additional information in \emph{attributes}.
+        Additionally, \acronym{SGML} document can contain miscellaneous
+        instructions for the program that is processing it, as well as
+        human-readable comments. Repeated strings of text can be declared as
+        \emph{entities} that can consequently be used throughout the document in
+        place of the original strings.
         
         Although the described structure is shared by all \acronym{SGML}
         documents, the actual syntax, as well as the restrictions with regards
@@ -133,6 +133,18 @@
         \acronym{XML} into a proper subset of \acronym{SGML} restrained by an
         \acronym{SGML} \acronym{DTD}.
         
+        \begin{figure}
+          \inputminted{xml}{examples/02/recipe.xml}
+          \caption{An example \acronym{XML} document\filename{recipe.xml}}
+          \label{fig:recipe}\bigskip
+          \inputminted{dtd}{examples/02/dtdtypes}
+          \caption{\acronym{SGML} and \acronym{XML} \acronym{DTD}s can be either
+            linked to the document through public and system identifiers, directly
+            embedded in the document, both linked and embedded or left out
+            altogether.}
+          \label{fig:recipe-dtd}
+        \end{figure}
+        
         This \acronym{DTD} completely fixes the syntax of \acronym{XML}
         documents, which makes it possible to differentiate two levels of
         correctness. Specifically, an \acronym{XML} document is considered to be
@@ -141,17 +153,17 @@
         given in the specification. An \acronym{XML} document is considered to
         be \emph{valid} against an \acronym{XML} \acronym{DTD}, when it
         is well-formed and conforms to the said \acronym{XML} \acronym{DTD}.
-        Along with \acronym{DTD}s, there exists a wealth of \emph{schema}
-        languages for \acronym{XML}, such as \acronym{W3C XML} Schema, Regular
-        Language for \acronym{XML} Next Generation (\acronym{Relax NG}) or
-        Schematron that can be used to check the validity of an \acronym{XML}
-        document instead of a \acronym{DTD}. The constrains imposed by either a
-        \acronym{DTD} or a schema define an \emph{application}, \emph{language}
-        or \emph{format} of \acronym{XML}.
+        Along with \acronym{DTD}s, there exists\footnote{
+          A list of tools for the manipulation of files in \acronym{XML} schema
+          languages is maintained on the web site of \acronym{W3C} at
+          \url{http://www.w3.org/XML/Schema}.
+        } a wealth of \emph{schema} languages for \acronym{XML}, such as
+        \acronym{W3C XML} Schema, Regular Language for \acronym{XML} Next
+        Generation (\acronym{Relax NG}) or Schematron that can be used to check
+        the validity of an \acronym{XML} document instead of a \acronym{DTD}.
+        The constrains imposed by either a \acronym{DTD} or a schema define an
+        \emph{application}, \emph{language} or \emph{format} of \acronym{XML}.
 
-          % Examples of various XML schema languages and DTD (https://en.wikipedia.org/wiki/Document_type_definition)
-          % Examples of validity testing
-        
         Along with schema languages, other supplementary languages also exist,
         such as XPointer, XPath and XQuery for addressing sets of elements
         (fragments) within a \acronym{XML} document or Cascading Style Sheet
@@ -178,16 +190,64 @@
         documents, unless all the \acronym{IRI}s and the respective schemata are
         known to the parser.
 
-          % Example of SGML CONCUR and XML namespaces being used to describe
-          % disjoint subdocuments as well as to describe multiple logical views of
-          % a document (include a graph, see [1]). In the latter case, present
-          % several XML workarounds (see [2], page 58, section 2.1.1).
-          %
-          %   [1]: <http://cmsmcq.com/2000/poddp2000.html#id2605197>
-          %   [2]: <http://wayback.archive.org/web/20070624034347/http://www.sfb632.uni-potsdam.de/publications/isis02_4witt.pdf>
-          %   <http://webylon.info/K.24>
-          %   <https://books.google.cz/books?id=VnfkBwAAQBAJ&pg=PA110&lpg=PA110&dq=sgml+how+to+use+concur&source=bl&ots=kKfJLdk4B-&sig=pxZQba7X1qLPOkeGndis5deU4UE&hl=cs&sa=X&ved=0CCsQ6AEwAWoVChMInsbLsa66xwIVS7UUCh2VFguJ#v=onepage&q=sgml%20how%20to%20use%20concur&f=false>
-          %   <http://www.angelovic.cz/internet/sgml-deklarace.html#concur>
+        {\def\bottomfraction{0.7}\begin{figure}[hb]
+          {\tikzstyle{level 1}=[sibling distance=\baselineskip, level distance=3.5cm]
+          \begin{tikzpicture}[grow=right]
+            \node {\textcolor{red}{Speech}}
+              child {
+                node[label=right:{AASE: See, you dare not! Every word of it's a lie!} ] {}}
+              child {
+                node[label=right:{PEER: Swear? Why should I?}] {} }
+              child {
+                node[label=right:{AASE: Well then, swear to me it's true!}] {}}
+              child {
+                node[label=right:{PEER: No, I'm not!}] {} }
+              child {
+                node[label=right:{AASE: Peer, you're lying!}] {} };
+            \node [below=5\baselineskip] {\textcolor{blue}{Verse}}
+              child {
+                node[label=right:{Every word of it's a lie!} ] {}}
+              child {
+                node[label=right:{Swear? Why should I? See, you dare not!}] {} }
+              child {
+                node[label=right:{Well then, swear to me it's true!}] {}}
+              child {
+                node[label=right:{Peer, you're lying! No, I'm not!}] {} };
+          \end{tikzpicture}}
+          \begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`^=7\catcode`_=8}]
+<(\textcolor{blue}{V})line><(\textcolor{red}{S})speech who="Aase">Peer, you're lying!</(\textcolor{red}{S})speech>
+  <(\textcolor{red}{S})speech who="Peer">No, I'm not!</(\textcolor{red}{S})speech></(\textcolor{blue}{V})line>
+<(\textcolor{blue}{V})line><(\textcolor{red}{S})speech who="Aase">Well then,
+  swear to me it's true!</(\textcolor{red}{S})speech></(\textcolor{blue}{V})line>
+<(\textcolor{blue}{V})line><(\textcolor{red}{S})speech who="Peer">Swear, why should I?</(\textcolor{red}{S})speech>
+  <(\textcolor{red}{S})speech who="Aase">See, you dare not!</(\textcolor{blue}{V})line>
+<(\textcolor{blue}{V})line>Every word of it's a lie!</(\textcolor{red}{S})speech></(\textcolor{blue}{V})line>
+          \end{Verbatim}
+          \caption{The markup of the dramatic and metrical views of the
+            beginning of Henrik Ibsen's Peer Gynt using the \texttt{CONCUR}
+            feature of \acronym{SGML}}
+        \end{figure}}
+
+        %%   <http://wayback.archive.org/web/20070624034347/http://www.sfb632.uni-potsdam.de/publications/isis02_4witt.pdf>
+        %%   <http://webylon.info/K.24>
+        %%   <http://www.angelovic.cz/internet/sgml-deklarace.html#concur>
+
+        \begin{figure}[H]
+          \inputminted{xml}{examples/02/recipe.xsd}
+          \caption{A reformulation of the recipe \acronym{DTD} from Figure
+            \ref{fig:recipe-dtd} in the \acronym{XML} Schema language.%
+            \filename{recipe.xsd}}
+          \label{fig:recipe-xsd}
+          \inputminted{text}{examples/02/recipe.rnc}
+          \caption{A reformulation of the recipe \acronym{DTD} from Figure
+            \ref{fig:recipe-dtd} in the compact syntax of the \acronym{Relax NG}
+            language.\filename{recipe.rnc}}
+          \label{fig:recipe-rnc}
+          \inputminted{sh}{examples/02/recipe.sh}
+          \caption{\acronym{XML} documents can be easily validated against
+            \acronym{XML} schemata using command-line tools, such as
+            \texttt{xmllint}.}
+        \end{figure}
 
         Due to the reduced complexity of \acronym{XML} compared to
         \acronym{SGML}, the language was adopted by specialists and the general
@@ -208,7 +268,7 @@
         (\acronym{SVG})---a two-dimensional vector image format. Other
         \acronym{XML} applications, such as \acronym{XHTML} and
         \acronym{RDF/XML}, will be discussed in Section \ref{sec:www-markup}.
-        
+      
       \section{Markup on the World Wide Web}\label{sec:www-markup}
       \subsection{The Hypertext Markup Language}
         In 1989, Timothy John Berners-Lee proposed in \cite{bernerslee89} a
@@ -223,8 +283,6 @@
         Consortium (\acronym{W3C}), which has since been developing the
         standards for the Web.
         
-        %%% On the various meanings of <tag /> <https://utcc.utoronto.ca/~cks/space/blog/web/ShortTagsMeanings>
-
         The first standard version of \acronym{HTML} was version 2.0 published
         as \cite{rfc1866} in 1995. As the Web was becoming ubiquitous, it began
         accumulating an increasing number of documents that weren't valid
@@ -234,10 +292,20 @@
         unify the way malformed \acronym{HTML} documents were rendered across
         the Web browsers, \acronym{W3C} acknowledged and documented this
         behaviour as a part of \cite[Section~8.2, Parsing HTML
-        documents]{hickson14} in 2008.
+        documents]{hickson14} in 2008. An example is presented in Figure
+        \ref{fig:overlapping-elements}.
 
-          % Example of a valid HTML5 document that is an invalid SGML
-          % application instance (overlapping tags, tag soup)
+        \begin{figure}[b]
+          \begin{minted}[linenos]{html}
+            <b>This text is bold, <i>bold and italic</b>, italic.</i>
+            <b>This text is bold, </b><i><b>bold and italic</b>, italic.</i>
+          \end{minted}
+          \caption{The fragment on line 1 contains overlapping elements and as
+            such, it can't be a part of a valid \acronym{HTML} document.
+            However, it is recommended by \acronym{W3C} that browsers should
+            parse the fragment identically to the fragment on line 2.}
+          \label{fig:overlapping-elements}
+        \end{figure}
 
         Initially, \acronym{HTML} comprised a mixture of logical and
         presentation markup with fixed visual interpretation. In 1996, a
@@ -247,7 +315,15 @@
         for the separation of document markup and design, effectively
         eliminating the need for the presentation markup.
 
-          % Example of the usage of CSS in favour of presentation markup
+        \begin{figure}
+          \inputminted{html}{examples/02/presentation-markup.html}
+          \caption{An excerpt from the Web site of the \acronym{CSS} Zen Zarden
+            located at \protect\url{http://csszengarden.com}. The document above
+            was created using the \acronym{HTML} presentation markup. The
+            document below achieves the same appearance by the combination of
+            logical markup and \acronym{CSS} style definitions.}\medskip
+          \inputminted{html}{examples/02/logical-markup.html}
+        \end{figure}
 
         During the same period, an initial version of a scripting language
         called JavaScript was drafted and incorporated into Netscape Navigator
@@ -263,9 +339,6 @@
         considered a good practice to use it chiefly for the enrichment of
         already self-sufficient \acronym{HTML} documents. In case of an
         interactive application, this recommendation can be relaxed.
-
-          % Example of the usage of JavaScript
-          % Relevant literature
 
       \subsection{The Extensible Hypertext Markup Language}
         Ever since the release of \acronym{XML} in 1998, \acronym{W3C}
@@ -300,14 +373,12 @@
         of \acronym{XML} namespaces. As a result, \acronym{XHTML} has yet to
         succeed in replacing \acronym{HTML} and remains an alternative markup
         language for the Web.
-
-          % An example of an XHTML document
-
+        
         %%% Content-Negotiation Techniques to serve XHTML as text/html and
         %%% application/xhtml+xml
         %%%   <http://www.w3.org/2003/01/xhtml-mimetype/content-negotiation>
 
-      \subsection{The Semantic Web and Microdata}
+      \subsection{The Semantic Web and Linked Data}
         The underlying fundament of the Web is the the idea of a globally
         available and incrementally scalable base of human knowledge.
         \acronym{HTML} and \acronym{XHTML} succeeded in fulfilling this vision
@@ -322,25 +393,26 @@
         Drawing from the research in the field of knowledge representation, an
         \acronym{RDF} document represents data as a set of \emph{triples}. Each
         of the triplets comprises \emph{a predicate}, \emph{a subject} and
-        \emph{an object}, where both the subject and the predicate are specified
+        \emph{an object}, where both the predicate and the subject are specified
         as \emph{resources} using \acronym{IRI}s. If the object of a
         triplet $(p,s,o)$ is also a resource, the triplet can be interpreted as
-        a subject $s$ being in a relation $p$ with an object $o$. If the object
+        a subject $s$ being in a relation $p$ with the object $o$. If the object
         is a \emph{literal value} rather than a resource, the respective triplet
-        can be interpreted as a subject $s$ having a property $p$ with a value
+        can be interpreted as a subject $s$ having a property $p$ with the value
         $o$.
 
         Resources in \acronym{RDF} are specified via \acronym{IRI}s to prevent
         naming collisions in \acronym{RDF} documents created independently by
         distinct authors. These \acronym{IRI}s are not required to resolve to an
         actual web page and, disregarding the small set of standard resources
-        specified within the \acronym{RDF} specification, they carry no inherent
-        meaning.  In order to describe a set of resources, the relationships
-        between them and their intended meaning in an \acronym{RDF} document, an
-        extended set of standard resources called \acronym{RDF} Schema and
-        specified within \cite{brickley04} can be used. The resulting documents
-        are called \emph{ontologies} and can be used for automated reasoning
-        about \acronym{RDF} documents containing resources described by the
+        specified within the \acronym{RDF} specification, they carry no
+        inherent meaning.  In order to describe a set of resources, the
+        relationships between them, and their intended meaning in an
+        \acronym{RDF} document, an extension of the set of standard resources%
+        ---called \acronym{RDF} Schema and specified within
+        \cite{brickley04}---can be used.  The resulting documents are called
+        \emph{ontologies} and can be used for automated reasoning about
+        \acronym{RDF} documents containing resources described by the
         ontology.\footnote{
           A list of ontologies that are fully documented, honor the current best
           practices and are supported by various tools can be found on the
@@ -429,31 +501,50 @@
           The circumstances that led to the creation of \TeX\ and the
           surrounding tools are thoroughly documented in \cite{knuth98}.
         }, which was developed and consequently released to the public domain by
-        a professor of computer science, Donald Knuth, in 1970s after receiving
-        galley proofs for the second volume of his monograph, the Art of
-        Computer Programming, and finding the appearance of mathematical
+        in 1970s a professor of computer science Donald Knuth, after he had
+        received galley proofs for the second volume of his monograph, the Art
+        of Computer Programming, and found the appearance of mathematical
         formulae unsatisfactory. As a result, the typesetting of mathematics is
         a central theme in \TeX, rather than an afterthought, which
         differentiates it from most other document preparation systems and
-        resulted in its massive popularity in academia. Much like in the case of
-        \texttt{troff} and its derivatives, the language of \TeX\ is ripe with
-        typographic and programming primitives and doesn't by itself contain
-        logical markup. The language, however, allows the creation of user
-        macros. An example of a macro package, which makes it possible to create
-        various classes of documents with pure logical markup, is \LaTeX, the
-        industry standard for academic and technical typesetting.
+        largely attributed to the massive popularity it attained in academia.
+        Much like in the case of \texttt{troff} and its derivatives, the
+        language of \TeX\ is ripe with typographic and programming primitives
+        and doesn't by itself contain logical markup. The language, however,
+        allows for the creation of user macros. An example of a macro package,
+        which makes it possible to create various classes of documents with pure
+        logical markup, is \LaTeX, the industry standard for academic and
+        technical typesetting.
         
-          % Example of a plain TeX and LaTeX document
+          % Example of a plain TeX and a LaTeX document
 
-        % Batch-oriented
-          % troff / groff / nroff / runoff, UNIX manpages
-          % LaTeX
-          % lout
-          %%% The Text Processor for Typesetters <http://www.troff.org/>
-          %%% <ftp://ftp.dante.de/tex-archive/support/tr2latex/diffs.tex>
-          %%% <http://troff.org/TheGroffFriendsHowto.pdf>
-          %%% TEX kontra Word
-          %%%   <http://math.feld.cvut.cz/ftp/olsak/typo/texword.pdf>
+      \subsection{Interactive Document Preparation Systems}
+        Interactive systems come in two distinctive flavours. \emph{Word
+        processors} are the digital progeny of the typewriter machine, with
+        which they share the main function of fast text capture. The typewriter
+        output documents served largely as a manuscript for designers and
+        typographers, who then produced the actual published work. With the
+        advent of personal computing and the Web, self-publishing became more
+        approachable to the general public and modern word processors can be
+        used not only to write, but also to design and set typeset documents,
+        although the offered functionally is typically constrained by user
+        experience demands. This concern is not shared by \emph{desktop
+        publishing software}, which provides refined control over the resulting page
+        layout and the typesetting primitives at the expense of steeper learning
+        curve, but with the ability to produce document comparable to those set
+        using traditional typography.
+
+        Most interactive systems will provide a means to mark up sections of
+        text. Presentation markup performs direct changes of typographic
+        properties, such as the face, family, variant, color or size
+        of the font used to render the text. Logical markup enables the
+        classification of text with the ability to set up the design of each
+        class later on. This decouples writing and markup from design and makes
+        it very difficult to introduce design inconsistencies into the final
+        document.
+
+          % An example of Word, OpenOffice, Indesign and Scribus markup
+
         % WYSIWYG
           % Word, OpenOffice, Adobe InDesign, Scribus
           %%% Style basics in Word <https://support.office.com/en-nz/article/Style-basics-in-Word-d382f84d-5c38-4444-98a5-9cbb6ede1ba4>

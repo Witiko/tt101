@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<element name="recipe" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <element name="name">
+    <text/>
+  </element>
+  <element name="description">
+    <text/>
+  </element>
+  <element name="ingredientList">
+    <attribute name="serves">
+      <data type="positiveInteger"/>
+    </attribute>
+    <oneOrMore>
+      <element name="ingredient">
+        <attribute name="amount"/>
+        <text/>
+      </element>
+    </oneOrMore>
+  </element>
+  <element name="stepList">
+    <oneOrMore>
+      <element name="step">
+        <text/>
+      </element>
+    </oneOrMore>
+  </element>
+</element>

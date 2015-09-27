@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="meta" type="application/rdf+xml" href="foaf.rdf" />
+    <link rel="meta" type="text/turtle" href="foaf.ttl" />
+    <link rel="meta" type="application/n-triples" href="foaf.nt" />
+    <title>The Web page of John Smith</title>
+  </head>
+  <body>
+    Hi, I'm John Smith and this is my Web page.
+  </body>
+</html>

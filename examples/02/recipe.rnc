@@ -1,0 +1,12 @@
+element recipe {
+  element name { text },
+  element description { text },
+  element ingredientList {
+    attribute serves { xsd:positiveInteger },
+    element ingredient {
+      attribute amount { text }, text
+    }+
+  }, element stepList {
+    element step { text }+
+  }  
+}

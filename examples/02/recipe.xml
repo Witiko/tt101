@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE recipe SYSTEM "recipe.dtd">
+<recipe>
+  <name>Grandma's pancakes</name>
+  <description>A traditional Bohemian recipe</description>
+  <ingredientList serves="8">
+    <ingredient amount="120g">Plain flour</ingredient>
+    <ingredient amount="2">Egg</ingredient>
+    <ingredient amount="300ml">Milk</ingredient>
+    <ingredient amount="1 tblspn">Sunflower oil</ingredient>
+    <ingredient amount="1 pinch">Salt</ingredient>
+  </ingredientList>
+  <stepList>
+    <step>Combine the ingredients and whisk until
+      you have a smooth batter.</step>
+    <step>Heat oil on a pan, pour in a tablespoonful
+      of the batter, fry until golden brown.</step>
+    <step>Repeat until there is no batter left.</step>
+    <step>Serve rolled and filled with jam.</step>
+  </stepList>
+</recipe>

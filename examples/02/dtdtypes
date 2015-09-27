@@ -1,0 +1,18 @@
+<!DOCTYPE recipe PUBLIC "-//EXAMPLE//DTD FOR RECIPES"
+  "http://www.example.com/DTD/recipe.dtd">
+<!DOCTYPE recipe SYSTEM "recipe.dtd">
+<!DOCTYPE recipe [
+  <!ELEMENT recipe (name, description, ingredientList, stepList)>
+  <!ELEMENT name (#PCDATA)>
+  <!ELEMENT description (#PCDATA)>
+  <!ELEMENT ingredientList (ingredient+)>
+  <!ATTLIST ingredientList serves CDATA #REQUIRED>
+  <!ELEMENT ingredient (#PCDATA) >
+  <!ATTLIST ingredient amount CDATA #REQUIRED>
+  <!ELEMENT stepList (step+) >
+  <!ELEMENT step (#PCDATA)> ]>
+<!DOCTYPE recipe PUBLIC "-//EXAMPLE//DTD FOR RECIPES"
+  "http://www.example.com/DTD/recipe.dtd" [
+  <!-- Omitted for brevity. --> ]>
+<!DOCTYPE recipe SYSTEM "recipe.dtd" [
+  <!-- Omitted for brevity. --> ]>

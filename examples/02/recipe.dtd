@@ -1,0 +1,9 @@
+<!ELEMENT recipe (name, description, ingredientList, stepList)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT ingredientList (ingredient+)>
+<!ATTLIST ingredientList serves CDATA #REQUIRED>
+<!ELEMENT ingredient (#PCDATA) >
+<!ATTLIST ingredient amount CDATA #REQUIRED>
+<!ELEMENT stepList (step+) >
+<!ELEMENT step (#PCDATA)>
