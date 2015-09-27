@@ -46,24 +46,25 @@
       supplemented with a set of annotations. At a more basic level, this refers
       to the compliance with the orthographic rules, such as the correct
       spelling, hyphenation, capitalization, word breaks and punctuation, that
-      are specific to the language of the document. It is not unreasonable to
-      expect that this basic compliance should be already met by the manuscript.
-      At a higher level, this consists of discovering and marking up the inner
-      order and the logic of the text, so that the resulting document can later
-      be typeset in a way that visually reflects the structure of the text.
+      are specific to the language of the document. It is not at all
+      unreasonable to expect that this basic compliance should be already met by
+      the manuscript.  At a higher level, this consists of discovering and
+      marking up the inner order and the logic of the text, so that the
+      resulting document can later be typeset in a way that visually reflects
+      the structure of the text.
       
       To this end, there exists a wealth of \emph{markup languages} that enable
       the enrichment of text with additional information and labels. Aside from
       \emph{logical markup}, which enables the capture of the logical structure
       of the document, markup languages may also provide \emph{presentation
       markup}, which directly impacts the visual properties of the document, but
-      which carries no semantic information. The usage of presentation markup
-      instead of logical markup makes it impossible to separate the markup from
-      the design of the document and to capture the logic of the text. As a
-      result, the unity of the design of each logical part of the document would
-      have to be ensured manually and future changes of design would become
-      tedious. It is for these reasons that the usage of presentation markup is
-      discouraged in favour of logical markup.
+      carries no semantic information. The usage of presentation markup instead
+      of logical markup makes it impossible to separate the markup from the
+      design of the document and to capture the logic of the text. As a result,
+      the unity of the design of each logical part of the document would have to
+      be ensured manually and future changes of design would become tedious. It
+      is for these reasons that the usage of presentation markup is discouraged
+      in favour of logical markup.
 
       \section{Meta Markup Languages}
       \subsection{The General Markup Language}
@@ -132,9 +133,6 @@
         \acronym{XML} into a proper subset of \acronym{SGML} restrained by an
         \acronym{SGML} \acronym{DTD}.
         
-        %%% A brief SGML tutorial <http://www.w3.org/TR/WD-html40-970708/intro/sgmltut.html>
-        %%% Comparison of SGML and XML <http://www.w3.org/TR/NOTE-sgml-xml>
-        
         This \acronym{DTD} completely fixes the syntax of \acronym{XML}
         documents, which makes it possible to differentiate two levels of
         correctness. Specifically, an \acronym{XML} document is considered to be
@@ -153,14 +151,14 @@
           % Examples of various XML schema languages and DTD
           % Examples of validity testing
         
-        Along with schema languages, other languages supplementary languages
-        also exist, such as XPointer, XPath and XQuery for addressing sets of
-        elements (fragments) within a \acronym{XML} document or Cascading Style
-        Sheet language (\acronym{CSS}) for specifying the visual properties of a
+        Along with schema languages, other supplementary languages also exist,
+        such as XPointer, XPath and XQuery for addressing sets of elements
+        (fragments) within a \acronym{XML} document or Cascading Style Sheet
+        language (\acronym{CSS}) for specifying the visual properties of an
         \acronym{XML} document. While some of these languages may not be
-        \acronym{XML} languages, they are nevertheless linked to and used within
-        documents of various \acronym{XML} formats and form an important part of
-        the \acronym{XML} ecosystem.
+        \acronym{XML} languages, they are nevertheless used within documents of
+        various \acronym{XML} formats and form an important part of the
+        \acronym{XML} ecosystem.
 
         Due to the reduced complexity of \acronym{XML} compared to
         \acronym{SGML}, the language was adopted by specialists and the general
@@ -195,7 +193,6 @@
         Consortium (\acronym{W3C}), which has since been developing the
         standards for the Web.
         
-        %%% On SGML and HTML <http://www.w3.org/TR/html4/intro/sgmltut.html>
         %%% On the various meanings of <tag /> <https://utcc.utoronto.ca/~cks/space/blog/web/ShortTagsMeanings>
 
         The first standard version of \acronym{HTML} was published as
@@ -241,28 +238,82 @@
 
       \subsection{The Extensible Hypertext Markup Language}
 
-      \subsection{Linked Data and Microdata}
-        % (v) Not the primary function of linked data, though
-        The primary fundament of the Web was the idea of links forming edges
-        between documents. The exponential growth of data present on the Web
-        propelled the evolution of search engines, which try their best to
-        return relevant documents to a given search query. To overcome the
-        limitations in the analysis of documents primarily intended to be read
-        by humans rather than machines, a proposal was made by ???  to create
-        additional mark-up, which would imbue links with additional information
-        regarding the relationship between the documents and which would add
-        machine-friendly structured information to a document.
-        
+      \subsection{The Semantic Web and Microdata}
+        The underlying fundament of the Web is the the idea of a globally
+        available and incrementally scalable base of human knowledge.
+        \acronym{HTML} and \acronym{XHTML} succeeded in fulfilling this vision
+        for human-readable documents, but didn't provide a unifying
+        machine-readable format for the representation of structured information
+        that would enable the creation of a web of linked data running in
+        parallel to the web of documents. In 1999, \acronym{W3C} released
+        \cite{lassira99} containing the specification of the Resource
+        Description Framework (\acronym{RDF}), a method for the description of
+        resources on the Web.
+
+        Drawing from the research in the field of knowledge representation, an
+        \acronym{RDF} document represents data as a set of triplets. Each of the
+        triplets comprises \emph{a predicate}, \emph{a subject} and \emph{an
+        object}, where both the subject and the predicate are specified as
+        \emph{resources} using Internationalized Resource Identifiers
+        (\acronym{IRI}s) as defined within \cite{rfc3987}. If the object of a
+        triplet $(p,s,o)$ is also a resource, the triplet can be interpreted as
+        a subject $s$ being in a relation $p$ with an object $o$. If the object
+        is a \emph{literal value} rather than a resource, the respective triplet
+        can be interpreted as a subject $s$ having a property $p$ with a value
+        $o$.
+
+        Resources in \acronym{RDF} are specified via \acronym{IRI}s to prevent
+        naming collisions in \acronym{RDF} documents created independently by
+        distinct authors. These \acronym{IRI}s are not required to resolve to an
+        actual web page and, disregarding the small set of standard resources
+        specified within the \acronym{RDF} specification, they carry no inherent
+        meaning.  In order to describe a set of resources, the relationships
+        between them and their intended meaning in an \acronym{RDF} document, an
+        extended set of standard resources called \acronym{RDF} Schema and
+        specified within \cite{brickley04} can be used. The resulting documents
+        are called \emph{ontologies} and can be used for automated reasoning
+        about \acronym{RDF} documents containing resources described by the
+        ontology.\footnote{
+          A list of ontologies that are fully documented, honor the current best
+          practices and are supported by various tools can be found on the
+          \acronym{W3C} wiki at \url{http://www.w3.org/wiki/Good_Ontologies}.
+        } Some of the well-known ontologies include Dublin
+        Core (\acronym{DC})---an ontology for the generic description of both
+        web multimedia and physical objects---, Friend or a Foe
+        (\acronym{FOAF})---an ontology for the description of people and their
+        social relationships---, or the Music Ontology---an ontology for the
+        description of entities related to the music industry, such as albums,
+        artists, tracks and events. More expressive languages for the creation
+        of ontologies, such as the Web Ontology Language (\acronym{OWL})
+        specified within \cite{mcguinness04}, also exist.
+
+        The syntax of \acronym{RDF} is not fixed, meaning that aside from the
+        \acronym{XML} serialization specified within \cite{lassira99}, other
+        languages, such as the JavaScript Object Notation for Linked Data
+        (\acronym{JSON-LD}) specified within \cite{sporny14} or the line-based
+        N-Triples specified within \cite{beckett14}, can be used to represent an
+        \acronym{RDF} document. A noteworthy serialization of \acronym{RDF} is
+        the \acronym{RDF} in attributes (\acronym{RDFa}) specified within
+        \cite{adida08}. While various serializations of \acronym{RDF} can be
+        included in or linked to an \acronym{HTML} or \acronym{XHTML} document,
+        this will often result in an undesirable duplication of data already
+        present in the document. To prevent this, \acronym{RDFa} uses the
+        content already present within the underlying \acronym{HTML} or
+        \acronym{XHTML} document using element attributes. The usage of
+        \acronym{RDF} in conjunction with \acronym{HTML} and \acronym{XHTML} is
+        intended to obsolete the practice of using the \texttt{meta} and
+        \texttt{link} elements to provide additional application-specific
+        metadata about the document.
+
+        % Write about PICS, POWDER and SPARQL?
+          
+          % Examples of Dublin Core
+          % Examples of RDF usage and serialization (see wiki) + diagram
+
         %%% Tim Berners-Lee: The next web <http://www.ted.com/talks/tim_berners_lee_on_the_next_web>
         %%% DBpedia <http://wiki.dbpedia.org/>
-        %%% Quepy: Natural language questions -> database query language translation framework <https://quepy.readthedocs.org>
-        %%% Linked Data - Connect Distributed Data across the Web <http://linkeddata.org/>
         
-        % <a href="..." rel="..."
-        % Linked Data and RDF (XML, RDFa and JSON-L serialization)
-        % See "Semantic Web"
-
-      \section{Markup in document processing systems}
+      \section{Markup in Document Processing Systems}
         % Batch-oriented
           % troff / groff / nroff / runoff, UNIX manpages
           % LaTeX
@@ -273,7 +324,7 @@
           %%% InDesign Help / Paragraph and character style <https://helpx.adobe.com/indesign/using/paragraph-character-styles.html>
           %%% Format text with Paragraph Styles <https://helpx.adobe.com/indesign/how-to/indesign-formatting-text-paragraph-styles.html>
 
-      \section{Lightweight markup languages}
+      \section{Lightweight Markup Languages}
         %%% Lightweight markup language <https://en.wikipedia.org/wiki/Lightweight_markup_language>
 
     \chapter{Design}
