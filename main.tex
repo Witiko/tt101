@@ -51,11 +51,22 @@
       the manuscript. At a higher level, this consists of discovering and
       marking up the inner order and logic of the text, so that the resulting
       document can later be typeset in a way that visually reflects the
-      structure of the text. To this end, there exists a wealth of \emph{markup
-      languages} that enable the enrichment of plain text documents with
-      additional information and labels.
+      structure of the text.
+      
+      To this end, there exists a wealth of \emph{markup languages} that enable
+      the enrichment of text with additional information and labels. Aside from
+      \emph{logical markup}, which enables the capture of the logical structure
+      of the document, markup languages may also provide \emph{presentation
+      markup}, which directly impacts the visual properties of the document, but
+      which carries no semantic information. The usage of presentation markup
+      instead of logical markup makes it impossible to separate the markup from
+      the design of the document and to capture the logic of the text. As a
+      result, the unity of the design of each logical part of the document will
+      have to be ensured manually and future changes of design will become
+      tedious. It is for these reasons that the usage of visual markup is
+      discouraged in favour of logical markup.
 
-      \section{SGML and its descendants}
+      \section{The General Markup Language}
         According to \cite{hlava11}, the situation engulfing digital typesetting
         was growing increasingly frustrating for publishers in the 1960s. The
         markup languages used by different typesetting systems varied wildly and
@@ -68,7 +79,7 @@
         This demand was met by a side product of a project developed\footnote{
           More information about the project can be found within the personal
           recollections of its co-author, Charles F. Goldfarb, in
-          \cite{goldfarb96,goldfarb97}.
+          \cite{goldfarb96} and \cite{goldfarb97:whySGML}.
         } at the IBM's Cambridge Scientific Center in the early 1970s. The
         project aimed at imbuing a text editor with the ability to query, edit
         and display documents from a repository to allow the usage of computers
@@ -81,10 +92,109 @@
         unifying markup language called the General Markup Language
         (\acronym{GML}) was drafted as a solution to the decribed problem. The
         language was later released to the public in \cite{goldfarb81} and
-        finally standardized as the Standard General Markup Language
-        (\acronym{SGML}) within the \acronym{ISO} 8879 standard.
+        finally standardized\footnote{
+          The authoritative resource on the \article{SGML} language is
+          \cite{goldfarb91}, which includes the full text of the standard along
+          with the author's extensive annotations.
+        } as the Standard General Markup Language (\acronym{SGML}) within
+        \cite{iso8879}.
 
-        % An example of an SGML document
+        \acronym{SGML} documents consist of text mixed with \emph{tags}, which
+        delimit meaningful sections of the document called \emph{elements}.
+        Tags can carry additional information in \emph{attributes}. A
+        \acronym{SGML} document can also contain miscellaneous processing
+        instructions for the application as well as human-readable comments.
+        Repeated strings of text can be declared as \emph{entities} that can
+        consequently be used throughout the document in place of the original
+        strings.
+        
+        Although the described structure is shared by all \acronym{SGML}
+        documents, the actual syntax, as well as the restrictions with regards
+        to the contents and the attributes of individual elements, are declared
+        within a Document Type Declaration (\acronym{DTD}) \emph{schema}. It is
+        worth noting that a \acronym{DTD} schema only declares the syntax of an
+        \acronym{SGML} document and the semantics of the individual elements and
+        their attributes are left to the interpretation of the parser processing
+        the document. A language declared by a \acronym{DTD} schema is called an
+        \emph{application} of \acronym{SGML}. An \acronym{SGML} document is
+        considered to be a valid instance of an \acronym{SGML} application, when
+        it conforms to the respective \acronym{DTD} schema.
+
+      \section{The Hypertext Markup Language}
+        In 1989, Timothy John Berners-Lee proposed in \cite{bernerslee89} a
+        decentralized system for sharing linked documents within \acronym{CERN}.
+        The system laid foundation for today's World Wide Web (Web) and earned
+        its author knighthood. The markup language used to write documents for
+        the system was an application of \acronym{SGML} called the HyperText
+        Markup Language (\acronym{HTML}). In 1993, the Web started to gain
+        popularity amongst the general public due to the release of the first
+        graphical Web browser Mosaic, which paved way for the Web browsers of
+        today. In 1994, Timothy John Berners-Lee formed the World Wide Web
+        Consortium (\acronym{W3C}), which has since been developing the
+        standards for the Web.
+        
+        The first standard version of \acronym{HTML} was published as
+        \cite{rfc1866} in 1995. As the Web was becoming ubiquitous, it began
+        accumulating documents that weren't valid instances of \acronym{HTML},
+        since most Web browsers, when faced with a malformed document, would act
+        in accordance with the Postel's law and attempt to render the document
+        despite its deficiencies. In an attempt to unify the way malformed
+        \acronym{HTML} documents were rendered across the Web browsers,
+        \acronym{W3C} standardized this behaviour as a part of \cite{berjon14}
+        in 2014. As a result, the current version of \acronym{HTML} is no longer
+        strictly an application of \acronym{SGML}.
+
+          % Example of a valid HTML5 document that is an invalid SGML
+          % application instance (overlapping tags)
+
+        Initially, \acronym{HTML} comprised a mixture of logical and
+        presentation markup with fixed visual interpretation. In 1996 a
+        specification of a Cascading Style Sheet (\acronym{CSS}) language was
+        published by \acronym{W3C} within \cite{lie96}. \acronym{CSS} enabled
+        the specification of the visual properties of any element, which allowed
+        for the separation of document markup and design.
+
+          % Example of the usage of CSS
+
+        During the same period, an initial version of a scripting language
+        called JavaScript was drafted and incorporated into Netscape Navigator
+        2.0, one of the contemporary leading web browsers. Standardized within
+        \cite{ecma1} in 1997, JavaScript blurs the line between static documents
+        and interactive applications and remains the predominant client-side
+        programming language for the Web. However, since the support of
+        JavaScript by a Web browser is fully optional, an HTML document should
+        not depend on it so as to remain widely accessible. In case of an
+        interactive application, this recommendation can be relaxed.
+
+          % Example of the usage of JavaScript
+          % Relevant literature
+
+      \section{The Extensible Markup Language}
+        Although \acronym{SGML} was designed to be the general format for data
+        exchange, the complexity of the specification and the lack of support
+        for Unicode proved to be a major hinderance preventing its wider
+        adoption and tool development. As a response, \acronym{W3C} published a
+        specification of the Extensible Markup Language (\acronym{XML}) within
+        \cite{bray98} in 1998. Along with the introduction of \acronym{XML}, the
+        \acronym{SGML} specification received a technical corrigendum of
+        \cite{goldfarb97:webSGML}, which turned \acronym{XML} into a proper
+        subset of \acronym{SGML} defined in terms of an \acronym{SGML}
+        \acronym{DTD} schema. This schema completely fixes the syntax of
+        \acronym{XML} documents, which makes it possible to use two models of
+        correctness. Specifically, an \acronym{XML} document is considered to be
+        \emph{well-formed}, when it conforms to the \acronym{SGML} \acronym{DTD}
+        schema that defines \acronym{XML}. An \acronym{XML} document is
+        considered to be \emph{valid} with regards to an \acronym{XML} schema,
+        when it is well-formed and conforms to the said \acronym{XML} schema.
+        Along with \acronym{DTD}, there exists a wealth of alternative schema
+        languages for \acronym{XML} that can be used to check the validity of an
+        \acronym{XML} document.
+
+          % Examples of various XML schema languages
+
+      % Linked Data and RDF (XML, RDFa and JSON-L serialization)
+      % LaTeX
+      % Lightweight Markup Languages
 
     \chapter{Design}
     \chapter{Typesetting}
