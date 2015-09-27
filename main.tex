@@ -238,8 +238,10 @@ punctuation, and ideograms to mahjong tiles, alchemical symbols, and the ancient
 Greek musical notation. Each of these characters is assigned a number, called
 a \term{code point}, ranging from 0 to 2,147,483,647 (\hexa{7FFFFFFF}) with the
 numbers of the most common characters in the range from 0 to 65,535
-(\hexa{FFFF}) called \acronym{BMP}.  \Acronym{UCS} encodings map character
-numbers to binary character codes. Three major encodings are specified in the
+(\hexa{FFFF}) called \acronym{BMP}. The smallest unit of division in
+\acronym{UCS} are \termpl*{block}\acroindex[!block]{UCS}, which contain 256
+thematically related characters. \Acronym{UCS} encodings map character numbers
+to binary character codes. Three major encodings are specified in the
 \acronym{UCS} standard and its amendments \cite{iso93:am1,iso93:am2}:
 \begin{description}
   \item[\acroshort{UTF}-32]\acroindex[!UTF-32@{\acroshort{UTF}-32}]{UTF}
@@ -258,8 +260,8 @@ numbers to binary character codes. Three major encodings are specified in the
     \acroshort{UCS} character.
   \item[\acroshort{UTF}-8]\acroindex[!UTF-8@{\acroshort{UTF}-8}]{UTF}
     Directly transforms code points ranging from 0 to 127 (\hexa{7F}) to one-byte
-    integers. Since the beginning of the \acroshort{BMP} matches
-    \acronym{ASCII}, any text encoded in eight-bit \acroshort{ASCII} is
+    integers. Since the first \acroshort{UCS} block of the \acroshort{BMP}
+    matches \acronym{ASCII}, any text encoded in eight-bit \acroshort{ASCII} is
     therefore also encoded in \acroshort{UTF}-8. Code points in the range from
     127 to 1,114,111 (\mbox{\hexa{00007F}--\hexa{10FFFF}}) are transformed into
     two to four one-byte integers ranging from 128 to 253
@@ -311,11 +313,12 @@ heterogeneity of eight-bit encodings:
     normalization algorithms for character string equivalence testing are
     specified by the standard \cite[sec.\,2.12]{unicode15}. An algorithm
     for case conversion is also specified \cite[sec.\,3.13]{unicode15}.
-  \item \Acronym{BOM} with the code point of 65,279 (\hexa{FEFF}) can be
-    inserted at the beginning of a text as a signature of Unicode encodings. As
-    the name suggests, the order in which the \hexa{FE} and \hexa{FF} bytes
-    arrive also indicates the integer byte order (called \term{endianity}).
-    In \acroshort{UTF}-32 and \acroshort{UTF}-16, the byte order can be chosen
+    \index{Unicode!normalization}\index{Unicode!case conversion}
+  \item The \ucs[FEFF]{Byte Order Mark} character can be inserted at the
+    beginning of a text as a signature of Unicode encodings. As the name
+    suggests, the order in which the \hexa{FE} and \hexa{FF} bytes arrive also
+    indicates the integer byte order (called \term{endianity}). In
+    \acroshort{UTF}-32 and \acroshort{UTF}-16, the byte order can be chosen
     arbitrarily by the encoding application. In \acroshort{UTF}-8, one-byte
     integers are used and the notion of byte order is therefore meaningless.
 \end{itemize}
@@ -376,14 +379,15 @@ system and offer little beyond the ability to load, modify and save text files.
 Entry-level text editors with a \acronym{GUI} include the \inx{Windows Notepad},
 the iOS \inx{TextEdit} in the plain text mode, and \inx{Leafpad} for \Linux\ and
 \acronym{BSD}. Entry-level text editors with a \acronym{CLI} include
-\acronym{joe}, \acroshort{GNU} nano\acroindex[!nano]{GNU}, and \acronym{pico}.
+\cliutil{joe}, \acroshort{GNU} \cliutil*{nano}\acroindex[!nano]{GNU}, and
+\cliutil{pico}.
 
 More advanced text editors come with the support for \termpl{regular
 expression} and \term{revision control}---which will be covered in sections
 \ref{sec:regexs} and \ref{sec:revisions}---, as well as user modules that
 extend the base functionality.  Advanced \acronym{GUI} text editors include
 \inx{Sublime Text}, \inx{Atom}, and \inx{PSPad}. Advanced \acronym{CLI} text
-editors include \acronym{emacs}, \acronym{vi}, and \acronym{vim}. The presented
+editors include \cliutil{emacs}, \cliutil{vi}, and \cliutil{vim}. The presented
 \acronym{CLI} text editors are especially notorious for their learning curve,
 whose steepness is only matched by the power these editors grant to those who
 wield them.
@@ -415,13 +419,80 @@ endeavour to discover a good formal model for the description of natural
 languages. The class of \termpl{regular grammar}, which is the least powerful
 of the proposed classes, has properties that make it possible to determine the
 grammaticality of a text in constant time and space. \Termpl{regular
-expression} are a more intuitive reformulation of regular grammars that can be
-used to find and replace character strings within text.
+expression} are a more intuitive reformulation of regular grammars that a writer
+can use to find and replace character strings within text.
 
-\subsubsection{Syntaxes}
-% POSIX basic, POSIX extended and Perl
-% <https://en.wikipedia.org/wiki/Regular_expression#Standards>
-\subsubsection{Utilities}
+Since regular expressions are just a formal model, a software implementation
+needs to settle on a concrete syntax. One of the earliest standard syntaxes are
+\acronym{BRE} and \acronym{ERE}, which are supported by most utilities using
+regular expressions on Unix and Unix-like operating systems. Both syntaxes are
+described in Table \ref{tab:regexs}. More extensive syntaxes include the
+\acroshort{GNU} extensions of \acronym{BRE} and \acronym{ERE}, the one used
+in the \inx{Perl} programming language, and their dialects and derivatives. For
+most of these extended syntaxes, the term \term*{regular} is a misnomer, as the
+expressions can be used to build grammars that, according to the Chomsky
+hierarchy, aren't regular.\footnote{
+  A curious reader with a background in formal language theory should direct
+  their attention to Perl self-referencing groups and look-aheads, which make it
+  a simple matter to create expressions that match non-context-free languages.
+% It is easy to show that the Perl 5 regex of \code[text]{(?=(a(?-1)?b)c)
+% a+(b(?-1)?c)} generates the context-sensitive language of $a^nb^nc^n$ for
+% arbitrary characters $a,b,c$ with superscripts denoting repetition.
+} To disambiguate the term, these expressions are often called
+\termpl*[regexes]{regex}\index{regex|see{regular expression}}.
+
+  % Describe the ERE and BRE syntaxes [[tab:regexs]]
+  % <https://en.wikipedia.org/wiki/Regular_expression#Standards>
+  % <http://pubs.opengroup.org/onlinepubs/007908799/xbd/re.html>
+  % 
+  % Remark that many GNU utilities implement GNU versions of BRE and ERE, which
+  % add the ERE abilities to BRE and which enable back-references, word
+  % boundaries and more in ERE.
+  % <http://www.regular-expressions.info/gnu.html>
+
+Many regex syntaxes and the software that implements them were designed for the
+processing of \acronym{ASCII} text and may behave in surprising ways, when
+confronted with \acronym{UCS} characters. The software may assume that each
+character is exactly one byte long and fail to recognize any characters that are
+longer as a single character, or it may assume that all \acronym{UCS} characters
+fall within \acronym{BMP} and exhibit the same problem with characters outside
+\acronym{BMP}. More subtle, but no less precarious, can be the lack of support
+for Unicode case conversion and normalization algorithms, which makes it
+difficult to perform case-insensitive matching and the matching of characters
+that can be encoded in several different ways. The lack of awareness of the
+invisible characters that can appear in \acronym{UCS} text---such as the
+\ucs[200B]{zero width space}, \ucs[200C]{zero width non-joiner}, \ucs[200D]{zero
+width joiner}, and \ucs[FEFF]{zero width no-break space}---, is also problematic
+and can lead to false negative matches. Conversely, modern regex syntaxes---such
+as that of Perl---are actively aware of \acronym{UCS} and provide features that
+enable the matching of characters based on their general category, numeric
+value, directionality, and other properties defined by Unicode.
+
+  % Show the character property Perl matching examples
+  % <https://en.wikipedia.org/wiki/Regular_expression#Unicode>
+
+The most elementary text processing \acroshort{CLI} tool is \cliutil{grep},
+which makes it possible to search text files for fixed strings and regexes in
+default of an advanced text editor. Upon execution, the tool will present lines
+that contain one or more matches to the user. A more advanced text-processing
+\acroshort{CLI} tool is \cliutil{sed}, which features a simple programming
+language that can be used to arbitrarily transform text files. \Cliutil{awk} is
+a \acroshort{CLI} tool that also features a text-processing programming
+language, albeit a more advanced one than that of \cliutil{sed}. Originally
+created for the Research Unix during 1973--1977, \cliutil{grep}, \cliutil{sed},
+and \cliutil{awk} are available in various flavours for most operating systems.
+
+  % Showcase a simple and an extreme example of grep, sed and awk code
+
+%%% The true power of regular expressions
+%%%   <https://nikic.github.io/2012/06/15/The-true-power-of-regular-expressions.html>
+%%%
+%%% Regular Expression Matching Can Be Simple And Fast
+%%%   <https://swtch.com/~rsc/regexp/regexp1.html>
+%%%
+%%% JavaScript has a Unicode problem
+%%%   <https://mathiasbynens.be/notes/javascript-unicode>
+
 % grep, sed, and awk
 
 %%% Does (should) LC_COLLATE affect character ranges?
