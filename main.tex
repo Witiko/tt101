@@ -161,11 +161,33 @@
         various \acronym{XML} formats and form an important part of the
         \acronym{XML} ecosystem.
 
-        %%% XML Namespaces and the discussion of their usefulness compared to
-        %%% Architectural Forms (AFs)
-        %%%  <http://users.nyct.net/~aray/sgo/bogosity.txt>
-        %%%  <http://www.w3.org/TR/1999/REC-xml-names-19990114/>
-        %%%  <https://msdn.microsoft.com/en-us/library/aa468565.aspx>
+        A notable new feature of \acronym{XML} are \emph{name spaces}, which
+        were added to the specification with the release of \cite{bray99} in
+        1999. Name spaces enable the inclusion of elements and attributes of
+        different \acronym{XML} applications within a single \acronym{XML}
+        document by providing a method to qualify element and attribute names
+        with Internationalized Resource Identifiers (\acronym{IRI}s)---specified
+        within \cite{rfc3987}---that uniquely represent the respective
+        \acronym{XML} applications. Namespaced elements are a spiritual
+        successor of a more expressive \acronym{SGML} feature of
+        \texttt{CONCUR}, which makes it possible to mark up several structural
+        views of a single document. Unlike with \texttt{CONCUR}, which ties each
+        view to an \acronym{SGML} \acronym{DTD}, there exists no general
+        mechanism for the translation of \acronym{IRI}s to \acronym{XML}
+        schemata. That makes it impossible to validate namespaced \acronym{XML}
+        documents, unless all the \acronym{IRI}s and the respective schemata are
+        known to the parser.
+
+          % Example of SGML CONCUR and XML namespaces being used to describe
+          % disjoint subdocuments as well as to describe multiple logical views of
+          % a document (include a graph, see [1]). In the latter case, present
+          % several XML workarounds (see [2], page 58, section 2.1.1).
+          %
+          %   [1]: <http://cmsmcq.com/2000/poddp2000.html#id2605197>
+          %   [2]: <http://wayback.archive.org/web/20070624034347/http://www.sfb632.uni-potsdam.de/publications/isis02_4witt.pdf>
+          %   <http://webylon.info/K.24>
+          %   <https://books.google.cz/books?id=VnfkBwAAQBAJ&pg=PA110&lpg=PA110&dq=sgml+how+to+use+concur&source=bl&ots=kKfJLdk4B-&sig=pxZQba7X1qLPOkeGndis5deU4UE&hl=cs&sa=X&ved=0CCsQ6AEwAWoVChMInsbLsa66xwIVS7UUCh2VFguJ#v=onepage&q=sgml%20how%20to%20use%20concur&f=false>
+          %   <http://www.angelovic.cz/internet/sgml-deklarace.html#concur>
 
         Due to the reduced complexity of \acronym{XML} compared to
         \acronym{SGML}, the language was adopted by specialists and the general
@@ -267,17 +289,17 @@
         \acronym{XML} application called the Extensible HyperText Markup
         Language (\acronym{XHTML}), which was met with lukewarm reception, since
         many of its supposed benefits proved to be either questionable or too
-        marginal to warrant migration from \acronym{HTML}.  The speed
-        improvements of the simpler parser were largely offset by its lack of
-        support for incremental rendering, caused by the impossibility to
-        validate partially downloaded pages, the closing of the gap in the
-        computing power between mobile and desktop devices made it possible to
-        use full-fledged \acronym{HTML} parsers instead, and the lack of ways to
+        marginal to warrant migration from \acronym{HTML}.  The speed advantages
+        of the simpler parser were largely offset by its lack of support for
+        incremental rendering, caused by the impossibility to validate partially
+        downloaded pages, the closing of the gap in the computing power between
+        mobile and desktop devices made it possible to use full-fledged
+        \acronym{HTML} parsers across the spectrum, and the lack of ways to
         provide alternative content for browsers that would not support directly
         included the \acronym{XML} documents considerably reduced the usefulness
-        of name spaces. As a result, \acronym{XHTML} did not succeed in
-        replacing \acronym{HTML} and remains an alternative markup language for
-        the Web.
+        of \acronym{XML} name spaces. As a result, \acronym{XHTML} has yet to
+        succeed in replacing \acronym{HTML} and remains an alternative markup
+        language for the Web.
 
           % An example of an XHTML document
 
@@ -301,8 +323,7 @@
         \acronym{RDF} document represents data as a set of \emph{triples}. Each
         of the triplets comprises \emph{a predicate}, \emph{a subject} and
         \emph{an object}, where both the subject and the predicate are specified
-        as \emph{resources} using Internationalized Resource Identifiers
-        (\acronym{IRI}s) as defined within \cite{rfc3987}. If the object of a
+        as \emph{resources} using \acronym{IRI}s. If the object of a
         triplet $(p,s,o)$ is also a resource, the triplet can be interpreted as
         a subject $s$ being in a relation $p$ with an object $o$. If the object
         is a \emph{literal value} rather than a resource, the respective triplet
