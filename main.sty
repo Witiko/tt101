@@ -2,22 +2,57 @@
 \ProvidesPackage{main}
 
 % Markup
+\def\footnote#1{\marginpar{\small\raggedright#1}}  % Margin footnotes
+\def\filename#1{ (\texttt{#1})}                    % Filenames in captions
+\let\work\textit                                   % Names of written works
+\let\term\textit                                   % New term
+\def\inx#1{#1\index{#1}}                           % Leaky indexing
+%% Faking chapters and TOC entries
+\def\faketoc#1{%
+  \addcontentsline{toc}{chapter}{#1}}
+\usepackage{afterpage}
+\def\fakechapter#1{
+  \chapter*{#1}
+  \markright{\MakeUppercase{#1}}
+  \afterpage{\markboth{\MakeUppercase{#1}}{\MakeUppercase{#1}}}
+  \faketoc{#1}}
 %% Acronyms
-\usepackage{textcase}
-\def\acronym#1{\textsc{\MakeTextLowercase{#1}}}
-%% Footnotes
-\def\footnote#1{\marginpar{\small\raggedright#1}}
-%% URLs
-\usepackage{url}\let\oldurl=\url
-\def\url#1{\texttt{<\oldurl{#1}>}}
-%% Filenames in captions
-\def\filename#1{ (\texttt{#1})}
-%% Embedded code
-\let\oldminted\minted
-\def\minted[#1]{\oldminted[gobble=12,#1]}
-%% The name of a written work
-\let\work\textit
+\usepackage{acro}
+\newcommand{\defacronym}[3][]{%
+  \DeclareAcronym{#2}{%
+    short={\MakeLowercase{#2}},
+    long={#3},
+    long-plural-form={#3s},#1}}
+\def\acronym#1{\ac{#1}\acroindex{#1}}     % An acronym
+\def\Acronym#1{\Ac{#1}\acroindex{#1}}     % ... at the beginning of a sentence
+\def\acropl#1{\acp{#1}\acroindex{#1}}     % ... in the plural form 
+\def\acroshort#1{\acs{#1}\acroindex{#1}}  % ... in the unexpanded form
+\def\acrolong#1{\acl{#1}\acroindex{#1}}   % ... in the expanded form
+\newcommand{\acroindex}[2][]{\expandafter\index\expandafter%
+  {#2@\acs*{#2}#1}}
+\def\acroflat#1{\textsc{\MakeLowercase{#1}}} % A plain acronym
 
 % Design
 %% No em-spaces after full stops
 \frenchspacing
+%% No clubs and widows
+\usepackage[all]{nowidow}
+%% Fonts
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont[Numbers=OldStyle,Ligatures=TeX]{TeX Gyre Pagella}
+\setmonofont[Ligatures=TeX,Scale=MatchLowercase]{Inconsolata}
+\setmathfont[math-style=ISO,bold-style=ISO,vargreek-shape=TeX]%
+  {texgyrepagella-math.otf}
+%% Protrusion
+\usepackage[protrusion]{microtype}
+%% Acronyms
+\acsetup{
+  first-long-format=\itshape,
+  short-format=\scshape,
+  list-short-format=\scshape,
+  list-caps=true,
+  index-cmd=\acroindex}
+%% Line numbers
+%% @see <http://tex.stackexchange.com/a/132850/70941>
+\renewcommand{\theFancyVerbLine}{{\rm\normalsize{\arabic{FancyVerbLine}}}}

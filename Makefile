@@ -1,6 +1,7 @@
 TEX=xelatex -shell-escape --
 OUTPUT=main
-SOURCES=$(OUTPUT).tex $(OUTPUT).bib $(OUTPUT).sty examples/*
+SOURCES=$(OUTPUT).tex $(OUTPUT).bib $(OUTPUT).sty acronyms.tex \
+	examples/*/*
 AUXDIRS=_minted-main
 AUXFILES=$(OUTPUT).aux $(OUTPUT).toc $(OUTPUT).bbl $(OUTPUT).blg \
 	$(OUTPUT).ind $(OUTPUT).idx $(OUTPUT).out $(OUTPUT).gl[gos] \
@@ -9,19 +10,26 @@ AUXFILES=$(OUTPUT).aux $(OUTPUT).toc $(OUTPUT).bbl $(OUTPUT).blg \
 	$(OUTPUT).cb $(OUTPUT).cb2 $(OUTPUT).ilg texput.log
 SUBMAKEFILES=examples/*/
 
-.PHONY: all clean implode $(SUBMAKEFILES)
-all: $(SUBMAKEFILES) $(OUTPUT).pdf clean
+.PHONY: all clean explode implode $(SUBMAKEFILES)
+all: explode clean
+explode: $(SUBMAKEFILES) $(OUTPUT).pdf
 
+# Prepare the resources in subdirectories.
 $(SUBMAKEFILES):
 	make -C $@
 
+# Typeset the text.
 $(OUTPUT).pdf: $(SOURCES) Makefile
 	$(TEX) $<
+	texindy -I omega --language english $(OUTPUT).idx
+	biber $(OUTPUT)
 	$(TEX) $<
 
+# Remove auxiliary files and directories.
 clean:
 	rm -f $(AUXFILES)
 	rm -rf $(AUXDIRS)
 
+# Remove all non-source files.
 implode: clean
 	rm -rf $(OUTPUT).pdf
