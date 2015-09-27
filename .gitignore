@@ -1,0 +1,5 @@
+.svn
+.svnignore
+*.vim
+*.url
+main.pdf
