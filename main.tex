@@ -40,7 +40,7 @@ documents then allows the aspiring author to bypass the publisher as well, if
 they so wish, without jeopardizing their chance of recognition.
 
 This text is intended as a handbook for any author who aspires to write, design,
-typeset and distribute high-quality documents of their own making. Each
+typeset, and distribute high-quality documents of their own making. Each
 chapters describes one discrete step of document creation along with the
 relevant tools and literature. Since document preparation is a broad,
 multidisciplinary subject, the main goal of this text is to provide the reader
@@ -58,11 +58,11 @@ A manuscript can consist of a seamless river of words and still make perfect
 sense to the author. To truly capture its meaning in a clear and unambiguous
 manner, however, the manuscript will often need to be supplemented with a set of
 annotations. At a more basic level, this refers to the compliance with the
-orthographic rules, such as the correct spelling, hyphenation, capitalization,
-word breaks and punctuation, that are specific to the language of the document.
+orthographic rules---such as the correct spelling, hyphenation, capitalization,
+word breaks, and punctuation---that are specific to the language of the document.
 It is not at all unreasonable to expect that this basic compliance should be
-already met by the manuscript.  At a higher level, this consists of discovering
-and marking up the inner order and the logic of the text, so that the resulting
+already met by the manuscript. At a higher level, this consists of discovering
+and marking up the inner order and logic of the text, so that the resulting
 document can later be typeset in a way that visually reflects the structure of
 the text.
 
@@ -71,12 +71,12 @@ To this end, there exists a wealth of \term{markup languages} that enable the
 enrichment of text with additional information and labels. Aside from
 \term{logical markup}, which enables the capture of the logical structure of the
 document, markup languages may also provide \term{presentation markup}, which
-directly impacts the visual properties of the document, but carries no semantic
+directly impacts the visual properties of the document but carries no semantic
 information. The usage of presentation markup instead of logical markup makes it
 impossible to separate the markup from the design of the document and to capture
-the logic of the text.  As a result, the unity in the design of each logical
-part of the document would have to be ensured manually and future changes of
-design would become tedious.  It is for these reasons that the usage of
+the logic of the text. As a result, the unity in the design of each logical
+part of the document would have to be ensured manually, and future changes of
+design would become tedious. It is for these reasons that the usage of
 presentation markup is discouraged in favour of logical markup.
 \index{markup!logical|)}\index{markup!presentation|)}
 
@@ -84,7 +84,7 @@ presentation markup is discouraged in favour of logical markup.
 \subsection{The General Markup Language}
 The situation engulfing digital typesetting was growing increasingly frustrating
 for publishers in the 1960s. The markup languages used by different typesetting
-systems varied wildly and once a publisher had a large collection of documents
+systems varied wildly, and once a publisher had a large collection of documents
 typeset via a given company, switching to another one could be very costly
 venture. The companies would often take advantage of this situation, causing
 their prices to skyrocket. As a result of that, a demand for a universal markup
@@ -95,7 +95,7 @@ This demand was met by a project developed\footnote{
   recollections of its co-author, Charles F. Goldfarb, in \cite{goldfarb96} and
   \cite{goldfarb97:whySGML}.
 } at the Cambridge Scientific Center of \acronym{IBM} in the early 1970s. The
-project aimed at imbuing a text editor with the ability to query, edit and
+project aimed at imbuing a text editor with the ability to query, edit, and
 display documents from a repository to allow the usage of computers in legal
 practice. Very early on in the development process, it became clear that the
 crux was going to be the markup languages in which the documents were written.
@@ -123,7 +123,7 @@ Although the described structure is shared by all \acronym{SGML} documents, the
 actual syntax, as well as the restrictions with regards to the contents and the
 attributes of individual elements, are declared within a \acronym{DTD}, which
 can be different for each document. It is worth noting that a \acronym{DTD} only
-declares the syntax of an \acroshort{SGML} document and the semantics of the
+declares the syntax of an \acroshort{SGML} document; the semantics of the
 individual elements and their attributes are left to the interpretation of the
 program processing the document. The syntax and the constraints imposed by a
 \acronym{DTD} define an \term{application} \acroindex[!application]{SGML} of
@@ -148,7 +148,7 @@ response, \acronym{W3C} published a specification of \acronym{XML} within
   \inputminted{dtd}{examples/02/dtdtypes}
   \caption{\acronym{SGML} and \acronym{XML} \acronym{DTD}s can be either linked
     to the document through public and system identifiers, directly embedded in
-    the document, both linked and embedded or left out altogether.}
+    the document, both linked and embedded, or left out altogether.}
   \label{fig:recipe-dtd}
 \end{figure}
         
@@ -166,25 +166,25 @@ of \term{schema languages}\acroindex[!schema language]{XML}\footnote{
   languages is maintained on the web site of \acronym{W3C} at
   \url{http://www.w3.org/XML/Schema}.
 } for \acronym{XML}, such as \acroshort{W3C} \acroshort{XML} Schema
-\acroindex[!Schema]{XML}, \acronym{Relax NG} or Schematron that can be used to
+\acroindex[!Schema]{XML}, \acronym{Relax NG}, or Schematron that can be used to
 check the validity of an \acroshort{XML} document instead of a \acronym{DTD}.
 The constrains imposed by either a \acronym{DTD} or a schema define an
-\term{application}, \term{language} or \term{format}
+\term{application}, \term{language}, or \term{format}
 \acroindex[!application]{XML} \acroindex[!language]{XML}
 \acroindex[!format]{XML} of \acronym{XML}.
 
 Along with schema languages, other supplementary languages also exist, such as
-\inx{XPointer}, \inx{XPath} and \inx{XQuery} for addressing sets of elements
+\inx{XPointer}, \inx{XPath}, and \inx{XQuery} for addressing sets of elements
 (fragments) within a \acronym{XML} document or \acronym{CSS} for specifying the
-visual properties of an \acroshort{XML} document. While some of these languages
-may not be \acronym{XML} languages, they are nevertheless used within documents
-of various \acronym{XML} formats and form an important part of the
-\acroshort{XML} ecosystem.
+visual properties of an \acroshort{XML} document. Although some of these
+languages may not be \acronym{XML} languages, they are nevertheless used within
+documents of various \acronym{XML} formats and form an important part of the
+ecosystem.
 
 A notable new feature of \acronym{XML} are \term{namespaces}%
 \acroindex[!namespace]{XML}, which were added to the specification with the
 release of \cite{bray99} in 1999. Namespaces enable the inclusion of elements
-  and attributes of different \acronym{XML} applications within a single
+and attributes of different \acronym{XML} applications within a single
 \acronym{XML} document by providing a method to qualify element and attribute
 names with \acropl{IRI} that uniquely represent the respective \acronym{XML}
 applications. Namespaced elements are a spiritual successor of a more expressive
@@ -232,7 +232,7 @@ superseded \acronym{SGML} in many applications. Some of the applications of
   publicly available at the Web page at \url{http://docbook.org}.
 }---a technical documentation format used for authoring books by publishers such
 as O'Reilly Media and for documenting software at companies such as Red Hat,
-\acroflat{SuSE} or Sun Microsystems---, \acronym{TEI}---a general text encoding
+\acroflat{SuSE}, or Sun Microsystems---, \acronym{TEI}---a general text encoding
 format for the use in the academic field of digital humanities---,
 \acronym{MathML}---a format for describing mathematical formulae---, or
 \acronym{SVG}---a two-dimensional vector image format. Other \acroshort{XML}
@@ -242,14 +242,14 @@ be discussed in Section \ref{sec:www-markup}.
 \section{Markup on the World Wide Web}\label{sec:www-markup}
 \subsection{The Hypertext Markup Language}
 In 1989, Timothy John Berners-Lee proposed in \cite{bernerslee89} a
-decentralized system for sharing linked documents within \acronym{CERN}.  The
+decentralized system for sharing linked documents within \acronym{CERN}. The
 system laid foundation for today's \term{\inx{World Wide Web}} (Web) and earned
 its author knighthood. The markup language used to write documents for the
 system was an application of \acronym{SGML} called \acronym{HTML}. In 1993, the
-Web started to gain popularity amongst the general public due to the release of
-the first graphical Web browser Mosaic, which paved way for the Web browsers of
-today. In 1994, Timothy John Berners-Lee formed \acronym{W3C}, which has since
-been developing the standards for the Web.
+Web started to gain popularity amongst the general public owing to the release
+of the first graphical Web browser Mosaic, which paved way for the Web browsers
+of today. In 1994, Timothy John Berners-Lee formed \acronym{W3C}, which has
+since been developing the standards for the Web.
 
 The first standard version of \acronym{HTML} was \acronym{HTML} 2.0 published as
 \cite{rfc1866} in 1995. As the Web was becoming ubiquitous, it began
@@ -267,8 +267,8 @@ Parsing HTML documents]{hickson14} in 2008. An example is presented in Figure
 <b>This text is bold, <i>bold and italic</b>, italic.</i>
 <b>This text is bold, </b><i><b>bold and italic</b>, italic.</i>
   \end{minted}
-  \caption{The fragment on line 1 contains overlapping elements and as such, it
-    can't be a part of a valid \acronym{HTML} document.  However, it is
+  \caption{The fragment on line 1 contains overlapping elements and, as such, it
+    can't be a part of a valid \acronym{HTML} document. Nevertheless, it is
     recommended by \acronym{W3C} that browsers should parse the fragment
     identically to the fragment on line 2.}
   \label{fig:overlapping-elements}
@@ -299,7 +299,7 @@ Microsystems and Netscape Communications, JavaScript was, according to
 \cite{js-announcement}, supposed to complement Java applets -- a role it has
 since outgrown. Standardized within \cite{ecma1} in 1997, JavaScript blurs the
 line between static documents and interactive applications and remains the
-predominant client-side programming language for the Web.  However, since the
+predominant client-side programming language for the Web. Since, however, the
 support of JavaScript by a Web browser is fully optional, it is considered a
 good practice to use it chiefly for the enrichment of already self-sufficient
 \acronym{HTML} documents. In case of an interactive application, this
@@ -315,7 +315,7 @@ acceptance of malformed content, \acronym{XML} parsers are, as per
 \acronym{XML} documents that aren't well-formed, leading to architectural
 simplicity and decreased computational requirements. As a result, reformulating
 \acronym{HTML} in \acronym{XML} was suggested as a way to bring the Web to
-mobile, embedded and other devices limited in their resources, as well as to
+mobile, embedded, and other devices limited in their resources, as well as to
 reduce the amount of malformed documents on the Web in general. Other perceived
 advantages included the ability to use \acronym{XML} tools for web documents and
 to include instances of other \acronym{XML} applications, such as
@@ -342,57 +342,57 @@ namespaces. As a result, \acronym{XHTML} has yet to succeed in replacing
 
 \subsection{The Semantic Web and Linked Data}
 The underlying fundament of the Web is the the idea of a globally available and
-incrementally scalable base of human knowledge.  \acronym{HTML} and
-\acronym{XHTML} succeeded in fulfilling this vision for human-readable
-documents, but didn't provide a unifying machine-readable format for the
-representation of structured information that would enable the creation of a web
-of linked data running in parallel to the web of documents. In 1999,
-\acronym{W3C} released \cite{lassira99} containing the specification of
-\acronym{RDF}, a method for the description of resources on the Web.
+incrementally scalable base of human knowledge. \acronym{HTML} and
+\acronym{XHTML} succeeded in fulfilling this vision for human-readable documents
+but didn't provide a unifying machine-readable format for the representation of
+structured information that would enable the creation of a web of linked data
+running in parallel to the web of documents. In 1999, \acronym{W3C} released
+\cite{lassira99} containing the specification of \acronym{RDF}, a method for the
+description of resources on the Web.
 
 Drawing from the research in the field of knowledge representation, an
 \acroshort{RDF} document represents data as a set of \term{triples}
 \acroindex[!triple]{RDF}. Each of the triplets comprises \term{a
-predicate}\acroindex[!predicate]{RDF}, \term{a subject}\acroindex[!subject]{RDF}
-and \term{an object}\acroindex[!object]{RDF}, where both the predicate and the
-subject are specified as \term{resources} \acroindex[!resource]{RDF} using
-\acropl{IRI}. If the object of a triplet $(p,s,o)$ is also a resource, the
-triplet can be interpreted as a subject $s$ being in a relation $p$ with the
-object $o$. If the object is a \term{literal value} \acroindex[!literal]{RDF}
-rather than a resource, the respective triplet can be interpreted as a subject
-$s$ having a property $p$ with the value $o$.
+predicate}\acroindex[!predicate]{RDF}, \term{a
+subject}\acroindex[!subject]{RDF}, and \term{an object}\acroindex[!object]{RDF},
+where both the predicate and the subject are specified as \term{resources}
+\acroindex[!resource]{RDF} using \acropl{IRI}. If the object of a triplet
+$(p,s,o)$ is also a resource, the triplet can be interpreted as a subject $s$
+being in a relation $p$ with the object $o$. If the object is a \term{literal
+value} \acroindex[!literal]{RDF} rather than a resource, the triplet can be
+interpreted as a subject $s$ having a property $p$ with the value $o$.
 
 Resources in \acronym{RDF} are specified via \acropl{IRI} to prevent naming
 collisions in \acronym{RDF} documents created independently by distinct authors.
-These \acropl{IRI} are not required to resolve to an actual web page and,
+These \acropl{IRI} are not required to resolve to an actual web page, and
 disregarding the small set of standard resources specified within the
-\acroshort{RDF} specification, they carry no inherent meaning.  In order to
+\acroshort{RDF} specification, they carry no inherent meaning. In order to
 describe a set of resources, the relationships between them, and their intended
 meaning in an \acroshort{RDF} document, an extension of the set of standard
 resources---called \acroshort{RDF} Schema and specified within
-\cite{brickley04}---can be used.  The resulting documents are called
+\cite{brickley04}---can be used. The resulting documents are called
 \term{ontologies} \acroindex[!ontology]{RDF} and can be used for automated
 reasoning about \acronym{RDF} documents containing resources described by the
 ontology.\footnote{
   A list of ontologies that are fully documented, honor the current best
-  practices and are supported by various tools can be found on the
+  practices, and are supported by various tools can be found on the
   \acroshort{W3C} wiki at \url{http://www.w3.org/wiki/Good_Ontologies}.
 } Some of the well-known ontologies include \acronym{DC}---an ontology for the
 generic description of both web multimedia and physical objects---,
 \acronym{FOAF}---an ontology for the description of people and their social
 relationships---, or the Music Ontology---an ontology for the description of
-entities related to the music industry, such as albums, artists, tracks and
+entities related to the music industry, such as albums, artists, tracks, and
 events. More expressive standards for the creation of ontologies, such as
 \acronym{OWL} specified within \cite{mcguinness04}, also exist.
 
-The syntax of \acronym{RDF} is not fixed, meaning that aside from the
+The syntax of \acronym{RDF} is not fixed, meaning that, beside the
 \acroshort{XML} serialization specified within \cite{lassira99}, other
 languages, such as \acronym{JSON-LD} specified within \cite{sporny14}, the
 \inx{Turtle} language specified within \cite{beckett14:turtle}, or the
 line-based \inx{N-Triples} language specified within \cite{beckett14:nt}, can be
 used to represent an \acroshort{RDF} document. A noteworthy serialization of
-\acronym{RDF} is \acronym{RDFa} specified within \cite{adida08}. While various
-serializations of \acronym{RDF} can be included in or linked to an
+\acronym{RDF} is \acronym{RDFa} specified within \cite{adida08}. Although
+various serializations of \acronym{RDF} can be included in or linked to an
 \acroshort{HTML} or \acroshort{XHTML} document, this will often result in an
 undesirable duplication of data already present in the document. To prevent
 this, \acronym{RDFa} utilizes the content already present within the underlying
@@ -408,7 +408,7 @@ the document.
   \inputminted{text}{examples/02/john.ttl}
   \caption{Above is an example \acronym{RDF} document using \acronym{DC} and
     \acronym{FOAF} ontologies in \acronym{RDF}/\acronym{XML}%
-    \filename{john.rd}, \inx{N-Triples}\filename{john.nt} and \inx{Turtle}%
+    \filename{john.rd}, \inx{N-Triples}\filename{john.nt}, and \inx{Turtle}%
     \filename{john.ttl} serializations. Below is a graph representation of the
     document.}\label{fig:rdf-doc}\bigskip
   \input{examples/02/john.tex}
@@ -443,29 +443,31 @@ demand, and \term{interactive systems} \index{document preparation
 system!interactive}, which allow the user to directly edit an approximation of
 the output document via a visual editor. Also referred to as \acronym{WYSIWYG},
 interactive systems exchange mild learning curve for more primitive typesetting
-algorithms, which don't stand in the way of interactivity, and for reduced
+algorithms that don't stand in the way of interactivity and for reduced
 flexibility stemming from the usage of a \acronym{GUI}, which, although often
 intuitive for simple tasks, seldom matches the power of the markup languages
 used by batch-oriented systems.
 
 \subsection{Batch-oriented Document Preparation Systems}
-One of the archetypal batch-oriented systems are \inx{\texttt{troff}} and
-\index{\texttt{nroff}|seealso{\texttt{troff}}} \texttt{nroff} from 1970s, which
-were available for Unix operating systems and which were used to produce output
-for either general printers or line printers and terminals, respectively. A free
-alternative from \acronym{GNU} called \texttt{groff}
-\index{\texttt{groff}|seealso{\texttt{troff}}} combines the capabilities of both
-\texttt{troff} and \texttt{nroff}, and is used extensively to date for the
-markup of documentation in Unix and Unix-like operating systems, although more
-advanced alternatives exist for general typesetting. The associated markup
+One of the archetypal batch-oriented systems are \inx{\texttt{troff}}, whose
+function is to produce output for general printers, and \texttt{nroff}%
+\index{\texttt{nroff}|seealso{\texttt{troff}}}, whose function is to produce
+output for line printers and text terminals. Both tools were developed as a
+proprietary software for the Unix operating system at the beginning of 1970s by
+\acronym{ATnT}. An alternative to \texttt{nroff} and \texttt{troff} is
+\texttt{groff}\index{\texttt{groff}|seealso{\texttt{troff}}}, which was
+developed as a free software in 1980 by \acronym{GNU}. \texttt{Groff} combines
+the capabilities of both tools and is still used extensively for the markup of
+documentation in Unix and Unix-like operating systems, although more advanced
+alternatives for general typesetting (such as \TeX) exist. The associated markup
 language combines presentation markup with programming constructs and allows the
-definition of logical markup in the form of user macros.  Standard macro
+definition of logical markup in the form of user macros. Standard macro
 packages, such as \inx{\texttt{man}} for the formatting of documentation,
 \texttt{me} \index{\texttt{troff}!\texttt{me}} for the creation of research
 papers, or the more recent \texttt{mom} \index{\texttt{troff}!\texttt{mom}} for
 general typesetting tasks are typically distributed along with the system.
-Special markup invokes preprocessors, which can be used for the typesetting of
-tables, equations and vector graphics.
+Special markup invokes preprocessors that can be used for the typesetting of
+tables, equations, and vector graphics.
 
 \begin{figure}
   \fbox{\includegraphics[clip,trim=1.7cm 12cm 1.7cm 1.3cm,%
@@ -486,19 +488,20 @@ tables, equations and vector graphics.
 Another notable batch-oriented system is \TeX\index{TeX@\TeX}\footnote{
   The circumstances that led to the creation of \TeX\ and the surrounding tools
   are thoroughly documented in \cite{knuth98}.
-}, which was developed and consequently released to the public domain by in
-1970s a professor of computer science Donald Knuth, after he had received galley
+}, which was developed and consequently released to the public domain in 1970s
+by a professor of computer science Donald Knuth, after he had received galley
 proofs for the second volume of his monograph, \work{the Art of Computer
-Programming}, and found the appearance of mathematical formulae unsatisfactory.
+Programming}, and found the appearance of mathematical formulae distasteful.
 As a result, the typesetting of mathematics is a central theme in \TeX, rather
 than an afterthought, which differentiates it from most other document
-preparation systems and largely attributed to the massive popularity it attained
-in academia. Much like in the case of \texttt{troff} and its derivatives, the
-language of \TeX\ is ripe with typographic and programming primitives and
-doesn't by itself contain logical markup. The language, however, allows for the
-creation of user macros. An example of a macro package, which makes it possible
-to create various classes of documents with pure logical markup, is
-\inx{\LaTeX}, the industry standard for academic and technical typesetting.
+preparation systems and which largely contributed to the massive popularity
+\TeX\ has attained in academia. Much like in the case of \texttt{troff} and its
+derivatives, the language of \TeX\ is ripe with typographic and programming
+primitives and doesn't by itself contain logical markup. The language, however,
+allows for the creation of user macros. An example of a macro package that
+makes it possible to create documents of various classes with pure logical
+markup is \inx{\LaTeX}: the standard markup language for academic and technical
+documents.
 
 \begin{figure}
   \inputminted{tex}{examples/02/poe.tex}
@@ -513,23 +516,22 @@ the digital progeny of the typewriter machine, with which they share the main
 function of fast text capture. The typewriter output documents served largely as
 a manuscript for designers and typographers, who then produced the actual
 published work. With the advent of personal computing and the Web,
-self-publishing became more approachable to the general public and modern word
-processors can be used not only to write, but also to design and set typeset
+self-publishing became more approachable to the general public, and modern word
+processors can be used not only to write but also to design and typeset
 documents, although the offered functionally is typically constrained by user
 experience demands. This concern is not shared by \emph{desktop publishing
 software}\index{document preparation system!interactive!desktop publishing},
 which provides refined control over the resulting page layout and the
-typesetting primitives at the expense of steeper learning curve, but with the
-ability to produce document comparable to those set using traditional
-typography.
+typesetting primitives. The ability to produce document comparable to those set
+using traditional typography comes at the expense of steeper learning curve.
 
 Most interactive systems will provide a means to mark up sections of text.
 Presentation markup performs direct changes of typographic properties, such as
-the face, family, variant, color or the size of the font that is used to typeset
-the text. Logical markup enables the classification of sections of text with the
-ability to set up the design of each class later on. This decouples writing and
-markup from design and makes it easy to change the design of the entire document
-and difficult to produce inconsistent design.
+the face, family, variant, color, or the size of the font that is used to
+typeset the text. Logical markup enables the classification of sections of text
+with the ability to set up the design of each class later on. This decouples
+writing and markup from design and makes it easy to change the design of the
+entire document and difficult to produce inconsistent design.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{examples/02/interactive-editors.png}
@@ -541,15 +543,15 @@ and difficult to produce inconsistent design.
 \section{Lightweight Markup Languages}
 Parallel to the heavy-duty applications of \acronym{SGML} and \acronym{XML},
 there runs a vein of markup languages that give priority to unobtrusiveness and
-legibility over expressiveness and genericity.  Rooted in the reality of
+legibility over expressiveness and genericity. Rooted in the reality of
 computer text terminals with limited formatting capabilities, \term{lightweight
-markup languages} \index{lightweight markup language} leverage symbols and
+markup languages} \index{lightweight markup language} leverage punctuation and
 indentation to produce comparatively weak and domain-specific, but also humane,
-highly intuitive and often profoundly beautiful markup that is easy to both read
-and write. Examples of lightweight markup languages include \inx{Markdown},
-\inx{Creole}, \inx{AsciiDoc}, \inx{MakeDoc}, \inx{Setext} or \inx{Wikicode}.
-Lightweight markup languages are typically supplemented by tools, which enable
-the conversion to more general languages, such as \acronym{HTML}.  Also typical
+highly intuitive, and often profoundly beautiful markup that is easy to both
+read and write. Examples of lightweight markup languages include \inx{Markdown},
+\inx{Creole}, \inx{AsciiDoc}, \inx{MakeDoc}, \inx{Setext}, or \inx{Wikicode}.
+Lightweight markup languages are typically supplemented by tools that enable
+the conversion to more general languages such as \acronym{HTML}. Also typical
 is the existence of numerous flavours of every lightweight markup language,
 which represent different use cases.
 

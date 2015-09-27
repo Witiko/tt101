@@ -2,27 +2,30 @@
 \ProvidesPackage{main}
 
 % Markup
+\def\scamp{{\footnotesize\&}}                      % A fake small caps ampersand
 \def\footnote#1{\marginpar{\small\raggedright#1}}  % Margin footnotes
 \def\filename#1{ (\texttt{#1})}                    % Filenames in captions
 \let\work\textit                                   % Names of written works
-\let\term\textit                                   % New term
+\let\term\textit                                   % First occurances of terms
 \def\inx#1{#1\index{#1}}                           % Leaky indexing
 %% Faking chapters and TOC entries
-\def\faketoc#1{%
+\def\faketoc#1{%                                   % A forced TOC entry
   \addcontentsline{toc}{chapter}{#1}}
 \usepackage{afterpage}
-\def\fakechapter#1{
+\def\fakechapter#1{%                               % An unnumbered chapter head
   \chapter*{#1}
   \markright{\MakeUppercase{#1}}
   \afterpage{\markboth{\MakeUppercase{#1}}{\MakeUppercase{#1}}}
   \faketoc{#1}}
 %% Acronyms
 \usepackage{acro}
-\newcommand{\defacronym}[3][]{%
-  \DeclareAcronym{#2}{%
-    short={\MakeLowercase{#2}},
-    long={#3},
-    long-plural-form={#3s},#1}}
+\newcommand{\defacronym}[3][]{%           % An acronym definition
+  \mdefacronym[#1]{#2}{#2}{#3}}  
+\newcommand{\mdefacronym}[4][]{%          % A manual acronym definition 
+  \DeclareAcronym{#2}{%                   %   #1: options, #2: handle
+    short={\MakeLowercase{#3}},%          %   #3: short form, #4: long form
+    long={#4},
+    long-plural-form={#4s},#1}}
 \def\acronym#1{\ac{#1}\acroindex{#1}}     % An acronym
 \def\Acronym#1{\Ac{#1}\acroindex{#1}}     % ... at the beginning of a sentence
 \def\acropl#1{\acp{#1}\acroindex{#1}}     % ... in the plural form 
@@ -30,7 +33,7 @@
 \def\acrolong#1{\acl{#1}\acroindex{#1}}   % ... in the expanded form
 \newcommand{\acroindex}[2][]{\expandafter\index\expandafter%
   {#2@\acs*{#2}#1}}
-\def\acroflat#1{\textsc{\MakeLowercase{#1}}} % A plain acronym
+\def\acroflat#1{\textsc{\MakeLowercase{#1}}} % An acronym w/o prior definition
 
 % Design
 %% No em-spaces after full stops
