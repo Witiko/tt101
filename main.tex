@@ -32,26 +32,66 @@
 
 \fakechapter{Foreword}
 With the advent of the digital age, typesetting has become available to
-virtually anyone equipped with a personal computer. Beautiful documents can now
-be crafted using free and consumer-grade software, which often obviates the need
-for the involvement of a professional designer and typesetter. The level playing
-field of the Internet coupled with the rising popularity of digital-only
-documents then allows the aspiring author to bypass the publisher as well, if
-they so wish, without jeopardizing their chance of recognition.
+virtually anyone equipped with a personal computer. Beautiful text documents can
+now be crafted using free and consumer-grade software, which often obviates the
+need for the involvement of a professional designer and typesetter. The level
+playing field of the Internet coupled with the rising popularity of digital-only
+documents then allows the author to bypass the publisher as well, if they so
+wish, without jeopardizing their chance of recognition.
 
-This text is intended as a handbook for any author who aspires to write, design,
-typeset, and distribute high-quality documents of their own making. Each
-chapters describes one discrete step of document creation along with the
-relevant tools and literature. Since document preparation is a broad,
-multidisciplinary subject, the main goal of this text is to provide the reader
-with a general overview of the landscape and to provide references to more
-detailed literature for those interested in further study.
+Documents are like tin-cans, conserving ideas for later consumption. This one in
+particular contains a number of thoughts that should prove useful for any author
+who aspires to write, design, typeset and distribute text documents---the most
+universal and common kind of documents in use. Each chapters describes one
+discrete step of text document preparation along with the relevant tools and
+literature. Since document preparation is a broad, multidisciplinary subject,
+the main goal of this text is to provide the reader with a general overview of
+the landscape and to present references to more detailed literature for those
+interested in further nourishment.
 
 \chapter{Writing}
-% Text encodings
-% Text editors
-% Regular expressions and text processing
-% Versioning systems
+The essence of a document is the idea it represents. In the case of a text
+document, this idea is articulated through speech, which is transcribed using
+text and then laid out on a sheet of paper according to a design. And since the
+text is typically independent on the design, whose task is to support and elicit
+the internal structure of the text, it is writing that is the logical first step
+in the text document creation.
+
+  % An example of a poem by Christian Morgenstern
+  % as an exception to the rule
+
+The essentials of writing in any given natural language include \term{grammar
+rules}, which specify the structure of spoken language, and \term{orthographic
+rules}, which impose additional requirements on written text. The complexity of
+either set of rules depends entirely on the language in question. Some
+alphabets, such as the Japanese kanji, are not phonographic and the
+correspondence between spoken words and written graphemes needs to be memorized
+by the writer on a word-to-word basis. Some languages, such as Czech, use vastly
+different grammar rules for speaking and for writing, which means that a spoken
+sentence needs to be translated first before writing down. These specifics need
+to be recognized by the writer.
+
+On top of grammar and orthographic rules stand style guides, which, in order to
+improve consistency, codify how common language patterns are encoded.\footnote{%
+  This document was prepared in accordance with Strunk and White's
+  \work{Elements of Style}: an American English style guide for general use.
+} More comprehensive style guides---such as \work{the Chicago Manual of Style}
+or Ritter's \work{Oxford Style Manual}---often go beyond writing and provide
+guidelines on design and typesetting as well, making them an indispensable
+reference on the editorial tradition.
+
+Above all stand the \term{typographic rules}, which specify how the resulting
+document should be laid out so that it doesn't disturb the eye of the reader.
+These, as well as the orthographic rules on hyphenation, can be safely ignored
+during writing, for the world of thought is unconstrained by the type area.
+
+  % An illustration of the journey of an idea from the author to the reader
+
+\section{Text processing}
+\subsection{Text encoding}
+\subsection{Text manipulation}
+\subsection{Revision control}
+\section{Word processing}
 
 \chapter{Markup}
 A manuscript can consist of a seamless river of words and still make perfect
@@ -188,17 +228,18 @@ and attributes of different \acronym{XML} applications within a single
 \acronym{XML} document by providing a method to qualify element and attribute
 names with \acropl{IRI} that uniquely represent the respective \acronym{XML}
 applications. Namespaced elements are a spiritual successor of a more expressive
-\acronym{SGML} feature of \inx{\texttt{CONCUR}}, which makes it possible to mark
-up several structural views of a single document.  Unlike with \texttt{CONCUR},
-which ties each view to an \acroshort{SGML} \acronym{DTD}, there exists no
-general mechanism for the translation of \acropl{IRI} to \acronym{XML} schemata.
-This makes it impossible to validate namespaced \acronym{XML} documents, unless
-all used \acropl{IRI} and their respective schemata are known to the parser.
+\acronym{SGML} feature of \inx{\identifier{CONCUR}}, which makes it possible to
+mark up several structural views of a single document. Unlike with
+\identifier{CONCUR}, which ties each view to an \acroshort{SGML} \acronym{DTD},
+there exists no general mechanism for the translation of \acropl{IRI} to
+\acronym{XML} schemata.  This makes it impossible to validate namespaced
+\acronym{XML} documents, unless all used \acropl{IRI} and their respective
+schemata are known to the parser.
 
 \begin{figure}[hb!]
   \input{examples/02/peer-gynt.tex}
   \caption{The markup of the dramatic and metrical views of the beginning of
-    Henrik Ibsen's \work{Peer Gynt} using the \texttt{CONCUR} feature of
+    Henrik Ibsen's \work{Peer Gynt} using the \identifier{CONCUR} feature of
     \acronym{SGML}}
 \end{figure}
 
@@ -219,7 +260,7 @@ all used \acropl{IRI} and their respective schemata are known to the parser.
   \label{fig:recipe-rnc}
   \inputminted{sh}{examples/02/recipe.sh}
   \caption{\acronym{XML} documents can be easily validated against \acronym{XML}
-    schemata using command-line tools, such as \inx{\texttt{xmllint}}.}
+    schemata using command-line tools, such as \inx{\identifier{xmllint}}.}
 \end{figure}
 
 Due to the reduced complexity of \acronym{XML} compared to \acronym{SGML}, the
@@ -398,8 +439,8 @@ undesirable duplication of data already present in the document. To prevent
 this, \acronym{RDFa} utilizes the content already present within the underlying
 \acroshort{HTML} or \acroshort{XHTML} document using element attributes. The
 usage of \acronym{RDF} in conjunction with \acronym{HTML} and \acronym{XHTML} is
-intended to gradually obsolete the practice of using the \texttt{meta} and
-\texttt{link} elements to provide additional application-specific metadata about
+intended to gradually obsolete the practice of using the \element{meta} and
+\element{link} elements to provide additional application-specific metadata about
 the document.
 
 \begin{figure}
@@ -449,23 +490,25 @@ intuitive for simple tasks, seldom matches the power of the markup languages
 used by batch-oriented systems.
 
 \subsection{Batch-oriented Document Preparation Systems}
-One of the archetypal batch-oriented systems are \inx{\texttt{troff}}, whose
-function is to produce output for general printers, and \texttt{nroff}%
-\index{\texttt{nroff}|seealso{\texttt{troff}}}, whose function is to produce
-output for line printers and text terminals. Both tools were developed as a
-proprietary software for the Unix operating system at the beginning of 1970s by
-\acronym{ATnT}. An alternative to \texttt{nroff} and \texttt{troff} is
-\texttt{groff}\index{\texttt{groff}|seealso{\texttt{troff}}}, which was
-developed as a free software in 1980 by \acronym{GNU}. \texttt{Groff} combines
-the capabilities of both tools and is still used extensively for the markup of
-documentation in Unix and Unix-like operating systems, although more advanced
-alternatives for general typesetting (such as \TeX) exist. The associated markup
-language combines presentation markup with programming constructs and allows the
-definition of logical markup in the form of user macros. Standard macro
-packages, such as \inx{\texttt{man}} for the formatting of documentation,
-\texttt{me} \index{\texttt{troff}!\texttt{me}} for the creation of research
-papers, or the more recent \texttt{mom} \index{\texttt{troff}!\texttt{mom}} for
-general typesetting tasks are typically distributed along with the system.
+One of the archetypal batch-oriented systems are \inx{\identifier{troff}}, whose
+function is to produce output for general printers, and \identifier{nroff}%
+\index{\identifier{nroff}|seealso{\identifier{troff}}}, whose function is to
+produce output for line printers and text terminals. Both tools were developed
+as a proprietary software for the Unix operating system at the beginning of
+1970s by \acronym{ATnT}. An alternative to \identifier{nroff} and
+\identifier{troff} is
+\identifier{groff}\index{\identifier{groff}|seealso{\identifier{troff}}}, which
+was developed as a free software in 1980 by \acronym{GNU}. \Identifier{groff}
+combines the capabilities of both tools and is still used extensively for the
+markup of documentation in Unix and Unix-like operating systems, although more
+advanced alternatives for general typesetting (such as \TeX) exist. The
+associated markup language combines presentation markup with programming
+constructs and allows the definition of logical markup in the form of user
+macros. Standard macro packages, such as \inx{\identifier{man}} for the
+formatting of documentation, \identifier{me}
+\index{\identifier{troff}!\identifier{me}} for the creation of research papers,
+or the more recent \identifier{mom} \index{\identifier{troff}!\identifier{mom}}
+for general typesetting tasks are typically distributed along with the system.
 Special markup invokes preprocessors that can be used for the typesetting of
 tables, equations, and vector graphics.
 
@@ -474,8 +517,9 @@ tables, equations, and vector graphics.
     width=0.975\textwidth]{examples/02/poe-groff.pdf}}
   \inputminted{groff}{examples/02/poe.groff}
   \caption{An excerpt from the beginning of Edgar Allen Poe's \work{Cask of
-    Amontillado} formatted using the \texttt{mom}
-    \index{\texttt{troff}!\texttt{mom}} macro package of \inx{\texttt{groff}}.}
+    Amontillado} formatted using the \identifier{mom}
+  \index{\identifier{troff}!\identifier{mom}} macro package of
+  \inx{\identifier{groff}}.}
   \label{fig:poe}
 \end{figure}
 
@@ -495,18 +539,17 @@ Programming}, and found the appearance of mathematical formulae distasteful.
 As a result, the typesetting of mathematics is a central theme in \TeX, rather
 than an afterthought, which differentiates it from most other document
 preparation systems and which largely contributed to the massive popularity
-\TeX\ has attained in academia. Much like in the case of \texttt{troff} and its
-derivatives, the language of \TeX\ is ripe with typographic and programming
+\TeX\ has attained in academia. Much like in the case of \identifier{troff} and
+its derivatives, the language of \TeX\ is ripe with typographic and programming
 primitives and doesn't by itself contain logical markup. The language, however,
-allows for the creation of user macros. An example of a macro package that
-makes it possible to create documents of various classes with pure logical
-markup is \inx{\LaTeX}: the standard markup language for academic and technical
-documents.
+allows for the creation of user macros. An example of a macro package that makes
+it possible to create documents of various classes with pure logical markup is
+\inx{\LaTeX}: the standard markup language for academic and technical documents.
 
 \begin{figure}
   \inputminted{tex}{examples/02/poe.tex}
-  \caption{The \texttt{groff} document from Figure \ref{fig:poe} reformulated
-    using \TeX}
+  \caption{The \identifier{groff} document from Figure \ref{fig:poe}
+    reformulated using \TeX}
 \end{figure}
 
 \subsection{Interactive Document Preparation Systems}
@@ -558,6 +601,7 @@ which represent different use cases.
 \chapter{Design}
 % XML -- CSS, XSL, XSLT
 \chapter{Typesetting}
+% Accessibility -- WCAG
 \chapter{Proofreading}
 \chapter{Printing}
 \chapter{Distribution}

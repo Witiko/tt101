@@ -2,17 +2,23 @@
 \ProvidesPackage{main}
 
 % Markup
-\def\scamp{{\footnotesize\&}}                      % A fake small caps ampersand
+\def\scamp{{\footnotesize\&}}                      % A fake small-caps ampersand
 \def\footnote#1{\marginpar{\small\raggedright#1}}  % Margin footnotes
 \def\filename#1{ (\texttt{#1})}                    % Filenames in captions
 \let\work\textit                                   % Names of written works
 \let\term\textit                                   % First occurances of terms
 \def\inx#1{#1\index{#1}}                           % Leaky indexing
+\def\element#1{\mintinline{html}{<#1>}}            % An SGML or XML element
+\let\identifier\texttt                    % A general ASCII identifier
+\def\Identifier#1{{%                      % ... at the beginning of a sentence
+  \def\head##1##2\relax{##1}
+  \def\tail##1##2\relax{##2}
+  \identifier{\uppercase{\head#1\relax}\tail#1\relax}}}
 %% Faking chapters and TOC entries
-\def\faketoc#1{%                                   % A forced TOC entry
+\def\faketoc#1{%                          % A forced TOC entry
   \addcontentsline{toc}{chapter}{#1}}
 \usepackage{afterpage}
-\def\fakechapter#1{%                               % An unnumbered chapter head
+\def\fakechapter#1{%                      % An unnumbered chapter head
   \chapter*{#1}
   \markright{\MakeUppercase{#1}}
   \afterpage{\markboth{\MakeUppercase{#1}}{\MakeUppercase{#1}}}
