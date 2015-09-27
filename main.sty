@@ -14,7 +14,9 @@
   \else
     Linux%
   \fi\acroindex[!Linux]{GNU}}
-\def\Unices{%                                      % A shorthand for unices
+\def\Unix{%                                        % A shorthand for Unix
+  Unix or Unix-like operating system}
+\def\Unices{%                                      % A shorthand for Unices
   Unix and Unix-like operating systems}
 \DeclareRobustCommand{\foreign}[2][]{%             % A foreign language text
   \begin{#1}\textit{#2}\end{#1}}
@@ -33,9 +35,9 @@
   \scshape\MakeLowercase{#2}}%                     %% a UCS character
   \if\relax#1\relax\else~(\hexa{#1})\fi}           %% #1 -- hexa, #2 -- name
 \def\scamp{{\footnotesize\&}}                      % A fake small-caps ampersand
-\def\separatorcaption#1{{%                         % A caption that relates to
+\def\separatorcaption#1{%                          % A caption that relates to
   \setlength{\belowcaptionskip}{\abovecaptionskip}%%% material both below and
-  \caption{#1}}}                                   %% above
+  \global\caption{#1}}
 \def\footnote#1{%                                  % Margin note
   \marginpar[{\footnotesize\raggedleft#1}]%
              {\footnotesize\raggedright#1}}%

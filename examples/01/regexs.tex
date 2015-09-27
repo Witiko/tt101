@@ -1,0 +1,81 @@
+{\def\regex#1{\code[text]{#1}}
+\def\match#1{\textcolor{red}{#1}}
+\let\meta\emph
+\def\regexTerm#1{\term*{#1}\acroindex[!#1]{BRE}\acroindex[!#1]{ERE}}
+\def\tablebegin{
+  \begin{tabularx}{\textwidth}{
+    X>{\raggedright}p{.57\textwidth}>{\raggedright\arraybackslash}
+    p{.18\textwidth}@{\smallskip}}}
+\footnotesize
+\tablebegin
+  \tblhead{\normalsize\acroshort{BRE} regex} &
+    \tblhead{\normalsize Description} &
+    \tblhead{\normalsize Matches} \\ \hline
+    \regex{we\{1,2\}p} & The repetition expression in the form
+      of \meta{c}\regex{\{}\meta{m}\regex{,}\meta{n}\regex{\}} matches the
+      character \meta{c} repeated \mbox{\meta{k} $\in\langle
+      $\meta{m}$;$\,\meta{n}$\rangle$} times. Other forms include
+      \meta{c}\regex{\{}\meta{m}\regex{,}\regex{\}} for \meta{k} $\in\langle
+      $\meta{m}$; \infty)$ and \meta{c}\regex{\{}\meta{m}\regex{\}} for \meta{k} =
+      \meta{m}. &
+      \match{weep}s, \match{wep}t\\
+  \regex{e*ne} & Star (\regex{*}) is a \regexTerm{repetition
+    operator} equivalent to the interval expression of \regex{\{0,\}}. &
+    \match{ne}ver, \match{ene}my, Kl\match{eene} \\
+  \regex{\(}\meta{regex}\regex{\)} &
+    A \regexTerm{subexpression} is a parenthesized regex. Any interval
+    expression or repetition operator used immediately after a
+    subexpression applies to the entire parenthesized regex. &
+    \meta{regex} \\
+  \regex{^ar} & 
+    At the beginning of a regex or a subexpression, a caret (\regex{^})
+    matches the beginning of a string. &
+    \match{ar}gument, \match{ar}row keys, \match{ar}a ararauna \\
+  \regex{ore$} &
+    At the end of a regex or a subexpression, the dollar sign (\regex{$})
+    matches the end of a string. &
+    iron \match{ore}, dumbled\match{ore} \\
+  \regex{be.} &
+    A period (\regex{.}) matches any single character. &
+    or not to \match{be?} \\
+  \regex{be[ea]} &
+    A \regexTerm{matching list expression} is enclosed in square brackets
+    (\regex{[ ]}) and contains a list of characters that the bracket
+    expression matches. It may contain other entities omitted here for brevity. &
+    \match{bee}hive, grizzly
+    \match{bea}r, glass \match{bea}ds \\
+  \regex{be[^ea]} &
+    A \regexTerm{non-matching list expression} contains a caret (\regex{^}) as
+    its first character and matches any character the corresponding matching
+    list expression would not match. & o\match{bea}h, \match{ben}d,
+    li\match{bel}a \\
+  \regex{\^\*\.\\\$} & Backslash (\regex{\ }) is an
+    \regexTerm{escape character} that either suppresses or activates the
+    special meaning of the following character. &
+    \match{\textasciicircum*.\textbackslash\$} \\
+  \regex{\(..\).*\1} & A \regexTerm{backreference} in the form of an
+    escaped number \meta{n} $\in\langle1;9\rangle$ (\regex{\1}, \regex{\2},
+    \ldots, \regex{\9}) matches anything the \meta{n}th subexpression matched.
+    & a\match{rara}una, \match{darda}nelles, \match{nationa}lity \\
+\end{tabularx}
+\separatorcaption{An informal description of the \acroshort{BRE} syntax
+  (above) and the differences in the \acroshort{ERE} syntax (below)}
+\tablebegin
+  \tblhead{\normalsize\acroshort{ERE} regex} &
+    \tblhead{\normalsize Description} &
+    \tblhead{\normalsize Matches} \\ \hline
+    \regex{we{1,2}p} & Unlike in \acronym{BRE}, braces aren't escaped. &
+      \match{weep}s, \match{wep}t\\
+  \regex{pe+rl?} & Plus sign (\regex{+}) and question mark (\regex{?}) are
+    repetition operators equivalent to the interval expressions of
+    \regex{\{1,\}} and \regex{\{0,1\}}. &
+    \match{per}sona, \match{peer}, s\match{pee}ch, \match{perl} \\
+  \regex{(}\meta{regex}\regex{)} &
+    Unlike in \acronym{BRE}, parentheses aren't escaped. & \meta{regex} \\
+  \regex{(on|t).} & Vertical line (\regex{|}) is an
+    \regexTerm{alternation operator} that separates multiple regexes. The
+    whole regex matches any of the alternative regexes. &
+    \match{one}, \match{tw}o, \match{tr}ophy, \match{tr}uth \\
+  \regex{(..).*\1} & \acropl{ERE} do not support backreferences. &
+    \match{a literal \textbackslash1} \\
+\end{tabularx}}

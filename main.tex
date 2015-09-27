@@ -52,11 +52,11 @@ interested in further study of the subject matter.
 
 Every chapter is filled with examples that illustrate the subject matter. These
 should be consulted whenever the concepts described in the text are unclear to
-the reader. Although care was taken not to favour any computing environment,
+the reader. Although care was taken not to favor any computing environment,
 some examples feature Unix utilities, which have no suitable counterpart in
 operating systems such as Windows. To try these examples out, the reader is
 advised to install a Unix-like environment, such as the Windows Cygwin, on their
-local machine or to use a Unix or Unix-like operating system, such as \Linux.
+local machine or to use a \Unix, such as \Linux.
 
 \chapter{Writing}
 The essence of a document is the idea it represents. In the case of a text
@@ -309,7 +309,7 @@ Originally a competing standard, Unicode underwent a merger with \acronym{UCS}
 in version 1.1 and since then, the standards have been kept closely
 synchronised. Unicode is a superset of \acronym{UCS}, which defines additional
 information about \acronym{UCS} characters---such as their general category,
-directionality, case, or numeric value \cite[sec.\,3.5, ch.\,4]{unicode15}---,
+directionality, case, or numeric value \cite[sec.\,3.5,~ch.\,4]{unicode15}---,
 various text processing algorithms, and implementation guidelines.
 
 \begin{figure}
@@ -436,12 +436,7 @@ methods of their own.
 \end{figure}
 
 \begin{figure}
-{\Large\centerline{\begin{varwidth}{\textwidth}
-  \def\next{\medskip\\}
-  \displaykey{Alt + 1 + 6 + 0} = á \next
-  \displaykey{Alt + 0 + 2 + 2 + 5} = á \next
-  \displaykey{Alt + {+} + E + 1} = á
-\end{varwidth}}}
+  \input examples/01/altCodes
   \caption{On the Windows operating system, holding the \key{Alt} key and typing
     a sequence of numbers produces a character with the corresponding number
     from either an \acroshort{IBM} code page, if the number has no leading zero,
@@ -452,15 +447,6 @@ methods of their own.
     characters by holding the \key{Alt} key and typing the corresponding
     \acroshort{UCS} code point in hexadecimal.}
 \end{figure}
-
-% The input of a character using the compose key, the Ctrl+Shift+U and the
-% Alt-code (or Alt+X in Microsoft Word)
-%   <https://en.wikipedia.org/wiki/Alt_code>
-%   <http://www.fileformat.info/tip/microsoft/enter_unicode.htm>
-%   <https://en.wikipedia.org/wiki/Compose_key>
-
-%%% Typing Through Time: Keyboard History
-%%%   <http://www.daskeyboard.com/blog/typing-through-time-the-history-of-the-keyboard/>
 
 \subsection{Text Editors}
 A \term{text editor} is an applications, which can be used to create and modify
@@ -504,7 +490,7 @@ Interactive \acropl{DPS} include \inx{Apache OpenOffice}, \inx{TextEdit},
 The \term{Chomsky hierarchy} is a classification of text production rules
 (called \termpl{formal grammar}), which was proposed \cite{chomsky56} in
 \citeyear{chomsky56} by the American linguist \person{Noam Chomsky} in his
-endeavour to discover a good formal model for the description of natural
+endeavor to discover a good formal model for the description of natural
 languages. The class of \termpl{regular grammar}, which is the least powerful
 of the proposed classes, has properties that make it possible to determine the
 grammaticality of a text in constant time and space. \Termpl{regular
@@ -513,14 +499,14 @@ can use to find and replace character strings within text.
 
 Since regular expressions are just a formal model, a software implementation
 needs to settle on a concrete syntax. One of the earliest standard syntaxes are
-\acronym{BRE} and \acronym{ERE}, which are supported by most utilities using
-regular expressions on \Unices. Both syntaxes are described in Table
-\ref{tab:regexs}. More extensive syntaxes include the \acroshort{GNU} extensions
-of \acronym{BRE} and \acronym{ERE}, the one used in the \inx{Perl} programming
-language, and their dialects and derivatives. For most of these extended
-syntaxes, the term \term*{regular} is a misnomer, as the expressions can be used
-to build grammars that, according to the Chomsky hierarchy, aren't
-regular.\footnote{
+\acronym{BRE} and \acronym{ERE} \cite[part~1,~ch.\,9]{iso93:posix2}, which are
+supported by most utilities using regular expressions on \Unices. Both syntaxes
+are described in Table \ref{tab:regexs}. More extensive syntaxes include the
+\acroshort{GNU} extensions of \acronym{BRE} and \acronym{ERE}, the regex syntag
+of the \inx{Perl} programming language, and their dialects and derivatives. For
+most of these extended syntaxes, the term \term*{regular} is a misnomer, as the
+expressions can be used to build grammars that, according to the Chomsky
+hierarchy, aren't regular.\footnote{
   A curious reader with a background in formal language theory should direct
   their attention to Perl self-referencing groups and look-aheads, which make it
   a simple matter to create expressions that match non-context-free formal
@@ -531,6 +517,11 @@ regular.\footnote{
 } To disambiguate the term, these expressions are often called
 \termpl*[regexes]{regex}\index{regex|see{regular expression}}.
 
+\begin{table}
+  \input examples/01/regexs
+  \label{tab:regexs}
+\end{table}
+
   % Describe the ERE and BRE syntaxes [[tab:regexs]]
   % <https://en.wikipedia.org/wiki/Regular_expression#Standards>
   % <http://pubs.opengroup.org/onlinepubs/007908799/xbd/re.html>
@@ -539,6 +530,9 @@ regular.\footnote{
   % add the ERE abilities to BRE and which enable back-references, word
   % boundaries and more in ERE.
   % <http://www.regular-expressions.info/gnu.html>
+
+%%% POSIX.2-1997: Regular Expressions
+%%%   <http://pubs.opengroup.org/onlinepubs/007908799/xbd/re.html>
 
 Many regex syntaxes and the software that implements them were designed for the
 processing of \acronym{ASCII} text and may behave in surprising ways, when
@@ -563,14 +557,15 @@ value, directionality, and other properties defined by Unicode.
 
 The most elementary text processing \acroshort{CLI} tool is \cliutil{grep},
 which makes it possible to search text files for fixed strings and regexes in
-default of an advanced text editor. Upon execution, the tool will present lines
-that contain one or more matches to the user. A more advanced text-processing
-\acroshort{CLI} tool is \cliutil{sed}, which features a simple programming
-language that can be used to arbitrarily transform text files. \Cliutil{awk} is
-a \acroshort{CLI} tool that also features a text-processing programming
-language, albeit a more advanced one than that of \cliutil{sed}. Originally
-developed for the Research Unix during 1973--1977, \cliutil{grep}, \cliutil{sed},
-and \cliutil{awk} are available in various flavours for most operating systems.
+default of an advanced text editor. Unless configured otherwise, the tool will
+present lines that contain one or more matches to the user. A more advanced
+text-processing \acroshort{CLI} tool is \cliutil{sed}, which features a simple
+programming language that can be used to arbitrarily transform text files.
+\Cliutil{awk} is a \acroshort{CLI} tool that also features a text-processing
+programming language, albeit a more advanced one than that of \cliutil{sed}.
+Originally developed for the Research Unix during 1973--1977, \cliutil{grep},
+\cliutil{sed}, and \cliutil{awk} are available in various flavors for most
+operating systems.
 
   % Showcase a simple and an extreme example of grep, sed and awk code
 
@@ -854,7 +849,7 @@ that weren't valid instances of \acronym{HTML}, since most Web browsers, when
 faced with a malformed document, would act in accordance with the Postel's law
 and try to render the document despite its deficiencies. In an attempt to unify
 the way malformed \acronym{HTML} documents were rendered across the Web
-browsers, \acronym{W3C} acknowledged and documented this behaviour as a part of
+browsers, \acronym{W3C} acknowledged and documented this behavior as a part of
 the \acroshort{HTML}5 specification \cite[sec.\,8.2]{hickson14}. An example is
 given in Figure \ref{fig:overlapping-elements}.
 
@@ -1109,7 +1104,7 @@ technical documents.
 \end{figure}
 
 \subsection{Interactive Document Preparation Systems}
-Interactive \acropl{DPS} come in two distinctive flavours. Word processors
+Interactive \acropl{DPS} come in two distinctive flavors. Word processors
 \acroindex[!interactive!word processing]{DPS} are the digital progeny of the
 typewriter machine, with which they share the main function of fast text
 capture. The typewriter output documents served largely as a manuscript for
@@ -1151,7 +1146,7 @@ read and write. Examples of lightweight markup languages include \inx{Markdown},
 \inx{Creole}, \inx{AsciiDoc}, \inx{MakeDoc}, \inx{Setext}, or \inx{Wikicode}.
 Lightweight markup languages are typically supplemented by tools that enable
 the conversion to more general languages such as \acronym{HTML}. Also typical
-is the existence of numerous flavours of every lightweight markup language,
+is the existence of numerous flavors of every lightweight markup language,
 which represent different use cases.
 
 \chapter{Design}
