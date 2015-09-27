@@ -1,0 +1,34 @@
+{\setlength\extrarowheight\smallskipamount
+\def\tablebegin{\begin{tabularx}{\textwidth}%
+  {>{\raggedright}Xp{.78\textwidth}}}
+\footnotesize\tablebegin
+  \normalsize\tblhead{Regex} & \normalsize\tblhead{Description} \\ \hline
+  \weakregex{\textbackslash x\{}\meta{n}\weakregex{\}} &
+    Matches the \acroshort{UCS} character with code point \meta{n} in
+    hexadecimal. \\
+  \weakregex{\textbackslash N\{}\meta{n}\weakregex{\}} &
+    Matches the \acroshort{UCS} character, whose \regex{Name} property,
+    \regex{Name_Alias} property, or code point label tag equals \meta{n}. \\
+  \weakregex{\textbackslash p\{}\meta{p}\weakregex{\}} &
+    Matches any \acroshort{UCS} character with property \meta{p}. \\
+  \weakregex{\textbackslash P\{}\meta{p}\weakregex{\}} &
+    Matches any \acroshort{UCS} character without property \meta{p}. \\
+\end{tabularx}\nexttable\tablebegin
+  \normalsize\tblhead{Property} & \normalsize\tblhead{Description} \\ \hline
+  \regex{Letter} & This property is satisfied by any letter. \\
+  \regex{Punctuation} & This property is satisfied by any punctuation. \\
+  \regex{Symbol} & This property is satisfied by any symbol. \\
+  \regex{Mark} & This property is satisfied by any mark. \\
+  \regex{Number} & This property is satisfied by any number. \\
+  \regex{Separator} & This property is satisfied by any separator. \\
+  \regex{Other} & This property is satisfied by any \acroshort{UCS}
+    character that doesn't belong to any of the abovelisted categories. \\
+  \weakregex{Block=}\meta{b} & This property is satisfied by characters that
+    reside in the \acroshort{UCS} block \meta{b}. \Acroshort{UCS} blocks include
+    \regex{Basic Latin}, \regex{Greek}, \regex{Arabic}, etc. \\
+  \regex{Script=}\meta{s} & This property is satisfied by characters that
+    belong to the writing system \meta{s}. Writing systems include \regex{Latin},
+    \regex{Korean}, \regex{Chinese}, etc. \\
+  \regex{Numeric Value=}\meta{n} & This property is satisfied by any
+    \acroshort{UCS} character with the numeric value \meta{n}. \\
+\end{tabularx}}

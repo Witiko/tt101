@@ -81,10 +81,10 @@ impose additional requirements on written text. The complexity of either set of
 rules depends entirely on the language in question. Some writing systems, such
 as the Japanese kanji, are not phonographic and the correspondence between
 the spoken words and the written symbols needs to be memorized by the writer on
-a word-to-word basis. Some languages, such as Czech, use vastly different
-grammar rules for speaking and for writing, which means that a spoken sentence
-needs to be translated first before writing down. A writer needs to recognize
-these specifics.
+a word-to-word basis. Other languages may use vastly different grammar rules for
+speaking and for writing, which means that a spoken sentence needs to be
+translated first before writing down. A writer needs to recognize these
+specifics.
 
 On top of grammar and orthographic rules stand \termpl{style guide}, which, in
 order to improve consistency, codify how common language patterns are encoded.
@@ -538,10 +538,20 @@ that can be encoded in several different ways. The lack of awareness of the
 invisible characters that can appear in \acronym{UCS} text---such as the
 \ucs[200B]{zero width space}, \ucs[200C]{zero width non-joiner}, \ucs[200D]{zero
 width joiner}, and \ucs[FEFF]{zero width no-break space}---, is also problematic
-and can lead to false negative matches. Conversely, modern regex syntaxes---such
-as that of Perl---are actively aware of \acronym{UCS} and provide features that
-enable the matching of characters based on their general category, numeric
-value, directionality, and other properties defined by Unicode.
+and can lead to false negative matches. Conversely, modern regex syntaxes that
+implement the Unicode standard for Regular Expressions \cite{unicode13}---such
+as those of Perl 5.2 or Java 7---are actively aware of \acronym{UCS} and provide
+features that enable the matching of characters based on their general category,
+numeric value, directionality, and other properties defined by Unicode, as shown
+in Table \ref{tab:unicode-regexs}.
+
+\begin{figure}
+  \input examples/01/unicode-regexs
+  \caption{An overview of the elements of the Unicode regex syntax as
+    implemented by Perl 5.2 and Java 7. The list of Unicode character properties
+    is only demonstrative.}
+  \label{tab:unicode-regexs}
+\end{figure}
 
   % Show the character property Perl matching examples
   % <https://en.wikipedia.org/wiki/Regular_expression#Unicode>
