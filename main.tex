@@ -24,13 +24,17 @@
       This text is intended as a handbook for any author who aspires to write,
       design, typeset and distribute high-quality documents of their own making.
       Each chapter describes one discrete step in the process of the creation of
-      a document and consists of two parts. The first part of each chapter is
-      dedicated to the historical background surrounding the subject as well as
-      the general principles, whereas the second part illustrates the principles
-      with real-world examples using common tools. Due to the ephemeral nature
-      of software, the usefulness of the examples will invariably wane in time,
-      but if we have succeeded with our task, the principles should retain their
-      value regardless of the reader's choice of tools.
+      a document % and consists of two parts. The first part of each chapter is
+    % dedicated to the historical background surrounding the subject as well as
+    % the general principles, whereas the second part illustrates the principles
+    % with real-world examples using common tools. Due to the ephemeral nature
+    % of software, the usefulness of the examples will invariably wane in time,
+    % but if we have succeeded with our task, the principles should retain their
+    % value regardless of the reader's choice of tools.
+    %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%% The structure of the chapters differs from the description. %%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
       The order of the chapters corresponds to the realities of document
       preparation and therefore forms a useful mental model, which allows the
@@ -40,23 +44,60 @@
       However, a lone author who is preparing a less complex document or who
       feels confident in their ability to multitask may find it more productive
       to interleave several steps of the document preparation process and this
-      is completely legitimate.
+      is a completely legitimate thing to do.
+
+    \chapter{Writing}
+      % Text encodings
+      % Text editors
+      % Regular expressions
+      % Versioning systems
 
     \chapter{Markup}
       A manuscript can consist of a seamless river of words and still make
       perfect sense to the author. To truly capture its meaning in a clear and
       unambiguous manner, however, the manuscript will often need to be
       supplemented with an additional set of annotations. At a more basic level,
-      this refers to the compliance with the orthographic rules specific to the
-      language of the document, such as the correct spelling, hyphenation,
-      capitalization, word breaks and punctuation. It's not unreasonable to
-      expect that this compliance is already met by the manuscript.
-      
-      At a higher level, this consists of discovering and marking up the inner
-      order and logic of the text, so that the resulting document can later be
-      made to visually reflect the structure of the text in a unified manner. To
-      this end, there exists a wealth of so-called \emph{markup} languages that
-      enable the enrichment of plain text documents with additional annotations.
+      this refers to the compliance with the orthographic rules, such as the
+      correct spelling, hyphenation, capitalization, word breaks and
+      punctuation, that are specific to the language of the document. It is not
+      unreasonable to expect that this basic compliance should be already met by
+      the manuscript. At a higher level, this consists of discovering and
+      marking up the inner order and logic of the text, so that the resulting
+      document can later be typeset in a way that visually reflects the
+      structure of the text. To this end, there exists a wealth of \emph{markup
+      languages} that enable the enrichment of plain text documents with
+      additional information and labels.
+
+      \section{SGML and its descendants}
+        According to \cite{hlava11}, the situation engulfing digital typesetting
+        was growing increasingly frustrating for publishers in the 1960s. The
+        markup languages used by different typesetting systems varied wildly and
+        once a publisher had a large collection of documents typeset via a given
+        company, switching to another one could be very costly. The companies
+        would often take advantage of this situation, causing their prices to
+        skyrocket. As a result of that, a demand for a universal markup language
+        emerged.
+
+        This demand was met by a side product of a project developed\footnote{
+          More information about the project can be found within the personal
+          recollections of its co-author, Charles F. Goldfarb, in
+          \cite{goldfarb96,goldfarb97}.
+        } at the IBM's Cambridge Scientific Center in the early 1970s. The
+        project aimed at imbuing a text editor with the ability to query, edit
+        and display documents from a repository to allow the usage of computers
+        in legal practice. Very early on in the development process, it became
+        clear that the main problem were going to be the markup languages in
+        which the documents were written. These languages weren't unified and,
+        rather than describing the logical structure of the documents, they
+        directly shaped their visual form, which made information retrieval
+        impossible without the use of heuristics. To resolve the issue, a
+        unifying markup language called the General Markup Language
+        (\acronym{GML}) was drafted as a solution to the decribed problem. The
+        language was later released to the public in \cite{goldfarb81} and
+        finally standardized as the Standard General Markup Language
+        (\acronym{SGML}) within the \acronym{ISO} 8879 standard.
+
+        % An example of an SGML document
 
     \chapter{Design}
     \chapter{Typesetting}
