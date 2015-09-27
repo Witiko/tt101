@@ -12,7 +12,10 @@ SUBMAKEFILES=examples/*/
 
 .PHONY: all clean explode implode $(SUBMAKEFILES)
 all: explode clean
-explode: $(SUBMAKEFILES) $(OUTPUT).pdf
+
+# Perform the entire typesetting routine.
+explode: $(SUBMAKEFILES)
+	make $(OUTPUT).pdf
 
 # Prepare the resources in subdirectories.
 $(SUBMAKEFILES):
