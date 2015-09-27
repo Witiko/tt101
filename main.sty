@@ -3,15 +3,25 @@
 
 % Markup
 \usepackage{xcolor}
+\def\foreign[#1]#2{\begin{#1}\textit{#2}\end{#1}}  % A foreign text
 \def\needscite{\textcolor{red}{%                   % [Citation needed] reminder
   \textsuperscript{[citation needed]}}}
-\let\hexa\texttt                                   % A hexadeximal number
+\def\hexa#1{%                                      % A hexadecimal number
+  {\let\ea\expandafter%
+  \mbox{\ea\ea\ea\@gobble\hexapair#1\relax\relax\relax}}%
+  \ifhexafirst\ in the hexadecimal notation\hexafirstfalse\fi}
+\newif\ifhexafirst\hexafirsttrue                   %% Tracks the first usage
+\def\hexapair#1#2{%                                %% Formats a hexa pair
+  \ifx#1\relax\else%
+    \,\texttt{\MakeUppercase{#1#2}}\expandafter\hexapair%
+  \fi}
 \def\scamp{{\footnotesize\&}}                      % A fake small-caps ampersand
 \def\footnote#1{\marginpar{\small\raggedright#1}}  % Margin footnotes
 \def\filename#1{ (\texttt{#1})}                    % Filenames in captions
 \let\work\textit                                   % Names of written works
 \let\term\textit                                   % First occurances of terms
 \def\inx#1{#1\index{#1}}                           % Leaky indexing
+\let\person\inx                                    % Person names
 \def\element#1{\mintinline{html}{<#1>}}            % An SGML or XML element
 \let\identifier\texttt                             % A general ASCII identifier
 \def\Identifier#1{{%                               % ... at the beginning of a sentence
@@ -36,15 +46,16 @@
     short={\MakeLowercase{#3}},%          %   #3: short form, #4: long form
     long={#4},
     long-plural-form={#4s},#1}}
+ % An acronym formatting macro
 \def\acronym#1{\ac{#1}\acroindex{#1}}     % An acronym
 \def\Acronym#1{\Ac{#1}\acroindex{#1}}     % ... at the beginning of a sentence
 \def\acrofirst#1{\acf{#1}\acroindex{#1}}  % ... in the initial form 
 \def\acropl#1{\acp{#1}\acroindex{#1}}     % ... in the plural form 
 \def\acroshort#1{\acs*{#1}\acroindex{#1}} % ... in the unexpanded form
 \def\acrolong#1{\acl{#1}\acroindex{#1}}   % ... in the expanded form
-\newcommand{\acroindex}[2][]{\expandafter\index\expandafter%
-  {#2@\acs*{#2}#1}}
-\def\acroflat#1{\textsc{\MakeLowercase{#1}}} % An acronym w/o prior definition
+\def\acroflat#1{\textsc{\MakeLowercase{#1}}} % ... that wasn't defined
+\newcommand{\acroindex}[2][]{%           % Puts an acronym entry into index with
+  \index{#2@{\acs*{#2}}#1}}              % #2 appended to the `\index` argument
 
 % Design
 %% No em-spaces after full stops
@@ -66,14 +77,22 @@
 \usepackage[protrusion]{microtype}
 %% Acronyms
 \acsetup{
-  first-long-format=\itshape,
-  short-format=\scshape,
-  list-short-format=\scshape,
-  list-caps=true,
-  index-cmd=\acroindex}
+  first-long-format=\itshape,  % The formatting of an expanded acronym
+  short-format=\scshape,       %               ... an unexpanded acronym
+  list-type=description,       % The type of the list used to print acronyms
+  list-caps=true}              % List definitions start with upper-case letters
 %% Line numbers
 %% @see <http://tex.stackexchange.com/a/132850/70941>
 \renewcommand{\theFancyVerbLine}{{\rm\normalsize{\arabic{FancyVerbLine}}}}
-%% Eliminate vertical spacing and indentation in lists
+%% Lists
+%%% No vertical spacing and indentation in lists
 \usepackage{enumitem}
 \setlist{noitemsep,leftmargin=0cm}
+%%% Description list runs into the margin
+\renewenvironment{description}{%
+  \begin{itemize}
+    \begingroup
+    \let\olditem\item
+    \renewcommand{\item}[1][]{\olditem[\textbf{##1}]}}{%
+    \endgroup
+  \end{itemize}}

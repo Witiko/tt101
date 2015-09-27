@@ -1,6 +1,7 @@
 \documentclass{book}
 \usepackage{polyglossia}  % Hyphenation
 \setmainlanguage{english}
+\setotherlanguages{french,italian}
 \usepackage{minted}       % Source code typesettings
 \setminted{breaklines=true}
 \usepackage{placeins}     % Float barriers
@@ -70,7 +71,7 @@ rules}\index{rules!grammar}, which specify the structure of spoken language, and
 requirements on written text. The complexity of either set of rules depends
 entirely on the language in question. Some writing systems, such as the Japanese
 kanji, are not phonographic and the correspondence between spoken words and
-written characters needs to be memorized by the writer on a word-to-word
+written ideographs needs to be memorized by the writer on a word-to-word
 basis. Some languages, such as Czech, use vastly different grammar rules for
 speaking and for writing, which means that a spoken sentence needs to be
 translated first before writing down. These specifics need to be recognized by
@@ -100,39 +101,36 @@ typewriter machine, manuscripts of today are produced chiefly using the personal
 computer. The discipline of creating and manipulating digital text is called
 \term{\inx{text processing}} and will be the focus of this section.
 
-\subsection{Text Encoding}
+\subsection{Character Encoding}
 Although computing at its most primal has no use for anything but numbers, it
 has nevertheless been accompanied by text from the very outset. Even the
 earliest computers from 1950s were programmed with both raw machine code and
 the text programming languages of \acronym{FORTRAN} and \acronym{COBOL}. The
-digital representation of letters, digits and other symbols was initially
+digital representation of letters, digits and other characters was initially
 closely tied to each specific application and processor architecture, but with
 the advent of networking in 1960s, mutual intelligibility became a point of
 concern. ``We had over sixty different ways to represent characters in
-computers. It was a real Tower of Babel,'' explains in \cite{brandel99} Bob
-Berner, a computer scientist who worked at \acronym{IBM} during 1956--1962 and
-who drafted \acronym{ASCII}---the digital encoding of text, standardized in
-\cite{asa63}, that unified the industry and enabled computer networking on large
-scale.
+computers. It was a real Tower of Babel,'' explains in \cite{brandel99}
+\person{Bob Berner}, an American computer scientist who worked at \acronym{IBM}
+during 1956--1962 and who drafted \acronym{ASCII}---the \term{\inx{character
+encoding}}, standardized in \cite{asa63}, that unified the industry and enabled
+computer networking on large scale.
 
 \subsubsection{ASCII}
-In \acronym{ASCII}, every character is represented by a sequence of seven bits,
-called \term{a \inx{character code}}. This allows for 128 combinations, which
-are used to encode \term{\inx{printable character}s}---spanning the letters of
-the English alphabet, digits, punctuation, and other symbols---and
-\term{\inx{control code}s}, as depicted in Table \ref{tab:ascii}. Unlike
-printable characters, control codes have no fixed visual representation or
-precise semantics and were used to implement application-specific communication
-protocols and text formatting. Unconstrained by the bandwidth and the storage
-limitations of the 1960s, today's communication protocols and text formats
-gravitate towards markup constructed from printable characters, which, unlike
-control codes, is human-readable and unlimited in its extensibility.
+In \acronym{ASCII}, every character is represented by a number from 0 to 127,
+which is transformed to a seven-bit integer called \term{a \inx{character
+code}}. These 128 codes are used to encode \term{\inx{printable
+character}s}---spanning the letters of the English alphabet, digits,
+punctuation, and other symbols---and \term{\inx{control code}s}, as depicted in
+Table \ref{tab:ascii}. Unlike printable characters, control codes have no fixed
+visual representation or precise semantics and were used to implement
+application-specific communication protocols and text formatting. Unconstrained
+by the bandwidth and the storage limitations of the 1960s, today's communication
+protocols and text formats gravitate towards markup constructed from printable
+characters, which, unlike control codes, are easy to read and write by humans.
 
-  % The ASCII table (both the original and ANSI X3.4-1986:
-  % <http://sliderule.mraiow.com/w/images/7/73/ASCII.pdf>)
-
-  % Some of the ASCII predecessors and contenders):
-  % ASCII, ISO/IEC 646, EBDIC, Baudot Code, Morse Code
+  % The ASCII table (both the original and ANSI X3.4-1986: [tab:ascii]
+  %   <http://sliderule.mraiow.com/w/images/7/73/ASCII.pdf>
 
 %%% ASCII, Other Standards
 %%%   <https://en.wikipedia.org/wiki/ASCII#Other_standards>
@@ -162,9 +160,10 @@ control codes, is human-readable and unlimited in its extensibility.
 The following properties make it easy to manipulate and reason about character
 strings encoded in \acronym{ASCII}:
 \begin{itemize}
-  \item Each character is exactly seven bits wide. This makes it easy to
-    allocate space for character strings of fixed length and to measure the
-    number of characters stored in a memory region.
+  \item Each character is represented by exactly seven bits. This makes it easy
+    to allocate space for character strings of fixed length, to measure the
+    number of characters stored in a memory region, and to perform basic
+    operations, such as adjacent character retrieval or text truncation.
   \item Characters are alphabetically ordered. Character strings can therefore
     be collated by the comparison of character code binary values.
   \item Lower-case letters, upper-case letters, digits and control codes form
@@ -176,8 +175,8 @@ strings encoded in \acronym{ASCII}:
 This comes at the expense of support for non-English writing systems.
 
 \subsubsection{Eight-bit Encodings}
-With the byte size stabilizing at eight bits, new text encodings emerged that
-were based on \acronym{ASCII} and utilized the additional bit to encode
+With the byte size stabilizing at eight bits, new character encodings emerged
+that were based on \acronym{ASCII} and utilized the additional bit to encode
 characters of non-English writing systems. Beside the numerous vendor-specific
 encodings (called \term{\inx{codepage}s}), a set of 15 eight-bit encodings
 covering all major modern writing systems whose characters fit within the space
@@ -189,8 +188,8 @@ of 128 additional combinations was standardized in the
 Compared to \acronym{ASCII}, eight-bit encodings introduced an additional level
 of complexity to text processing:
 \begin{itemize}
-  \item Each character is exactly eight bits wide. The buffering and measuring
-    of character strings is therefore as simple as with \acronym{ASCII}.
+  \item Each character is exactly eight bits wide. The manipulation with strings
+    is therefore as straightforward as with \acronym{ASCII}.
   \item Character strings can no longer be collated by character code
     comparison. Each encoding requires a separate mapping from character codes
     to sorting weights.
@@ -206,46 +205,100 @@ of complexity to text processing:
     heuristics or additional metadata. Consequently, no standard mechanism
     exists to use different character encodings within a single text document.
 \end{itemize}
-A portion of this complexity is inherent in the the task of encoding all modern
-writing systems, but the overhead caused by text encoding fragmentation proved
-to be unnecessary.
+A portion of this complexity is inherent in the task of encoding the characters
+of all modern writing systems, but the overhead caused by the character encoding
+fragmentation proved to be hurtful and unnecessary.
 
 \subsubsection{The Universal Character Set and Unicode}
 The continual increase in the available bandwidth and storage led to the
-creation of Unicode \cite{unicode91,unicode92} and \acronym{UCS} \cite{iso93} in
-an attempt to create a text encoding containing each and every useful character
-in order to end the hurtful text encoding fragmentation.
+creation of the competing standards of Unicode \cite{unicode91,unicode92} and
+\acronym{UCS} \cite{iso93} in an attempt to create a text encoding that would
+contain the characters of all the world's living languages and succeed
+\acronym{ASCII} as the \foreign[italian]{lingua franca} of text interchange.
 
-% text encoding -> font encoding
-% remove direct references to bibliography (in \cite{...})
+\Acronym{UCS} is an ever-expanding catalogue of characters from writing systems
+both modern and ancient, and symbols ranging from diacritical marks,
+punctuation, and ideograms to mahjong tiles, alchemical symbols, and the ancient
+Greek musical notation. Each of these characters is assigned a number ranging
+from 0 to 2,147,483,647 (\hexa{7FFFFFFF}) with the numbers of the most common
+characters in the range from 0 to 65,535 (\hexa{FFFF}) called \acronym{BMP}.
+\Acronym{UCS} encodings map character numbers to binary character codes. Three
+major encodings are specified in the \acronym{UCS} standard and its
+amendments \cite{iso93:am1,iso93:am2}:
+\begin{description}
+  \item[\acroshort{UTF}-32]\acroindex[!UTF-32@{\acroshort{UTF}-32}]{UTF}
+    Directly encodes \acronym{UCS} characters by transforming the character
+    numbers to four-byte integers. This encoding is also known as
+    \acroshort{UCS}-4\acroindex[!UCS-4@{\acroshort{UCS}-4}]{UCS}.
+  \item[\acroshort{UTF}-16]\acroindex[!UTF-16@{\acroshort{UTF}-16}]{UTF}
+    Directly encodes characters within \acronym{BMP} by transforming the
+    character numbers to two-byte integers. Character numbers in the range from
+    65,536 to 1,114,111 (\mbox{\hexa{010000}--\hexa{10FFFF}}) are transformed
+    into a pair of two-byte integers, called \term{a \inx{surrogate pair}},
+    ranging from 55,296 to 57,343 (\mbox{\hexa{DC00}--\hexa{DFFF}}). To enable
+    the \acroshort{UTF}-16 encoding, the character numbers in the surrogate pair
+    range will never be assigned. The same applies to character numbers greater
+    than 1,114,111 (\hexa{10FFFF}), which allows \acroshort{UTF}-16 to encode
+    any \acroshort{UCS} character.
+  \item[\acroshort{UTF}-8]\acroindex[!UTF-8@{\acroshort{UTF}-8}]{UTF}
+    Directly transforms character numbers from 0 to 127 (\hexa{7F}) to one-byte
+    integers. Since the beginning of the \acroshort{BMP} matches
+    \acronym{ASCII}, any text encoded in eight-bit \acroshort{ASCII} is also
+    encoded in \acroshort{UTF}-8. Character numbers in the range from 127 to
+    1,114,111 (\mbox{\hexa{00007F}--\hexa{10FFFF}}) are transformed into two to
+    four one-byte integers ranging from 128 to 253
+    (\mbox{\hexa{80}--\hexa{FD}}). The encoding is illustrated in Figure
+    \ref{fig:utf8}.
+\end{description}
+\acroshort{UTF}-32 is primarily used for the internal representation of
+individual \acronym{UCS} characters inside programs. \acroshort{UTF}-16 fulfills
+the same role for applications that only work with \acronym{BMP}.
+\acroshort{UTF}-8 is used for text storage and interchange; since 2010, the
+majority of text content on the Web is encoded in \acroshort{UTF}-8
+\cite{qsuccess15}.
 
-\Acronym{UCS} is an ever-expanding catalogue of characters ranging from writing
-systems both modern and ancient, mathematical symbols, and a wide variety of
-ideograms to mahjong tiles, alchemical symbols, and ancient Greek musical
-notation. Each of these characters is assigned a number ranging from 0 to
-1,114,111 (\hexa{10FFFF} in hexadecimal) with the codes of the most common
-characters falling inside the range of 0--65,535 (\hexa{FFFF} in hexadecimal).
-Encodings of \acronym{UCS} map character numbers to binary character codes. ???
-such encodings are specified in \cite{iso93}
-
-  % A table explaining the UTF-8 encoding
+  % A table explaining the UTF-8 encoding [fig:utf8]
+  % Some examples of exotic glyphs in Unicode
 
 % Unicode > ISO/IEC 10646: Sorting, directionality, how it combines with other
 % characters, numeric values <https://en.wikipedia.org/wiki/Universal_Coded_Character_Set#External_links>
 %
 % Adopce UTF-8: <https://en.wikipedia.org/wiki/UTF-8#/media/File:UnicodeGrow2b.png>
-% Standard UTF-7
+% Standardy UTF-7 a UTF-EBCDIC
 %
 % UTF-8:  RFC 3629
 % UTF-16: RFC 2781
 % <https://tools.ietf.org/html/rfc5198> 
 %
+% Unicode signature: FEFF (byte order mask)
+%
+% Unicode was initially intended as a 16-bit encoding (leaving out ancient
+% scripts, see [[Unicode 88, pages 4--5]])
+% UCS was initially intended as a 32-bit encoding (wasn't approved by vendors) => compromise
+%
 % Příklad možností několika zakódování stejně vypadajících symbolů:
 %   <https://en.wikipedia.org/wiki/Number_Forms> (římské číslice), ellipsis,
 %   soft hyphen, combination sequences
+%
+% Unicode and ISO 10646 merged in version 1.1
+% The big achievement of Unicode: Unification of ideographic glyphs
+%
+% Přidat brevity disclaimery ohledně ostatních existujících kódování
+%   ISO/IEC 646, EBDIC, Baudot Code, Morse Code
+%   14-bitový JIS a odvozená kódování
+%   ... [[ASCII: Other Standards]]
 
 %%% Unicode 101: An Introduction to the Unicode Standard
 %%%   <http://www.interproinc.com/blog/unicode-101-introduction-unicode-standard>
+%%%
+%%% Unicode Implementation levels
+%%%   <http://www.cl.cam.ac.uk/~mgk25/unicode.html#levels>
+%%%
+%%% Unification of the Unicode Standard and ISO 10646
+%%%   <http://www.unicode.org/versions/Unicode1.0.0/V2ch01.pdf>
+%%%
+%%% Unicode 88 <http://unicode.org/history/unicode88.pdf>
+%%% Unicode equivalence <https://en.wikipedia.org/wiki/Unicode_equivalence>
 %%%
 %%% Plane (Unicode):
 %%%   <https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane>
@@ -444,15 +497,16 @@ be discussed in Section \ref{sec:www-markup}.
       
 \section{Markup on the World Wide Web}\label{sec:www-markup}
 \subsection{The Hypertext Markup Language}
-In \cite{bernerslee89}, Timothy John Berners-Lee proposed a decentralized system
-for sharing linked documents within \acronym{CERN}. The system laid foundation
-for today's \term{\inx{World Wide Web}} (Web) and earned its author knighthood.
-The markup language used to write documents for the system was an application of
-\acronym{SGML} called \acronym{HTML}. In 1993, the Web started to gain
-popularity amongst the general public owing to the release of the first
-graphical Web browser Mosaic, which paved way for the Web browsers of today. In
-1994, Timothy John Berners-Lee formed \acronym{W3C}, which has since been
-developing the standards for the Web.
+In \cite{bernerslee89}, an English computer scientist \person{Timothy John
+Berners-Lee} proposed a decentralized system for sharing linked documents within
+\acronym{CERN}. The system laid foundation for today's \term{\inx{World Wide
+Web}} (Web) and earned its author knighthood.  The markup language used to write
+documents for the system was an application of \acronym{SGML} called
+\acronym{HTML}. In 1993, the Web started to gain popularity amongst the general
+public owing to the release of the first graphical Web browser Mosaic, which
+paved way for the Web browsers of today. In 1994, \person{Timothy John
+Berners-Lee} formed \acronym{W3C}, which has since been developing the standards
+for the Web.
 
 The first standard version of \acronym{HTML} was \acronym{HTML} 2.0 published in
 \cite{rfc1866}. As the Web was becoming ubiquitous, it began accumulating an
@@ -650,7 +704,7 @@ systems. These can be dichotomized into \term{batch-oriented systems}
 text documents into printable output documents in a page description language on
 demand, and \term{interactive systems} \index{document preparation
 system!interactive}, which allow the user to directly edit an approximation of
-the output document via a visual editor. Also referred to as \acronym{WYSIWYG},
+the output document via a visual editor. Also called \acronym{WYSIWYG},
 interactive systems exchange mild learning curve for more primitive typesetting
 algorithms that don't stand in the way of interactivity and for reduced
 flexibility stemming from the usage of a \acronym{GUI}, which, although often
@@ -704,18 +758,19 @@ Another notable batch-oriented system is \TeX\index{TeX@\TeX}\footnote{
   The circumstances that led to the creation of \TeX\ and the surrounding tools
   are thoroughly documented in \cite{knuth98}.
 }, which was developed and consequently released to the public domain in 1970s
-by a professor of computer science Donald Knuth, after he had received galley
-proofs for the second volume of his monograph, \work{the Art of Computer
-Programming}, and found the appearance of mathematical formulae distasteful.
-As a result, the typesetting of mathematics is a central theme in \TeX, rather
-than an afterthought, which differentiates it from most other document
-preparation systems and which largely contributed to the massive popularity
-\TeX\ has attained in academia. Much like in the case of \identifier{troff} and
-its derivatives, the language of \TeX\ is ripe with typographic and programming
-primitives and doesn't by itself contain logical markup. The language, however,
-allows for the creation of user macros. An example of a macro package that makes
-it possible to create documents of various classes with pure logical markup is
-\inx{\LaTeX}: the standard markup language for academic and technical documents.
+by an American professor of computer science \person{Donald Knuth}, after he had
+received galley proofs for the second volume of his monograph, \work{the Art of
+Computer Programming}, and found the appearance of mathematical formulae
+distasteful.  As a result, the typesetting of mathematics is a central theme in
+\TeX, rather than an afterthought, which differentiates it from most other
+document preparation systems and which largely contributed to the massive
+popularity \TeX\ has attained in academia. Much like in the case of
+\identifier{troff} and its derivatives, the language of \TeX\ is ripe with
+typographic and programming primitives and doesn't by itself contain logical
+markup. The language, however, allows for the creation of user macros. An
+example of a macro package that makes it possible to create documents of various
+classes with pure logical markup is \inx{\LaTeX}: the standard markup language
+for academic and technical documents.
 
 \begin{figure}
   \inputminted{tex}{examples/02/poe.tex}
@@ -774,6 +829,18 @@ which represent different use cases.
 \chapter{Typesetting}
 % Accessibility -- WCAG
 % Digital Typesetting Pocket Primer, Ron Goldberg
+% Word processors do offer typographic primitives
+%   <http://word.tips.net/T001081_Inserting_a_Non-Breaking_Space.html>
+%   Unicode characters:
+%     * \hexa{FEFF} -- \unichar{Zero width no-break space}
+%     * \hexa{00A0} -- \unichar{Non-breaking space}
+%     * \hexa{200B} -- \unichar{Zero width space}
+%     * \hexa{0020} -- \unichar{Space}
+%     * \hexa{2009} -- \unichar{Thin space}
+%     * ... <http://www.fileformat.info/info/unicode/category/Zs/list.htm>
+%     * ... <http://www.fileformat.info/search/google.htm?q=zero+width&domains=www.fileformat.info&sitesearch=www.fileformat.info&client=pub-6975096118196151&forid=1&channel=1657057343&ie=UTF-8&oe=UTF-8&cof=GALT%3A%23008000%3BGL%3A1%3BDIV%3A%23336699%3BVLC%3A663399%3BAH%3Acenter%3BBGC%3AFFFFFF%3BLBGC%3A336699%3BALC%3A0000FF%3BLC%3A0000FF%3BT%3A000000%3BGFNT%3A0000FF%3BGIMP%3A0000FF%3BFORID%3A11&hl=en>
+%     * ... <http://www.unicode.org/versions/Unicode1.0.0/V2ch01.pdf>, page 6
+%
 %%% Hyphenation in HTML
 %%%   <http://www.cs.tut.fi/~jkorpela/shy.html>
 %%%   <https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens>
@@ -791,7 +858,8 @@ which represent different use cases.
 \printacronyms[heading=none]
 
 % Index
-\printindex
+\def\index#1{} % Disable indexing
+\printindex    % Print the index
 \faketoc{Index}
 
 \end{document}
