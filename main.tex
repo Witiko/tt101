@@ -124,7 +124,7 @@
       \subsection{The Extensible Markup Language}
         Although \acronym{SGML} was designed to be the general format for data
         exchange, the complexity of the specification and the lack of support
-        for Unicode proved to be a major hinderance preventing its wider
+        for Unicode proved to be a major hindrance preventing its wider
         adoption and tool development. As a response, the World Wide Web
         Consortium (W3C) published a specification of the Extensible Markup
         Language (\acronym{XML}) within \cite{bray98} in 1998. Along with the
@@ -137,8 +137,9 @@
         documents, which makes it possible to differentiate two levels of
         correctness. Specifically, an \acronym{XML} document is considered to be
         \emph{well-formed}, when it conforms to the \acronym{SGML} \acronym{DTD}
-        that defines \acronym{XML}. An \acronym{XML} document is considered to
-        be \emph{valid} with regards to an \acronym{XML} \acronym{DTD}, when it
+        that restrains \acronym{XML} as well as to the additional constraints
+        given in the specification. An \acronym{XML} document is considered to
+        be \emph{valid} against an \acronym{XML} \acronym{DTD}, when it
         is well-formed and conforms to the said \acronym{XML} \acronym{DTD}.
         Along with \acronym{DTD}s, there exists a wealth of \emph{schema}
         languages for \acronym{XML}, such as \acronym{W3C XML} Schema, Regular
@@ -148,7 +149,7 @@
         \acronym{DTD} or a schema define an \emph{application}, \emph{language}
         or \emph{format} of \acronym{XML}.
 
-          % Examples of various XML schema languages and DTD
+          % Examples of various XML schema languages and DTD (https://en.wikipedia.org/wiki/Document_type_definition)
           % Examples of validity testing
         
         Along with schema languages, other supplementary languages also exist,
@@ -159,6 +160,12 @@
         \acronym{XML} languages, they are nevertheless used within documents of
         various \acronym{XML} formats and form an important part of the
         \acronym{XML} ecosystem.
+
+        %%% XML Namespaces and the discussion of their usefulness compared to
+        %%% Architectural Forms (AFs)
+        %%%  <http://users.nyct.net/~aray/sgo/bogosity.txt>
+        %%%  <http://www.w3.org/TR/1999/REC-xml-names-19990114/>
+        %%%  <https://msdn.microsoft.com/en-us/library/aa468565.aspx>
 
         Due to the reduced complexity of \acronym{XML} compared to
         \acronym{SGML}, the language was adopted by specialists and the general
@@ -174,10 +181,11 @@
         companies such as Red Hat, \acronym{SUSE} or Sun Microsystems---,
         Text Encoding Initiative (\acronym{TEI})---a general text encoding
         format for the use in the academic field of digital humanities---,
-        or Mathematical Markup Language (\acronym{MathML})---a format for
-        describing mathematical formulae. Other \acronym{XML} applications, such
-        as \acronym{XHTML} and \acronym{RDF/XML}, will be described in Section
-        \ref{sec:www-markup}.
+        Mathematical Markup Language (\acronym{MathML})---a format for
+        describing mathematical formulae---, or Scalable Vector Graphics
+        (\acronym{SVG})---a two-dimensional vector image format. Other
+        \acronym{XML} applications, such as \acronym{XHTML} and
+        \acronym{RDF/XML}, will be described in Section \ref{sec:www-markup}.
         
       \section{Markup on the World Wide Web}\label{sec:www-markup}
       \subsection{The Hypertext Markup Language}
@@ -195,22 +203,22 @@
         
         %%% On the various meanings of <tag /> <https://utcc.utoronto.ca/~cks/space/blog/web/ShortTagsMeanings>
 
-        The first standard version of \acronym{HTML} was published as
-        \cite{rfc1866} in 1995. As the Web was becoming ubiquitous, it began
+        The first standard version of \acronym{HTML} was version 2.0 published
+        as \cite{rfc1866} in 1995. As the Web was becoming ubiquitous, it began
         accumulating an increasing number of documents that weren't valid
         instances of \acronym{HTML}, since most Web browsers, when faced with a
         malformed document, would act in accordance with the Postel's law and
         try to render the document despite its deficiencies. In an attempt to
         unify the way malformed \acronym{HTML} documents were rendered across
-        the Web browsers, \acronym{W3C} standardized this behaviour as a part of
-        \cite{berjon14} in 2014. As a result, the current version of
-        \acronym{HTML} is no longer strictly an application of \acronym{SGML}.
+        the Web browsers, \acronym{W3C} acknowledged and documented this
+        behaviour as a part of \cite[Section~8.2, Parsing HTML
+        documents]{hickson14} in 2008.
 
           % Example of a valid HTML5 document that is an invalid SGML
-          % application instance (overlapping tags)
+          % application instance (overlapping tags, tag soup)
 
         Initially, \acronym{HTML} comprised a mixture of logical and
-        presentation markup with fixed visual interpretation. In 1996 a
+        presentation markup with fixed visual interpretation. In 1996, a
         specification of a Cascading Style Sheet (\acronym{CSS}) language was
         published by \acronym{W3C} within \cite{lie96}. The language enabled
         the specification of the visual properties of any element, which allowed
@@ -221,22 +229,61 @@
 
         During the same period, an initial version of a scripting language
         called JavaScript was drafted and incorporated into Netscape Navigator
-        2.0, one of the contemporary leading web browsers. As a part of a
-        joint effort to bring Java into web browsers by Sun Microsystems and
-        Netscape Communications, JavaScript was supposed (see
-        \cite{js-announcement}) to complement Java applets -- a role it has
-        since outgrown. Standardized within \cite{ecma1} in 1997, JavaScript
-        blurs the line between static documents and interactive applications and
-        remains the predominant client-side programming language for the Web.
-        However, since the support of JavaScript by a Web browser is fully
-        optional, it is considered a good practice to use it chiefly for the
-        enrichment of an already self-sufficient \acronym{HTML} document. In
-        case of an interactive application, this recommendation can be relaxed.
+        2.0, one of the contemporary leading web browsers and a descendant of
+        the original Mosaic browser. As a part of a joint effort to bring Java
+        into web browsers by Sun Microsystems and Netscape Communications,
+        JavaScript was, according to \cite{js-announcement}, supposed to
+        complement Java applets -- a role it has since outgrown. Standardized
+        within \cite{ecma1} in 1997, JavaScript blurs the line between static
+        documents and interactive applications and remains the predominant
+        client-side programming language for the Web.  However, since the
+        support of JavaScript by a Web browser is fully optional, it is
+        considered a good practice to use it chiefly for the enrichment of
+        already self-sufficient \acronym{HTML} documents. In case of an
+        interactive application, this recommendation can be relaxed.
 
           % Example of the usage of JavaScript
           % Relevant literature
 
       \subsection{The Extensible Hypertext Markup Language}
+        Ever since the release of \acronym{XML} in 1998, \acronym{W3C}
+        entertained the idea of turning \acronym{HTML} into an application of
+        \acronym{XML}, rather than \acronym{SGML}, as exemplified by the working
+        draft of \cite{raggett98} released the very same year. Unlike
+        \acronym{HTML} parsers, which are complex in their acceptance of
+        malformed content, \acronym{XML} parsers are, as per \cite[Section~1.2,
+        Terminology]{bray98}, required to draconianly refuse \acronym{XML}
+        documents that aren't well-formed, leading to architectural simplicity
+        and decreased computational requirements. As a result, reformulating
+        \acronym{HTML} in \acronym{XML} was suggested as a way to bring the Web
+        to mobile, embedded and other devices limited in their resources, as
+        well as to reduce the amount of malformed documents on the Web in
+        general. Other perceived advantages included the ability to use
+        \acronym{XML} tools for web documents and to include instances of other
+        \acronym{XML} applications, such as \acronym{MathML} and \acronym{SVG},
+        directly into web documents using \acronym{XML} name spaces.
+
+        The idea was brought to fruition within \cite{pemberton00} in 2000 as an
+        \acronym{XML} application called the Extensible HyperText Markup
+        Language (\acronym{XHTML}), which was met with lukewarm reception, since
+        many of its supposed benefits proved to be either questionable or too
+        marginal to warrant migration from \acronym{HTML}.  The speed
+        improvements of the simpler parser were largely offset by its lack of
+        support for incremental rendering, caused by the impossibility to
+        validate partially downloaded pages, the closing of the gap in the
+        computing power between mobile and desktop devices made it possible to
+        use full-fledged \acronym{HTML} parsers instead, and the lack of ways to
+        provide alternative content for browsers that would not support directly
+        included the \acronym{XML} documents considerably reduced the usefulness
+        of name spaces. As a result, \acronym{XHTML} did not succeed in
+        replacing \acronym{HTML} and remains an alternative markup language for
+        the Web.
+
+          % An example of an XHTML document
+
+        %%% Content-Negotiation Techniques to serve XHTML as text/html and
+        %%% application/xhtml+xml
+        %%%   <http://www.w3.org/2003/01/xhtml-mimetype/content-negotiation>
 
       \subsection{The Semantic Web and Microdata}
         The underlying fundament of the Web is the the idea of a globally
