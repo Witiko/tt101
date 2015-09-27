@@ -553,9 +553,6 @@ in Table \ref{tab:unicode-regexs}.
   \label{tab:unicode-regexs}
 \end{figure}
 
-  % Show the character property Perl matching examples
-  % <https://en.wikipedia.org/wiki/Regular_expression#Unicode>
-
 The most elementary text processing \acroshort{CLI} tool is \cliutil{grep}%
 \footnote{
   The authoritative resource on \cliutil{grep}, \cliutil{sed}, and \cliutil{awk}
@@ -606,18 +603,62 @@ version locally and its operation is fully dependent on the availability of the
 server. An example of centralized \acronym{VCS} is \acronym{SVN}\footnote{
   The authoritative resource on \acronym{SVN} is \citework{sussman02},
   affectionately known as \work{the Subversion book}.
-}. By comparison,
-there is no designated server in decentralized \acronym{VCS} and the users can
-send and download new versions to and from any other user. The client software
-is \term*{thick} in the sense that each user has a local repository with all the
-existing versions, which he browse and expand regardless of the availability of
-others. The disadvantages of decentralization include the more complex workflow
-and the increased opportunity for the users not to share their new local
-versions frequently enough, leading to an increased chance of colliding changes.
-Examples of decentralized \acronym{VCS} include \inx{Git}, \inx{Mercurial}, or
-\inx{Bazaar}.
+}. By comparison, there is no designated server in decentralized \acronym{VCS}
+and the users can send and download new versions to and from any other user. The
+client software is \term*{thick} in the sense that each user has a local
+repository with all the existing versions, which he browse and expand regardless
+of the availability of others. The disadvantages of decentralization include the
+more complex workflow and the increased opportunity for the users not to share
+their new local versions frequently enough, leading to an increased chance of
+colliding changes.  Examples of decentralized \acronym{VCS} include \inx{Git},
+\inx{Mercurial}, or \inx{Bazaar}.
 
-  % In a fashion similar to regexes, create a basic GIT and SVN cheat-sheet.
+\begin{figure}
+  {\def\incgr#1{\includegraphics{examples/01/cisco/#1.pdf}}
+  \def\pc{\incgr{pc}} \def\db{\incgr{db}} \def\bend{15}
+  \newlength\radius
+  \setlength\radius{.18\textwidth}
+  \newlength\clientposabove
+  \setlength\clientposabove{.1\textwidth}
+  \newlength\serverposabove
+  \setlength\serverposabove{.01\textwidth}
+  \def\sqrttwo{1.2}
+  \tikzset{>=latex}
+  \footnotesize
+  \begin{tikzpicture}
+    \node (A)                                                   {\db};
+    \node (B) [below of=A,       node distance=\radius]         {\pc};
+    \node (C) [below left of=A,  node distance=\sqrttwo\radius] {\pc};
+    \node (D) [below right of=A, node distance=\sqrttwo\radius] {\pc};
+
+    \path (A) edge [loop above, in=70, out=110, min distance=.05\textwidth, ->]
+              node[above=\serverposabove] {\command{svnadmin create}} (A)
+          (B) edge[bend left=\bend] (A) (A) edge[bend left=\bend, ->] (B)
+          (C) edge[bend left=\bend] (A) (A) edge[bend left=\bend, ->]
+              node[rotate=45,above=\clientposabove]
+                {\command{svn checkout}} (C)
+          (D) edge[bend left=\bend] (A) (A) edge[bend left=\bend, ->] (D);
+  \end{tikzpicture}\hfill\begin{tikzpicture}
+    \node (A)                                                   {\db};
+    \node (B) [below of=A,       node distance=\radius]         {\pc};
+    \node (C) [below left of=A,  node distance=\sqrttwo\radius] {\pc};
+    \node (D) [below right of=A, node distance=\sqrttwo\radius] {\pc};
+
+    \path (B) edge[red,bend left=\bend] (A) (A) edge[red,bend left=\bend, ->] (B)
+          (C) edge[red,bend left=\bend] (A) (A) edge[red,bend left=\bend, ->]
+              node[red,rotate=45,above=\clientposabove]
+                {\command{svn update}} (C)
+          (D) edge[red,bend left=\bend]
+              node[blue,rotate=-45,above=\clientposabove]
+                {\command{svn commit}} (A) (A) edge[red,bend left=\bend, ->] (D)
+          (B) edge[blue, ->] (A) (C) edge[blue, ->] (A) (D) edge[blue, ->] (A);
+  \end{tikzpicture}}
+  \caption{The basic \acroshort{SVN} workflow. After a remote repository has been
+    established, the users download the latest version of the document and then
+    keep downloading the latest version and uploading their changes.}
+\end{figure}
+
+% In a fashion similar to regexes, create a basic GIT and SVN cheat-sheet.
 
 Although \acronym{VCS} can be used to keep track of any kind of files, they are
 typically geared towards text files, which can be easily displayed along with
