@@ -3,6 +3,9 @@
 
 % Markup
 %% Miscellaneous
+\let\key\textit                                    % A keyboard key
+\usepackage{menukeys}
+\let\displaykey\keys                               % A displayable keyboard key
 \newif\iflinuxfirst\linuxfirsttrue
 \def\Linux{%                                       % A shorthand for GNU/Linux
   \iflinuxfirst
@@ -11,6 +14,8 @@
   \else
     Linux%
   \fi\acroindex[!Linux]{GNU}}
+\def\Unices{%                                      % A shorthand for unices
+  Unix and Unix-like operating systems}
 \DeclareRobustCommand{\foreign}[2][]{%             % A foreign language text
   \begin{#1}\textit{#2}\end{#1}}
 \usepackage{xcolor}
@@ -51,7 +56,8 @@
   \else
     \lmarginpar{#1}
   \fi}
-\def\filename#1{ (\texttt{#1})}                    % Filenames in captions
+\let\filename\texttt                               % Filenames
+\def\filenamecap#1{ (\filename{#1})}               % Filenames in captions
 \DeclareRobustCommand{\work}{\@ifstar\work@\work@@}
 \def\work@#1{\textit{#1}}                          % Names of written works
 \def\work@@#1{\work*{#1}\index{#1@\work*{#1}}}     %% ... without indexing
@@ -167,6 +173,7 @@
 \def\Acronym#1{\Ac{#1}\acroindex{#1}}     %% ... at the beginning of a sentence
 \def\acrofirst#1{\acf{#1}\acroindex{#1}}  %% ... in the initial form 
 \def\acropl#1{\acp{#1}\acroindex{#1}}     %% ... in the plural form 
+\def\acroplfst#1{\acfp{#1}\acroindex{#1}} %% ... in the initial and plural form
 \def\acroshort#1{\acs*{#1}\acroindex{#1}} %% ... in the unexpanded form
 \def\acrolong#1{\acl{#1}\acroindex{#1}}   %% ... in the expanded form
 \def\acroflat#1{\textsc{\MakeLowercase{#1}}} %% ... that wasn't defined
@@ -257,6 +264,7 @@
   AutoFakeSlant, % Fake the slant on the typewriter font
   BoldItalicFeatures=FakeSlant
 ]{Inconsolata}
+\setsansfont[Scale=MatchLowercase]{Latin Modern Sans}
 %%% Set up TeX Gyre Pagella as the math font with old style digits from the
 %%%% base TeX Gyre Pagella font for inline mathematics.
 \setmathfont[

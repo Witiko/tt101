@@ -24,6 +24,7 @@
 \usepackage[nottoc]{tocbibind}
 \usepackage{makeidx}      % Index
 \makeindex
+\usepackage{varwidth}     % Variable-width minipages
 \usepackage{./main}       % Markup and design
 \input{./acronyms}        % Acronyms
 \begin{document}
@@ -55,7 +56,7 @@ the reader. Although care was taken not to favour any computing environment,
 some examples feature Unix utilities, which have no suitable counterpart in
 operating systems such as Windows. To try these examples out, the reader is
 advised to install a Unix-like environment, such as the Windows Cygwin, on their
-local machine or to use a Unix-like operating system, such as \Linux.
+local machine or to use a Unix or Unix-like operating system, such as \Linux.
 
 \chapter{Writing}
 The essence of a document is the idea it represents. In the case of a text
@@ -69,7 +70,7 @@ writing that is the logical first step in the text document creation.
   \input examples/01/trichter
   \caption{Exceptions that prove the rule about the separation of text and
     design can sometimes be encountered in poetry. Above is \person{Christian
-    Morgenstern}'s \work{\foreign[german]{Trichter}}, where the text and its
+    Morgenstern}'s \foreign[german]{\work{Trichter}}, where the text and its
     form are intimately intertwined.}
 \end{figure}
 
@@ -215,7 +216,7 @@ With the byte size stabilizing at eight bits, new character encodings emerged
 that were based on \acronym{ASCII} and utilized the additional bit to encode
 characters of non-English writing systems while retaining complete backwards
 compatibility with \acroshort{ASCII}. Beside the numerous vendor-specific
-encodings (called \termpl{codepage}), a set of 15 eight-bit encodings covering
+encodings (called \termpl{code page}), a set of 15 eight-bit encodings covering
 all major modern writing systems whose characters fit within the space of 128
 additional combinations was standardized in the
 \acroshort{ISO}/\acroshort{IEC}~8859 series released during 1986--2001.
@@ -304,36 +305,29 @@ a similar role in applications that only work with \acronym{BMP}, and
 majority of text content on the Web is encoded in \acroshort{ASCII} and
 \acroshort{UTF}-8 \cite{qsuccess15}.
 
-  % Some examples of exotic glyphs in Unicode
-
 Originally a competing standard, Unicode underwent a merger with \acronym{UCS}
 in version 1.1 and since then, the standards have been kept closely
 synchronised. Unicode is a superset of \acronym{UCS}, which defines additional
 information about \acronym{UCS} characters---such as their general category,
 directionality, case, or numeric value \cite[sec.\,3.5, ch.\,4]{unicode15}---,
-various text processing algorithms and implementation guidelines.
+various text processing algorithms, and implementation guidelines.
 
-\makeatletter
-  \begin{figure}
-    \ffootnote{One of the design goals of \acroshort{UCS} was to avoid assigning
-      code points to different glyphs that carry the same meaning. As a result,
-      the visually distinctive Han characters used in the East Asian countries
-      of China, Japan, Korea, and Vietnam were merged into a set of 75,960
-      ideograms in a process referred to as the \term{Han Unification}. This
-      simplifies text processing, but also makes it impossible to encode a text
-      in multiple East Asian languages without having to rely on external markup
-      to select appropriate regional fonts. As a result, a derivative of
-      \acronym{UCS} that doesn't implement the Han Unification was developed for
-      use in operating systems based on \acronym{TRON} and is used in the East
-      Asia alongside \acronym{UCS} and region-specific encodings.}
-    \includegraphics[width=\textwidth,
-        trim=1.85in 9.465in 5.45in 1.75in,clip]{examples/01/unihan-cjk.pdf}%
-    \\\includegraphics[width=\textwidth,
-        trim=1.85in 9.8in 5.45in 1.72in,clip]{examples/01/unihan-chunom.pdf}
-    \caption{Several Han characters in the traditional Chinese, Japanese,
-      Korean, and Vietnamese variants}
-  \end{figure}
-\makeatother
+\begin{figure}
+  \ffootnote{One of the design goals of \acroshort{UCS} was to avoid assigning
+    code points to different glyphs that carry the same meaning. As a result,
+    the visually distinctive Han characters used in the East Asian countries
+    of China, Japan, Korea, and Vietnam were merged into a set of 75,960
+    ideograms in a process referred to as the \term{Han Unification}. This
+    simplifies text processing, but also makes it impossible to encode a text
+    in multiple East Asian languages without having to rely on external markup
+    to select appropriate regional fonts. As a result, a derivative of
+    \acronym{UCS} that doesn't implement the Han Unification was developed for
+    use in operating systems based on \acronym{TRON} and is used in the East
+    Asia alongside \acronym{UCS} and region-specific encodings.}
+  \input examples/01/unihan
+  \caption{Several Han characters in the traditional Chinese, Japanese,
+    Korean, and Vietnamese variants}
+\end{figure}
 
 With regards to text processing, Unicode and \acronym{UCS} represent a
 compromise between the simplicity of the seven-bit \acronym{ASCII} and the
@@ -343,9 +337,9 @@ heterogeneity of eight-bit encodings:
     character can be made exactly two or four bytes wide using the
     \acroshort{UTF}-16 and \acroshort{UTF}-32 encodings.
   \item Although character strings can not be collated by a simple character
-    code comparison, a collation algorithm \cite{unicode15:collation} and
-    collation tables for major locales \cite{unicode15:cldr} are maintained by
-    the Unicode Consortium.
+    code comparison, a collation algorithm is defined in the Unicode
+    specification \cite{unicode15:collation} and collation tables for major
+    locales \cite{unicode15:cldr} are maintained by the Unicode Consortium.
   \item Classes of characters---such as uppercase letters, lowercase letters,
     numbers, and punctuation---do not form contiguous ranges, but their position
     is directly specified by the standard \cite[sec.\,4.5]{unicode15}.
@@ -358,18 +352,33 @@ heterogeneity of eight-bit encodings:
   \item The \ucs[FEFF]{Byte Order Mark} character can be inserted at the
     beginning of a text as a signature of Unicode encodings. As the name
     suggests, the order in which the \hexa{FE} and \hexa{FF} bytes arrive also
-    indicates the integer byte order (called \term{endianity}). In
-    \acroshort{UTF}-32 and \acroshort{UTF}-16, the byte order can be chosen
-    arbitrarily by the encoding application. In \acroshort{UTF}-8, one-byte
-    integers are used and the notion of byte order is therefore meaningless.
+    indicates the order of bytes (called \term{endianity}) that was used to
+    encode integers. In \acroshort{UTF}-32 and \acroshort{UTF}-16, endianity
+    can be chosen arbitrarily by the encoding application. In \acroshort{UTF}-8,
+    one-byte integers are used and the notion of endianity is therefore
+    meaningless.
 \end{itemize}
 
-  % An example of combining characters with the explanation of UCS
-  % implementation levels
+\begin{figure}
+  \input examples/01/combining-chars
+  \caption{Some \acroshort{UCS} characters can be either input as a single
+    entity or composed from several combining characters. With regards to the
+    Unicode normalization forms, all of the above representations are
+    canonically equivalent.}
+\end{figure}
 
-  % An example of encoding conversions (iconv) and Unicode collation (sort)
-  % <http://superuser.com/a/414408/136765> in Unix environments. 
+\begin{figure}
+  \centerline{\code[sh]{iconv -f latin2 -t utf8 -- old.txt > new.txt}}
+  \caption{Text files can be converted between encodings using the
+    \cliutil{iconv} command-line tool. The sample code shows the file
+    \filename{old.txt} being converted from the
+    \acroshort{ISO}/\acroshort{IEC}~8859-2 encoding to \mbox{\acroshort{UTF}-8}.
+    The result of the conversion is stored in the file \filename{new.txt}.}
+\end{figure}
 
+%%% Setting collation order in shell sort
+%%%   <http://superuser.com/a/414408/136765>
+%%%
 %%% Unicode 101: An Introduction to the Unicode Standard
 %%%   <http://www.interproinc.com/blog/unicode-101-introduction-unicode-standard>
 %%%
@@ -393,17 +402,57 @@ makes it possible to use a microphone or a tablet as well. On hand-held devices,
 the use of either a numeric keypad or a touch-screen is more typical.
 
 An operating system will typically provide one or more input methods for each
-input device through a component commonly referred to as the \acronym{IME}. As
-an example, the \acroshort{ASCII} standard was developed with typewriters and
-teleprinters in mind and, as their direct descendant, the Latin computer
-keyboard provides support for all \acroshort{ASCII} characters. However, this
-doesn't apply to the much larger \acronym{UCS} and it is the task of an
-\acronym{IME} to provide a mechanism for the creation and selection of keyboard
-layouts that will allow the user to input any \acronym{UCS} character. Some
-programs may provide input methods of their own.
+input device through a component commonly referred to as the \acronym{IME}. The
+\acroshort{ASCII} encoding was developed with typewriters and teleprinters in
+mind and, as their direct descendant, the standard computer keyboard provides
+support for all \acroshort{ASCII} characters. This doesn't apply to the much
+larger \acronym{UCS} and it is the task of an \acronym{IME} to provide a
+mechanism for the creation and selection of keyboard layouts that will allow the
+user to input any \acronym{UCS} character. Some programs may provide input
+methods of their own.
 
-% An example of the pinyin input method <https://en.wikipedia.org/wiki/Pinyin_input_method>
-% The keyboard layout from the Elements of Typographic Style, p. 90, s. 5.5.2
+\begin{figure}
+  \centerline{\includegraphics[width=0.75\textwidth]%
+    {examples/01/google-pinyin.png}}
+  \caption{Text input methods are not limited to keyboard layouts. Software that
+    allows for the input of non-Latin characters on a keyboard through reversed
+    romanization can often be the best option for writing systems with a large
+    number of characters. Above is the \inx{Google Pinyin} input method for the
+    Android operating system, which makes it possible to input Chinese
+    characters using the \inx{pinyin} phonetic system.}
+  % TODO: Získat lepší screenshot
+\end{figure}
+
+\begin{figure}
+  \input examples/01/composeKey
+  \caption{The \key{Compose}\index{Compose@\displaykey{Compose}} key followed by
+    a mnemonic sequence of \acroshort{ASCII} characters produces a
+    \acroshort{UCS} character. Although originally a physical key, \key{Compose}
+    is not available on modern \acroshort{PC} and Apple keyboards and is usually
+    mapped to a less-used key, such as the right \key{Ctrl} or \key{Super} key.
+    \key{Compose} is natively supported on \Unices\ using the \inx{X Window
+    System}. On other operating systems, support can be added by installing
+    third-party software.}
+\end{figure}
+
+\begin{figure}
+{\Large\centerline{\begin{varwidth}{\textwidth}
+  \def\next{\medskip\\}
+  \displaykey{Alt + 1 + 6 + 0} = á \next
+  \displaykey{Alt + 0 + 2 + 2 + 5} = á \next
+  \displaykey{Alt + {+} + E + 1} = á
+\end{varwidth}}}
+  \caption{On the Windows operating system, holding the \key{Alt} key and typing
+    a sequence of numbers produces a character with the corresponding number
+    from either an \acroshort{IBM} code page, if the number has no leading zero,
+    or from a Windows code page otherwise. The code pages vary depending on the
+    current locale; in English locales, the \acroshort{IBM} code page~437
+    and the Windows code page~1252 are used. After a Windows Registry
+    modification, it is also possible to directly produce \acroshort{UCS}
+    characters by holding the \key{Alt} key and typing the corresponding
+    \acroshort{UCS} code point in hexadecimal.}
+\end{figure}
+
 % The input of a character using the compose key, the Ctrl+Shift+U and the
 % Alt-code (or Alt+X in Microsoft Word)
 %   <https://en.wikipedia.org/wiki/Alt_code>
@@ -418,7 +467,7 @@ A \term{text editor} is an applications, which can be used to create and modify
 text files. Entry-level text editors are often distributed with an operating
 system and offer little beyond the ability to load, modify and save text files.
 Entry-level text editors with a \acronym{GUI} include the \inx{Windows Notepad},
-the iOS \inx{TextEdit} in the plain text mode, and \inx{Leafpad} for \Linux\ and
+the iOS \inx{TextEdit} in plain text mode, and \inx{Leafpad} for \Linux\ and
 \acronym{BSD}. Entry-level text editors with a \acronym{CLI} include
 \cliutil{joe}, \acroshort{GNU} \cliutil*{nano}\acroindex[!nano]{GNU}, and
 \cliutil{pico}.
@@ -465,16 +514,17 @@ can use to find and replace character strings within text.
 Since regular expressions are just a formal model, a software implementation
 needs to settle on a concrete syntax. One of the earliest standard syntaxes are
 \acronym{BRE} and \acronym{ERE}, which are supported by most utilities using
-regular expressions on Unix and Unix-like operating systems. Both syntaxes are
-described in Table \ref{tab:regexs}. More extensive syntaxes include the
-\acroshort{GNU} extensions of \acronym{BRE} and \acronym{ERE}, the one used
-in the \inx{Perl} programming language, and their dialects and derivatives. For
-most of these extended syntaxes, the term \term*{regular} is a misnomer, as the
-expressions can be used to build grammars that, according to the Chomsky
-hierarchy, aren't regular.\footnote{
+regular expressions on \Unices. Both syntaxes are described in Table
+\ref{tab:regexs}. More extensive syntaxes include the \acroshort{GNU} extensions
+of \acronym{BRE} and \acronym{ERE}, the one used in the \inx{Perl} programming
+language, and their dialects and derivatives. For most of these extended
+syntaxes, the term \term*{regular} is a misnomer, as the expressions can be used
+to build grammars that, according to the Chomsky hierarchy, aren't
+regular.\footnote{
   A curious reader with a background in formal language theory should direct
   their attention to Perl self-referencing groups and look-aheads, which make it
-  a simple matter to create expressions that match non-context-free languages.
+  a simple matter to create expressions that match non-context-free formal
+  languages.
 % It is easy to show that the Perl 5 regex of \code[text]{(?=(a(?-1)?b)c)
 % a+(b(?-1)?c)} generates the context-sensitive language of $a^nb^nc^n$ for
 % arbitrary characters $a,b,c$ with superscripts denoting repetition.
@@ -686,7 +736,7 @@ response, \acronym{W3C} published a specification of \acronym{XML} in
 
 \begin{figure}
   \inputcode[xml]{examples/02/recipe.xml}
-  \caption{An example \acronym{XML} document\filename{recipe.xml}}
+  \caption{An example \acronym{XML} document\filenamecap{recipe.xml}}
   \label{fig:recipe}\bigskip
   \inputcode[dtd]{examples/02/dtdtypes}
   \caption{\acronym{SGML} and \acronym{XML} \acronym{DTD}s can be either linked
@@ -756,12 +806,12 @@ schemata are known to the parser.
   \inputcode[xml]{examples/02/recipe.xsd}
   \caption{A reformulation of the recipe \acronym{DTD} from Figure
     \ref{fig:recipe-dtd} in the \acroshort{XML} Schema \acroindex[!Schema]{XML}
-    language.\filename{recipe.xsd}}
+    language.\filenamecap{recipe.xsd}}
   \label{fig:recipe-xsd}
   \inputcode{examples/02/recipe.rnc}
   \caption{A reformulation of the recipe \acronym{DTD} from Figure
     \ref{fig:recipe-dtd} in the compact syntax of \acronym{Relax NG}.%
-    \filename{recipe.rnc}}
+    \filenamecap{recipe.rnc}}
   \label{fig:recipe-rnc}
   \inputcode[sh]{examples/02/recipe.sh}
   \caption{\acronym{XML} documents can be easily validated against \acronym{XML}
@@ -949,9 +999,9 @@ application-specific metadata about the document---a technique known as
   \inputcode[text]{examples/02/john.ttl}
   \separatorcaption{Above is an example \acronym{RDF} document using
     \acronym{DC} and \acronym{FOAF} ontologies in \acronym{RDF}/\acronym{XML}%
-    \filename{john.rd}, \inx{N-Triples}\filename{john.nt}, and \inx{Turtle}%
-    \filename{john.ttl} serializations. Below is a graph representation of the
-    document.}\label{fig:rdf-doc}
+    \filenamecap{john.rd}, \inx{N-Triples}\filenamecap{john.nt}, and
+    \inx{Turtle}\filenamecap{john.ttl} serializations. Below is a graph
+    representation of the document.}\label{fig:rdf-doc}
   \input{examples/02/john.tex}
 \end{figure}
 
@@ -979,8 +1029,8 @@ application-specific metadata about the document---a technique known as
 %%%   <http://www.w3.org/TR/rif-overview/>
         
 \section{Markup in Document Preparation Systems}
-Some of the existing markup is directly tied with specific \acropl{DPS}. These
-\acropl{DPS} can be dichotomized into \term*{batch-oriented}%
+Some of the existing markup is directly tied with specific \acroplfst{DPS}.
+These \acropl{DPS} can be dichotomized into \term*{batch-oriented}%
 \acroindex[!batch-oriented]{DPS}, which process marked up input
 text documents into printable output documents in a page description language on
 demand, and \term*{interactive}\acroindex[!interactive]{DPS}, which
@@ -1002,11 +1052,11 @@ as a proprietary software for the Unix operating system at the beginning of
 is \cliutil*{groff}\index{groff@\cliutil*{groff}|see{\cliutil*{troff}}}, which
 was developed as a free software in 1980 by \acronym{GNU}. \Cliutil*{groff}
 combines the capabilities of both tools and is still used extensively for the
-markup of documentation in Unix and Unix-like operating systems, although more
-advanced alternatives for general typesetting (such as \TeX) exist. The
-associated markup language combines presentation markup with programming
-constructs and allows the definition of logical markup in the form of user
-macros. Standard macro packages, such as \identifier{man} for the
+markup of documentation in \Unices, although more advanced alternatives for
+general typesetting (such as \TeX) exist. The associated markup language
+combines presentation markup with programming constructs and allows the
+definition of logical markup in the form of user macros. Standard macro
+packages, such as \identifier{man} for the
 \index{troff@\cliutil*{troff}!\identifier{man}} formatting of documentation,
 \identifier{me} \index{troff@\cliutil*{troff}!\identifier{me}} for the creation
 of research papers, or the more recent \identifier{mom}
