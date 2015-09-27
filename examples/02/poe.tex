@@ -1,0 +1,37 @@
+% Page geometry
+\pdfpagewidth=6in
+\pdfpageheight=9in
+
+% Page dimensions
+\baselineskip=16.8pt
+\hsize=\dimexpr\pdfpagewidth-1.5in
+\vsize=\dimexpr\pdfpageheight-1.5in
+\hoffset=-.25in\voffset=-.25in
+
+% Fonts
+\font\rm=ptmr8t at 12.5pt\rm
+\font\bigbf=ptmb8t at 16pt
+\font\dropcap=ptmr8t at 62pt
+\font\it=ptmri8r at 12.5pt
+
+% Macro definitions
+\def\title#1{{\bigbf\centerline{#1}}}
+\def\author#1{{\it\centerline{by}\centerline{#1}}\vskip 3.9em}
+\def\drop#1{\noindent\smash{\hskip0.1ex\lower5.8ex%
+  \hbox{\llap{\dropcap#1}}\hskip-0.3ex}
+  \parshape=4 3em\dimexpr\hsize-3em 3.28em\dimexpr\hsize-3.28em
+           3.28em\dimexpr\hsize-3.28em 0em\hsize}
+
+% The document
+\title{The Cask of Amontillado}
+\author{Edgar Allen Poe}
+\drop{T}he thousand injuries of Fortunato I had borne as I best
+could, but when he ventured upon insult I vowed revenge. You, who
+so well know the nature of my soul, will not suppose, however,
+that gave utterance to a threat. {\it At length} I would be
+avenged; this was a point definitely settled---but the very
+definitiveness with which it was resolved precluded the idea of
+risk. I must not only punish but punish with impunity. A wrong is
+unredressed when retribution overtakes its redresser. It is
+equally unredressed when the avenger fails to make himself felt as
+such to him who has done the wrong.\bye

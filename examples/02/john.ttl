@@ -2,7 +2,7 @@
 @prefix dc:   <http://purl.org/dc/elements/1.1/> .
 <http://example.org/document.html>
     dc:title "The Web page of John Smith"@en ;
-    foaf:creator <http://example.org/john-smith> .
+    dc:creator <http://example.org/john-smith> .
 <http://example.org/john-smith>
     a foaf:Person ;
     foaf:name "John Smith" .

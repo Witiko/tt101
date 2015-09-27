@@ -2,11 +2,11 @@
 <html lang="en">
   <head vocab="http://purl.org/dc/terms/"
         about="http://example.org/document.html">
-    <title property="title" lang="en">The Web page of John Smith</title>
+    <title property="title" lang="en">John's Web page</title>
     <meta property="creator" href="http://example.org/john-smith">
   </head>
   <body vocab="http://xmlns.com/foaf/0.1/"
         about="http://example.org/john-smith" typeof="Person">
-    Hi, I'm <span property="name">John Smith</span> and this is my Web page.
+    Hi, I'm <span property="name">John Smith</span>.
   </body>
 </html>

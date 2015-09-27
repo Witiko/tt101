@@ -2,9 +2,10 @@
 \usepackage{polyglossia}  % Hyphenation
 \setmainlanguage{english}
 \usepackage{minted}       % Source code typesettings
+\setminted{breaklines=true}
 \usepackage{placeins}     % Float barriers
 \usepackage{tikz}         % Diagrams
-\usetikzlibrary{trees}
+\usetikzlibrary{trees,arrows}
 \usepackage{fancyvrb}     % Manually colored verbatim
 \usepackage{float}        % Non-floating figures
 \usepackage{./main}
@@ -190,47 +191,16 @@
         documents, unless all the \acronym{IRI}s and the respective schemata are
         known to the parser.
 
-        {\def\bottomfraction{0.7}\begin{figure}[hb]
-          {\tikzstyle{level 1}=[sibling distance=\baselineskip, level distance=3.5cm]
-          \begin{tikzpicture}[grow=right]
-            \node {\textcolor{red}{Speech}}
-              child {
-                node[label=right:{AASE: See, you dare not! Every word of it's a lie!} ] {}}
-              child {
-                node[label=right:{PEER: Swear? Why should I?}] {} }
-              child {
-                node[label=right:{AASE: Well then, swear to me it's true!}] {}}
-              child {
-                node[label=right:{PEER: No, I'm not!}] {} }
-              child {
-                node[label=right:{AASE: Peer, you're lying!}] {} };
-            \node [below=5\baselineskip] {\textcolor{blue}{Verse}}
-              child {
-                node[label=right:{Every word of it's a lie!} ] {}}
-              child {
-                node[label=right:{Swear? Why should I? See, you dare not!}] {} }
-              child {
-                node[label=right:{Well then, swear to me it's true!}] {}}
-              child {
-                node[label=right:{Peer, you're lying! No, I'm not!}] {} };
-          \end{tikzpicture}}
-          \begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`^=7\catcode`_=8}]
-<(\textcolor{blue}{V})line><(\textcolor{red}{S})speech who="Aase">Peer, you're lying!</(\textcolor{red}{S})speech>
-  <(\textcolor{red}{S})speech who="Peer">No, I'm not!</(\textcolor{red}{S})speech></(\textcolor{blue}{V})line>
-<(\textcolor{blue}{V})line><(\textcolor{red}{S})speech who="Aase">Well then,
-  swear to me it's true!</(\textcolor{red}{S})speech></(\textcolor{blue}{V})line>
-<(\textcolor{blue}{V})line><(\textcolor{red}{S})speech who="Peer">Swear, why should I?</(\textcolor{red}{S})speech>
-  <(\textcolor{red}{S})speech who="Aase">See, you dare not!</(\textcolor{blue}{V})line>
-<(\textcolor{blue}{V})line>Every word of it's a lie!</(\textcolor{red}{S})speech></(\textcolor{blue}{V})line>
-          \end{Verbatim}
+        \begin{figure}[hb!]
+          \input{examples/02/peer-gynt.tex}
           \caption{The markup of the dramatic and metrical views of the
-            beginning of Henrik Ibsen's Peer Gynt using the \texttt{CONCUR}
-            feature of \acronym{SGML}}
-        \end{figure}}
+            beginning of Henrik Ibsen's \work{Peer Gynt} using the
+            \texttt{CONCUR} feature of \acronym{SGML}}
+        \end{figure}
 
-        %%   <http://wayback.archive.org/web/20070624034347/http://www.sfb632.uni-potsdam.de/publications/isis02_4witt.pdf>
-        %%   <http://webylon.info/K.24>
-        %%   <http://www.angelovic.cz/internet/sgml-deklarace.html#concur>
+        %%% Živoucí CONCAT <http://webylon.info/K.24>
+        %%% Popis SGML deklarace pro ISO/IEC15445
+        %%%   <http://www.angelovic.cz/internet/sgml-deklarace.html#concur>
 
         \begin{figure}[H]
           \inputminted{xml}{examples/02/recipe.xsd}
@@ -321,7 +291,7 @@
             located at \protect\url{http://csszengarden.com}. The document above
             was created using the \acronym{HTML} presentation markup. The
             document below achieves the same appearance by the combination of
-            logical markup and \acronym{CSS} style definitions.}\medskip
+            logical markup and \acronym{CSS} definitions.}\medskip
           \inputminted{html}{examples/02/logical-markup.html}
         \end{figure}
 
@@ -430,24 +400,42 @@
         The syntax of \acronym{RDF} is not fixed, meaning that aside from the
         \acronym{XML} serialization specified within \cite{lassira99}, other
         languages, such as the JavaScript Object Notation for Linked Data
-        (\acronym{JSON-LD}) specified within \cite{sporny14} or the line-based
-        N-Triples specified within \cite{beckett14}, can be used to represent an
-        \acronym{RDF} document. A noteworthy serialization of \acronym{RDF} is
-        the \acronym{RDF} in attributes (\acronym{RDFa}) specified within
-        \cite{adida08}. While various serializations of \acronym{RDF} can be
-        included in or linked to an \acronym{HTML} or \acronym{XHTML} document,
-        this will often result in an undesirable duplication of data already
-        present in the document. To prevent this, \acronym{RDFa} uses the
-        content already present within the underlying \acronym{HTML} or
-        \acronym{XHTML} document using element attributes. The usage of
-        \acronym{RDF} in conjunction with \acronym{HTML} and \acronym{XHTML} is
-        intended to gradually obsolete the practice of using the \texttt{meta}
-        and \texttt{link} elements to provide additional application-specific
-        metadata about the document.
+        (\acronym{JSON-LD}) specified within \cite{sporny14}, the Turtle
+        language specified within \cite{beckett14-turtle}, or the line-based
+        N-Triples language specified within \cite{beckett14-nt}, can be used to
+        represent an \acronym{RDF} document. A noteworthy serialization of
+        \acronym{RDF} is the \acronym{RDF} in attributes (\acronym{RDFa})
+        specified within \cite{adida08}. While various serializations of
+        \acronym{RDF} can be included in or linked to an \acronym{HTML} or
+        \acronym{XHTML} document, this will often result in an undesirable
+        duplication of data already present in the document. To prevent this,
+        \acronym{RDFa} uses the content already present within the underlying
+        \acronym{HTML} or \acronym{XHTML} document using element attributes. The
+        usage of \acronym{RDF} in conjunction with \acronym{HTML} and
+        \acronym{XHTML} is intended to gradually obsolete the practice of using
+        the \texttt{meta} and \texttt{link} elements to provide additional
+        application-specific metadata about the document.
 
-          % Examples of Dublin Core
-          % Examples of RDF usage and serialization (see wiki) + nodes and arcs graph 
-          % Examples of SPARQL queries
+        \begin{figure}
+          \inputminted{xml}{examples/02/john.rd}
+          \inputminted{text}{examples/02/john.nt}
+          \inputminted{text}{examples/02/john.ttl}
+          \caption{Above is an example \acronym{RDF} document using \acronym{DC}
+            and \acronym{FOAF} ontologies in the \acronym{RDF}/\acronym{XML}%
+            \filename{john.rd}, N-Triples\filename{john.nt} and Turtle%
+            \filename{john.ttl} serializations. Below is a graph representation
+            of the document.}\label{fig:rdf-doc}\bigskip
+          \input{examples/02/john.tex}
+        \end{figure}
+
+        \begin{figure}[t!]
+          \inputminted{html}{examples/02/john.html.linked-rdf}
+          \caption{Above is an \acronym{HTML} document linked to the
+            \acronym{RDF} document from Figure \ref{fig:rdf-doc}. Below is the
+            same \acronym{HTML} document with the \acronym{RDF} data directly
+            embedded using the \acronym{RDFa} serialization.}\bigskip
+          \inputminted{html}{examples/02/john.html.rdfa}
+        \end{figure}
 
         %%% Tim Berners-Lee: The next web
         %%%   <http://www.ted.com/talks/tim_berners_lee_on_the_next_web>
@@ -488,14 +476,27 @@
         language combines presentation markup with programming constructs and
         allows the definition of logical markup in the form of user macros.
         Standard macro packages, such as \texttt{man} for the formatting of
-        documentation or \texttt{me} for the creation of research papers, are
+        documentation, \texttt{me} for the creation of research papers, or
+        the more recent \texttt{mom} for general typesetting tasks are
         typically distributed along with the system. Special markup invokes
         preprocessors, which can be used for the typesetting of tables,
         equations and vector graphics.
 
-          % Example of a troff document
-          %   <http://troff.org/TheGroffFriendsHowto.pdf>
-          %   <https://www.gnu.org/software/groff/manual/html_node/Writing-Macros.html>
+        \begin{figure}
+          \fbox{\includegraphics[clip,trim=1.7cm 12cm 1.7cm 1.3cm,%
+            width=0.975\textwidth]{examples/02/poe-groff.pdf}}
+          \inputminted{groff}{examples/02/poe.groff}
+          \caption{An excerpt from the beginning of Edgar Allen Poe's
+            \work{Cask of Amontillado} formatted using the \texttt{mom}
+            macro package of \texttt{groff}.}
+          \label{fig:poe}
+        \end{figure}
+
+          %%% The Groff and Friends HOWTO
+          %%%   <http://troff.org/TheGroffFriendsHowto.pdf>
+          %%%
+          %%% Writing Macros
+          %%%   <https://www.gnu.org/software/groff/manual/html_node/Writing-Macros.html>
 
         Another notable batch-oriented system is \TeX\footnote{
           The circumstances that led to the creation of \TeX\ and the
@@ -516,7 +517,11 @@
         logical markup, is \LaTeX, the industry standard for academic and
         technical typesetting.
         
-          % Example of a plain TeX and a LaTeX document
+        \begin{figure}
+          \inputminted{tex}{examples/02/poe.tex}
+          \caption{The \texttt{groff} document from Figure \ref{fig:poe}
+            reformulated using \TeX}
+        \end{figure}
 
       \subsection{Interactive Document Preparation Systems}
         Interactive systems come in two distinctive flavours. \emph{Word
@@ -536,13 +541,19 @@
 
         Most interactive systems will provide a means to mark up sections of
         text. Presentation markup performs direct changes of typographic
-        properties, such as the face, family, variant, color or size
-        of the font used to render the text. Logical markup enables the
-        classification of text with the ability to set up the design of each
-        class later on. This decouples writing and markup from design and makes
-        it very difficult to introduce design inconsistencies into the final
-        document.
+        properties, such as the face, family, variant, color or the size
+        of the font that is used to typeset the text. Logical markup enables
+        the classification of sections of text with the ability to set up the
+        design of each class later on. This decouples writing and markup from
+        design and makes it easy to change the design of the entire document and
+        difficult to produce inconsistent design.
 
+        \begin{figure}
+          \includegraphics[width=\textwidth]{examples/02/interactive-editors.png}
+          \caption{Logical markup in the interactive document preparation
+            systems of Scribus (left), Microsoft Word (above), Adobe InDesign
+            (below left) and Apache OpenOffice (below right)}
+        \end{figure}
           % An example of Word, OpenOffice, Indesign and Scribus markup
 
         % WYSIWYG
@@ -553,22 +564,18 @@
 
       \section{Lightweight Markup Languages}
         Parallel to the heavy-duty applications of \acronym{SGML} and
-        \acronym{XML}, there runs a vein of markup languages that are motivated
-        by unobtrusiveness and legibility rather than by genericity and
-        expressiveness. Rooted in the reality of computer text terminals with
-        limited formatting capabilities, lightweight markup languages leverage
-        symbols and indentation to produce comparatively weak and
-        domain-specific, but also humane, highly intuitive and often profoundly
-        beautiful, markup.  Examples of lightweight markup languages include
-        Markdown, Creole, AsciiDoc, MakeDoc, Setext or Wikicode. Lightweight
-        markup languages are typically supplemented by tools, which enable the
-        conversion to more general markup languages, such as \acronym{HTML}.
+        \acronym{XML}, there runs a vein of markup languages that give priority
+        to unobtrusiveness and legibility over expressiveness and genericity.
+        Rooted in the reality of computer text terminals with limited formatting
+        capabilities, lightweight markup languages leverage symbols and
+        indentation to produce comparatively weak and domain-specific, but also
+        humane, highly intuitive and often profoundly beautiful markup that is
+        easy to both read and write. Examples of lightweight markup languages
+        include Markdown, Creole, AsciiDoc, MakeDoc, Setext or Wikicode.
+        Lightweight markup languages are typically supplemented by tools, which
+        enable the conversion to more general languages, such as \acronym{HTML}.
         Also typical is the existence of numerous flavours of every lightweight
-        markup language representing different use cases.
-
-          % Examples of some of the below:
-          % Markdown, Creole, BBCode, AsciiDoc, MakeDoc, org-mode,
-          % ReStructuredText, Ruby Document format, Setext, Textile, txt2tags, wikicode
+        markup language, which represent different use cases.
 
     \chapter{Design}
       % XML -- CSS, XSL, XSLT

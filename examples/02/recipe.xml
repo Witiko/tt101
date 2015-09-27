@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE recipe SYSTEM "recipe.dtd">
 <recipe>
-  <name>Grandma's pancakes</name>
-  <description>A traditional Bohemian recipe</description>
+  <name>Palatschinken</name>
+  <description>A traditional Slavic crêpe-like dish</description>
   <ingredientList serves="8">
     <ingredient amount="120g">Plain flour</ingredient>
     <ingredient amount="2">Egg</ingredient>
