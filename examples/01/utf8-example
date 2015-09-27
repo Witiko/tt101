@@ -1,0 +1,9 @@
+{\def\ohead#1{\textcolor{red}{#1}}
+\centering
+\begin{tabular}{cl@{\quad$\leadsto$\quad}l@{\quad$\leadsto$\quad}l}
+  \tblhead{Character} & \multicolumn{3}{l}{\tblhead{Code point encoding}}
+  \\\hline
+  Ř & 344 & 101011000 & \ohead{110}00101 \ohead{10}011000 \\
+  e & 101 & 1100101   & \ohead{0}1100101                  \\
+  č & 269 & 100101000 & \ohead{110}00100 \ohead{10}101000
+\end{tabular}\par}

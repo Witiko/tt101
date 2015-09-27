@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{cmap}
+\usepackage[10pt]{type1ec}
+\usepackage[T1]{fontenc}
+\usepackage{CJKutf8}
+
+\input unihan-text
+\def\SChinese#1{{%
+  \CJKfamily{gbsn}%
+  \CJKtilde
+  \CJKnospace#1}}
+\def\TChinese#1{{%
+  \CJKfamily{bsmi}%
+  \CJKtilde
+  \CJKnospace#1}}
+\def\Japanese#1{{%
+  \CJKfamily{min}%
+  \CJKtilde
+  \CJKnospace#1}}
+\def\Korean#1{{%
+  \CJKfamily{mj}#1}}
+
+\begin{document}
+  \noindent
+  \begin{CJK}{UTF8}{}%
+    \TChinese\text\\
+    \Japanese\text\\
+    \Korean  \text\\
+  \end{CJK}
+\end{document}

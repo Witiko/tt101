@@ -12,6 +12,7 @@
 \usepackage{url}          % URLs
 \usepackage{tabularx}     % Tables
 \usepackage{booktabs}
+\usepackage{latexsym}     % Additional LaTeX symbols
 \usepackage[              % Bibliography
   backend=biber,
   style=numeric,
@@ -120,8 +121,8 @@ concern.\iffalse\footnote{
   introduction of \acronym{PC} in 1981. In countries using Chinese ideographs,
   special encodings, such as Big5, \acronym{JIS}, and \acronym{EUC}, are used to
   this day. For brevity, the text focuses on the main stream of international
-  encodings.
-}\fi``We had over sixty different ways to represent characters in
+  encodings.}\fi
+\ ``We had over sixty different ways to represent characters in
 computers. It was a real Tower of Babel,'' explains \cite{brandel99}
 \person{Bob Berner}, an American computer scientist who worked at \acronym{IBM}
 during 1956--1962 and who drafted \acronym{ASCII}---a
@@ -134,18 +135,33 @@ which is transformed to a seven-bit integer called a \term{character code}.
 These 128 codes are used to encode \termpl{printable character}---spanning the
 letters of the English alphabet, digits, punctuation, and other symbols---and
 \termpl{control code}, as depicted in Table \ref{tab:ascii}.  Unlike printable
-characters, control codes have no fixed visual representation or precise
-semantics and were used to implement application-specific communication
-protocols and text formatting. Unconstrained by the bandwidth and the storage
-limitations of the 1960s, today's communication protocols and text formats
-gravitate towards markup constructed from printable characters, which, unlike
-control codes, are easy to read and write by humans.
+characters, control codes have no fixed visual representation and they were used
+to implement application-specific communication protocols and text formatting;
+their precise semantics were defined in the much later standard of
+\acroshort{ISO}~646 from \citeyear{iso72} \cite{iso72}. Unconstrained by the
+bandwidth and the storage limitations of the 1960s and 1970s, today's
+communication protocols and text formats gravitate towards markup constructed
+from printable characters, which, unlike control codes, are easy to read and
+write by humans.
 
 \begin{table}
   \input examples/01/ascii
   \caption{The \acronym{ASCII} encoding, as specified in the \citeyear{asa86}
     revision of the standard \cite{asa86}.}
   \label{tab:ascii}
+\end{table}
+
+\begin{table}
+  \input examples/01/utf8
+  \caption{The \acroshort{UTF}-8 encoding. Each \textvisiblespace\ represents
+    one bit of the \acroshort{UCS} code point in binary.}
+  \label{tab:utf8}
+\end{table}
+
+\begin{table}
+  \input examples/01/utf8-example
+  \caption{An example of the \acroshort{UTF}-8 encoding}
+  \label{tab:utf8-example}
 \end{table}
 
 %%% ASCII, Other Standards
@@ -188,16 +204,24 @@ strings encoded in \acronym{ASCII}:
     conversion between the lower- and uppercase letters is a matter of
     inverting one bit.
 \end{itemize}
-This comes at the expense of support for non-English writing systems.
+This comes at the expense of support for non-English writing systems. As a
+temporary workaround, a set of \acroshort{ASCII} derivatives that replaced the
+less-needed characters of \# \$ @ [ \textbackslash\ ] \textasciicircum\ ` \{ |
+\} and \textasciitilde\ for international characters was specified in the
+\acroshort{ISO}~646 standard \cite{iso72} from \citeyear{iso72}.
 
 \subsubsection{Eight-bit Encodings}
 With the byte size stabilizing at eight bits, new character encodings emerged
 that were based on \acronym{ASCII} and utilized the additional bit to encode
-characters of non-English writing systems. Beside the numerous vendor-specific
+characters of non-English writing systems while retaining complete backwards
+compatibility with \acroshort{ASCII}. Beside the numerous vendor-specific
 encodings (called \termpl{codepage}), a set of 15 eight-bit encodings covering
 all major modern writing systems whose characters fit within the space of 128
 additional combinations was standardized in the
-\acroshort{ISO}/\acroshort{IEC} 8859 series released during 1986--2001.
+\acroshort{ISO}/\acroshort{IEC}~8859 series released during 1986--2001.
+
+  % Show a time diagram of Czech encodings
+  %   <http://luki.sdf-eu.org/txt/cs-encodings-faq.html>
 
 Compared to \acronym{ASCII}, eight-bit encodings introduced an additional level
 of complexity to text processing:
@@ -270,8 +294,8 @@ are specified in the \acronym{UCS} standard and its amendments
     therefore also encoded in \acroshort{UTF}-8. Code points in the range from
     127 to 1,114,111 (\mbox{\hexa{00007F}--\hexa{10FFFF}}) are transformed into
     two to four one-byte integers ranging from 128 to 253
-    (\mbox{\hexa{80}--\hexa{FD}}). The encoding is illustrated in Figure
-    \ref{fig:utf8}.
+    (\mbox{\hexa{80}--\hexa{FD}}). The encoding is illustrated in tables
+    \ref{tab:utf8} and \ref{tab:utf8-example}.
 \end{description}
 \acroshort{UTF}-32 is primarily used for the internal representation of
 individual \acronym{UCS} characters inside programs, \acroshort{UTF}-16 fulfills
@@ -280,7 +304,6 @@ a similar role in applications that only work with \acronym{BMP}, and
 majority of text content on the Web is encoded in \acroshort{ASCII} and
 \acroshort{UTF}-8 \cite{qsuccess15}.
 
-  % A table explaining the UTF-8 encoding [fig:utf8]
   % Some examples of exotic glyphs in Unicode
 
 Originally a competing standard, Unicode underwent a merger with \acronym{UCS}
@@ -290,10 +313,27 @@ information about \acronym{UCS} characters---such as their general category,
 directionality, case, or numeric value \cite[sec.\,3.5, ch.\,4]{unicode15}---,
 various text processing algorithms and implementation guidelines.
 
-  % An example of the Han Unification with Chinese, Japanese and Korean texts
-  % Explain the resulting controversy and introduce TRON.
-  %   <https://en.wikipedia.org/wiki/Han_unification>
-  %   <https://en.wikipedia.org/wiki/TRON_(encoding)>
+\makeatletter
+  \begin{figure}
+    \ffootnote{One of the design goals of \acroshort{UCS} was to avoid assigning
+      code points to different glyphs that carry the same meaning. As a result,
+      the visually distinctive Han characters used in the East Asian countries
+      of China, Japan, Korea, and Vietnam were merged into a set of 75,960
+      ideograms in a process referred to as the \term{Han Unification}. This
+      simplifies text processing, but also makes it impossible to encode a text
+      in multiple East Asian languages without having to rely on external markup
+      to select appropriate regional fonts. As a result, a derivative of
+      \acronym{UCS} that doesn't implement the Han Unification was developed for
+      use in operating systems based on \acronym{TRON} and is used in the East
+      Asia alongside \acronym{UCS} and region-specific encodings.}
+    \includegraphics[width=\textwidth,
+        trim=1.85in 9.465in 5.45in 1.75in,clip]{examples/01/unihan-cjk.pdf}%
+    \\\includegraphics[width=\textwidth,
+        trim=1.85in 9.8in 5.45in 1.72in,clip]{examples/01/unihan-chunom.pdf}
+    \caption{Several Han characters in the traditional Chinese, Japanese,
+      Korean, and Vietnamese variants}
+  \end{figure}
+\makeatother
 
 With regards to text processing, Unicode and \acronym{UCS} represent a
 compromise between the simplicity of the seven-bit \acronym{ASCII} and the
@@ -1094,7 +1134,7 @@ which represent different use cases.
 \printbibliography[heading=bibintoc]
 
 % Acronyms
-\chapter{Acronyms}
+\fakechapter{Acronyms}
 \printacronyms[heading=none]
 
 % Index

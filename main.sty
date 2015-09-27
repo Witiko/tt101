@@ -34,6 +34,23 @@
 \def\footnote#1{%                                  % Margin note
   \marginpar[{\footnotesize\raggedleft#1}]%
              {\footnotesize\raggedright#1}}%
+\def\lmarginpar#1{{%                               % A non-floating margin note
+  \footnotesize                                    %% ... in even page variant
+  \smash{\llap{\parbox[t]{\marginparwidth}
+  {\strut\raggedleft#1}\kern\marginparsep}}}}
+\def\rmarginpar#1{{%                               %% ... in odd page variant
+  \footnotesize
+  \smash{\rlap{\hspace*{\dimexpr\linewidth+\marginparsep}\parbox[t]%
+  {\marginparwidth}{\strut\raggedright#1}}}}}
+\usepackage{changepage}
+\strictpagecheck
+\def\ffootnote#1{%                   % A two-side aware non-floating margin note
+  \checkoddpage
+  \ifoddpage
+    \rmarginpar{#1}
+  \else
+    \lmarginpar{#1}
+  \fi}
 \def\filename#1{ (\texttt{#1})}                    % Filenames in captions
 \DeclareRobustCommand{\work}{\@ifstar\work@\work@@}
 \def\work@#1{\textit{#1}}                          % Names of written works

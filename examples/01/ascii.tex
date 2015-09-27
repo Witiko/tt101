@@ -1,0 +1,33 @@
+{\addfontfeatures{Numbers=Monospaced}
+\def\ctrlcode#1{\textcolor{red}{\acroshort{#1}}}
+\def\aid{\rule{0pt}{1.3em}}
+\begin{tabularx}{\textwidth}{XXXX|cccccccc}
+  $7$&&&&0\enspace\enspace&0\enspace\enspace&0\enspace\enspace&%
+    0\enspace\enspace&1\enspace\enspace&1\enspace\enspace&1\enspace\enspace&%
+    1\enspace\enspace\\
+  $6$&\multicolumn{3}{c|}{\tblhead{Bits}}&\enspace0\enspace&\enspace0\enspace&%
+    \enspace1\enspace&\enspace1\enspace&\enspace0\enspace&\enspace0\enspace&%
+    \enspace1\enspace&\enspace1\enspace\\
+  $5$&&&&\enspace\enspace0&\enspace\enspace1&\enspace\enspace0&%
+    \enspace\enspace1&\enspace\enspace0&\enspace\enspace1&\enspace\enspace0&%
+    \enspace\enspace1\\
+  $4$&$3$&$2$&$1$&\multicolumn{2}{c}{\tblhead{\textcolor{red}{Ctrl
+    codes}}}&\multicolumn{2}{c}{\tblhead{Symbols}}&\multicolumn{2}{c}{\tblhead{Upper
+    case}}&\multicolumn{2}{c}{\tblhead{Lower case}}\\[.1em]\hline
+  0&0&0&0& \ctrlcode{NUL}&\ctrlcode{DLE}&\textvisiblespace&0&@&P&`&p\\
+  0&0&0&1& \ctrlcode{SOH}&\ctrlcode{DC1}&!&1&A&Q&a&q\\
+  0&0&1&0& \ctrlcode{STX}&\ctrlcode{DC2}&"&2&B&R&b&r\\
+  0&0&1&1& \ctrlcode{ETX}&\ctrlcode{DC3}&\#&3&C&S&c&S\\\aid
+  0&1&0&0& \ctrlcode{EOT}&\ctrlcode{DC4}&\$&4&D&T&d&t\\
+  0&1&0&1& \ctrlcode{ENQ}&\ctrlcode{NAK}&\%&5&E&U&e&u\\
+  0&1&1&0& \ctrlcode{ACK}&\ctrlcode{SYN}&\&&6&F&V&f&v\\
+  0&1&1&1& \ctrlcode{BEL}&\ctrlcode{ETB}&'&7&G&W&g&w\\\aid
+  1&0&0&0& \ctrlcode{BS}&\ctrlcode{CAN}&(&8&H&X&h&x\\
+  1&0&0&1& \ctrlcode{HT}&\ctrlcode{EM}&)&9&I&Y&i&y\\
+  1&0&1&0& \ctrlcode{LF}&\ctrlcode{SUB}&*&:&J&Z&j&z\\
+  1&0&1&1& \ctrlcode{VT}&\ctrlcode{ESC}&+&q&K&[&k&\{\\\aid
+  1&1&0&0& \ctrlcode{FF}&\ctrlcode{FS}&,&<&L&\textbackslash&l&|\\
+  1&1&0&1& \ctrlcode{CR}&\ctrlcode{GS}&-&=&M&]&m&\}\\
+  1&1&1&0& \ctrlcode{SO}&\ctrlcode{RS}&.&>&N&\textasciicircum&n&\textasciitilde\\
+  1&1&1&1& \ctrlcode{SI}&\ctrlcode{US}&/&?&O&\_&o&\ctrlcode{DEL}\\
+\end{tabularx}}
