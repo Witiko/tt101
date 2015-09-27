@@ -21,12 +21,44 @@
 \def\work#1{\index{#1}\textit{#1}}                 % Names of written works
 \def\inx#1{#1\index{#1}}                           % Leaky indexing
 \let\person\inx                                    % Person names
-\def\element#1{\mintinline{html}{<#1>}}            % An SGML or XML element
-\let\identifier\texttt                             % A general ASCII identifier
-\def\Identifier#1{{%                               % ... at the beginning of a sentence
+%% Code
+\def\code@readhead:#1{%               % A helper macro that reads #1\relax and
+  \if#1|%                             % returns any tokens preceding a pipe (|)
+    \ea\code@readhead@\ea:\ea%
+  \else\ifx#1\relax\else%
+    #1\ea\ea\ea\code@readhead\ea\ea\ea:%
+  \fi\fi}%
+\def\code@readhead@:#1{%
+  \ifx#1\relax\else%
+    \ea\code@readhead@\ea:%
+  \fi}
+\def\code@readtail:#1{%              % A helper macro that reads #1\relax and
+  \if#1|%                            % returns any tokens following a pipe (|)
+    \ea\code@readtail@\ea:%
+  \else\ifx#1\relax\else%
+    \ea\ea\ea\code@readtail\ea\ea\ea:%
+  \fi\fi}
+\def\code@readtail@:#1{%
+  \ifx#1\relax\else%
+    #1\ea\code@readtail@\ea:%
+  \fi}%
+\usepackage{minted}
+\newcommand{\code}[2][text]{{%       % Inline code #2 in language #1, a pipe
+  \let\ea\expandafter%               % in #1 delimits implementation parameters
+  \edef\head{\code@readhead:#1\relax}%
+  \edef\tail{\code@readtail:#1\relax}%
+  \mintinline[\tail]{\head}{#2}}}
+\newcommand{\inputcode}[2][text]{{%  % Code from file #2 in language #1, a pipe
+  \let\ea\expandafter%               % in #1 delimits implementation parameters
+  \edef\head{\code@readhead:#1\relax}%
+  \edef\tail{\code@readtail:#1\relax}%
+  \inputminted[\tail]{\head}{#2}}}
+\let\identifier\texttt                   % A general ASCII identifier
+\def\Identifier#1{{%                     % ... at the beginning of a sentence
   \def\head##1##2\relax{##1}
   \def\tail##1##2\relax{##2}
   \identifier{\uppercase{\head#1\relax}\tail#1\relax}}}
+\def\element#1{\code[html]{<#1>}}        % An SGML or XML element
 %% Terms
 \let\termstyle\textit
 \def\term{\@ifstar\term@@\term@}
@@ -99,9 +131,6 @@
   short-format=\scshape,       %               ... an unexpanded acronym
   list-type=description,       % The type of the list used to print acronyms
   list-caps=true}              % List definitions start with upper-case letters
-%% Line numbers
-%% @see <http://tex.stackexchange.com/a/132850/70941>
-\renewcommand{\theFancyVerbLine}{{\rm\normalsize{\arabic{FancyVerbLine}}}}
 %% Lists
 %%% No vertical spacing and indentation in lists
 \usepackage{enumitem}
@@ -114,5 +143,14 @@
     \renewcommand{\item}[1][]{\olditem[\textbf{##1}]}}{%
     \endgroup
   \end{itemize}}
+%% Code
+\setminted{breaklines=true}
+\usemintedstyle{default}
+%%% Line numbers
+%%% @see <http://tex.stackexchange.com/a/132850/70941>
+\renewcommand{\theFancyVerbLine}{{\rm\normalsize{\arabic{FancyVerbLine}}}}
 %% Hypertext support
-\usepackage[colorlinks,citecolor=blue]{hyperref}
+\usepackage[%
+  colorlinks,
+  citecolor=blue
+]{hyperref}

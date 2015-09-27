@@ -2,8 +2,6 @@
 \usepackage{polyglossia}  % Hyphenation
 \setmainlanguage{english}
 \setotherlanguages{french,italian}
-\usepackage{minted}       % Source code typesettings
-\setminted{breaklines=true}
 \usepackage{placeins}     % Float barriers
 \usepackage{tikz}         % Diagrams
 \usetikzlibrary{trees,arrows}
@@ -81,8 +79,8 @@ by the writer.
 On top of grammar and orthographic rules stand \termpl{style guide}, which, in
 order to improve consistency, codify how common language patterns are
 encoded.\footnote{
-  This document was prepared in accordance with William Strunk's \work{Elements
-  of Style}: an American English style guide for general use.
+  This document was prepared in accordance with \person{William Strunk}'s
+  \work{Elements of Style}, an American English style guide for general use.
 } More comprehensive style guides---such as the \work{Chicago Manual of Style}
 or Ritter's \work{Oxford Style Manual}---often go beyond writing and provide
 guidelines on design and typesetting as well, making them an indispensable
@@ -110,7 +108,7 @@ the text programming languages of \acronym{FORTRAN} and \acronym{COBOL}. The
 digital representation of letters, digits and other characters was initially
 closely tied to each specific application and processor architecture, but with
 the advent of networking in 1960s, mutual intelligibility became a point of
-concern. \footnote{
+concern.\footnote{
   \Acronym{EBCDIC} by \acronym{IBM} was the default encoding on
   \acroshort{IBM}'s System/360 mainframes and was in active use until the
   introduction of \acronym{PC} in 1981. In countries using Chinese ideographs,
@@ -120,8 +118,8 @@ concern. \footnote{
 }``We had over sixty different ways to represent characters in
 computers. It was a real Tower of Babel,'' explains \cite{brandel99}
 \person{Bob Berner}, an American computer scientist who worked at \acronym{IBM}
-during 1956--1962 and who drafted \acronym{ASCII}---a \term{character
-encoding} from \citeyear{asa63} \cite{asa63} that unified the industry and
+during 1956--1962 and who drafted \acronym{ASCII}---a
+\term{character encoding} from \citeyear{asa63} that unified the industry and
 enabled computer networking on large scale.
 
 \subsubsection{ASCII}
@@ -219,8 +217,8 @@ fragmentation proved to be hurtful and unnecessary.
 
 \subsubsection{The Universal Character Set and Unicode}
 The continual increase in the available bandwidth and storage led to the
-creation of the competing standards of Unicode \cite{unicode91,unicode92} and
-\acronym{UCS} \cite{iso93} in an attempt to create a text encoding that would
+creation of the standards of Unicode \cite{unicode91,unicode92} and
+\acronym{UCS} in an attempt to create a text encoding that would
 contain the characters of all the world's living languages and succeed
 \acronym{ASCII} as the \foreign[italian]{lingua franca} of text interchange.
 
@@ -276,7 +274,7 @@ Originally a competing standard, Unicode underwent a merger with \acronym{UCS}
 in version 1.1 and since then, the standards have been kept closely
 synchronised. Unicode is a superset of \acronym{UCS}, which defines additional
 information about \acronym{UCS} characters---such as their general category,
-directionality, case, or numeric value \cite[sec.~3.5, ch.~4]{unicode15}---,
+directionality, case, or numeric value \cite[sec.\,3.5, ch.\,4]{unicode15}---,
 various text processing algorithms and implementation guidelines.
 
   % An example of the Han Unification with Chinese, Japanese and Korean texts
@@ -297,12 +295,12 @@ eight-bit encodings:
     the Unicode Consortium.
   \item Classes of characters---such as upper-case letters, lower-case letters,
     numbers, and punctuation---do not form contiguous ranges, but their position
-    is directly specified by the standard \cite[sec.~4.5]{unicode15}.
+    is directly specified by the standard \cite[sec.\,4.5]{unicode15}.
   \item Although idiosyncrasies---such as ligatures, invisible hyphenation
     hints, and combining characters---are present in \acronym{UCS}, explicit
     normalization algorithms for character string equivalence testing are
-    specified by the standard \cite[sec.~2.12]{unicode15}. An algorithm
-    for case conversion is also specified \cite[sec.~3.13]{unicode15}.
+    specified by the standard \cite[sec.\,2.12]{unicode15}. An algorithm
+    for case conversion is also specified \cite[sec.\,3.13]{unicode15}.
   \item \Acronym{BOM} with the code point of 65,279 (\hexa{FEFF}) can be
     inserted at the beginning of a text as a signature of Unicode encodings. As
     the name suggests, the order in which the \hexa{FE} and \hexa{FF} bytes
@@ -382,13 +380,12 @@ crux was going to be the markup languages in which the documents were written.
 These languages were not unified and many of them comprised largely presentation
 markup, which made information retrieval impossible without the use of
 heuristics. To resolve these issues, a unifying markup language called
-\acronym{GML} was drafted. The language was later released to the public in
-\citeyear{goldfarb81} \cite{goldfarb81} and finally standardized as \acronym{SGML}
-\footnote{
+\acronym{GML} was drafted. The language was later released \citeyear{goldfarb81}
+to the public \cite{goldfarb81} and finally standardized \citeyear{iso86} as
+\acronym{SGML}\footnote{
   The authoritative resource on \acronym{SGML} is \textcite{goldfarb91}, which
-  includes the full text of the standard along with the author's extensive
-  annotations.
-} in \citeyear{iso86} \cite{iso86}.
+  includes the full text of the standard along with extensive annotations.
+} \cite{iso86}.
 
 \Acronym{SGML} documents consist of text mixed with \termpl*{tag}%
 \acroindex[!tag]{SGML}, which delimit meaningful sections of the document called
@@ -417,16 +414,16 @@ Although \acronym{SGML} was designed to be the general format for data exchange,
 the complexity of the specification and the lack of support for Unicode proved
 to be a major hindrance preventing its wider adoption and tool development. As a
 response, \acronym{W3C} published a specification of \acronym{XML} in
-\citeyear{bray98} \cite{bray98}. Along with the introduction of \acronym{XML},
-the \acroshort{SGML} specification received a technical corrigendum
+\citeyear{bray98}. Along with the introduction of \acronym{XML}, the
+\acroshort{SGML} specification received a technical corrigendum
 \cite{goldfarb97:webSGML}, which turned \acronym{XML} into a proper subset of
 \acronym{SGML} restrained by an \acroshort{SGML} \acronym{DTD}.
 
 \begin{figure}
-  \inputminted{xml}{examples/02/recipe.xml}
+  \inputcode[xml]{examples/02/recipe.xml}
   \caption{An example \acronym{XML} document\filename{recipe.xml}}
   \label{fig:recipe}\bigskip
-  \inputminted{dtd}{examples/02/dtdtypes}
+  \inputcode[dtd]{examples/02/dtdtypes}
   \caption{\acronym{SGML} and \acronym{XML} \acronym{DTD}s can be either linked
     to a document through public and system identifiers, directly embedded in
     a document, both linked to and embedded in a document, or left out
@@ -464,25 +461,25 @@ documents of various \acronym{XML} formats and form an important part of the
 ecosystem.
 
 A notable new feature of \acronym{XML} are \termpl*{namespace}%
-\acroindex[!namespace]{XML}, which were added to the specification in
-\citeyear{bray99} \cite{bray99}. Namespaces enable the inclusion of elements and
-attributes of different \acronym{XML} applications within a single \acronym{XML}
-document by providing a method to qualify element and attribute names with
-\acropl{IRI} that uniquely represent the respective \acronym{XML} applications.
-Namespaced elements are a spiritual successor of a more expressive
-\acronym{SGML} feature of \inx{\identifier{CONCUR}}, which makes it possible to
-mark up several structural views of a single document. Unlike with
+\acroindex[!namespace]{XML}, which were added to the specification
+\cite{bray99} in \citeyear{bray99}. Namespaces enable the inclusion of elements
+and attributes of different \acronym{XML} applications within a single
+\acronym{XML} document by providing a method to qualify element and attribute
+names with \acropl{IRI} that uniquely represent the respective \acronym{XML}
+applications.  Namespaced elements are a spiritual successor of a more
+expressive \acronym{SGML} feature of \inx{\identifier{CONCUR}}, which makes it
+possible to mark up several structural views of a single document. Unlike with
 \identifier{CONCUR}, which ties each view to an \acroshort{SGML} \acronym{DTD},
 there exists no general mechanism for the translation of \acropl{IRI} to
-\acronym{XML} schemata.  This makes it impossible to validate namespaced
+\acronym{XML} schemata. This makes it impossible to validate namespaced
 \acronym{XML} documents, unless all used \acropl{IRI} and their respective
 schemata are known to the parser.
 
 \begin{figure}[hb!]
   \input{examples/02/peer-gynt.tex}
   \caption{The markup of the dramatic and metrical views of the beginning of
-    Henrik Ibsen's \work{Peer Gynt} using the \identifier{CONCUR} feature of
-    \acronym{SGML}}
+    \person{Henrik Ibsen}'s \work{Peer Gynt} using the \identifier{CONCUR}
+    feature of \acronym{SGML}}
 \end{figure}
 
 %%% Živoucí CONCAT <http://webylon.info/K.24>
@@ -490,17 +487,17 @@ schemata are known to the parser.
 %%%   <http://www.angelovic.cz/internet/sgml-deklarace.html#concur>
 
 \begin{figure}[H]
-  \inputminted{xml}{examples/02/recipe.xsd}
+  \inputcode[xml]{examples/02/recipe.xsd}
   \caption{A reformulation of the recipe \acronym{DTD} from Figure
     \ref{fig:recipe-dtd} in the \acroshort{XML} Schema \acroindex[!Schema]{XML}
     language.\filename{recipe.xsd}}
   \label{fig:recipe-xsd}
-  \inputminted{text}{examples/02/recipe.rnc}
+  \inputcode{examples/02/recipe.rnc}
   \caption{A reformulation of the recipe \acronym{DTD} from Figure
     \ref{fig:recipe-dtd} in the compact syntax of \acronym{Relax NG}.%
     \filename{recipe.rnc}}
   \label{fig:recipe-rnc}
-  \inputminted{sh}{examples/02/recipe.sh}
+  \inputcode[sh]{examples/02/recipe.sh}
   \caption{\acronym{XML} documents can be easily validated against \acronym{XML}
     schemata using command-line tools, such as \inx{\identifier{xmllint}}.}
 \end{figure}
@@ -512,7 +509,7 @@ superseded \acronym{SGML} in many applications. Some of the applications of
 \footnote{
   The authoritative resource on the DocBook \acronym{XML} format is
   \textcite{walsh10}. The book itself is written in DocBook and its source code
-  is publicly available. 
+  is publicly available at \url{http://docbook.org}.
 }---a technical documentation format used for authoring books by publishers such
 as O'Reilly Media and for documenting software at companies such as Red Hat,
 \acroflat{SuSE}, or Sun Microsystems---, \acronym{TEI}---a general text encoding
@@ -524,9 +521,9 @@ be discussed in Section \ref{sec:www-markup}.
       
 \section{Markup on the World Wide Web}\label{sec:www-markup}
 \subsection{The Hypertext Markup Language}
-In \citeyear{bernerslee89} \cite{bernerslee89}, an English computer scientist
-\person{Timothy John Berners-Lee} proposed a decentralized system for sharing
-linked documents within \acronym{CERN}. The system laid foundation for the Web
+In \citeyear{bernerslee89}, an English computer scientist \person{Timothy John
+Berners-Lee} proposed a decentralized system for sharing linked documents within
+\acronym{CERN} \cite{bernerslee89}. The system laid foundation for the Web
 and earned its author knighthood.  The markup language used to write documents
 for the system was an application of \acronym{SGML} called \acronym{HTML}. In
 1993, the Web started to gain popularity amongst the general public owing to the
@@ -534,22 +531,19 @@ release of the first graphical Web browser Mosaic, which paved way for the Web
 browsers of today. In 1994, \person{Timothy John Berners-Lee} formed
 \acronym{W3C}, which has since been developing the standards for the Web.
 
-The first standard version of \acronym{HTML} was \acronym{HTML} 2.0 published in
-\citeyear{bernerslee95} \cite{bernerslee95}. As the Web was becoming ubiquitous,
-it began accumulating an increasing number of documents that weren't valid
-instances of \acronym{HTML}, since most Web browsers, when faced with a
-malformed document, would act in accordance with the Postel's law and try to
-render the document despite its deficiencies. In an attempt to unify the way
-malformed \acronym{HTML} documents were rendered across the Web browsers,
-\acronym{W3C} acknowledged and documented this behaviour as a part of the
-\acroshort{HTML}5 specification \cite[sec.~8.2]{hickson14}. An example is
-presented in Figure \ref{fig:overlapping-elements}.
+The first standard version of \acronym{HTML} was \acronym{HTML} 2.0
+\cite{bernerslee95} published in \citeyear{bernerslee95}. As the Web was
+becoming ubiquitous, it began accumulating an increasing number of documents
+that weren't valid instances of \acronym{HTML}, since most Web browsers, when
+faced with a malformed document, would act in accordance with the Postel's law
+and try to render the document despite its deficiencies. In an attempt to unify
+the way malformed \acronym{HTML} documents were rendered across the Web
+browsers, \acronym{W3C} acknowledged and documented this behaviour as a part of
+the \acroshort{HTML}5 specification \cite[sec.\,8.2]{hickson14}. An example is
+given in Figure \ref{fig:overlapping-elements}.
 
 \begin{figure}[b]
-  \begin{minted}[linenos]{html}
-<b>This text is bold, <i>bold and italic</b>, italic.</i>
-<b>This text is bold, </b><i><b>bold and italic</b>, italic.</i>
-  \end{minted}
+  \inputcode[html|linenos]{examples/02/malformed.html}
   \caption{The fragment on line 1 contains overlapping elements and, as such, it
     can't be a part of a valid \acronym{HTML} document. Nevertheless, it is
     recommended by \acronym{W3C} that browsers parse the fragment identically to
@@ -559,46 +553,45 @@ presented in Figure \ref{fig:overlapping-elements}.
 
 Initially, \acronym{HTML} only comprised a mixture of logical and presentation
 markup with fixed visual interpretation. This changed with the specification of
-\acronym{CSS}, which was introduced by \acronym{W3C} in \citeyear{lie96}
-\cite{lie96}. The language enabled the specification of the visual properties of
-any element, which allowed for the separation of document markup and design,
-effectively eliminating the need for the presentation markup.
+\acronym{CSS}, which was introduced by \acronym{W3C} in \citeyear{lie96}. The
+language enabled the specification of the visual properties of any element,
+which allowed for the separation of document markup and design, effectively
+eliminating the need for the presentation markup.
 
 \begin{figure}
-  \inputminted{html}{examples/02/presentation-markup.html}
+  \inputcode[html]{examples/02/presentation-markup.html}
   \caption{An excerpt from the Web site of the \acroshort{CSS} Zen Zarden
     located at \protect\url{http://csszengarden.com}. The document above was
     created using the \acroshort{HTML} presentation markup. The document below
     achieves the same appearance by the combination of logical markup and
     \acronym{CSS} definitions.}\bigskip
-  \inputminted{html}{examples/02/logical-markup.html}
+  \inputcode[html]{examples/02/logical-markup.html}
 \end{figure}
 
 During the same period, an initial version of a scripting language called
-\inx{JavaScript} was drafted and incorporated into Netscape Navigator 2.0%
-\footnote{
+\inx{JavaScript} \cite{ecma97} was drafted and incorporated into Netscape
+Navigator 2.0\footnote{
   \inx{JScript} and \inx{VBScript} were direct competitors of JavaScript, but
   they never saw implementation outside Microsoft browsers.
 } of the contemporary leading web browsers and a descendant of the original
 Mosaic browser. As a part of a joint effort to bring Java into web browsers by
 Sun Microsystems and Netscape Communications, JavaScript was supposed to
-\cite{netscape95} complement Java applets -- a role it has since outgrown.
-Standardized in \citeyear{ecma97} \cite{ecma97}, JavaScript blurs the line
-between static documents and interactive applications and remains the
-predominant client-side programming language for the Web. Since, however, the
-support of JavaScript by a Web browser is fully optional, it is considered a
-good practice to use it chiefly for the enrichment of already self-sufficient
-\acronym{HTML} documents. In case of an interactive application, this
-recommendation can be relaxed.
+complement Java applets \cite{netscape95}---a role it has since outgrown.
+Standardized in \citeyear{ecma97}, JavaScript blurs the line between static
+documents and interactive applications and remains the predominant client-side
+programming language for the Web. Since, however, the support of JavaScript by a
+Web browser is fully optional, it is considered a good practice to use it
+chiefly for the enrichment of already self-sufficient \acronym{HTML} documents.
+In case of an interactive application, this recommendation can be relaxed.
 
 \subsection{The Extensible Hypertext Markup Language}
 Ever since the release of \acronym{XML} in 1998, \acronym{W3C} entertained the
 idea of turning \acronym{HTML} into an application of \acronym{XML}, rather than
 \acronym{SGML}, as exemplified by the working draft of \textcite{raggett98}.
 Unlike \acronym{HTML} parsers, which are complex in their acceptance of
-malformed content, \acronym{XML} parsers are, as per \cite[Section~1.2,
-Terminology]{bray98}, required to draconianly refuse \acronym{XML} documents
-that aren't well-formed, leading to architectural simplicity and decreased
+malformed content, \acronym{XML} parsers are required to draconianly refuse
+\acronym{XML} documents that aren't well-formed \cite[Section~1.2,
+Terminology]{bray98}, leading to architectural simplicity and decreased
 computational requirements. As a result, reformulating \acronym{HTML} in
 \acronym{XML} was suggested as a way to bring the Web to mobile, embedded, and
 other devices limited in their resources, as well as to reduce the amount of
@@ -607,19 +600,18 @@ the ability to use \acronym{XML} tools for web documents and to include
 instances of other \acronym{XML} applications, such as \acronym{MathML} and
 \acronym{SVG}, directly into web documents using \acronym{XML} namespaces.
 
-The idea was brought to fruition \cite{pemberton00} as an \acronym{XML}
-application named \acronym{XHTML}. \acronym{XHTML} was met with lukewarm
-reception, since many of its supposed benefits proved to be either questionable
-or too marginal to warrant migration from \acronym{HTML}. The speed advantages
-of the simpler parser were largely offset by its lack of support for incremental
-rendering, caused by the impossibility to validate partially downloaded pages,
-the closing of the gap in the computing power between mobile and desktop devices
-made it possible to use full-fledged \acronym{HTML} parsers across the spectrum,
-and the lack of ways to provide alternative content for browsers that would not
-support directly included \acroshort{XML} documents considerably reduced the
-usefulness of \acronym{XML} namespaces. As a result, \acronym{XHTML} has yet to
-succeed in replacing \acronym{HTML} and remains an alternative markup language
-for the Web.
+The idea was brought to fruition as an \acronym{XML} application named
+\acronym{XHTML}. \acronym{XHTML} was met with lukewarm reception, since many of
+its supposed benefits proved to be either questionable or too marginal to
+warrant migration from \acronym{HTML}. The speed advantages of the simpler
+parser were largely offset by its lack of support for incremental rendering,
+caused by the impossibility to validate partially downloaded pages, the closing
+of the gap in the computing power between mobile and desktop devices made it
+possible to use full-fledged \acronym{HTML} parsers across the spectrum, and the
+lack of ways to provide alternative content for browsers that would not support
+directly included \acroshort{XML} documents considerably reduced the usefulness
+of \acronym{XML} namespaces. As a result, \acronym{XHTML} has yet to succeed in
+replacing \acronym{HTML} and remains an alternative markup language for the Web.
 
 %%% Content-Negotiation Techniques to serve XHTML as text/html and
 %%% application/xhtml+xml
@@ -630,10 +622,9 @@ The underlying fundament of the Web is the the idea of a globally available and
 incrementally scalable base of human knowledge. \acronym{HTML} and
 \acronym{XHTML} succeeded in fulfilling this vision for human-readable documents
 but didn't provide a unifying machine-readable format for the representation of
-structured information that would enable the creation of a web of linked data
+structured information that would enable the creation of a web of \acronym{LD}
 running in parallel to the web of documents. To remedy that, \acronym{W3C}
-created \acronym{RDF} \cite{lassira99}, a method for the description of
-resources on the Web.
+created \acronym{RDF}, a method for the description of resources on the Web.
 
 Drawing from the research in the field of knowledge representation, an
 \acroshort{RDF} document represents data as a set of \termpl*{triple}%
@@ -668,29 +659,28 @@ generic description of both web multimedia and physical objects---,
 relationships---, or the Music Ontology---an ontology for the description of
 entities related to the music industry, such as albums, artists, tracks, and
 events. More expressive standards for the creation of ontologies, such as
-\acronym{OWL} \cite{mcguinness04}, also exist.
+\acronym{OWL}, also exist.
 
-The syntax of \acronym{RDF} is not fixed, meaning that, beside the
-\acroshort{XML} serialization \cite{lassira99}, other languages, such as
-\acronym{JSON-LD} \cite{sporny14}, the \inx{Turtle} language
-\cite{beckett14:turtle}, or the line-based \inx{N-Triples} language
+The syntax of \acronym{RDF} is not fixed and, beside the \acroshort{XML}
+serialization \cite{lassira99}, other languages, such as \acronym{JSON-LD},
+\inx{Turtle} \cite{beckett14:turtle}, or the line-based \inx{N-Triples}
 \cite{beckett14:nt}, can be used to represent an \acroshort{RDF} document. A
-noteworthy serialization of \acronym{RDF} is \acronym{RDFa} \cite{adida08}.
-Although various serializations of \acronym{RDF} can be included in or linked to
-an \acroshort{HTML} or \acroshort{XHTML} document, this will often result in an
+noteworthy serialization of \acronym{RDF} is \acronym{RDFa}.  Although various
+serializations of \acronym{RDF} can be included in or linked to an
+\acroshort{HTML} or \acroshort{XHTML} document, this will often result in
 undesirable duplication of data already present in the document. To prevent
-this, \acronym{RDFa} utilizes the content already present within the underlying
-\acroshort{HTML} or \acroshort{XHTML} document using element attributes. The
-usage of \acronym{RDF} in conjunction with \acronym{HTML} and \acronym{XHTML} is
-intended to gradually obsolete the loosely-defined use of \acronym{CSS} class
-names, attributes, the \element{meta} element, and the \element{link} element to
-encode additional application-specific metadata about the document---a technique
-known as \term{microformatting}.
+this, \acronym{RDFa} utilizes the content of the underlying \acroshort{HTML} or
+\acroshort{XHTML} document using element attributes. The usage of \acronym{RDF}
+in conjunction with \acronym{HTML} and \acronym{XHTML} is intended to gradually
+obsolete the loosely-defined use of \acronym{CSS} class names, attributes, the
+\element{meta} element, and the \element{link} element to encode additional
+application-specific metadata about the document---a technique known as
+\term{microformatting}.
 
 \begin{figure}
-  \inputminted{xml}{examples/02/john.rd}
-  \inputminted{text}{examples/02/john.nt}
-  \inputminted{text}{examples/02/john.ttl}
+  \inputcode[xml]{examples/02/john.rd}
+  \inputcode[text]{examples/02/john.nt}
+  \inputcode[text]{examples/02/john.ttl}
   \caption{Above is an example \acronym{RDF} document using \acronym{DC} and
     \acronym{FOAF} ontologies in \acronym{RDF}/\acronym{XML}%
     \filename{john.rd}, \inx{N-Triples}\filename{john.nt}, and \inx{Turtle}%
@@ -700,12 +690,12 @@ known as \term{microformatting}.
 \end{figure}
 
 \begin{figure}[t!]
-  \inputminted{html}{examples/02/john.html.linked-rdf}
+  \inputcode[html]{examples/02/john.html.linked-rdf}
   \caption{Above is an \acroshort{HTML} document linked to the \acroshort{RDF}
     document from Figure \ref{fig:rdf-doc}. Below is the same \acroshort{HTML}
     document with the \acroshort{RDF} data directly embedded using the
     \acroshort{RDFa} serialization.}\bigskip
-  \inputminted{html}{examples/02/john.html.rdfa}
+  \inputcode[html]{examples/02/john.html.rdfa}
 \end{figure}
 
 %%% Linked Data
@@ -724,10 +714,10 @@ known as \term{microformatting}.
         
 \section{Markup in Document Preparation Systems}
 Some of the existing markup is directly tied with specific document preparation
-systems. These can be dichotomized into \termpl*{batch-oriented system}
+systems. These can be dichotomized into \termpl*{batch-oriented system}%
 \index{document preparation system!batch-oriented}, which process marked up input
 text documents into printable output documents in a page description language on
-demand, and \termpl*{interactive system} \index{document preparation
+demand, and \termpl*{interactive system}\index{document preparation
 system!interactive}, which allow the user to directly edit an approximation of
 the output document via a visual editor. Also called \acronym{WYSIWYG},
 interactive systems exchange mild learning curve for more primitive typesetting
@@ -762,9 +752,9 @@ tables, equations, and vector graphics.
 \begin{figure}
   \fbox{\includegraphics[clip,trim=1.7cm 12cm 1.7cm 1.3cm,%
     width=0.975\textwidth]{examples/02/poe-groff.pdf}}
-  \inputminted{groff}{examples/02/poe.groff}
-  \caption{An excerpt from the beginning of Edgar Allen Poe's \work{Cask of
-    Amontillado} formatted using the \identifier{mom}
+  \inputcode[groff]{examples/02/poe.groff}
+  \caption{An excerpt from the beginning of \person{Edgar Allen Poe}'s
+    \work{Cask of Amontillado} formatted using the \identifier{mom}
   \index{\identifier{troff}!\identifier{mom}} macro package of
   \inx{\identifier{groff}}.}
   \label{fig:poe}
@@ -786,7 +776,7 @@ Another notable batch-oriented system is \TeX\index{TeX@\TeX}\footnote{
 by an American professor of computer science \person{Donald Knuth}, after he had
 received galley proofs for the second volume of his monograph, the \work{Art of
 Computer Programming}, and found the appearance of mathematical formulae
-distasteful.  As a result, the typesetting of mathematics is a central theme in
+distasteful. As a result, the typesetting of mathematics is a central theme in
 \TeX, rather than an afterthought, which differentiates it from most other
 document preparation systems and which largely contributed to the massive
 popularity \TeX\ has attained in academia. Much like in the case of
@@ -798,7 +788,7 @@ classes with pure logical markup is \inx{\LaTeX}: the standard markup language
 for academic and technical documents.
 
 \begin{figure}
-  \inputminted{tex}{examples/02/poe.tex}
+  \inputcode[tex]{examples/02/poe.tex}
   \caption{The \identifier{groff} document from Figure \ref{fig:poe}
     reformulated using \TeX}
 \end{figure}
