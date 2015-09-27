@@ -25,7 +25,7 @@ $(SUBMAKEFILES):
 # Typeset the text.
 $(OUTPUT).pdf: $(SOURCES) Makefile
 	$(TEX) $<
-	texindy -I omega --language english $(OUTPUT).idx
+	makeindex $(OUTPUT)
 	biber $(OUTPUT)
 	$(TEX) $<
 	$(TEX) $<

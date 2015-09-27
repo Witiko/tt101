@@ -16,9 +16,9 @@
   backref=true
 ]{biblatex}
 \addbibresource{main.bib}
+\usepackage[nottoc]{tocbibind}
 \usepackage{makeidx}      % Index
 \makeindex
-\usepackage[nottoc]{tocbibind}
 \usepackage{./main}       % Markup and design
 \input{./acronyms}        % Acronyms
 \begin{document}
@@ -49,6 +49,15 @@ the main goal of this text is to provide the reader with a general overview of
 the landscape and to present references to more detailed literature for those
 interested in further nourishment.
 
+Each chapter contains numerous examples, which illustrate the subject matter. In
+most cases, these examples are removed from the flow of the main text and aren't
+necessary for its comprehension. Although care was taken not to favour any
+computing environment, some examples feature Unix utilities, which have no
+suitable counterpart in operating systems such as Windows. To try these examples
+out, the reader is advised to install a Unix-like environment, such as the
+Windows Cygwin, on their local machine or to use a Unix-like operating system,
+such as \Linux.
+
 \chapter{Writing}
 The essence of a document is the idea it represents. In the case of a text
 document, this idea is articulated through speech, which is transcribed using
@@ -70,11 +79,11 @@ language, and \termpl*{orthographic rule}\index{writing rules!ortography}, which
 impose additional requirements on written text. The complexity of either set of
 rules depends entirely on the language in question. Some writing systems, such
 as the Japanese kanji, are not phonographic and the correspondence between
-spoken words and written ideographs needs to be memorized by the writer on a
-word-to-word basis. Some languages, such as Czech, use vastly different grammar
-rules for speaking and for writing, which means that a spoken sentence needs to
-be translated first before writing down. These specifics need to be recognized
-by the writer.
+the spoken words and the written symbols needs to be memorized by the writer on
+a word-to-word basis. Some languages, such as Czech, use vastly different
+grammar rules for speaking and for writing, which means that a spoken sentence
+needs to be translated first before writing down. A writer needs to recognize
+these specifics.
 
 On top of grammar and orthographic rules stand \termpl{style guide}, which, in
 order to improve consistency, codify how common language patterns are
@@ -82,7 +91,7 @@ encoded.\footnote{
   This document was prepared in accordance with \person{William Strunk}'s
   \work{Elements of Style}, an American English style guide for general use.
 } More comprehensive style guides---such as the \work{Chicago Manual of Style}
-or Ritter's \work{Oxford Style Manual}---often go beyond writing and provide
+or the \work{Oxford Style Manual}---often go beyond writing and provide
 guidelines on design and typesetting as well, making them an indispensable
 reference on the editorial tradition.
 
@@ -97,8 +106,9 @@ knows no type areas.
 \section{Text Processing}
 Originally the domain of the pen, the quill, the stylus, and the more recent
 typewriter machine, manuscripts of today are produced chiefly using the personal
-computer. The discipline of creating and manipulating digital text is called
-\term{text processing} and will be the focus of this section.
+computer and stored in \termpl{text file}. The discipline of creating and
+manipulating digital text is called \term{text processing} and will be the focus
+of this section.
 
 \subsection{Character Encoding}
 Although computing at its most primal has no use for anything but numbers, it
@@ -259,8 +269,8 @@ numbers to binary character codes. Three major encodings are specified in the
 \acroshort{UTF}-32 is primarily used\footnote{
   Notable are also the seven-bit encodings of \acroshort{UTF}-7
   \acroindex[!UTF-7@\acroshort{UTF}-7]{UTF} and \inx{Punycode}, which bring
-  Unicode support to protocols originally intended for the seven-bit
-  \acroshort{ASCII}, such as e-mail.}
+  Unicode support to protocols that were designed with the seven-bit
+  \acroshort{ASCII} in mind, such as e-mail.}
 for the internal representation of individual \acronym{UCS} characters inside
 programs, \acroshort{UTF}-16 fulfills a similar role in applications that only
 work with \acronym{BMP}, and \acroshort{UTF}-8 is used for text storage and
@@ -283,8 +293,8 @@ various text processing algorithms and implementation guidelines.
   %   <https://en.wikipedia.org/wiki/TRON_(encoding)>
 
 With regards to text processing, Unicode and \acronym{UCS} represent a
-compromise between the simplicity of \acronym{ASCII} and the heterogeneity of
-eight-bit encodings:
+compromise between the simplicity of the seven-bit \acronym{ASCII} and the
+heterogeneity of eight-bit encodings:
 \begin{itemize}
   \item If simple text manipulation is preferred over space efficiency, each
     character can be made exactly two or four bytes wide using the
@@ -311,6 +321,10 @@ eight-bit encodings:
 \end{itemize}
 
   % An example of combining characters with the explanation of UCS
+  % implementation levels
+
+  % An example of encoding conversions (iconv) and Unicode collation (sort)
+  % <http://superuser.com/a/414408/136765> in Unix environments. 
 
 %%% Unicode 101: An Introduction to the Unicode Standard
 %%%   <http://www.interproinc.com/blog/unicode-101-introduction-unicode-standard>
@@ -327,10 +341,64 @@ eight-bit encodings:
 %%% Plane (Unicode):
 %%%   <https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane>
 
-\subsection{Text Manipulation}
-% Inserting Unicode symbols on Windows, Linux, iOS, Android
-\subsection{Revision Control}
-\section{Word Processing}
+\subsection{Text Input}
+To insert text into a document, it is necessary to use an input device. In case
+of personal computers, this is typically a computer keyboard and a mouse,
+although the ongoing research in the areas of \acronym{SR} and \acronym{OCR}
+makes it possible to use a microphone or a tablet as well. On hand-held devices,
+the use of either a numeric keypad or a touch-screen is more typical.
+
+An operating system will typically provide one or more input methods for each
+input device through a component commonly referred to as the \acronym{IME}. As
+an example, the \acroshort{ASCII} standard was developed with typewriters and
+teleprinters in mind and, as their direct descendant, the Latin computer
+keyboard provides support for all \acroshort{ASCII} characters. However, this
+doesn't apply to the much larger \acronym{UCS} and it is the task of an
+\acronym{IME} to provide a mechanism for the creation and selection of keyboard
+layouts that will allow the user to input any \acronym{UCS} character. Some text
+editors and word processors may provide additional input methods of their own.
+
+% An example of the pinyin input method <https://en.wikipedia.org/wiki/Pinyin_input_method>
+% The keyboard layout from the Elements of Typographic Style, p. 90, s. 5.5.2
+% The input of a character using the compose key, the Ctrl+Shift+U and the
+% Alt-code (or Alt+X in Microsoft Word)
+%   <https://en.wikipedia.org/wiki/Alt_code>
+%   <http://www.fileformat.info/tip/microsoft/enter_unicode.htm>
+%   <https://en.wikipedia.org/wiki/Compose_key>
+
+%%% Typing Through Time: Keyboard History
+%%%   <http://www.daskeyboard.com/blog/typing-through-time-the-history-of-the-keyboard/>
+
+\subsection{Text Editors and Word Processors}
+A \term{text editor} is an applications, which can be used to create and modify
+text files. Entry-level text editors are often distributed with an operating
+system and offer little beyond the ability to load, modify and save text files.
+Entry-level text editors with a \acronym{GUI} include the \inx{Windows Notepad},
+the iOS \inx{TextEdit} in the plain text mode, and \inx{Leafpad} for \Linux\ and
+\acronym{BSD}. Entry-level text editors with a \acronym{CLI} include
+\acronym{joe}, \acroshort{GNU} nano\acroindex[!nano]{GNU}, and \acronym{pico}.
+
+More advanced text editors come with the support for \termpl{regular
+expression}, \term{revision control}---both of which will be covered in the
+following sections---, and user modules that extend the base functionality.
+Advanced \acronym{GUI} text editors include \inx{Sublime Text}, \inx{Atom}, and
+\inx{Brackets}. Advanced \acronym{CLI} text editors include \acronym{emacs},
+\acronym{vi}, and \acronym{vim}. The presented \acronym{CLI} text editors are
+especially notorious for their learning curve, whose steepness is only matched
+by the power these editors grant to the user.
+
+Word processors are a breed of text editors that produces fully-formatted text
+documents instead of (or along with) text files.
+% ...
+A reader who wishes to use a word processor instead of a text editor is advised
+to only no more than the logical markup capabilities of the word processor
+during the writing stage of the document preparation process.
+
+% Word processors (Word, TextEdit, WordPad)
+\subsection{Regular Expressions}
+%%% Does (should) LC_COLLATE affect character ranges?
+%%%   <http://unix.stackexchange.com/a/16028/42056>
+\section{Revision Control}
 
 \chapter{Markup}
 A manuscript can consist of a seamless river of words and still make perfect
@@ -342,13 +410,18 @@ and punctuation---that are specific to the language of the document.  It is not
 at all unreasonable to expect that this basic compliance should be already met
 by the manuscript. At a higher level, this consists of discovering and marking
 up the inner order and logic of the text, so that the resulting document can
-later be typeset in a way that visually reflects its structure, and
-supplementing the document with additional figures.
+later be typeset in a way that visually reflects its structure.
+
+More often than not, the writing and marking up of a text are two inseparably
+connected activities performed in parallel rather than in succession.
+Nevertheless, each represents a distinct concept: Writing is the process of
+breaking thoughts into fragmented strings of words, which the markup reassembles
+back into meaningful units of linguistic thought waiting to be brought to life
+by a designer.
 
 \index{markup!logical|(}\index{markup!presentation|(}
-To this end, there exists a wealth of \termpl*{markup language} that enable the
-enrichment of text with additional information and labels. Aside from
-\term*{logical markup}, which captures the logical structure of the document,
+Markup can be created using a variety of \termpl*{markup language}. Aside from
+\term*{logical markup}, which captures the logical structure of a document,
 markup languages may also provide \term*{presentation markup}, which directly
 impacts the visual properties of the document but carries no semantic
 information. The usage of presentation markup makes it impossible to separate
@@ -356,7 +429,7 @@ the markup from the design and to capture the logic of the text. As a result,
 the consistency in the design of each logical part of the document needs to be
 ensured manually, and future changes of design become error-prone and tedious.
 In this regard, logical markup is to design what style guides are to writing: a
-means of ensuring consistency that should be used whenever appropriate.
+means of ensuring consistency that should be used whenever possible.
 \index{markup!logical|)}\index{markup!presentation|)}
 
 \section{Meta Markup Languages}
@@ -384,7 +457,7 @@ heuristics. To resolve these issues, a unifying markup language called
 to the public \cite{goldfarb81} and finally standardized \citeyear{iso86} as
 \acronym{SGML}\footnote{
   The authoritative resource on \acronym{SGML} is \textcite{goldfarb91}, which
-  includes the full text of the standard along with extensive annotations.
+  includes the full text of the standard bearing extensive annotations.
 } \cite{iso86}.
 
 \Acronym{SGML} documents consist of text mixed with \termpl*{tag}%
@@ -466,9 +539,10 @@ A notable new feature of \acronym{XML} are \termpl*{namespace}%
 and attributes of different \acronym{XML} applications within a single
 \acronym{XML} document by providing a method to qualify element and attribute
 names with \acropl{IRI} that uniquely represent the respective \acronym{XML}
-applications.  Namespaced elements are a spiritual successor of a more
-expressive \acronym{SGML} feature of \inx{\identifier{CONCUR}}, which makes it
-possible to mark up several structural views of a single document. Unlike with
+applications. Namespaced elements are a spiritual successor of a more
+expressive \acronym{SGML} feature of
+\identifier{CONCUR}\index{CONCUR@\identifier{CONCUR}}, which makes it possible
+to mark up several structural views of a single document. Unlike with
 \identifier{CONCUR}, which ties each view to an \acroshort{SGML} \acronym{DTD},
 there exists no general mechanism for the translation of \acropl{IRI} to
 \acronym{XML} schemata. This makes it impossible to validate namespaced
@@ -499,7 +573,7 @@ schemata are known to the parser.
   \label{fig:recipe-rnc}
   \inputcode[sh]{examples/02/recipe.sh}
   \caption{\acronym{XML} documents can be easily validated against \acronym{XML}
-    schemata using command-line tools, such as \inx{\identifier{xmllint}}.}
+    schemata using command-line tools, such as \cliutil{xmllint}.}
 \end{figure}
 
 Due to the reduced complexity of \acronym{XML} compared to \acronym{SGML}, the
@@ -618,7 +692,7 @@ replacing \acronym{HTML} and remains an alternative markup language for the Web.
 %%%   <http://www.w3.org/2003/01/xhtml-mimetype/content-negotiation>
 
 \subsection{The Semantic Web and Linked Data}
-The underlying fundament of the Web is the the idea of a globally available and
+The underlying fundament of the Web is the idea of a globally available and
 incrementally scalable base of human knowledge. \acronym{HTML} and
 \acronym{XHTML} succeeded in fulfilling this vision for human-readable documents
 but didn't provide a unifying machine-readable format for the representation of
@@ -727,27 +801,28 @@ intuitive for simple tasks, seldom matches the power of the markup languages
 used by batch-oriented systems.
 
 \subsection{Batch-oriented Document Preparation Systems}
-One of the archetypal batch-oriented systems are \inx{\identifier{troff}}, whose
-function is to produce output for general printers, and \identifier{nroff}%
-\index{\identifier{nroff}|seealso{\identifier{troff}}}, whose function is to
+One of the archetypal batch-oriented systems are \cliutil*{troff}%
+\index{troff@\cliutil*{troff}}, whose function is to produce output for general
+printers, and \cliutil*{nroff}%
+\index{nroff@\cliutil*{nroff}|see{\cliutil*{troff}}}, whose function is to
 produce output for line printers and text terminals. Both tools were developed
 as a proprietary software for the Unix operating system at the beginning of
-1970s by \acronym{ATnT}. An alternative to \identifier{nroff} and
-\identifier{troff} is
-\identifier{groff}\index{\identifier{groff}|seealso{\identifier{troff}}}, which
-was developed as a free software in 1980 by \acronym{GNU}. \Identifier{groff}
+1970s by \acronym{ATnT}. An alternative to \cliutil*{nroff} and \cliutil*{troff}
+is \cliutil*{groff}\index{groff@\cliutil*{groff}|see{\cliutil*{troff}}}, which
+was developed as a free software in 1980 by \acronym{GNU}. \Cliutil*{groff}
 combines the capabilities of both tools and is still used extensively for the
 markup of documentation in Unix and Unix-like operating systems, although more
 advanced alternatives for general typesetting (such as \TeX) exist. The
 associated markup language combines presentation markup with programming
 constructs and allows the definition of logical markup in the form of user
-macros. Standard macro packages, such as \inx{\identifier{man}} for the
-formatting of documentation, \identifier{me}
-\index{\identifier{troff}!\identifier{me}} for the creation of research papers,
-or the more recent \identifier{mom} \index{\identifier{troff}!\identifier{mom}}
-for general typesetting tasks are typically distributed along with the system.
-Special markup invokes preprocessors that can be used for the typesetting of
-tables, equations, and vector graphics.
+macros. Standard macro packages, such as \identifier{man} for the
+\index{troff@\cliutil*{troff}!\identifier{man}} formatting of documentation,
+\identifier{me} \index{troff@\cliutil*{troff}!\identifier{me}} for the creation
+of research papers, or the more recent \identifier{mom}
+\index{troff@\cliutil*{troff}!\identifier{mom}} for general typesetting tasks
+are typically distributed along with the system. Special markup invokes
+preprocessors that can be used for the typesetting of tables, equations, and
+vector graphics.
 
 \begin{figure}
   \fbox{\includegraphics[clip,trim=1.7cm 12cm 1.7cm 1.3cm,%
@@ -755,8 +830,7 @@ tables, equations, and vector graphics.
   \inputcode[groff]{examples/02/poe.groff}
   \caption{An excerpt from the beginning of \person{Edgar Allen Poe}'s
     \work{Cask of Amontillado} formatted using the \identifier{mom}
-  \index{\identifier{troff}!\identifier{mom}} macro package of
-  \inx{\identifier{groff}}.}
+    macro package of \cliutil*{groff}.}
   \label{fig:poe}
 \end{figure}
 
@@ -780,17 +854,17 @@ distasteful. As a result, the typesetting of mathematics is a central theme in
 \TeX, rather than an afterthought, which differentiates it from most other
 document preparation systems and which largely contributed to the massive
 popularity \TeX\ has attained in academia. Much like in the case of
-\identifier{troff} and its derivatives, the language of \TeX\ is ripe with
+\cliutil*{troff} and its derivatives, the language of \TeX\ is ripe with
 typographic and programming primitives and doesn't by itself contain logical
 markup. The language, however, allows for the creation of user macros. An
 example of a macro package that makes it possible to create documents of various
-classes with pure logical markup is \inx{\LaTeX}: the standard markup language
-for academic and technical documents.
+classes with pure logical markup is \LaTeX\index{LaTeX@\LaTeX}: the standard
+markup language for academic and technical documents.
 
 \begin{figure}
   \inputcode[tex]{examples/02/poe.tex}
-  \caption{The \identifier{groff} document from Figure \ref{fig:poe}
-    reformulated using \TeX}
+  \caption{The \cliutil*{groff} document from Figure \ref{fig:poe} reformulated
+    using \TeX}
 \end{figure}
 
 \subsection{Interactive Document Preparation Systems}
@@ -859,9 +933,10 @@ which represent different use cases.
 %%% Hyphenation in HTML
 %%%   <http://www.cs.tut.fi/~jkorpela/shy.html>
 %%%   <https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens>
-\chapter{Proofreading}
-\chapter{Printing}
-\chapter{Distribution}
+\chapter{Release}
+\section{Proofreading}
+\section{Printing and Binding}
+\section{Distribution}
 
 % Bibliography
 \cleardoublepage
