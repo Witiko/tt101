@@ -4,7 +4,8 @@
 % Markup
 %% Miscellaneous
 \let\key\textit                                    % A keyboard key
-\def\nexttable{\medskip\\}               % The separator of two adjacent tables
+\def\nexttable{\medskip\\}      % The vertical separator of two adjacent tables
+\def\nextimage{\bigskip\\}      % The vertical separator of two adjacent images
 \usepackage{menukeys}
 \let\displaykey\keys                               % A displayable keyboard key
 \newif\iflinuxfirst\linuxfirsttrue
@@ -130,7 +131,7 @@
   \edef\tail{\code@readtail:#1\relax}%
   \mintinline[\tail]{\head}{#2}}}
 \newcommand{\inputcode}[2][text]{{%  % Code from file #2 in language #1, a pipe
-  \let\ea\expandafter%               %% in #1 delimits implementation parameters
+  \let\ea\expandafter                %% in #1 delimits implementation parameters
   \edef\head{\code@readhead:#1\relax}%
   \edef\tail{\code@readtail:#1\relax}%
   \inputminted[\tail]{\head}{#2}}}

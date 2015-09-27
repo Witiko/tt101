@@ -1,7 +1,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix dc:   <http://purl.org/dc/elements/1.1/> .
 <http://example.org/document.html>
-    dc:title "The Web page of John Smith"@en ;
+    dc:title "John's Web page"@en ;
     dc:creator <http://example.org/john-smith> .
 <http://example.org/john-smith>
     a foaf:Person ;

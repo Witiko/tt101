@@ -1,4 +1,4 @@
-{\tikzstyle{level 1}=[sibling distance=\baselineskip, level distance=3.5cm]
+{\tikzstyle{level 1}=[sibling distance=\baselineskip, level distance=1.5cm]
 \begin{tikzpicture}[grow=right]
   \node {\textcolor{red}{Speech}}
     child {
@@ -21,13 +21,18 @@
       node[label=right:{Well then, swear to me it's true!}] {}}
     child {
       node[label=right:{Peer, you're lying! No, I'm not!}] {} };
-\end{tikzpicture}}
+\end{tikzpicture}}%
 \begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`^=7\catcode`_=8}]
-<(\textcolor{blue}{V})line><(\textcolor{red}{S})speech who="Aase">Peer, you're lying!</(\textcolor{red}{S})speech>
-  <(\textcolor{red}{S})speech who="Peer">No, I'm not!</(\textcolor{red}{S})speech></(\textcolor{blue}{V})line>
-<(\textcolor{blue}{V})line><(\textcolor{red}{S})speech who="Aase">Well then,
-  swear to me it's true!</(\textcolor{red}{S})speech></(\textcolor{blue}{V})line>
-<(\textcolor{blue}{V})line><(\textcolor{red}{S})speech who="Peer">Swear, why should I?</(\textcolor{red}{S})speech>
-  <(\textcolor{red}{S})speech who="Aase">See, you dare not!</(\textcolor{blue}{V})line>
-<(\textcolor{blue}{V})line>Every word of it's a lie!</(\textcolor{red}{S})speech></(\textcolor{blue}{V})line>
+<(\textcolor{blue}{V})line>
+  <(\textcolor{red}{S})speech who="Aase">Peer, you're lying!</(\textcolor{red}{S})speech>
+  <(\textcolor{red}{S})speech who="Peer">No, I'm not!</(\textcolor{red}{S})speech>
+</(\textcolor{blue}{V})line><(\textcolor{blue}{V})line>
+  <(\textcolor{red}{S})speech who="Aase">Well then,
+    swear to me it's true!</(\textcolor{red}{S})speech>
+</(\textcolor{blue}{V})line><(\textcolor{blue}{V})line>
+  <(\textcolor{red}{S})speech who="Peer">Swear, why should I?</(\textcolor{red}{S})speech>
+  <(\textcolor{red}{S})speech who="Aase">See, you dare not!
+</(\textcolor{blue}{V})line><(\textcolor{blue}{V})line>
+  Every word of it's a lie!</(\textcolor{red}{S})speech>
+</(\textcolor{blue}{V})line>
 \end{Verbatim}

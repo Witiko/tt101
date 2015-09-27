@@ -3,7 +3,7 @@
          xmlns:dc="http://purl.org/dc/terms/"
          xmlns:foaf="http://xmlns.com/foaf/0.1/">
   <rdf:Description rdf:about="http://example.org/document.html">
-    <dc:title xml:lang="en">The Web page of John Smith</dc:title>
+    <dc:title xml:lang="en">John's Web page</dc:title>
     <dc:creator rdf:resource="http://example.org/john-smith"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://example.org/john-smith">

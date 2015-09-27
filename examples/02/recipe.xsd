@@ -2,13 +2,16 @@
 <schema xmlns="http://www.w3.org/2001/XMLSchema">
   <element name="recipe"><complexType><all>
     <element name="name" type="string" minOccurs="1"/>
-    <element name="description" type="string" minOccurs="1"/>
+    <element name="description" type="string"
+             minOccurs="1"/>
     <element name="ingredientList"><complexType><sequence>
       <element name="ingredient" minOccurs="1"
                maxOccurs="unbounded">
-        <complexType><simpleContent><extension base="string">
-          <attribute name="amount" type="string"/>
-        </extension></simpleContent></complexType>
+        <complexType><simpleContent>
+          <extension base="string">
+            <attribute name="amount" type="string"/>
+          </extension>
+        </simpleContent></complexType>
       </element></sequence>
       <attribute name="serves" type="positiveInteger"
                  use="required"/>

@@ -11,6 +11,12 @@
 \usepackage{tikz}         % Diagrams
 \usetikzlibrary{trees,arrows}
 \usepackage{fancyvrb}     % Manually colored verbatim
+\let\oldendVerbatim       %% patched so that there is no extra vertical space
+    \endVerbatim          %% after the environment
+\def\endVerbatim{%
+  \oldendVerbatim
+  \vspace{-9pt}}
+\usepackage{hologo}       % TeX engine logos
 \usepackage{float}        % Non-floating figures
 \usepackage{url}          % URLs
 \usepackage{tabularx}     % Tables
@@ -371,7 +377,7 @@ heterogeneity of eight-bit encodings:
 \end{figure}
 
 \begin{figure}
-  \centerline{\code[sh]{iconv -f latin2 -t utf8 -- old.txt > new.txt}}
+  \centerline{\code[sh]{iconv -f latin2 -t utf8 -- old.txt > new.txt}}%
   \caption{Text files can be converted between encodings using the
     \cliutil{iconv} command-line tool. The sample code shows the file
     \filename{old.txt} being converted from the
@@ -423,7 +429,6 @@ methods of their own.
     number of characters. Above is the \inx{Google Pinyin} input method for the
     Android operating system, which makes it possible to input Chinese
     characters using the \inx{pinyin} phonetic system.}
-  % TODO: Získat lepší screenshot
 \end{figure}
 
 \begin{figure}
@@ -487,7 +492,8 @@ nature of \acropl{DPS} may be a time-saving feature for simpler documents, but
 in the case of more complex documents, the markup and typesetting capabilities
 of a \acronym{DPS} may not be up to par with those of a dedicated tool.
 Interactive \acropl{DPS} include \inx{Apache OpenOffice}, \inx{TextEdit},
-\inx{Microsoft Word}, \inx{Scribus}, and \inx{Adobe InDesign}.
+\inx{Microsoft Word}, \inx{Scribus}, \inx{Adobe InDesign}, \inx{Adobe
+FrameMaker} and \inx{QuarkXPress}.
 
 \subsection{Regular Expressions}\label{sec:regexs}
 The \term{Chomsky hierarchy} is a classification of text production rules
@@ -622,14 +628,14 @@ colliding changes.  Examples of decentralized \acronym{VCS} include \inx{Git},
 
 \begin{figure}
   \ffootnote{%
-    The reader should note that although it is typical to use a central
-    repository, the decentralized architecture of Git makes it possible for
-    clients to exchange the contents of their repositories directly.
-    Multiple layers of repositories that automatically exchange the latest
-    updates can also be created for backup and other purposes.}
+    Although it is typical to use a central repository, the decentralized
+    architecture of Git makes it possible for clients to exchange the contents
+    of their repositories directly.  Multiple layers of repositories that
+    automatically exchange the latest updates can also be created for backup and
+    other purposes.}
   \vspace*{-1mm} % Forcibly align the two diagrams.
   \input examples/01/git
-  \vspace*{4in}  %% Remove if the float positions change.
+  \vspace*{4in} %% Remove, if the float position changes.
 \end{figure}
 
 Although \acronym{VCS} can be used to keep track of any kind of files, they are
@@ -644,11 +650,25 @@ function that records the changes directly into the output file, a separate
 documents---, or a web service that enables real-time interactive
 collaboration---such as \inx{Office Online} or \inx{Google Docs}.
 
-  % Tortoise SVN diffing Microsoft Office documents
-  % Revision control in Apache OpenOffice and Microsoft Word
+\begin{figure}
+  \includegraphics[width=\textwidth]{examples/01/word.png}\nextimage
+  \includegraphics[width=\textwidth]{examples/01/openoffice.png}
+  \caption{The built-in \acronym{VCS} of \inx{Microsoft Word} (above) and
+    \inx{Apache OpenOffice} (below)}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{examples/01/tortoise-svn.png}
+  \caption{\inx{Tortoise \acroshort{SVN}} is a graphical frontend for
+    \acronym{SVN} with the ability to display the difference between two versions
+    of a \inx{Microsoft Word} document even though it is not stored in a text
+    file.}
+\end{figure}
 
 %%% Git porcelains <http://stackoverflow.com/a/6978402>
-%%% Pushing an existing Git repository to SVN
+%%% Git <-> SVN
+%%%   <https://git-scm.com/book/en/v1/Git-and-Other-Systems-Git-and-Subversion>
+%%%   <http://www.janosgyerik.com/practical-tips-for-using-git-with-large-subversion-repositories/>
 %%%   <http://stackoverflow.com/a/772881/657401>
 
 \chapter{Markup}
@@ -748,11 +768,14 @@ response, \acronym{W3C} published a specification of \acronym{XML} in
   \inputcode[xml]{examples/02/recipe.xml}
   \caption{An example \acronym{XML} document\filenamecap{recipe.xml}}
   \label{fig:recipe}\bigskip
+\end{figure}
+
+\begin{figure}
   \inputcode[dtd]{examples/02/dtdtypes}
   \caption{\acronym{SGML} and \acronym{XML} \acronym{DTD}s can be either linked
-    to a document through public and system identifiers, directly embedded in
-    a document, both linked to and embedded in a document, or left out
-    altogether.}
+    to a document through \code[dtd]{PUBLIC} and \code[dtd]{SYSTEM} identifiers,
+    directly embedded in a document, both linked to and embedded in a document,
+    or left out altogether.}
   \label{fig:recipe-dtd}
 \end{figure}
         
@@ -777,6 +800,28 @@ The constrains imposed by either a \acronym{DTD} or a schema define an
 \acroindex[!application]{XML} \acroindex[!language]{XML}
 \acroindex[!format]{XML}
 
+\begin{figure}
+  \inputcode[xml]{examples/02/recipe.xsd}
+  \caption{A reformulation of the recipe \acronym{DTD} from Figure
+    \ref{fig:recipe-dtd} in the \acroshort{XML} Schema \acroindex[!Schema]{XML}
+    language.\filenamecap{recipe.xsd}}
+  \label{fig:recipe-xsd}
+\end{figure}
+
+\begin{figure}
+  \inputcode[sh]{examples/02/recipe.sh}
+  \caption{\acronym{XML} documents can be easily validated against \acronym{XML}
+    schemata using command-line tools, such as \cliutil{xmllint}.}
+\end{figure}
+
+\begin{figure}
+  \inputcode{examples/02/recipe.rnc}
+  \caption{A reformulation of the recipe \acronym{DTD} from Figure
+    \ref{fig:recipe-dtd} in the compact syntax of \acronym{Relax NG}.%
+    \filenamecap{recipe.rnc}}
+  \label{fig:recipe-rnc}
+\end{figure}
+
 Along with schema languages, other supplementary languages also exist, such as
 \inx{XPointer}, \inx{XPath}, and \inx{XQuery} for addressing sets of elements
 (fragments) within a \acronym{XML} document or \acronym{CSS} for specifying the
@@ -784,6 +829,13 @@ visual properties of an \acroshort{XML} document. Although some of these
 languages may not be \acronym{XML} languages, they are nevertheless used within
 documents of various \acronym{XML} formats and form an important part of the
 ecosystem.
+
+\begin{figure}[b!]
+  \input{examples/02/peer-gynt.tex}%
+  \caption{The markup of the dramatic and metrical views of \person{Henrik
+    Ibsen}'s \work{Peer Gynt} using the \identifier{CONCUR} feature of
+    \acronym{SGML}}
+\end{figure}
 
 A notable new feature of \acronym{XML} are \termpl*{namespace}%
 \acroindex[!namespace]{XML}, which were added to the specification
@@ -801,32 +853,9 @@ there exists no general mechanism for the translation of \acropl{IRI} to
 \acronym{XML} documents, unless all used \acropl{IRI} and their respective
 schemata are known to the parser.
 
-\begin{figure}[hb!]
-  \input{examples/02/peer-gynt.tex}
-  \caption{The markup of the dramatic and metrical views of the beginning of
-    \person{Henrik Ibsen}'s \work{Peer Gynt} using the \identifier{CONCUR}
-    feature of \acronym{SGML}}
-\end{figure}
-
 %%% Živoucí CONCAT <http://webylon.info/K.24>
 %%% Popis SGML deklarace pro ISO/IEC15445
 %%%   <http://www.angelovic.cz/internet/sgml-deklarace.html#concur>
-
-\begin{figure}[H]
-  \inputcode[xml]{examples/02/recipe.xsd}
-  \caption{A reformulation of the recipe \acronym{DTD} from Figure
-    \ref{fig:recipe-dtd} in the \acroshort{XML} Schema \acroindex[!Schema]{XML}
-    language.\filenamecap{recipe.xsd}}
-  \label{fig:recipe-xsd}
-  \inputcode{examples/02/recipe.rnc}
-  \caption{A reformulation of the recipe \acronym{DTD} from Figure
-    \ref{fig:recipe-dtd} in the compact syntax of \acronym{Relax NG}.%
-    \filenamecap{recipe.rnc}}
-  \label{fig:recipe-rnc}
-  \inputcode[sh]{examples/02/recipe.sh}
-  \caption{\acronym{XML} documents can be easily validated against \acronym{XML}
-    schemata using command-line tools, such as \cliutil{xmllint}.}
-\end{figure}
 
 Due to the reduced complexity of \acronym{XML} compared to \acronym{SGML}, the
 language was adopted by specialists and the general public alike and has
@@ -885,12 +914,12 @@ which allowed for the separation of document markup and design, effectively
 eliminating the need for the presentation markup.
 
 \begin{figure}
-  \inputcode[html]{examples/02/presentation-markup.html}
-  \caption{An excerpt from the Web site of the \acroshort{CSS} Zen Zarden
-    located at \protect\url{http://csszengarden.com}. The document above was
-    created using the \acroshort{HTML} presentation markup. The document below
-    achieves the same appearance by the combination of logical markup and
-    \acronym{CSS} definitions.}\bigskip
+  \inputcode[html]{examples/02/presentation-markup.html}%
+  \separatorcaption{An excerpt from the Web site of the \acroshort{CSS} Zen
+    Zarden located at \protect\url{http://csszengarden.com}. The document above
+    was created using the \acroshort{HTML} presentation markup. The document
+    below achieves the same appearance by the combination of logical markup and
+    \acronym{CSS} definitions.}
   \inputcode[html]{examples/02/logical-markup.html}
 \end{figure}
 
@@ -1007,21 +1036,25 @@ application-specific metadata about the document---a technique known as
   \inputcode[xml]{examples/02/john.rd}
   \inputcode{examples/02/john.nt}
   \inputcode{examples/02/john.ttl}
-  \separatorcaption{Above is an example \acronym{RDF} document using
+  \separatorcaption{An example \acronym{RDF} document using
     \acronym{DC} and \acronym{FOAF} ontologies in \acronym{RDF}/\acronym{XML}%
     \filenamecap{john.rd}, \inx{N-Triples}\filenamecap{john.nt}, and
-    \inx{Turtle}\filenamecap{john.ttl} serializations. Below is a graph
-    representation of the document.}\label{fig:rdf-doc}
-  \input{examples/02/john.tex}
+    \inx{Turtle}\filenamecap{john.ttl} serializations}\label{fig:rdf-doc}
 \end{figure}
 
-\begin{figure}[t!]
+\begin{figure}
   \inputcode[html]{examples/02/john.html.linked-rdf}
-  \caption{Above is an \acroshort{HTML} document linked to the \acroshort{RDF}
-    document from Figure \ref{fig:rdf-doc}. Below is the same \acroshort{HTML}
-    document with the \acroshort{RDF} data directly embedded using the
-    \acroshort{RDFa} serialization.}\bigskip
+  \separatorcaption{Above is an \acroshort{HTML} document linked to the
+    \acroshort{RDF} document from Figure \ref{fig:rdf-doc}. Below is the same
+    \acroshort{HTML} document with the \acroshort{RDF} data directly embedded
+    using the \acroshort{RDFa} serialization.}
   \inputcode[html]{examples/02/john.html.rdfa}
+\end{figure}
+
+\begin{figure}
+  \input{examples/02/john.tex}
+  \caption{A graph of the \acroshort{RDF} document from Figure
+    \ref{fig:rdf-doc}}
 \end{figure}
 
 %%% Linked Data
@@ -1038,7 +1071,7 @@ application-specific metadata about the document---a technique known as
 %%% The Rule Interchange Format (RIF)
 %%%   <http://www.w3.org/TR/rif-overview/>
         
-\section{Markup in Document Preparation Systems}
+\section{Document Preparation Systems}
 Some of the existing markup is directly tied with specific \acropl{DPS}.
 These \acropl{DPS} can be dichotomized into \term*{batch-oriented}%
 \acroindex[!batch-oriented]{DPS}, which process marked up input
@@ -1051,7 +1084,7 @@ in the way of interactivity and for reduced flexibility stemming from the usage
 of a \acronym{GUI}, which, although often intuitive for simple tasks, seldom
 matches the power of the markup languages used by batch-oriented \acropl{DPS}.
 
-\subsection{Batch-oriented Document Preparation Systems}
+\subsection{Batch-oriented Systems}
 One of the archetypal batch-oriented \acropl{DPS} are \cliutil*{troff}%
 \index{troff@\cliutil*{troff}}, whose function is to produce output for general
 printers, and \cliutil*{nroff}%
@@ -1081,7 +1114,7 @@ vector graphics.
   \inputcode[groff]{examples/02/poe.groff}
   \caption{An excerpt from the beginning of \person{Edgar Allen Poe}'s
     \work*{Cask of Amontillado}\workindex{the Cask of Amontillado} formatted
-    using the \identifier{mom} macro package of \cliutil*{groff}.}
+    via the \identifier{mom} macro package of \cliutil*{groff}.}
   \label{fig:poe}
 \end{figure}
 
@@ -1114,11 +1147,12 @@ technical documents.
 
 \begin{figure}
   \inputcode[tex]{examples/02/poe.tex}
-  \caption{The \cliutil*{groff} document from Figure \ref{fig:poe} reformulated
-    using \TeX}
+  \caption{The document from Figure \ref{fig:poe} reformulated in \TeX\ using
+    \hologo{plainTeX} macros and the primitives of \hologo{eTeX} and
+    \hologo{pdfTeX}}
 \end{figure}
 
-\subsection{Interactive Document Preparation Systems}
+\subsection{Interactive Systems}
 Interactive \acropl{DPS} come in two distinctive flavors. Word processors
 \acroindex[!interactive!word processing]{DPS} are the digital progeny of the
 typewriter machine, with which they share the main function of fast text
@@ -1152,17 +1186,17 @@ entire document and difficult to produce inconsistent design.
 \section{Lightweight Markup Languages}
 Parallel to the heavy-duty applications of \acronym{SGML} and \acronym{XML},
 there runs a vein of markup languages that give priority to unobtrusiveness and
-legibility over expressiveness and genericity. Rooted in the reality of
-computer text terminals with limited formatting capabilities, \termpl{lightweight
-markup language} leverage punctuation and
-indentation to produce comparatively weak and domain-specific, but also humane,
-highly intuitive, and often profoundly beautiful markup that is easy to both
-read and write. Examples of lightweight markup languages include \inx{Markdown},
-\inx{Creole}, \inx{AsciiDoc}, \inx{MakeDoc}, \inx{Setext}, or \inx{Wikicode}.
-Lightweight markup languages are typically supplemented by tools that enable
-the conversion to more general languages such as \acronym{HTML}. Also typical
-is the existence of numerous flavors of every lightweight markup language,
-which represent different use cases.
+legibility over raw expressive power. Rooted in the reality of computer text
+terminals with limited formatting capabilities, \termpl{lightweight markup
+language} leverage punctuation and indentation to produce comparatively weak and
+domain-specific, but also humane, highly intuitive, and often profoundly
+beautiful markup that is easy to both read and write. Examples of lightweight
+markup languages include \inx{Markdown}, \inx{Creole}, \inx{AsciiDoc},
+\inx{MakeDoc}, \inx{Setext}, or \inx{Wikicode}.  Lightweight markup languages
+are typically supplemented by tools that enable the conversion to more general
+languages, such as \acronym{HTML}. Also typical is the existence of numerous
+flavors of every lightweight markup language, which represent their different
+use cases.
 
 \chapter{Design}
 % XML -- CSS, XSL, XSLT

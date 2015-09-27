@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="meta" type="application/rdf+xml" href="john.rdf">
+    <link rel="meta" type="application/rdf+xml"
+          href="john.rdf">
     <link rel="meta" type="text/turtle" href="john.ttl">
-    <link rel="meta" type="application/n-triples" href="john.nt">
+    <link rel="meta" type="application/n-triples"
+          href="john.nt">
     <title>John's Web page</title>
   </head>
   <body>

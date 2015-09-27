@@ -1,4 +1,4 @@
-<http://example.org/document.html> <http://purl.org/dc/terms/title> "The Web page of John Smith"@en
+<http://example.org/document.html> <http://purl.org/dc/terms/title> "John's Web page"@en
 <http://example.org/document.html> <http://purl.org/dc/terms/creator> <http://example.org/john-smith>
 <http://example.org/john-smith> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person>
 <http://example.org/john-smith> <http://xmlns.com/foaf/0.1/name> "John Smith"
