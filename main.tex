@@ -355,8 +355,8 @@ teleprinters in mind and, as their direct descendant, the Latin computer
 keyboard provides support for all \acroshort{ASCII} characters. However, this
 doesn't apply to the much larger \acronym{UCS} and it is the task of an
 \acronym{IME} to provide a mechanism for the creation and selection of keyboard
-layouts that will allow the user to input any \acronym{UCS} character. Some text
-editors and word processors may provide additional input methods of their own.
+layouts that will allow the user to input any \acronym{UCS} character. Some
+programs may provide input methods of their own.
 
 % An example of the pinyin input method <https://en.wikipedia.org/wiki/Pinyin_input_method>
 % The keyboard layout from the Elements of Typographic Style, p. 90, s. 5.5.2
@@ -369,7 +369,7 @@ editors and word processors may provide additional input methods of their own.
 %%% Typing Through Time: Keyboard History
 %%%   <http://www.daskeyboard.com/blog/typing-through-time-the-history-of-the-keyboard/>
 
-\subsection{Text Editors and Word Processors}
+\subsection{Text Editors}
 A \term{text editor} is an applications, which can be used to create and modify
 text files. Entry-level text editors are often distributed with an operating
 system and offer little beyond the ability to load, modify and save text files.
@@ -379,26 +379,54 @@ the iOS \inx{TextEdit} in the plain text mode, and \inx{Leafpad} for \Linux\ and
 \acronym{joe}, \acroshort{GNU} nano\acroindex[!nano]{GNU}, and \acronym{pico}.
 
 More advanced text editors come with the support for \termpl{regular
-expression}, \term{revision control}---both of which will be covered in the
-following sections---, and user modules that extend the base functionality.
-Advanced \acronym{GUI} text editors include \inx{Sublime Text}, \inx{Atom}, and
-\inx{Brackets}. Advanced \acronym{CLI} text editors include \acronym{emacs},
-\acronym{vi}, and \acronym{vim}. The presented \acronym{CLI} text editors are
-especially notorious for their learning curve, whose steepness is only matched
-by the power these editors grant to the user.
+expression} and \term{revision control}---which will be covered in sections
+\ref{sec:regexs} and \ref{sec:revisions}---, as well as user modules that
+extend the base functionality.  Advanced \acronym{GUI} text editors include
+\inx{Sublime Text}, \inx{Atom}, and \inx{PSPad}. Advanced \acronym{CLI} text
+editors include \acronym{emacs}, \acronym{vi}, and \acronym{vim}. The presented
+\acronym{CLI} text editors are especially notorious for their learning curve,
+whose steepness is only matched by the power these editors grant to those who
+wield them.
 
-Word processors are a breed of text editors that produces fully-formatted text
-documents instead of (or along with) text files.
-% ...
-A reader who wishes to use a word processor instead of a text editor is advised
-to only no more than the logical markup capabilities of the word processor
-during the writing stage of the document preparation process.
+\subsection{Interactive Document Preparation Systems}
+Interactive \acropl{DPS}\acroindex[!interactive]{DPS} are a breed of text
+editors that produces fully-formatted text documents instead of (or along with)
+text files. The reader is advices to avoid interactive \acropl{DPS} that use
+proprietary, undocumented, and obscure file formats which lock the user into
+using the respective \acronym{DPS} to open the files reliably. Well-defined
+interactive \acronym{DPS} file formats include \acronym{PDF}, \acronym{OOXML},
+and \acronym{ODF}.
 
-% Word processors (Word, TextEdit, WordPad)
-\subsection{Regular Expressions}
+The primary difference between text editors and \acropl{DPS} is the fact that
+the user is expected to use the \acronym{DPS} to mark up, design, and typeset the
+resulting text document, whereas with plain text files a multitude of choices is
+available at each step of the document preparation process. The self-sufficient
+nature of \acropl{DPS} may be a time-saving feature for simpler documents, but
+in the case of more complex documents, the markup and typesetting capabilities
+of a \acronym{DPS} may not be up to par with those of a dedicated tool.
+Interactive \acropl{DPS} include \inx{Apache OpenOffice}, \inx{TextEdit},
+\inx{Microsoft Word}, \inx{Scribus}, and \inx{Adobe InDesign}.
+
+\subsection{Regular Expressions}\label{sec:regexs}
+The \term{Chomsky hierarchy} is a classification of text production rules
+(called \termpl{formal grammar}), which was proposed \cite{chomsky56} in
+\citeyear{chomsky56} by the American linguist \person{Noam Chomsky} in his
+endeavour to discover a good formal model for the description of natural
+languages. The class of \termpl{regular grammar}, which is the least powerful
+of the proposed classes, has properties that make it possible to determine the
+grammaticality of a text in constant time and space. \Termpl{regular
+expression} are a more intuitive reformulation of regular grammars that can be
+used to find and replace character strings within text.
+
+\subsubsection{Syntaxes}
+% POSIX basic, POSIX extended and Perl
+% <https://en.wikipedia.org/wiki/Regular_expression#Standards>
+\subsubsection{Utilities}
+% grep, sed, and awk
+
 %%% Does (should) LC_COLLATE affect character ranges?
 %%%   <http://unix.stackexchange.com/a/16028/42056>
-\section{Revision Control}
+\section{Revision Control}\label{sec:revisions}
 
 \chapter{Markup}
 A manuscript can consist of a seamless river of words and still make perfect
@@ -787,21 +815,20 @@ application-specific metadata about the document---a technique known as
 %%%   <http://www.w3.org/TR/rif-overview/>
         
 \section{Markup in Document Preparation Systems}
-Some of the existing markup is directly tied with specific document preparation
-systems. These can be dichotomized into \termpl*{batch-oriented system}%
-\index{document preparation system!batch-oriented}, which process marked up input
+Some of the existing markup is directly tied with specific \acropl{DPS}. These
+\acropl{DPS} can be dichotomized into \term*{batch-oriented}%
+\acroindex[!batch-oriented]{DPS}, which process marked up input
 text documents into printable output documents in a page description language on
-demand, and \termpl*{interactive system}\index{document preparation
-system!interactive}, which allow the user to directly edit an approximation of
-the output document via a visual editor. Also called \acronym{WYSIWYG},
-interactive systems exchange mild learning curve for more primitive typesetting
-algorithms that don't stand in the way of interactivity and for reduced
-flexibility stemming from the usage of a \acronym{GUI}, which, although often
-intuitive for simple tasks, seldom matches the power of the markup languages
-used by batch-oriented systems.
+demand, and \term*{interactive}\acroindex[!interactive]{DPS}, which
+allow the user to directly edit an approximation of the output document via a
+visual editor. Also called \acronym{WYSIWYG}, interactive \acropl{DPS} exchange
+mild learning curve for more primitive typesetting algorithms that don't stand
+in the way of interactivity and for reduced flexibility stemming from the usage
+of a \acronym{GUI}, which, although often intuitive for simple tasks, seldom
+matches the power of the markup languages used by batch-oriented \acropl{DPS}.
 
 \subsection{Batch-oriented Document Preparation Systems}
-One of the archetypal batch-oriented systems are \cliutil*{troff}%
+One of the archetypal batch-oriented \acropl{DPS} are \cliutil*{troff}%
 \index{troff@\cliutil*{troff}}, whose function is to produce output for general
 printers, and \cliutil*{nroff}%
 \index{nroff@\cliutil*{nroff}|see{\cliutil*{troff}}}, whose function is to
@@ -843,7 +870,7 @@ vector graphics.
 %%% A User's Guide to the Lout Document Formatting System
 %%%   <https://www.urz.uni-heidelberg.de/imperia/md/content/urz/programme/text/lout.pdf>
 
-Another notable batch-oriented system is \TeX\index{TeX@\TeX}\footnote{
+Another notable batch-oriented \acronym{DPS} is \TeX\index{TeX@\TeX}\footnote{
   The circumstances that led to the creation of \TeX\ and the surrounding tools
   are thoroughly documented in \textcite{knuth98}.
 }, which was developed and consequently released to the public domain in 1970s
@@ -852,14 +879,14 @@ received galley proofs for the second volume of his monograph, the \work{Art of
 Computer Programming}, and found the appearance of mathematical formulae
 distasteful. As a result, the typesetting of mathematics is a central theme in
 \TeX, rather than an afterthought, which differentiates it from most other
-document preparation systems and which largely contributed to the massive
-popularity \TeX\ has attained in academia. Much like in the case of
-\cliutil*{troff} and its derivatives, the language of \TeX\ is ripe with
-typographic and programming primitives and doesn't by itself contain logical
-markup. The language, however, allows for the creation of user macros. An
-example of a macro package that makes it possible to create documents of various
-classes with pure logical markup is \LaTeX\index{LaTeX@\LaTeX}: the standard
-markup language for academic and technical documents.
+\acropl{DPS} and which largely contributed to the massive popularity \TeX\ has
+attained in academia. Much like in the case of \cliutil*{troff} and its
+derivatives, the language of \TeX\ is ripe with typographic and programming
+primitives and doesn't by itself contain logical markup. The language, however,
+allows for the creation of user macros. An example of a macro package that makes
+it possible to create documents of various classes with pure logical markup is
+\LaTeX\index{LaTeX@\LaTeX}: the standard markup language for academic and
+technical documents.
 
 \begin{figure}
   \inputcode[tex]{examples/02/poe.tex}
@@ -868,22 +895,22 @@ markup language for academic and technical documents.
 \end{figure}
 
 \subsection{Interactive Document Preparation Systems}
-Interactive systems come in two distinctive flavours. \emph{Word processors}
-\index{document preparation system!interactive!word procesing} are
-the digital progeny of the typewriter machine, with which they share the main
-function of fast text capture. The typewriter output documents served largely as
-a manuscript for designers and typographers, who then produced the actual
-published work. With the advent of personal computing and the Web,
-self-publishing became more approachable to the general public, and modern word
-processors can be used not only to write but also to design and typeset
-documents, although the offered functionally is typically constrained by user
-experience demands. This concern is not shared by \emph{desktop publishing
-software}\index{document preparation system!interactive!desktop publishing},
-which provides refined control over the resulting page layout and the
-typesetting primitives. The ability to produce document comparable to those set
-using traditional typography comes at the expense of steeper learning curve.
+Interactive \acropl{DPS} come in two distinctive flavours. Word processors
+\acroindex[!interactive!word processing]{DPS} are the digital progeny of the
+typewriter machine, with which they share the main function of fast text
+capture. The typewriter output documents served largely as a manuscript for
+designers and typographers, who then produced the actual published work. With
+the advent of personal computing and the Web, self-publishing became more
+approachable to the general public, and modern word processors can be used not
+only to write but also to design and typeset documents, although the offered
+functionally is typically constrained by user experience demands. This concern
+is not shared by \term*{\acronym{DTP}
+software}\acroindex[!interactive!desktop publishing]{DPS}, which provides
+refined control over the resulting page layout and the typesetting primitives.
+The ability to produce documents comparable to those set using traditional
+typography comes at the expense of a steeper learning curve.
 
-Most interactive systems will provide a means to mark up sections of text.
+Most interactive \acropl{DPS} will provide a means to mark up sections of text.
 Presentation markup performs direct changes of typographic properties, such as
 the face, family, variant, color, or the size of the font that is used to
 typeset the text. Logical markup enables the classification of sections of text
@@ -893,9 +920,9 @@ entire document and difficult to produce inconsistent design.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{examples/02/interactive-editors.png}
-  \caption{Logical markup in the interactive document preparation systems of
-    \inx{Scribus} (left), \inx{Microsoft Word} (above), \inx{Adobe InDesign}
-    (below left) and \inx{Apache OpenOffice} (below right)}
+  \caption{Logical markup in the interactive \acropl{DPS} of \inx{Scribus}
+    (left), \inx{Microsoft Word} (above), \inx{Adobe InDesign} (below left) and
+    \inx{Apache OpenOffice} (below right)}
 \end{figure}
 
 \section{Lightweight Markup Languages}

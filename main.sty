@@ -98,6 +98,25 @@
     \termstyle{##1}}%
   \if#1[\expandafter\textoutput\else%
   \endgroup\termstyle{#1s}\fi}
+\def\Term{\@ifstar\Term@@\Term@}
+\def\Term@#1{\Term@@{#1}\index{#1}}% ... at the beginning of a sentence (`\Term`)
+\def\Term@@#1{\termstyle{%         % ... w/o indexing                  (`\Term*`)
+  \MakeTitlecase{#1}}}
+\def\Termpl{\@ifstar\Termpl@@\Termpl@}
+\def\Termpl@#1{%                         % ... in plural              (`\Termpl`)
+  \begingroup%                           % [#1]{#2} -- #2 has plural spelling #1
+  \def\textoutput##1]{%                  % {#1} -- #1 has plural spelling #1s
+    \termstyle{\MakeTitlecase{##1}}\indexoutput}%
+  \def\indexoutput##1{%
+    \index{##1}\endgroup}%
+  \if#1[\expandafter\textoutput\else%
+  \endgroup\termstyle{\MakeTitlecase{#1s}}\index{#1}\fi}
+\def\Termpl@@#1{%                        % ... in plural w/o indexing (`\Termpl*`)
+  \begingroup%                           % [#1]{#2} -- #2 has plural spelling #1
+  \def\textoutput##1]##2{%               % {#1} -- #1 has plural spelling #1s
+    \termstyle{\MakeTitlecase{##1}}}%
+  \if#1[\expandafter\textoutput\else%
+  \endgroup\termstyle{\MakeTitlecase{#1s}}\fi}
 %% Faking chapters and TOC entries
 \def\faketoc#1{%                          % A forced TOC entry
   \addcontentsline{toc}{chapter}{#1}}
