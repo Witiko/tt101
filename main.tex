@@ -39,24 +39,23 @@ playing field of the Internet coupled with the rising popularity of digital-only
 documents then allows the author to bypass the publisher as well, if they so
 wish, without jeopardizing their chance of recognition.
 
-Documents are like tin-cans, conserving ideas for later consumption. This one in
-particular contains a number of thoughts that should prove useful for any author
-who aspires to write, design, typeset and distribute text documents---the most
-universal and common kind of documents in use. Each chapters describes one
-discrete step of text document preparation along with the relevant tools and
-literature. Since document preparation is a broad, multidisciplinary subject,
-the main goal of this text is to provide the reader with a general overview of
-the landscape and to present references to more detailed literature for those
-interested in further nourishment.
+Documents are like tin-cans, conserving ideas for later consumption. The one you
+just opened contains an assortment of thoughts that should prove useful for any
+author who aspires to write, design, typeset, and distribute text
+documents---the most universal and common kind of documents in use. Each
+chapters describes one discrete step of document preparation along with
+practical examples and references to more detailed literature. Since document
+preparation is a broad, multidisciplinary subject, the primary goal of this text
+is to provide the reader with a general overview of the landscape and to provide
+pointers for those interested in further intellectual nourishment.
 
-Each chapter contains numerous examples, which illustrate the subject matter. In
-most cases, these examples are removed from the flow of the main text and aren't
-necessary for its comprehension. Although care was taken not to favour any
-computing environment, some examples feature Unix utilities, which have no
-suitable counterpart in operating systems such as Windows. To try these examples
-out, the reader is advised to install a Unix-like environment, such as the
-Windows Cygwin, on their local machine or to use a Unix-like operating system,
-such as \Linux.
+Every chapter is filled with examples that illustrate the subject matter. These
+should be consulted whenever the concepts described in the text are unclear to
+the reader. Although care was taken not to favour any computing environment,
+some examples feature Unix utilities, which have no suitable counterpart in
+operating systems such as Windows. To try these examples out, the reader is
+advised to install a Unix-like environment, such as the Windows Cygwin, on their
+local machine or to use a Unix-like operating system, such as \Linux.
 
 \chapter{Writing}
 The essence of a document is the idea it represents. In the case of a text
@@ -382,15 +381,14 @@ the iOS \inx{TextEdit} in the plain text mode, and \inx{Leafpad} for \Linux\ and
 \cliutil{joe}, \acroshort{GNU} \cliutil*{nano}\acroindex[!nano]{GNU}, and
 \cliutil{pico}.
 
-More advanced text editors come with the support for \termpl{regular
-expression} and \term{revision control}---which will be covered in sections
-\ref{sec:regexs} and \ref{sec:revisions}---, as well as user modules that
-extend the base functionality.  Advanced \acronym{GUI} text editors include
-\inx{Sublime Text}, \inx{Atom}, and \inx{PSPad}. Advanced \acronym{CLI} text
-editors include \cliutil{emacs}, \cliutil{vi}, and \cliutil{vim}. The presented
-\acronym{CLI} text editors are especially notorious for their learning curve,
-whose steepness is only matched by the power these editors grant to those who
-wield them.
+More advanced text editors come with the support for \termpl{regular expression}
+and \term{version control}---which will be covered in sections \ref{sec:regexs}
+and \ref{sec:vcs}---, as well as user modules that extend the base
+functionality.  Advanced \acronym{GUI} text editors include \inx{Sublime Text},
+\inx{Atom}, and \inx{PSPad}. Advanced \acronym{CLI} text editors include
+\cliutil{emacs}, \cliutil{vi}, and \cliutil{vim}. The presented \acronym{CLI}
+text editors are especially notorious for their learning curve, whose steepness
+is only matched by the power these editors grant to those who wield them.
 
 \subsection{Interactive Document Preparation Systems}
 Interactive \acropl{DPS}\acroindex[!interactive]{DPS} are a breed of text
@@ -479,7 +477,7 @@ that contain one or more matches to the user. A more advanced text-processing
 language that can be used to arbitrarily transform text files. \Cliutil{awk} is
 a \acroshort{CLI} tool that also features a text-processing programming
 language, albeit a more advanced one than that of \cliutil{sed}. Originally
-created for the Research Unix during 1973--1977, \cliutil{grep}, \cliutil{sed},
+developed for the Research Unix during 1973--1977, \cliutil{grep}, \cliutil{sed},
 and \cliutil{awk} are available in various flavours for most operating systems.
 
   % Showcase a simple and an extreme example of grep, sed and awk code
@@ -493,11 +491,64 @@ and \cliutil{awk} are available in various flavours for most operating systems.
 %%% JavaScript has a Unicode problem
 %%%   <https://mathiasbynens.be/notes/javascript-unicode>
 
-% grep, sed, and awk
+\section{Version Control}\label{sec:vcs}
+When writing a text document, it is ofter useful to have a backup of the
+previous versions of files, so that undesirable changes can be reverted whenever
+necessary. If more than one person contributes to the document, the ability to
+associate these changes with their authors also becomes useful. If beside
+writing we consider the markup, the design, and the typesetting of documents, we
+will find that some of these tasks can closely resemble programming, which makes
+the ability to move between previous versions of our code instrumental to
+tracking down programming errors. To aid with this is the goal of \acronym{VCS}.
+At its most rudimentary, \acronym{VCS} records changes along with an information
+about their author and a short description. These changes can then be browsed,
+viewed, and reverted. With a single contributor, \acronym{VCS} are a convenient
+alternative to manual archival of individual versions of the document. With
+several contributors, \acronym{VCS} become an irreplaceable instrument.
 
-%%% Does (should) LC_COLLATE affect character ranges?
-%%%   <http://unix.stackexchange.com/a/16028/42056>
-\section{Revision Control}\label{sec:revisions}
+\Acronym{VCS} can be dichotomized based on its architecture, which is either
+\term*{centralized}\acroindex[!centralized]{VCS} or \term*{decentralized
+\acronym{VCS}}\acroindex[!decentralized]{VCS}. Centralized \acronym{VCS} stores
+all versions in a repository located on a remote server. Users then send and
+download new versions to and from the server using a client software. The client
+software is \term*{thin} in the sense that it does not store more than one
+version locally and its operation is fully dependent on the availability of the
+server. An example of centralized \acronym{VCS} is \acronym{SVN}\footnote{
+  The authoritative resource on \acronym{SVN} is the \work{Version Control With
+  Subversion} book, affectionately known as the \work*{Subversion
+  book}\index{Subversion book|see{Version Control With Subversion}}, which is
+  available in full at \url{http://svnbook.com/}.
+}. By comparison,
+there is no designated server in decentralized \acronym{VCS} and the users can
+send and download new versions to and from any other user. The client software
+is \term*{thick} in the sense that each user has a local repository with all the
+existing versions, which he browse and expand regardless of the availability of
+others. The disadvantages of decentralization include the more complex workflow
+and the increased opportunity for the users not to share their new local
+versions frequently enough, leading to an increased chance of colliding changes.
+Examples of decentralized \acronym{VCS} include \inx{Git}, \inx{Mercurial}, or
+\inx{Bazaar}.
+
+  % In a fashion similar to regexes, create a basic GIT and SVN cheat-sheet.
+
+Although \acronym{VCS} can be used to keep track of any kind of files, they are
+typically geared towards text files, which can be easily displayed along with
+the list of changes between two versions. However, most interactive \acropl{DPS}
+do not produce text files and the use of traditional \acronym{VCS} would
+negatively impact the user experience. As a counter-measure, some \acropl{DPS}
+include \acronym{VCS} of their own, which can take the form of an internal
+function that records the changes directly into the output file, a separate
+\acronym{VCS} that provides a special support for the file format used by the
+\acronym{DPS}---such as \inx{Tortoise \acronym{SVN}} does for Microsoft Office
+documents---, or a web service that enables real-time interactive
+collaboration---such as \inx{Office Online} or \inx{Google Docs}.
+
+  % Tortoise SVN diffing Microsoft Office documents
+  % Revision control in Apache OpenOffice and Microsoft Word
+
+%%% Git porcelains <http://stackoverflow.com/a/6978402>
+%%% Pushing an existing Git repository to SVN
+%%%   <http://stackoverflow.com/a/772881/657401>
 
 \chapter{Markup}
 A manuscript can consist of a seamless river of words and still make perfect
@@ -514,7 +565,7 @@ later be typeset in a way that visually reflects its structure.
 More often than not, the writing and marking up of a text are two inseparably
 connected activities performed in parallel rather than in succession.
 Nevertheless, each represents a distinct concept: Writing is the process of
-breaking thoughts into fragmented strings of words, which the markup reassembles
+breaking ideas into fragmented strings of words, which the markup reassembles
 back into meaningful units of linguistic thought waiting to be brought to life
 by a designer.
 
@@ -682,7 +733,7 @@ superseded \acronym{SGML} in many applications. Some of the applications of
 \footnote{
   The authoritative resource on the DocBook \acronym{XML} format is
   \textcite{walsh10}. The book itself is written in DocBook and its source code
-  is publicly available at \url{http://docbook.org}.
+  is publicly available in full at \url{http://docbook.org}.
 }---a technical documentation format used for authoring books by publishers such
 as O'Reilly Media and for documenting software at companies such as Red Hat,
 \acroflat{SuSE}, or Sun Microsystems---, \acronym{TEI}---a general text encoding

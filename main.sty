@@ -29,7 +29,9 @@
 \def\scamp{{\footnotesize\&}}                      % A fake small-caps ampersand
 \def\footnote#1{\marginpar{\small\raggedright#1}}  % Margin footnotes
 \def\filename#1{ (\texttt{#1})}                    % Filenames in captions
-\def\work#1{\textit{#1}\index{#1@\textit{#1}}}     % Names of written works
+\DeclareRobustCommand{\work}{\@ifstar\work@\work@@}
+\def\work@#1{\textit{#1}}                          % Names of written works
+\def\work@@#1{\work*{#1}\index{#1@\work*{#1}}}     %% ... without indexing
 \def\inx#1{#1\index{#1}}                           % Leaky indexing
 \let\person\inx                                    % Person names
 \def\MakeTitlecase#1{{%                            % Turns the first character
