@@ -389,10 +389,71 @@
         %%%   <http://www.w3.org/TR/rif-overview/>
         
       \section{Markup in Document Processing Systems}
+        Some of the existing markup is directly tied with specific document
+        preparation systems. These can be dichotomized into batch-oriented
+        systems, which process marked up input text documents into printable
+        output documents in a page description language on demand, and
+        interactive systems, which allow the user to directly edit an
+        approximation of the output document via a visual editor. Also referred
+        to as \emph{What You See Is What You Get} (\acronym{WYSIWYG}),
+        interactive systems exchange mild learning curve for more primitive
+        typesetting algorithms, which don't stand in the way of interactivity,
+        and for reduced flexibility stemming from the usage of a Graphical User
+        Interface (\acronym{GUI}), which, although often intuitive for simple
+        tasks, seldom matches the power of markup languages used by
+        batch-oriented systems.
+
+      \subsection{Batch-oriented Document Preparation Systems}
+        One of the archetypal batch-oriented systems are \texttt{troff} and
+        \texttt{nroff} from 1970s, which were available for \acronym{UNIX}
+        operating systems and which were used to produce output for either
+        general printers or line printers and terminals, respectively. A free
+        alternative from \acronym{GNU} called \texttt{groff} combines the
+        capabilities of both \texttt{troff} and \texttt{nroff}, and is used
+        extensively to date for the markup of documentation in \acronym{UNIX}
+        and \acronym{UNIX}-like operating systems, although more advanced
+        alternatives exist for general typesetting. The associated markup
+        language combines presentation markup with programming constructs and
+        allows the definition of logical markup in the form of user macros.
+        Standard macro packages, such as \texttt{man} for the formatting of
+        documentation or \texttt{me} for the creation of research papers, are
+        typically distributed along with the system. Special markup invokes
+        preprocessors, which can be used for the typesetting of tables,
+        equations and vector graphics.
+
+          % Example of a troff document
+          %   <http://troff.org/TheGroffFriendsHowto.pdf>
+          %   <https://www.gnu.org/software/groff/manual/html_node/Writing-Macros.html>
+
+        Another notable batch-oriented system is \TeX\footnote{
+          The circumstances that led to the creation of \TeX\ and the
+          surrounding tools are thoroughly documented in \cite{knuth98}.
+        }, which was developed and consequently released to the public domain by
+        a professor of computer science, Donald Knuth, in 1970s after receiving
+        galley proofs for the second volume of his monograph, the Art of
+        Computer Programming, and finding the appearance of mathematical
+        formulae unsatisfactory. As a result, the typesetting of mathematics is
+        a central theme in \TeX, rather than an afterthought, which
+        differentiates it from most other document preparation systems and
+        resulted in its massive popularity in academia. Much like in the case of
+        \texttt{troff} and its derivatives, the language of \TeX\ is ripe with
+        typographic and programming primitives and doesn't by itself contain
+        logical markup. The language, however, allows the creation of user
+        macros. An example of a macro package, which makes it possible to create
+        various classes of documents with pure logical markup, is \LaTeX, the
+        industry standard for academic and technical typesetting.
+        
+          % Example of a plain TeX and LaTeX document
+
         % Batch-oriented
           % troff / groff / nroff / runoff, UNIX manpages
           % LaTeX
           % lout
+          %%% The Text Processor for Typesetters <http://www.troff.org/>
+          %%% <ftp://ftp.dante.de/tex-archive/support/tr2latex/diffs.tex>
+          %%% <http://troff.org/TheGroffFriendsHowto.pdf>
+          %%% TEX kontra Word
+          %%%   <http://math.feld.cvut.cz/ftp/olsak/typo/texword.pdf>
         % WYSIWYG
           % Word, OpenOffice, Adobe InDesign, Scribus
           %%% Style basics in Word <https://support.office.com/en-nz/article/Style-basics-in-Word-d382f84d-5c38-4444-98a5-9cbb6ede1ba4>
@@ -400,22 +461,19 @@
           %%% Format text with Paragraph Styles <https://helpx.adobe.com/indesign/how-to/indesign-formatting-text-paragraph-styles.html>
 
       \section{Lightweight Markup Languages}
-        %%% Lightweight markup language <https://en.wikipedia.org/wiki/Lightweight_markup_language>
-        % Very domain-specific
-        
         Parallel to the heavy-duty applications of \acronym{SGML} and
         \acronym{XML}, there runs a vein of markup languages that are motivated
         by unobtrusiveness and legibility rather than by genericity and
         expressiveness. Rooted in the reality of computer text terminals with
         limited formatting capabilities, lightweight markup languages leverage
         symbols and indentation to produce comparatively weak and
-        domain-specific, but also humane and highly intuitive, markup.  Examples
-        of lightweight markup languages include Markdown, Creole, AsciiDoc,
-        MakeDoc, Setext and Wikicode. Lightweight markup languages are typically
-        supplemented by tools, which enable the conversion to more general
-        markup languages, such as \acronym{HTML}, and also typical is the
-        existence of numerous flavours of every lightweight markup language
-        representing different use cases.
+        domain-specific, but also humane, highly intuitive and often profoundly
+        beautiful, markup.  Examples of lightweight markup languages include
+        Markdown, Creole, AsciiDoc, MakeDoc, Setext or Wikicode. Lightweight
+        markup languages are typically supplemented by tools, which enable the
+        conversion to more general markup languages, such as \acronym{HTML}.
+        Also typical is the existence of numerous flavours of every lightweight
+        markup language representing different use cases.
 
           % Examples of some of the below:
           % Markdown, Creole, BBCode, AsciiDoc, MakeDoc, org-mode,
