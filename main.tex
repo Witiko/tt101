@@ -161,9 +161,9 @@
         various \acronym{XML} formats and form an important part of the
         \acronym{XML} ecosystem.
 
-        A notable new feature of \acronym{XML} are \emph{name spaces}, which
+        A notable new feature of \acronym{XML} are \emph{namespaces}, which
         were added to the specification with the release of \cite{bray99} in
-        1999. Name spaces enable the inclusion of elements and attributes of
+        1999. Namespaces enable the inclusion of elements and attributes of
         different \acronym{XML} applications within a single \acronym{XML}
         document by providing a method to qualify element and attribute names
         with Internationalized Resource Identifiers (\acronym{IRI}s)---specified
@@ -174,7 +174,7 @@
         views of a single document. Unlike with \texttt{CONCUR}, which ties each
         view to an \acronym{SGML} \acronym{DTD}, there exists no general
         mechanism for the translation of \acronym{IRI}s to \acronym{XML}
-        schemata. That makes it impossible to validate namespaced \acronym{XML}
+        schemata. This makes it impossible to validate namespaced \acronym{XML}
         documents, unless all the \acronym{IRI}s and the respective schemata are
         known to the parser.
 
@@ -207,7 +207,7 @@
         describing mathematical formulae---, or Scalable Vector Graphics
         (\acronym{SVG})---a two-dimensional vector image format. Other
         \acronym{XML} applications, such as \acronym{XHTML} and
-        \acronym{RDF/XML}, will be described in Section \ref{sec:www-markup}.
+        \acronym{RDF/XML}, will be discussed in Section \ref{sec:www-markup}.
         
       \section{Markup on the World Wide Web}\label{sec:www-markup}
       \subsection{The Hypertext Markup Language}
@@ -283,7 +283,7 @@
         general. Other perceived advantages included the ability to use
         \acronym{XML} tools for web documents and to include instances of other
         \acronym{XML} applications, such as \acronym{MathML} and \acronym{SVG},
-        directly into web documents using \acronym{XML} name spaces.
+        directly into web documents using \acronym{XML} namespaces.
 
         The idea was brought to fruition within \cite{pemberton00} in 2000 as an
         \acronym{XML} application called the Extensible HyperText Markup
@@ -297,7 +297,7 @@
         \acronym{HTML} parsers across the spectrum, and the lack of ways to
         provide alternative content for browsers that would not support directly
         included the \acronym{XML} documents considerably reduced the usefulness
-        of \acronym{XML} name spaces. As a result, \acronym{XHTML} has yet to
+        of \acronym{XML} namespaces. As a result, \acronym{XHTML} has yet to
         succeed in replacing \acronym{HTML} and remains an alternative markup
         language for the Web.
 
@@ -401,6 +401,25 @@
 
       \section{Lightweight Markup Languages}
         %%% Lightweight markup language <https://en.wikipedia.org/wiki/Lightweight_markup_language>
+        % Very domain-specific
+        
+        Parallel to the heavy-duty applications of \acronym{SGML} and
+        \acronym{XML}, there runs a vein of markup languages that are motivated
+        by unobtrusiveness and legibility rather than by genericity and
+        expressiveness. Rooted in the reality of computer text terminals with
+        limited formatting capabilities, lightweight markup languages leverage
+        symbols and indentation to produce comparatively weak and
+        domain-specific, but also humane and highly intuitive, markup.  Examples
+        of lightweight markup languages include Markdown, Creole, AsciiDoc,
+        MakeDoc, Setext and Wikicode. Lightweight markup languages are typically
+        supplemented by tools, which enable the conversion to more general
+        markup languages, such as \acronym{HTML}, and also typical is the
+        existence of numerous flavours of every lightweight markup language
+        representing different use cases.
+
+          % Examples of some of the below:
+          % Markdown, Creole, BBCode, AsciiDoc, MakeDoc, org-mode,
+          % ReStructuredText, Ruby Document format, Setext, Textile, txt2tags, wikicode
 
     \chapter{Design}
       % XML -- CSS, XSL, XSLT

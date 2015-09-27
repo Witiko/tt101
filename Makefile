@@ -12,7 +12,6 @@ all: $(OUTPUT).pdf clean
 
 $(OUTPUT).pdf: $(SOURCES) Makefile
 	$(TEX) $<
-	$(TEX) $<
 
 clean:
 	rm -f $(AUXFILES)
