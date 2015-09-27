@@ -11,7 +11,8 @@ AUXFILES=$(OUTPUT).aux $(OUTPUT).toc $(OUTPUT).bbl $(OUTPUT).blg \
 SUBMAKEFILES=examples/*/
 
 .PHONY: all clean explode implode $(SUBMAKEFILES)
-all: explode clean
+all: clean explode
+	make clean
 
 # Perform the entire typesetting routine.
 explode: $(SUBMAKEFILES)
@@ -26,6 +27,7 @@ $(OUTPUT).pdf: $(SOURCES) Makefile
 	$(TEX) $<
 	texindy -I omega --language english $(OUTPUT).idx
 	biber $(OUTPUT)
+	$(TEX) $<
 	$(TEX) $<
 
 # Remove auxiliary files and directories.

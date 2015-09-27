@@ -2,6 +2,10 @@
 \ProvidesPackage{main}
 
 % Markup
+\usepackage{xcolor}
+\def\needscite{\textcolor{red}{%                   % [Citation needed] reminder
+  \textsuperscript{[citation needed]}}}
+\let\hexa\texttt                                   % A hexadeximal number
 \def\scamp{{\footnotesize\&}}                      % A fake small-caps ampersand
 \def\footnote#1{\marginpar{\small\raggedright#1}}  % Margin footnotes
 \def\filename#1{ (\texttt{#1})}                    % Filenames in captions
@@ -9,8 +13,8 @@
 \let\term\textit                                   % First occurances of terms
 \def\inx#1{#1\index{#1}}                           % Leaky indexing
 \def\element#1{\mintinline{html}{<#1>}}            % An SGML or XML element
-\let\identifier\texttt                    % A general ASCII identifier
-\def\Identifier#1{{%                      % ... at the beginning of a sentence
+\let\identifier\texttt                             % A general ASCII identifier
+\def\Identifier#1{{%                               % ... at the beginning of a sentence
   \def\head##1##2\relax{##1}
   \def\tail##1##2\relax{##2}
   \identifier{\uppercase{\head#1\relax}\tail#1\relax}}}
@@ -34,8 +38,9 @@
     long-plural-form={#4s},#1}}
 \def\acronym#1{\ac{#1}\acroindex{#1}}     % An acronym
 \def\Acronym#1{\Ac{#1}\acroindex{#1}}     % ... at the beginning of a sentence
+\def\acrofirst#1{\acf{#1}\acroindex{#1}}  % ... in the initial form 
 \def\acropl#1{\acp{#1}\acroindex{#1}}     % ... in the plural form 
-\def\acroshort#1{\acs{#1}\acroindex{#1}}  % ... in the unexpanded form
+\def\acroshort#1{\acs*{#1}\acroindex{#1}} % ... in the unexpanded form
 \def\acrolong#1{\acl{#1}\acroindex{#1}}   % ... in the expanded form
 \newcommand{\acroindex}[2][]{\expandafter\index\expandafter%
   {#2@\acs*{#2}#1}}
@@ -51,8 +56,12 @@
 \usepackage{unicode-math}
 \setmainfont[Numbers=OldStyle,Ligatures=TeX]{TeX Gyre Pagella}
 \setmonofont[Ligatures=TeX,Scale=MatchLowercase]{Inconsolata}
+%%% Set up TeX Gyre Pagella as the math font with old style digits from the
+%%% base TeX Gyre Pagella font for inline mathematics.
 \setmathfont[math-style=ISO,bold-style=ISO,vargreek-shape=TeX]%
   {texgyrepagella-math.otf}
+\setmathfont[range=\mathup/{num},Numbers=OldStyle]{TeX Gyre Pagella}
+\everydisplay={\setmathfont[range=\mathup/{num}]{texgyrepagella-math.otf}}
 %% Protrusion
 \usepackage[protrusion]{microtype}
 %% Acronyms
@@ -65,3 +74,6 @@
 %% Line numbers
 %% @see <http://tex.stackexchange.com/a/132850/70941>
 \renewcommand{\theFancyVerbLine}{{\rm\normalsize{\arabic{FancyVerbLine}}}}
+%% Eliminate vertical spacing and indentation in lists
+\usepackage{enumitem}
+\setlist{noitemsep,leftmargin=0cm}
