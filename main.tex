@@ -251,10 +251,10 @@
         resources on the Web.
 
         Drawing from the research in the field of knowledge representation, an
-        \acronym{RDF} document represents data as a set of triplets. Each of the
-        triplets comprises \emph{a predicate}, \emph{a subject} and \emph{an
-        object}, where both the subject and the predicate are specified as
-        \emph{resources} using Internationalized Resource Identifiers
+        \acronym{RDF} document represents data as a set of \emph{triples}. Each
+        of the triplets comprises \emph{a predicate}, \emph{a subject} and
+        \emph{an object}, where both the subject and the predicate are specified
+        as \emph{resources} using Internationalized Resource Identifiers
         (\acronym{IRI}s) as defined within \cite{rfc3987}. If the object of a
         triplet $(p,s,o)$ is also a resource, the triplet can be interpreted as
         a subject $s$ being in a relation $p$ with an object $o$. If the object
@@ -283,7 +283,7 @@
         (\acronym{FOAF})---an ontology for the description of people and their
         social relationships---, or the Music Ontology---an ontology for the
         description of entities related to the music industry, such as albums,
-        artists, tracks and events. More expressive languages for the creation
+        artists, tracks and events. More expressive standards for the creation
         of ontologies, such as the Web Ontology Language (\acronym{OWL})
         specified within \cite{mcguinness04}, also exist.
 
@@ -301,17 +301,24 @@
         content already present within the underlying \acronym{HTML} or
         \acronym{XHTML} document using element attributes. The usage of
         \acronym{RDF} in conjunction with \acronym{HTML} and \acronym{XHTML} is
-        intended to obsolete the practice of using the \texttt{meta} and
-        \texttt{link} elements to provide additional application-specific
+        intended to gradually obsolete the practice of using the \texttt{meta}
+        and \texttt{link} elements to provide additional application-specific
         metadata about the document.
 
-        % Write about PICS, POWDER and SPARQL?
-          
           % Examples of Dublin Core
-          % Examples of RDF usage and serialization (see wiki) + diagram
+          % Examples of RDF usage and serialization (see wiki) + nodes and arcs graph 
+          % Examples of SPARQL queries
 
-        %%% Tim Berners-Lee: The next web <http://www.ted.com/talks/tim_berners_lee_on_the_next_web>
-        %%% DBpedia <http://wiki.dbpedia.org/>
+        %%% Tim Berners-Lee: The next web
+        %%%   <http://www.ted.com/talks/tim_berners_lee_on_the_next_web>
+        %%%
+        %%% The SPARQL Query Language for RDF (SPARQL) and the (at the time of
+        %%% writing only drafted) Linked Data Fragments RDF query interfaces
+        %%%   <http://www.w3.org/TR/rdf-sparql-query/>
+        %%%   <http://linkeddatafragments.org/specification/>
+        %%%
+        %%% The Rule Interchange Format (RIF)
+        %%%   <http://www.w3.org/TR/rif-overview/>
         
       \section{Markup in Document Processing Systems}
         % Batch-oriented
