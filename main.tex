@@ -1,4 +1,7 @@
-\documentclass[a5paper,10pt]{book}
+\documentclass[
+  a5paper,10pt,           % Basic geometry and type size
+  dvipsnames              % To be passed to the xcolor package
+]{book}
 \usepackage{etex}         % Reserve room for 32 additional insertion classes
 \reserveinserts{32}       %% that will not be taken away by `\newcount` et al.
 \usepackage{polyglossia}  % Hyphenation
@@ -614,51 +617,20 @@ colliding changes.  Examples of decentralized \acronym{VCS} include \inx{Git},
 \inx{Mercurial}, or \inx{Bazaar}.
 
 \begin{figure}
-  {\def\incgr#1{\includegraphics{examples/01/cisco/#1.pdf}}
-  \def\pc{\incgr{pc}} \def\db{\incgr{db}} \def\bend{15}
-  \newlength\radius
-  \setlength\radius{.18\textwidth}
-  \newlength\clientposabove
-  \setlength\clientposabove{.1\textwidth}
-  \newlength\serverposabove
-  \setlength\serverposabove{.01\textwidth}
-  \def\sqrttwo{1.2}
-  \tikzset{>=latex}
-  \footnotesize
-  \begin{tikzpicture}
-    \node (A)                                                   {\db};
-    \node (B) [below of=A,       node distance=\radius]         {\pc};
-    \node (C) [below left of=A,  node distance=\sqrttwo\radius] {\pc};
-    \node (D) [below right of=A, node distance=\sqrttwo\radius] {\pc};
-
-    \path (A) edge [loop above, in=70, out=110, min distance=.05\textwidth, ->]
-              node[above=\serverposabove] {\command{svnadmin create}} (A)
-          (B) edge[bend left=\bend] (A) (A) edge[bend left=\bend, ->] (B)
-          (C) edge[bend left=\bend] (A) (A) edge[bend left=\bend, ->]
-              node[rotate=45,above=\clientposabove]
-                {\command{svn checkout}} (C)
-          (D) edge[bend left=\bend] (A) (A) edge[bend left=\bend, ->] (D);
-  \end{tikzpicture}\hfill\begin{tikzpicture}
-    \node (A)                                                   {\db};
-    \node (B) [below of=A,       node distance=\radius]         {\pc};
-    \node (C) [below left of=A,  node distance=\sqrttwo\radius] {\pc};
-    \node (D) [below right of=A, node distance=\sqrttwo\radius] {\pc};
-
-    \path (B) edge[red,bend left=\bend] (A) (A) edge[red,bend left=\bend, ->] (B)
-          (C) edge[red,bend left=\bend] (A) (A) edge[red,bend left=\bend, ->]
-              node[red,rotate=45,above=\clientposabove]
-                {\command{svn update}} (C)
-          (D) edge[red,bend left=\bend]
-              node[blue,rotate=-45,above=\clientposabove]
-                {\command{svn commit}} (A) (A) edge[red,bend left=\bend, ->] (D)
-          (B) edge[blue, ->] (A) (C) edge[blue, ->] (A) (D) edge[blue, ->] (A);
-  \end{tikzpicture}}
-  \caption{The basic \acroshort{SVN} workflow. After a remote repository has been
-    established, the users download the latest version of the document and then
-    keep downloading the latest version and uploading their changes.}
+  \input examples/01/svn
 \end{figure}
 
-% In a fashion similar to regexes, create a basic GIT and SVN cheat-sheet.
+\begin{figure}
+  \ffootnote{%
+    The reader should note that although it is typical to use a central
+    repository, the decentralized architecture of Git makes it possible for
+    clients to exchange the contents of their repositories directly.
+    Multiple layers of repositories that automatically exchange the latest
+    updates can also be created for backup and other purposes.}
+  \vspace*{-1mm} % Forcibly align the two diagrams.
+  \input examples/01/git
+  \vspace*{4in}  %% Remove if the float positions change.
+\end{figure}
 
 Although \acronym{VCS} can be used to keep track of any kind of files, they are
 typically geared towards text files, which can be easily displayed along with

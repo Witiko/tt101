@@ -1,0 +1,46 @@
+{\input examples/01/vcs-definitions%
+\begin{tikzpicture}
+  \gitnodes
+  \path (E) edge[loop above, in=70, out=110, min distance=.05\textwidth, ->]
+            node[above=\serverposabove] {\command{git init}} (E)
+        (A) edge[bend left=\extrabend] (E) (E) edge[bend left=\extrabend] (A)
+        (B) edge[bend left=\bend] (A) (A) edge[bend left=\bend, ->] (B)
+        (C) edge[bend left=\bend] (A) (A) edge[bend left=\bend, ->]
+            node[rotate=45,above=\clientposabove]
+              {\command{git clone}} (C)
+        (D) edge[bend left=\bend] (A) (A) edge[bend left=\bend, ->] (D);
+  \node[below of=G, node distance=\clientstrutposbelow] {\command{\strut}};
+  \node[below of=H, node distance=\clientstrutposbelow] {\command{\strut}};
+\end{tikzpicture}\hfill\begin{tikzpicture}
+  \gitnodes
+  \path (B) edge[\gitpull,bend left=\bend] (A) (A) edge[\gitpull,bend left=\bend, ->] (B)
+        (A) edge[\gitpull,bend left=\extrabend] (E)
+        (E) edge[\gitpull,bend left=\extrabend] (A)
+        (C) edge[\gitpull,bend left=\bend] (A) (A) edge[\gitpull,bend left=\bend, ->]
+            node[\gitpull,rotate=45,above=\clientposabove]
+              {\command{git pull}} (C)
+        (D) edge[\gitpull,bend left=\bend]
+            node[\gitpush,rotate=-45,above=\clientposabove]
+              {\command{git push}} (A) (A) edge[\gitpull,bend left=\bend, ->] (D)
+        (B) edge[\gitpush] (A) (C) edge[\gitpush] (A) (D) edge[\gitpush] (A) (A)
+            edge[\gitpush, ->] (E)
+        (F) edge[\gitcheckout, bend left=\bend] (B)
+        (B) edge[\gitcheckout, bend left=\bend, ->] (F)
+        (G) edge[\gitcheckout, bend left=\bend] (C)
+        (C) edge[\gitcheckout, bend left=\bend, ->] (G)
+        (H) edge[\gitcheckout, bend left=\bend] (D)
+        (D) edge[\gitcheckout, bend left=\bend, ->] (H)
+        (F) edge[\gitcommit, ->] (B)
+        (G) edge[\gitcommit, ->] (C)
+        (H) edge[\gitcommit, ->] (D);
+  \node[\gitcheckout, below of=G, node distance=\clientposbelow]
+    {\command{git checkout\mbox{ }}};
+  \node[\gitcommit, below of=H, node distance=\clientposbelow]
+    {\command{git commit}};
+\end{tikzpicture}
+\caption{The basic Git workflow. After a remote repository has been
+  established, users make a local copy of the entire repository and then
+  \textcolor{\gitcommit}{store changes in their local repositories} or
+  \textcolor{\gitcheckout}{revert changes from their local repositories}. Every
+  once in a while, users \textcolor{\gitpull}{download the latest changes by
+  other users} and \textcolor{\gitpush}{upload changes of their own} in bulk.}}

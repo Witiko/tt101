@@ -1,0 +1,45 @@
+% Cisco icons
+\def\incgr#1{\includegraphics{examples/01/cisco/#1.pdf}}
+\def\pc{\incgr{pc}}
+\def\db{\incgr{db}}
+\def\cloud{\incgr{cloud}}
+% Dimensions
+\def\bend{15}
+\def\extrabend{25}
+\def\sqrttwo{1.2}   % Almost 2^0.5
+\def\isqrttwo{0.82} % Almost 2^-0.5
+\def\lendef#1#2{
+  \let#1\relax
+  \newlength#1
+  \setlength#1{#2}}
+\lendef\radius{.18\textwidth}
+\lendef\clientposabove{.1\textwidth}
+\lendef\serverposabove{.01\textwidth}
+\lendef\clientposbelow{.085\textwidth}
+\lendef\clientstrutposbelow{\clientposbelow-0.005\textwidth}
+% Colors
+\def\svncheckout{red}
+\def\svncommit{blue}
+\let\gitcheckout\svncheckout
+\let\gitcommit\svncommit
+\def\gitpull{Magenta}
+\def\gitpush{ForestGreen}
+% Additional macros
+\def\svnnodes{
+  \node (A)                                                 {\cloud};
+  \node (B) [below of=A,       node distance=\radius]          {\pc};
+  \node (C) [below left of=A,  node distance=\sqrttwo\radius]  {\pc};
+  \node (D) [below right of=A, node distance=\sqrttwo\radius]  {\pc};
+  \node (E) [above of=A,       node distance=\isqrttwo\radius] {\db};}
+\def\gitnodes{
+  \node (A)                                                 {\cloud};
+  \node (B) [below of=A,       node distance=\radius]          {\db};
+  \node (C) [below left of=A,  node distance=\sqrttwo\radius]  {\db};
+  \node (D) [below right of=A, node distance=\sqrttwo\radius]  {\db};
+  \node (E) [above of=A,       node distance=\isqrttwo\radius] {\db};
+  \node (F) [below of=B,       node distance=\radius]          {\pc};
+  \node (G) [below of=C,       node distance=\radius]          {\pc};
+  \node (H) [below of=D,       node distance=\radius]          {\pc};}
+% Miscellaneous
+\tikzset{>=latex}
+\footnotesize
