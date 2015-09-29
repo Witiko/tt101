@@ -615,28 +615,30 @@ server. An example of centralized \acronym{VCS} is \acronym{SVN}\footnote{
   affectionately known as \work{the Subversion book}.
 }. By comparison, there is no designated server in decentralized \acronym{VCS}
 and the users can send and download new versions to and from any other user. The
-client software is \term*{thick} in the sense that each user has a local
-repository with all the existing versions, which he browse and expand regardless
-of the availability of others. The disadvantages of decentralization include the
-more complex workflow and the increased opportunity for the users not to share
-their new local versions frequently enough, leading to an increased chance of
-colliding changes.  Examples of decentralized \acronym{VCS} include \inx{Git},
-\inx{Mercurial}, or \inx{Bazaar}.
+client software is \term*{thick} in the sense that all users have a local
+repository with all the existing versions, which they can browse and expand
+regardless of the availability of others. The disadvantages of decentralization
+include the more complex workflow and the increased opportunity for the users
+not to share their new local versions frequently enough, leading to an increased
+chance of colliding changes. Examples of decentralized \acronym{VCS} include
+\inx{Git}, \inx{Mercurial}, or \inx{Bazaar}.
 
-\begin{figure}
-  \input examples/01/svn
-\end{figure}
-
-\begin{figure}
+\begin{figure}[!b]
   \ffootnote{%
     Although it is typical to use a central repository, the decentralized
     architecture of Git makes it possible for clients to exchange the contents
     of their repositories directly.  Multiple layers of repositories that
     automatically exchange the latest updates can also be created for backup and
     other purposes.}
-  \vspace*{-1mm} % Forcibly align the two diagrams.
   \input examples/01/git
-  \vspace*{4in} %% Remove, if the float position changes.
+\end{figure}
+
+\begin{figure}
+  \input examples/01/svn
+\end{figure}
+
+\begin{figure}
+  \input examples/01/git-svn
 \end{figure}
 
 Although \acronym{VCS} can be used to keep track of any kind of files, they are
