@@ -10,9 +10,13 @@ AUXFILES=$(OUTPUT).aux $(OUTPUT).toc $(OUTPUT).bbl $(OUTPUT).blg \
 	$(OUTPUT).cb $(OUTPUT).cb2 $(OUTPUT).ilg texput.log
 SUBMAKEFILES=examples/*/
 
-.PHONY: all clean explode implode $(SUBMAKEFILES)
+.PHONY: all clean explode implode publish $(SUBMAKEFILES)
 all: clean explode
 	make clean
+
+# Typeset the document and publish it online
+publish: all
+	scp $(OUTPUT).pdf xnovot32@aisa.fi.muni.cz:public_html/tt101.pdf
 
 # Perform the entire typesetting routine.
 explode: $(SUBMAKEFILES)
