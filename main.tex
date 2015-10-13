@@ -676,9 +676,9 @@ collaboration---such as \inx{Office Online} or \inx{Google Docs}.
 %%%   <http://stackoverflow.com/a/772881/657401>
 
 \chapter{Markup}
-A manuscript can consist of a seamless river of words and still make perfect
-sense to the author. To truly capture its meaning in a clear and unambiguous
-manner, however, the manuscript will often need to be supplemented with a set of
+A manuscript can be a seamless current of words and still make perfect sense to
+the author. To truly capture its meaning in a clear and unambiguous manner,
+however, the manuscript will often need to be supplemented with a set of
 annotations. At a more basic level, this refers to the compliance with the
 orthographic rules---such as the correct spelling, capitalization, word breaks,
 and punctuation---that are specific to the language of the document.  It is not
@@ -793,7 +793,7 @@ considered to be \term*{valid} \acroindex[!validity]{XML} against an
 \acronym{XML} \acronym{DTD}.  Along with \acronym{DTD}s, there exists a wealth
 of \termpl*{schema language}\acroindex[!schema language]{XML}\footnote{
   A list of tools for the manipulation of files in \acronym{XML} schema
-  languages is maintained on the web site of \acronym{W3C} at
+  languages is maintained on the Web site of \acronym{W3C} at
   \url{http://www.w3.org/XML/Schema}.
 } for \acronym{XML}, such as \acroshort{W3C} \acroshort{XML} Schema%
 \acroindex[!Schema]{XML}, \acronym{Relax NG}, or Schematron that can be used to
@@ -1197,30 +1197,36 @@ beautiful markup that is easy to both read and write. Examples of lightweight
 markup languages include \inx{Markdown}, \inx{Creole}, \inx{AsciiDoc},
 \inx{MakeDoc}, \inx{Setext}, or \inx{Wikicode}.  Lightweight markup languages
 are typically supplemented by tools that enable the conversion to more general
-languages, such as \acronym{HTML}. Also typical is the existence of numerous
-flavors of every lightweight markup language, which represent its different
-use cases.
+markup languages, such as \acronym{HTML}. Also typical is the existence of
+numerous flavors of every lightweight markup language, which represent its
+different use cases.
 
 \chapter{Design}
-% XML -- CSS, XSL, XSLT
+After a manuscript has been written and marked up, it is time to create a visual
+system that will emphasize the internal structure and the character of the
+document. In book design, this involves the selection of one or several type
+faces that are well-suited to both the document and each other, the design and
+positioning of marked-up elements---such as headings, tables, figures, and
+lists---and parts of the page---such as headers, footers, and page numbers---,
+and the choice of the paper and type area geometry. In web design, several
+visual systems may have to be created to accommodate for various devices.
+
+\section{Typefaces}
+\subsection{Terminology}
+\subsection{History}
+\subsection{Choosing a Typeface}
+\section{Structural Element Design}
+\section{Page Geometry}
+
 \chapter{Typesetting}
-% Accessibility -- WCAG
-% Digital Typesetting Pocket Primer, Ron Goldberg
-% Word processors do offer typographic primitives
-%   <http://word.tips.net/T001081_Inserting_a_Non-Breaking_Space.html>
-%   Unicode characters:
-%     * \hexa{FEFF} -- \unichar{Zero width no-break space}
-%     * \hexa{00A0} -- \unichar{Non-breaking space}
-%     * \hexa{200B} -- \unichar{Zero width space}
-%     * \hexa{0020} -- \unichar{Space}
-%     * \hexa{2009} -- \unichar{Thin space}
-%     * ... <http://www.fileformat.info/info/unicode/category/Zs/list.htm>
-%     * ... <http://www.fileformat.info/search/google.htm?q=zero+width&domains=www.fileformat.info&sitesearch=www.fileformat.info&client=pub-6975096118196151&forid=1&channel=1657057343&ie=UTF-8&oe=UTF-8&cof=GALT%3A%23008000%3BGL%3A1%3BDIV%3A%23336699%3BVLC%3A663399%3BAH%3Acenter%3BBGC%3AFFFFFF%3BLBGC%3A336699%3BALC%3A0000FF%3BLC%3A0000FF%3BT%3A000000%3BGFNT%3A0000FF%3BGIMP%3A0000FF%3BFORID%3A11&hl=en>
-%     * ... <http://www.unicode.org/versions/Unicode1.0.0/V2ch01.pdf>, page 6
-%
-%%% Hyphenation in HTML
-%%%   <http://www.cs.tut.fi/~jkorpela/shy.html>
-%%%   <https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens>
+After finishing the design, the marked up manuscript can be flowed into the
+document and checked for typesetting errors. Some of the more common typesetting
+errors include \termpl{widow} and \termpl{orphan}---runt lines that are left
+separated from the rest of the paragraph---, overfull lines, and improper line
+breaks. In book design, only the actual errors found in the typeset document
+need to be addressed. In web design, typographic errors need to be fixed
+pre-emptively, as the document may display differently on various devices.
+
 \chapter{Release}
 \section{Proofreading}
 \section{Printing and Binding}
