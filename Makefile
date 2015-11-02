@@ -10,7 +10,7 @@ AUXFILES=$(OUTPUT).aux $(OUTPUT).toc $(OUTPUT).bbl $(OUTPUT).blg \
 	$(OUTPUT).cb $(OUTPUT).cb2 $(OUTPUT).ilg texput.log proselint.result
 SUBMAKEFILES=examples/*/
 
-.PHONY: all clean explode implode publish test $(SUBMAKEFILES)
+.PHONY: all clean explode implode publish test tex $(SUBMAKEFILES)
 all: clean explode
 	make clean
 
@@ -28,11 +28,15 @@ $(SUBMAKEFILES):
 
 # Typeset the text.
 $(OUTPUT).pdf: $(SOURCES) Makefile
-	$(TEX) $<
+	make tex
 	biber $(OUTPUT)
-	$(TEX) $<
+	make tex
 	makeindex $(OUTPUT)
-	$(TEX) $<
+	make tex
+
+# Performs a fast incremental typesetting of the document.
+tex:
+	$(TEX) $(OUTPUT)
 
 # Remove auxiliary files and directories.
 clean:
