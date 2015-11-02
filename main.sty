@@ -42,9 +42,10 @@
   \setlength\oldbelowcaptionskip\belowcaptionskip  %% material both below and
   \setlength\belowcaptionskip\abovecaptionskip
   \caption{#1}\setlength\belowcaptionskip\oldbelowcaptionskip}
+\usepackage{ragged2e}
 \def\footnote#1{%                                  % Margin note
-  \marginpar[{\footnotesize\raggedleft#1}]%
-             {\footnotesize\raggedright#1}}%
+  \marginpar[{\footnotesize\RaggedLeft#1}]%
+             {\footnotesize\RaggedRight#1}}%
 \def\lmarginpar#1{{%                               % A non-floating margin note
   \footnotesize                                    %% ... in even page variant
   \smash{\llap{\parbox[t]{\marginparwidth}
