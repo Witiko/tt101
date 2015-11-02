@@ -6,7 +6,7 @@
 \reserveinserts{32}       %% that will not be taken away by `\newcount` et al.
 \usepackage{polyglossia}  % Hyphenation
 \setmainlanguage{english}
-\setotherlanguages{french,italian,german}
+\setotherlanguages{french, italian, german, czech}
 \usepackage{placeins}     % Float barriers
 \usepackage{tikz}         % Diagrams
 \usetikzlibrary{trees,arrows}
@@ -132,8 +132,8 @@ concern.\iffalse\footnote{
   special encodings, such as Big5, \acronym{JIS}, and \acronym{EUC}, are used to
   this day. For brevity, the text focuses on the main stream of international
   encodings.}\fi
-\ ``We had over sixty different ways to represent characters in
-computers. It was a real Tower of Babel,'' explains \cite{brandel99}
+\ \quote{We had over sixty different ways to represent characters in
+computers. It was a real Tower of Babel,} explains \cite{brandel99}
 \person{Bob Berner}, an American computer scientist who worked at \acronym{IBM}
 during 1956--1962 and who drafted \acronym{ASCII}---a
 \term{character encoding} from \citeyear{asa63} that unified the industry and
@@ -718,8 +718,8 @@ typesetting, leading to a demand for a universal markup language.
 
 This demand was met by a project developed\footnote{
   More information about the project can be found within
-  \citework{goldfarb96} and \citework[SGML: The Reason Why and the First
-  Published Hint]{goldfarb97:whySGML}.
+  \citework{goldfarb96} and \citework*(SGML: The Reason Why and the First
+  Published Hint)[]{goldfarb97:whySGML}.
 } at the Cambridge Scientific Center of \acronym{IBM} in the early 1970s. The
 project aimed at imbuing a text editor with the ability to query, edit, and
 display documents from a repository to allow the usage of computers in legal
@@ -752,7 +752,7 @@ can be different for each document. It is worth noting that a \acronym{DTD} only
 declares the syntax of an \acroshort{SGML} document; the semantics of the
 individual elements and their attributes are left to the interpretation of the
 program processing the document. The syntax and the constraints imposed by a
-\acronym{DTD} define an \term*{application of \acronym{SGML}}
+\acronym{DTD} define an \term*{application of \acronym{SGML}}%
 \acroindex[!application]{SGML}. An \acronym{SGML} document is considered to be a
 valid instance of an \acroshort{SGML} application, when it conforms to the
 respective \acronym{DTD}.
@@ -1202,23 +1202,79 @@ numerous flavors of every lightweight markup language, which represent its
 different use cases.
 
 \chapter{Design}
+\nocite{beran14}
 After a manuscript has been written and marked up, it is time to create a visual
 system that will emphasize the internal structure and the character of the
-document. In book design, this involves the selection of one or several type
-faces that are well-suited to both the document and each other, the design and
+document. In book design, this involves the selection of one or several fonts
+that are well-suited to both the document and each other, the design and the
 positioning of marked-up elements---such as headings, tables, figures, and
 lists---and parts of the page---such as headers, footers, and page numbers---,
-and the choice of the paper and type area geometry. In web design, several
-visual systems may have to be created to accommodate for various devices.
+and the choice of the paper size and the type area geometry. In web design,
+several visual systems may have to be created to accommodate for various display
+devices.
 
-\section{Typefaces}
-\subsection{Terminology}
-\subsection{History}
-\subsection{Choosing a Typeface}
-\section{Structural Element Design}
+\section{Fonts}
+When choosing fonts for a document, legibility should be of foremost concern.
+The main text should be set with a font at a size of at least 10\,pt, if the
+document is aimed at adult readers, or 12\,pt, if elementary-school children and
+people with weakened sight are part of the audience
+\cite[para.\,13--15]{kapr99}. The target medium also needs to be taken into
+consideration. A faithful copy of a typeface designed for the letterpress will
+look lighter than originally intended when printed digitally. This may hamper
+its legibility, if it contains hairline strokes due to its high contrast or
+overall lightness \cite[sec.~6.1.2]{bringhurst92}. In printed text, serified
+fonts are more familiar to the reader and therefore more suitable for
+long-distance reading than their sans-serif counterparts. At small-resolution
+screens, however, simple low-contrast typefaces with slab or no serifs will
+often yield the best result.
+
+Beside being legible, a font should be sympathetic to the subject matter and
+compatible with the cultural and historical affiliations of the document. As
+\person{Robert Bringhurst} writes in \citework*()[sec.\,6.3.1]{bringhurst92}:
+\quote{There are books about the Renaissance set in faces that belong to the
+Baroque and books about the Baroque set in faces from the Renaissance.  To a
+good typographer, it is not enough merely to avoid these kinds of laughable
+contradictions. The typographer seeks to \emph{shed light} on the text, to
+generate insight and energy, by setting every text in a face and form in which
+it actually belongs.} In a more nuanced way, this also applies to modern
+documents with seemingly no historical affiliations. It is typical to set
+scientific documents in neoclassical typefaces as an homage to the Age of
+Enlightenment, and modern-day novels in renaissance typefaces as a reference to
+\person{Miguel de Cervantes Saavedra}'s \work{Don Quixote} and other early
+European novels.
+
+A font should also contain all the letters and symbols that will appear in
+the document. If the manuscript is multilingual and contains passages in both
+Latin and non-Latin writing systems, it may be necessary to combine several
+typefaces. If the multilingual manuscript only contains Latin characters, but
+several diacriticized characters are missing from the base font, they may be
+constructed by combining the base font with diacritical marks from another
+typeface. If certain punctuation marks and other symbols are missing from the
+base font, they may likewise be borrowed from other typefaces. In each of these
+cases, the typefaces should be consonant in their spirit and structure, unless
+the text would benefit from their dissimilarity.
+
+Several fonts may appear in a document---a bold font, an italic font, or perhaps
+several sizes of the base font for use in some of the structural elements. The
+natural instinct is to pick these fonts from one typeface, but some typefaces
+may not offer all that the design requires. In that case, the fonts may again
+have to be borrowed from other typefaces.
+
+%%% unicode-range - CSS | MDN
+%%%   <https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range>
+%%%
+%%% Creating Custom Font Stacks with Unicode-Range
+%%%   <https://24ways.org/2011/creating-custom-font-stacks-with-unicode-range>
+%%%
+%%% Fallback fonts on special characters
+%%%   <http://stackoverflow.com/questions/11395584/fallback-fonts-on-special-characters>
+
+\section{Structural Elements}
+\section{Colors}
 \section{Page Geometry}
 
 \chapter{Typesetting}
+\iffalse % This text is completely temporary
 After finishing the design, the marked up manuscript can be flowed into the
 document and checked for typesetting errors. Some of the more common typesetting
 errors include \termpl{widow} and \termpl{orphan}---runt lines that are left
@@ -1226,9 +1282,10 @@ separated from the rest of the paragraph---, overfull lines, and improper line
 breaks. In book design, only the actual errors found in the typeset document
 need to be addressed. In web design, typographic errors need to be fixed
 pre-emptively, as the document may display differently on various devices.
+\fi
+\section{Proofreading}
 
 \chapter{Release}
-\section{Proofreading}
 \section{Printing and Binding}
 \section{Distribution}
 \backmatter
