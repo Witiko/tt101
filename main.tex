@@ -22,6 +22,7 @@
 \usepackage{tabularx}     % Tables
 \usepackage{booktabs}
 \usepackage{latexsym}     % Additional LaTeX symbols
+\usepackage{pifont}       % Dingbats
 \usepackage[              % Bibliography
   backend=biber,
   style=numeric,
@@ -319,8 +320,8 @@ Originally a competing standard, Unicode underwent a merger with \acronym{UCS}
 in version 1.1 and since then, the standards have been kept closely
 synchronised. Unicode is a superset of \acronym{UCS}, which defines additional
 information about \acronym{UCS} characters---such as their general category,
-directionality, case, or numeric value \cite[sec.\,3.5,~ch.\,4]{unicode15}---,
-various text processing algorithms, and implementation guidelines.
+directionality, case, or numeric value \cite[sec.\,3.5 and ch.\,4]{unicode15}%
+---, various text processing algorithms, and implementation guidelines.
 
 \begin{figure}
   \ffootnote{One of the design goals of \acroshort{UCS} was to avoid assigning
@@ -1201,7 +1202,6 @@ numerous flavors of every lightweight markup language, which represent its
 different use cases.
 
 \chapter{Design}
-\nocite{beran14}
 After a manuscript has been written and marked up, it is time to create a visual
 system that will emphasize the internal structure and the character of the
 document. In book design, this involves the selection of one or several fonts
@@ -1272,10 +1272,10 @@ have to be borrowed from other typefaces.
 \subsection{Paragraphs}
 The base units of thought in prose, paragraphs slice the text into coherent bits
 ready to be consumed by the reader. A line in a paragraph of the main text
-should be 45--75 characters long on a single-column page or 40--50 characters on
-a multi-column page and \term{justified} (spread horizontally to fit the column
-width). Extended passages of lines wider than 80 characters strain the eye of
-the reader, whereas justified lines that are too narrow to accommodate 40
+should be 45--75 characters long on a single-column page or 40--50 characters
+long on a multi-column page and \term{justified} (spread horizontally to fit the
+column width). Extended passages of lines wider than 80 characters strain the
+eye of the reader, whereas justified lines that are too narrow to accommodate 40
 characters may make the word spacing entirely too loose. In the latter case, the
 text should be set \term{ragged} instead, as seen in the margin notes throughout
 this book \cite[sec.\,2.1.2]{bringhurst92}.
@@ -1286,15 +1286,39 @@ this book \cite[sec.\,2.1.2]{bringhurst92}.
 Vertically, the lines of a paragraph should be separated by approximately twenty
 to forty-five percent of the font size \cite{line-spacing}. If the size of the
 base font is 10\,pt, the line height (also known as the \emph{leading}) would be
-12\,pt, adding 1\,pt of lead above and below each line. As a general guideline,
-dark and bulky fonts require more leading, as do texts riddled with accents,
-full capital letters, subscripts, and superscripts
-\cite[sec.\,2.2.1]{bringhurst92}.
+between 12 and 14.5\,pt, adding 1 to 2.25\,pt of lead above and below each line.
+As a general guideline, dark and bulky fonts require more leading, as do texts
+riddled with accents, full capital letters, subscripts, and superscripts
+\cite[sec.\,2.2.1]{bringhurst92}. The main text of this book is set in 10\,pt
+Palatino with the leading of 12\,pt. To allow for such minimal leading, all
+acronyms and other strings of upper-case letters are set as \term{small
+capitals} (capital letters whose height matches the lower case).
 
-% Leading in LaTeX, Word and CSS
+% Leading in LaTeX, Word, and CSS
 
-% Separating paragraphs
-% Stanzas
+Two adjacent paragraphs should be visibly separated without distracting the
+reader from the text. A predominant method is to indent the initial line of a
+paragraph with one half (1\,en) to three times (3\,em) the font size
+\cite[sec.\,2.3.2]{bringhurst92}. \par\noindent\hskip-\parindent If the margins
+are ample, outdented paragraphs are an intriguing option as well.  \ding{161}
+Paragraphs can also be separated by graphical symbols, such as pilcrows, bullets,
+or boxes.\hspace{3em}A plain horizontal space that is at least 3\,em wide can
+likewise act as a paragraph separator
+\cite[ch.\,2,~p.\,16]{beran14}.\par\noindent Block paragraphs exchange
+indentation and horizontal separators for additional vertical space above and
+below the paragraph. In justified block paragraphs, this space can be omitted as
+well, although the typesetter then has to manually ensure that the last line of
+each paragraph offers enough horizontal space to act as a separator. In short
+documents and limited spans of text, block paragraphs are a breath of fresh air
+\cite[sec.\,2.3.2]{bringhurst92}.
+
+% Paragraph separation in LaTeX, Word, and CSS
+
+The poetry counterpart to the paragraph, the stanza is a collection of lines
+rather than sentences. Due to this structural difference, stanzas are only
+justified, if the individual lines are long enough to fill up the column, and
+ragged otherwise. Much like in the case of prose, short-form poetry benefits
+from having the stanzas set in block paragraph style.
 
 \subsection{Headings}
 Another fundamental structural element, which appears in both prose and fiction,
@@ -1306,9 +1330,9 @@ including the text of the latest heading in the margin or the header of the page
 
 The hierarchy of the headings can be expressed by the variation of fonts,
 indentation, alignment and numbering, although alternating the size of the base
-font is sufficient for many a document. In documents that are bound in codex
-form and read two pages at a time, the height of headings should be a whole
-multiple of the line height of the main text, so that the headings do not
+font is sufficient for many types of a document. In documents that are bound in
+codex form and read two pages at a time, the height of headings should be a
+whole multiple of the line height of the main text, so that the headings do not
 disrupt the alignment of lines on the facing pages \cite[para.\,33]{kapr99}.
 
 \section{Colors}

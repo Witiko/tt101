@@ -284,11 +284,11 @@
 
 % Typesetting
 %% General settings
-%% No em-spaces after full stops
 \frenchspacing % No em-spaces after full stops
 \usepackage[all]{nowidow} % No clubs and widows
 \emergencystretch 1em % Add up to 1em of stretchable glue to overfull lines
 \usepackage{marginfix} % Prevent margin notes bleeding into the bottom margin
+\AtBeginDocument{\fontsize{10pt}{12pt}} % Set the leading to 12pt
 %% Hyphenation definitions
 \input ushyphex
 \input ./hyphenation
