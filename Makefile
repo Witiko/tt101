@@ -1,8 +1,7 @@
-TEX=xelatex -shell-escape --
+TEX=lualatex -shell-escape --
 OUTPUT=main
 SOURCES=$(OUTPUT).tex $(OUTPUT).bib $(OUTPUT).sty acronyms.tex \
 	examples/*/*
-AUXDIRS=_minted-main
 AUXFILES=$(OUTPUT).aux $(OUTPUT).toc $(OUTPUT).bbl $(OUTPUT).blg \
 	$(OUTPUT).ind $(OUTPUT).idx $(OUTPUT).out $(OUTPUT).gl[gos] \
 	$(OUTPUT).xdy $(OUTPUT).lo[ftg] $(OUTPUT).ac[rn] $(OUTPUT).alg \
@@ -41,13 +40,15 @@ tex:
 # Remove auxiliary files and directories.
 clean:
 	rm -f $(AUXFILES)
-	rm -rf $(AUXDIRS)
 
 # Run `proselint` on the source.
 test:
-	@proselint $(OUTPUT).tex | \
-		grep -Ev "`cat .proselintignore`" > proselint.result || true &&\
-	cat proselint.result && ! [ -s proselint.result ]
+	@for i in $(OUTPUT).tex chapters/*.tex; do \
+	  proselint "$$i" | grep -Ev "`cat .proselintignore`" > proselint.result; \
+		echo ">> $$i"; \
+		cat proselint.result; \
+		[ -s proselint.result ] && exit 1; \
+	done || true
 	@rm proselint.result
 
 # Remove all non-source files.

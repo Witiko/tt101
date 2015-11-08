@@ -1,4 +1,10 @@
 {\input examples/01/vcs-definitions%
+\ffootnote{After a remote repository has been established, users make local
+  copies of the entire repository and then \textcolor{\gitcommit}{store changes
+  in their local repositories} or \textcolor{\gitcheckout}{revert changes from
+  their local repositories}. Users periodically \textcolor{\gitpull}{download
+  the latest changes by other users} and \textcolor{\gitpush}{upload changes of
+  their own}.}
 \begin{tikzpicture}
   \gitnodes
   \path (E) edge[loop above, in=70, out=110, min distance=.05\textwidth, ->]
@@ -38,9 +44,4 @@
   \node[\gitcommit, below of=H, node distance=\clientposbelow]
     {\command{git commit}};
 \end{tikzpicture}
-\caption{The basic Git workflow. After a remote repository has been
-  created, users make local copies of the entire repository and then
-  \textcolor{\gitcommit}{store changes in their local repositories} or
-  \textcolor{\gitcheckout}{revert changes from their local repositories}. Users
-  periodically \textcolor{\gitpull}{download the latest changes by other users}
-  and \textcolor{\gitpush}{upload changes of their own}.}}
+\caption{The basic Git workflow}}

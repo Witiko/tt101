@@ -56,7 +56,7 @@
   {\marginparwidth}{\strut\raggedright#1}}}}}
 \usepackage{changepage}
 \strictpagecheck
-\def\ffootnote#1{%                   % A two-side aware non-floating margin note
+\def\ffootnote#1{%                 % A two-side aware non-floating margin note
   \checkoddpage
   \ifoddpage
     \rmarginpar{#1}
@@ -130,7 +130,7 @@
   \ifx#1\relax\else%
     #1\ea\code@readtail@\ea:%
   \fi}%
-\usepackage{minted}
+\usepackage[cache=false]{minted}
 \newcommand{\code}[2][text]{{%       % Inline code #2 in language #1, a pipe
   \let\ea\expandafter%               %% in #1 delimits implementation parameters
   \edef\head{\code@readhead:#1\relax}%
@@ -227,7 +227,7 @@
 \setlength{\headsep}{4mm}
 \setlength{\textheight}{%
   \paperheight-\footskip-\headheight-\headsep-\topmargin-33mm}
-\setlength{\marginparsep}{4mm}
+\setlength{\marginparsep}{4mm} %% ~1cc as per \citework[para.\,50]{kapr99}
 \setlength{\textwidth}{100mm} %% Set up a measure that yields ~66 chars per line
 \setlength{\marginparwidth}{\paperwidth-\textwidth-\marginparsep-18mm}
 \setlength{\oddsidemargin}{2mm}
@@ -298,10 +298,10 @@
 \setmainfont[
   Numbers=OldStyle,
   Ligatures=TeX,
-  UprightFeatures={    SmallCapsFeatures={Letters=SmallCaps,LetterSpace=8} },
-  BoldFeatures={       SmallCapsFeatures={Letters=SmallCaps,LetterSpace=8} },
-  ItalicFeatures={     SmallCapsFeatures={Letters=SmallCaps,LetterSpace=8} },
-  BoldItalicFeatures={ SmallCapsFeatures={Letters=SmallCaps,LetterSpace=8} }
+  UprightFeatures={    Renderer=Basic },
+  BoldFeatures={       Renderer=Basic },
+  ItalicFeatures={     Renderer=Basic },
+  BoldItalicFeatures={ Renderer=Basic }
 ]{TeX Gyre Pagella}
 \setmonofont[
   Ligatures=TeX,
@@ -322,5 +322,5 @@
   Numbers=OldStyle
 ]{TeX Gyre Pagella}
 \everydisplay={\setmathfont[range=\mathup/{num}]{texgyrepagella-math.otf}}
-%% Protrusion
-\usepackage[protrusion]{microtype}
+%% Protrusion, expansion and small-caps letterspacing
+\usepackage[protrusion=true,expansion,tracking=true]{microtype}
