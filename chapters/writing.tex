@@ -226,9 +226,9 @@ are specified in the \acronym{UCS} standard and its amendments
     of two-byte integers, called \termpl{surrogate pair}, ranging from
     55,296 to 57,343 (\mbox{\hexa{DC00}--\hexa{DFFF}}). To enable the
     \acroshort{UTF}-16 encoding, the code points in the surrogate pair range
-    will never be assigned. The same applies to code points greater than
-    1,114,111 (\hexa{10FFFF}), which allows \acroshort{UTF}-16 to encode any
-    \acroshort{UCS} character.
+    will never be assigned \cite[sec.\,3.4]{unicode15}. The same applies to code
+    points greater than 1,114,111 (\hexa{10FFFF}), which allows
+    \acroshort{UTF}-16 to encode any \acroshort{UCS} character.
   \item[\acroshort{UTF}-8]\acroindex[!UTF-8@{\acroshort{UTF}-8}]{UTF}
     Directly transforms code points ranging from 0 to 127 (\hexa{7F}) to
     one-byte integers. Since the first \acroshort{UCS} block of the
