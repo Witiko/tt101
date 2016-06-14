@@ -6,7 +6,8 @@ AUXFILES=$(OUTPUT).aux $(OUTPUT).toc $(OUTPUT).bbl $(OUTPUT).blg \
 	$(OUTPUT).ind $(OUTPUT).idx $(OUTPUT).out $(OUTPUT).gl[gos] \
 	$(OUTPUT).xdy $(OUTPUT).lo[ftg] $(OUTPUT).ac[rn] $(OUTPUT).alg \
 	$(OUTPUT).run.xml $(OUTPUT).bcf $(OUTPUT)-blx.bib $(OUTPUT).mw \
-	$(OUTPUT).cb $(OUTPUT).cb2 $(OUTPUT).ilg texput.log proselint.result
+	$(OUTPUT).cb $(OUTPUT).cb2 $(OUTPUT).ilg texput.log proselint.result \
+	$(OUTPUT).pyg chapters/*.aux
 SUBMAKEFILES=examples/*/
 
 .PHONY: all clean explode implode publish test tex $(SUBMAKEFILES)
