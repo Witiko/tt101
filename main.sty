@@ -96,16 +96,18 @@
     \def\work@sortstring{#1}%
   \fi\workindex@{#2}}
 \def\workindex@#1{%                                %% ... only indexing
-  \index{\work@sortstring @\work*{#1}}}
+  \ifx\relax\work@sortstring\relax
+    \index{#1@\work*{#1}}%
+  \else
+    \index{\work@sortstring @\work*{#1}}%
+  \fi}
 \DeclareFieldFormat*{citetitle}{\work*{#1}\workindex@{#1}}
 \def\citework{\@ifstar\citework@@\citework@}
 \def\citework@#1{\citework*()[]{#1}}               %% ... citation format
 \def\citework@@(#1)[#2]#3{%                        %%% ... fully parametrized:
-  \ifx\relax#1\relax                               %%%% #1: sortstring
-    \def\work@sortstring{#2}%                      %%%% #2: `\cite` opt-args
-  \else                                            %%%% #3: `\cite` id
-    \def\work@sortstring{#1}%
-  \fi\citetitle{#3}~\cite[#2]{#3}}
+  \def\work@sortstring{#1}%                        %%%% #1: sortstring
+  \citetitle{#3}~\cite[#2]{#3}}%                   %%%% #2: `\cite` opt-args
+                                                   %%%% #3: `\cite` id
 %% Quotation macros
 \def\quote#1{``\emph{{\let\emph\textbf#1}}''}      % Any emphasis in a quote
                                                    %% will be set in bold.
