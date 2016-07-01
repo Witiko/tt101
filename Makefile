@@ -1,16 +1,12 @@
-TEX=lualatex -shell-escape --
 OUTPUT=main
 SOURCES=$(OUTPUT).tex $(OUTPUT).bib $(OUTPUT).sty acronyms.tex \
 	examples/*/* chapters/*.tex
-AUXFILES=$(OUTPUT).aux $(OUTPUT).toc $(OUTPUT).bbl $(OUTPUT).blg \
-	$(OUTPUT).ind $(OUTPUT).idx $(OUTPUT).out $(OUTPUT).gl[gos] \
-	$(OUTPUT).xdy $(OUTPUT).lo[ftg] $(OUTPUT).ac[rn] $(OUTPUT).alg \
-	$(OUTPUT).run.xml $(OUTPUT).bcf $(OUTPUT)-blx.bib $(OUTPUT).mw \
-	$(OUTPUT).cb $(OUTPUT).cb2 $(OUTPUT).ilg texput.log proselint.result \
-	$(OUTPUT).pyg chapters/*.aux
+AUXFILES=$(OUTPUT).bbl $(OUTPUT).run.xml chapters/*.aux
 SUBMAKEFILES=examples/*/
 
 .PHONY: all clean explode implode publish test tex $(SUBMAKEFILES)
+
+# Perform the entire typesetting routine and clean up afterwards.
 all: clean explode
 	make clean
 
@@ -28,19 +24,12 @@ $(SUBMAKEFILES):
 
 # Typeset the text.
 $(OUTPUT).pdf: $(SOURCES) Makefile
-	make tex
-	biber $(OUTPUT)
-	make tex
-	makeindex $(OUTPUT)
-	make tex
-
-# Performs a fast incremental typesetting of the document.
-tex:
-	$(TEX) $(OUTPUT)
+	latexmk -pdf $<
 
 # Remove auxiliary files and directories.
 clean:
 	rm -f $(AUXFILES)
+	latexmk -c
 
 # Run `proselint` on the source.
 test:
