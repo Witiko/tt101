@@ -2,7 +2,8 @@
   a5paper,10pt,           % Basic geometry and type size
   dvipsnames              % To be passed to the xcolor package
 ]{book}
-\usepackage{shellesc}     % Patch LuaTeX 0.87+ to support `\write18`.
+\IfFileExists{shellesc.sty}{%
+  \usepackage{shellesc}}{}% Patch LuaTeX 0.87+ to support `\write18`.
 \usepackage{etex}         % Reserve room for 32 additional insertion classes
 \reserveinserts{32}       %% that will not be taken away by `\newcount` et al.
 \usepackage{polyglossia}  % Hyphenation
