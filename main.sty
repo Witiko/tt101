@@ -21,7 +21,9 @@
 \def\Unices{%                                      % A shorthand for Unices
   Unix and Unix-like operating systems}
 \DeclareRobustCommand{\foreign}[2][]{%             % A foreign language text
-  \begin{#1}\textit{#2}\end{#1}}
+  \selectlanguage{#1}\textit{#2}%
+  \selectlanguage{english}}%                       %% A workaround fixing
+  %% <https://github.com/reutenauer/polyglossia/issues/153>
 \usepackage{xcolor}
 \def\needscite{\textcolor{red}{[citation needed]}} % [Citation needed] reminder
 \def\hexa#1{%                                      % A hexadecimal number
