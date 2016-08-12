@@ -2,6 +2,7 @@ OUTPUT=main
 SOURCES=$(OUTPUT).tex $(OUTPUT).bib $(OUTPUT).sty acronyms.tex \
 	examples/*/* chapters/*.tex
 AUXFILES=$(OUTPUT).bbl $(OUTPUT).run.xml chapters/*.aux
+AUXDIRS=_minted-$(OUTPUT)
 SUBMAKEFILES=examples/*/
 
 .PHONY: all clean explode implode publish test tex $(SUBMAKEFILES)
@@ -29,6 +30,7 @@ $(OUTPUT).pdf: $(SOURCES) Makefile
 # Remove auxiliary files and directories.
 clean:
 	rm -f $(AUXFILES)
+	rm -rf $(AUXDIRS)
 	latexmk -c
 
 # Run `proselint` on the source.

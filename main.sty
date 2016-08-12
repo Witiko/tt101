@@ -132,7 +132,7 @@
   \ifx#1\relax\else%
     #1\ea\code@readtail@\ea:%
   \fi}%
-\usepackage[cache=false]{minted}
+\usepackage{minted}
 \newcommand{\code}[2][text]{{%       % Inline code #2 in language #1, a pipe
   \let\ea\expandafter%               %% in #1 delimits implementation parameters
   \edef\head{\code@readhead:#1\relax}%
