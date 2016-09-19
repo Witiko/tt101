@@ -24,14 +24,16 @@ low-resolution screens, however, simple low-contrast typefaces with slab or no
 serifs will often yield the best result.
 
 \begin{figure}
-  \fbox{\includegraphics[clip,trim=4.3cm 19.75cm 4.35cm 4.55cm,%
-    width=0.975\textwidth]{examples/03/cornford12.pdf}}\vspace{.9em}
+  \vspace{.5em}%
+  \fbox{\includegraphics[clip,trim=4.3cm 19.8cm 4.35cm 4.55cm,%
+    width=0.975\textwidth]{examples/03/cornford12.pdf}}%
+  \vspace{.5em}%
   \inputcode[latex]{examples/03/cornford12.tex}
   \caption{An excerpt from \person{F. M. Cornford}'s \work{From Religion to
     Philosophy: A Study in the Origins of Western Speculation} as a
     text marked up in \TeX\index{TeX@\TeX} using \LaTeX{}\index{LaTeX@\LaTeX}
     macros and the primitives of \Hologo{XeTeX}\index{XeTeX@\Hologo{XeTeX}}
-    (below) and the output document (above). Note that two typefaces are used:
+    (below) and the output document (above). Note that two typefaces were used:
     the regular typeface of Alegreya Sans at the size of 11\,pt for the Latin
     characters and the regular typeface of GFS Neohellenic at the size of
     13.2\,pt for the Greek characters.}
@@ -146,11 +148,26 @@ pages.~\cite[para.\,33]{kapr99}
 seamlessly into the surrounding text and avoid unnecessary visual clutter. Use
 the same typeface the surrounding text does, treat the columns of tables the
 same way you treat columns in the text, and keep the amount of rules, boxes,
-dots, and extraneous spacing to a bare minimum.~\cite[sec.\,2.1.10 and
-4.4]{bringhurst92}
+dots, and extraneous spacing to a bare minimum (see
+Table~\ref{table:papers}).~\cite[sec.\,2.1.10 and 4.4]{bringhurst92}
 
-% An example of a nice and simple figure
-% An example of a nice and simple list
+\begin{table}
+  \begin{center}
+    \hspace{4ex}Sizes in inches\hspace{1.2em}Page proportions
+    \begin{tabular}{%
+        l%
+        D{×}{{}\times{}}{4}@{\quad\quad}%
+        D{:}{{}:{}}{5}@{\quad\quad}%
+        D{.}{.}{5}}
+      \emph{A4}     & 8.27×11.7 & 2:\sqrt{2} & 1.41421 \\
+      \emph{B5}     & 6.93×9.84 & 1:\sqrt{2} & 0.707   \\
+      \emph{Letter} &   8½×11   & 1:1.294    & 1.2941  \\
+    \end{tabular}
+  \end{center}
+  \caption{An overview of common paper sizes used for commercial and industrial
+    printing}
+  \label{table:papers}
+\end{table}
 
 \subsection{Notes}
 \Termpl{note} provide commentary on a specified passage of the main text and can
@@ -158,8 +175,8 @@ take three different forms:
 \begin{enumerate}
   \item[1]\Termpl{sidenote} are displayed in the horizontal margins next to the
     \sidenote{%
-      This is a sidenote. Sidenotes are ideal for short comments and are
-      easy for the reader to find.}
+      This is a sidenote. Sidenotes enliven the page and are easy for the reader
+      to find.}
     relevant passage of the main text, as seen throughout this book.  Unless the
     horizontal margins are very wide, sidenotes are unsuitable for the inclusion
     of bibliographical references---a common use for notes in academic writing.
