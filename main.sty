@@ -22,7 +22,8 @@
   Unix and Unix-like operating systems}
 \DeclareRobustCommand{\foreign}[2][]{%             % A foreign language text
   \selectlanguage{#1}\textit{#2}%
-  \selectlanguage{english}}%                       %% A workaround fixing
+  \PolyglossiaSetup{english}{indentfirst=false}%   %% A workaround fixing
+  \selectlanguage{english}}%                       %% ...
   %% <https://github.com/reutenauer/polyglossia/issues/153>
 \usepackage{xcolor}
 \def\needscite{\textcolor{red}{[citation needed]}} % [Citation needed] reminder
