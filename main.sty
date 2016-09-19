@@ -294,8 +294,9 @@
 \usepackage{marginfix} % Prevent margin notes bleeding into the bottom margin
 \AtBeginDocument{\fontsize{10pt}{12pt}} % Set the leading to 12pt
 %% Hyphenation definitions
-\input ushyphex
-\input ./hyphenation
+\AtBeginDocument{%
+  \input ushyphex
+  \input ./hyphenation}
 %% Fonts
 \usepackage{fontspec}
 \usepackage{unicode-math}
