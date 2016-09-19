@@ -1,0 +1,23 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec, leading, newunicodechar}
+\usepackage[Latin,Greek]{ucharclasses}
+\setTransitionsForLatin{%
+  \fontspec{AlegreyaSans-Regular.ttf}[Ligatures=TeX]}{}
+\setTransitionsForGreek{%
+  \fontspec{GFSNeohellenic.otf}[Scale=1.2, WordSpace=0.5, Ligatures=TeX]}{}
+\newunicodechar{·}{\raisebox{.8ex}{.}}
+\frenchspacing
+\leading{14pt}
+
+\begin{document}
+  The second function of Soul -- knowing -- was not at
+  first distinguished from motion. Aristotle says, φαμὲν
+  γὰρ τὴν ψυχὴν λυπεῖσθαι χαίρειν, θαρρεῖν φοβεῖσθαι, ἔτι
+  δὲ ὸργίζεσθαί τε καὶ αἰσθάνεσθαι καὶ διανοεῖσθαι· ταῦτα
+  δὲ πάντα κινήσεις εἶναι δοκοῦσιν. ὅθεν οἰηθείη τις ἂν
+  αὐτὴν κινεῖσθαι.
+  ``The soul is said to feel pain and joy, confidence and
+  fear, and again to be angry, to perceive, and to think;
+  and all these states are held to be movements, which
+  might lead one to suppose that soul itself is moved.''
+\end{document}

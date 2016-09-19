@@ -16,7 +16,7 @@ concept. Writing is the process of breaking ideas down into raw sequences of
 words. To mark up these words then is to take and reassemble them back into
 meaningful units of linguistic thought.
 
-\index[(]{markup!logical}\index[(]{markup!presentation}
+\index{markup!logical}\index{markup!presentation}
 Markup can be created using a variety of \termpl*{markup language}. Aside from
 \term*{logical markup}, which captures the logical structure of a document,
 markup languages may also provide \term*{presentation markup}, which directly
@@ -27,7 +27,7 @@ result, the consistency in the design of each logical part of the document needs
 to be ensured manually, and future changes of design become error-prone and
 tedious. In this regard, logical markup is to design what style guides are to
 writing: a means of ensuring internal consistency that should be used whenever
-possible.\index[)]{markup!logical}\index[)]{markup!presentation}
+possible.
 
 \section{Meta Markup Languages}
 \subsection{The General Markup Language}
@@ -38,7 +38,7 @@ typeset via a given company, switching to another one could be a costly
 venture. This power imbalance artificially increased the price of digital
 typesetting, leading to a demand for a universal markup language.
 
-This demand was met by a project developed\footnote{
+This demand was met by a project developed\sidenote{
   More information about the project can be found within
   \citework{goldfarb96} and \citework*(SGML: The Reason Why and the First
   Published Hint)[]{goldfarb97:whySGML}.
@@ -52,7 +52,7 @@ presentation markup, which made information retrieval impossible without heavy
 use of heuristics. To resolve these issues, a unifying markup language called
 \acronym{GML} was drafted. The language was released~\cite{goldfarb81} to the
 public in \citeyear{goldfarb81} and finally standardized in \citeyear{iso86} as
-\acronym{SGML}\footnote{
+\acronym{SGML}\sidenote{
   The authoritative resource on \acronym{SGML} is \citework{goldfarb91}, which
   includes the full text of the standard bearing extensive annotations.
 }.~\cite{iso86}
@@ -98,7 +98,7 @@ received a technical corrigendum~\cite{goldfarb97:webSGML}, which turned
 \end{figure}
 
 \begin{figure}
-  \ffootnote{\acronym{DTD}s in \acronym{SGML} and \acronym{XML} documents can be
+  \fsidenote{\acronym{DTD}s in \acronym{SGML} and \acronym{XML} documents can be
     either linked to the document through \code[dtd]{PUBLIC} and
     \code[dtd]{SYSTEM} identifiers (top), directly embedded in the document
     (middle), linked to the document and then extended by an embedded
@@ -126,7 +126,7 @@ An \acroshort{XML} document is considered to be
 \term*{valid}\acroindex[!validity]{XML} against an \acronym{DTD}, when it is
 well-formed and conforms to the said \acronym{DTD}. Along with \acronym{DTD}s,
 there exists a wealth of \termpl*{schema language}\acroindex[!schema
-language]{XML}\footnote{
+language]{XML}\sidenote{
   A list of tools for the manipulation of files in \acronym{XML} schema
   languages is maintained on the Web site of \acronym{W3C} at
   \url{http://www.w3.org/XML/Schema}.
@@ -188,7 +188,7 @@ known to the parser.
 Due to the reduced complexity of \acronym{XML} compared to \acronym{SGML}, the
 language was adopted by the industry and has superseded \acronym{SGML} in most
 applications. Some of the applications of \acronym{XML} for document preparation
-include DocBook\acroindex[!DocBook]{XML}\footnote{
+include DocBook\acroindex[!DocBook]{XML}\sidenote{
   The authoritative resource on the DocBook \acronym{XML} format is
   \citework{walsh10}. The book itself is written in DocBook and its source code
   is publicly available at \url{http://docbook.org}.
@@ -219,7 +219,7 @@ The first standard version of \acronym{HTML} was \acronym{HTML} 2.0
 becoming ubiquitous, it began accumulating an increasing number of documents
 that weren't valid instances of \acronym{HTML}, since most Web browsers faced
 with a malformed document would act in accordance with the Postel's law%
-\footnote{
+\sidenote{
   The Postel's law states that one should be conservative in what they send, but
   liberal in what they accept.~\cite[sec.\,2.10]{postel80} It is one of the base
   principles for building robust communication protocols.}
@@ -231,15 +231,16 @@ a non-conforming \acroshort{HTML}5 document and its canonical interpretation is
 given in Figure \ref{fig:overlapping-elements}.
 
 \begin{figure}[b]
-  \inputcode[html|linenos]{examples/02/malformed.html}
-  \caption{Line 1 contains overlapping elements and, as such, can't be a part of
-    a valid \acronym{HTML} document. Nevertheless, it is recommended by
-    \acronym{W3C} that browsers handle it identically to line 2.}
+  \inputcode[html]{examples/02/malformed.html}
+  \caption{The first line contains overlapping elements and, as such, can't be a
+    part of a valid \acronym{HTML} document. Nevertheless, browsers should
+    handle it identically to the second line.}
   \label{fig:overlapping-elements}
 \end{figure}
 
-Initially, \acronym{HTML} only comprised a mixture of logical and presentation
-markup with fixed visual interpretation. This changed with the specification of
+Initially, \acronym{HTML} only comprised a mixture of
+logical\index{markup!logical} and presentation markup\index{markup!presentation}
+with fixed visual interpretation. This changed with the specification of
 \acronym{CSS}, which was introduced by \acronym{W3C} in \citeyear{lie96}. The
 language enabled the specification of the visual properties for any
 \acroshort{HTML} element, which enabled the separation of document markup and
@@ -249,15 +250,16 @@ design, effectively eliminating the need for the presentation markup.
   \inputcode[html]{examples/02/presentation-markup.html}%
   \separatorcaption{An excerpt from the Web site of the \acroshort{CSS} Zen
     Zarden located at \protect\url{http://csszengarden.com}. The document above
-    was created using the \acroshort{HTML} presentation markup. The document
-    below achieves the same appearance by the combination of logical markup and
+    was created using the \acroshort{HTML} presentation
+    markup\index{markup!presentation}. The document below achieves the same
+    appearance by the combination of logical markup\index{markup!logical} and
     \acronym{CSS}.}
   \inputcode[html]{examples/02/logical-markup.html}
 \end{figure}
 
 During the same period, an initial version of a scripting language called
 \inx{JavaScript}~\cite{ecma97} was drafted and incorporated into Netscape
-Navigator 2.0\footnote{
+Navigator 2.0\sidenote{
   \inx{JScript} and \inx{VBScript} competed directly with JavaScript, but they
   never saw implementation outside Microsoft browsers.
 }---one of the contemporary leading web browsers and a descendant of the
@@ -310,9 +312,9 @@ The Web is based on the idea of a distributed and globally available network of
 human knowledge. The languages of \acronym{HTML}, \acronym{XHTML}, \acronym{CSS}
 and JavaScript form the foundation of the human-readable parts of the Web, but
 are inadequate for creating a network of machine-readable data that could be
-navigated by software agents.\footnote{
+navigated by software agents.\sidenote{
   The idea of a network of machine-readable data was described by
-  \person{\citeauthor{bernerslee06}} in \citeyear{bernerslee06} in the article
+  \person{Tim Berners-Lee} in \citeyear{bernerslee06} in the article
   \citework{bernerslee06}.}
 Drawing from the research in the field of knowledge representation,
 \acronym{W3C} created \acronym{RDF} in \citeyear{lassira99}---a language for the
@@ -339,7 +341,7 @@ resources, the relationships between them, and their intended meaning in an
 \acroshort{RDF} Schema~\cite{brickley04} can be used. The resulting documents
 are called \termpl*[ontologies]{ontology} \acroindex[!ontology]{RDF} and can be
 used for automated reasoning about \acronym{RDF} documents containing resources
-described by the ontology.\footnote{
+described by the ontology.\sidenote{
   A list of ontologies that are fully documented, honor the current best
   practices, and are supported by various tools can be found on the
   \acroshort{W3C} wiki at \url{http://www.w3.org/wiki/Good_Ontologies}.
@@ -366,10 +368,10 @@ and the \acronym{CSS} class names to include additional machine-readable metadat
 into the documents on the Web---a technique known as \term{microformatting}.
 
 \begin{figure}
-  \inputcode[xml]{examples/02/john.rd}
-  \inputcode{examples/02/john.nt}
+  \inputcode[xml]{examples/02/john.rd}\vspace{-.4em}%
+  \inputcode{examples/02/john.nt}\vspace{-.4em}%
   \inputcode{examples/02/john.ttl}
-  \separatorcaption{An example \acronym{RDF} document using
+  \caption{An example \acronym{RDF} document using
     the \acronym{DC} and \acronym{FOAF} ontologies in the languages of
     \acronym{RDF}/\acronym{XML}\filenamecap[top]{john.rd},
     \inx{N-Triples}\filenamecap[middle]{john.nt}, and
@@ -430,26 +432,26 @@ software developed for the Unix operating system at the beginning of 1970s by
 developed as free software for the \acronym{GNU} project in 1980 by the members
 of the \acronym{FSM}. \Cliutil*{groff} combines the capabilities of both systems
 and is used extensively for the markup of documentation in \Unices. The
-markup language of \cliutil*{groff} combines presentation markup with
-programming constructs and enables the definition of logical markup through user
-macros. The standard macro packages for \cliutil*{groff} include
-\identifier{man} for the \index{troff@\cliutil*{troff}!\identifier{man}}
-formatting of documentation, \identifier{me}
-\index{troff@\cliutil*{troff}!\identifier{me}} for the creation of research
-papers, and the more recent \identifier{mom}
+markup language of \cliutil*{groff} combines presentation
+markup\index{markup!presentation} with programming constructs and enables the
+definition of logical markup\index{markup!logical} through user macros. The
+standard macro packages for \cliutil*{groff} include \identifier{man} for the
+\index{troff@\cliutil*{troff}!\identifier{man}} formatting of documentation,
+\identifier{me} \index{troff@\cliutil*{troff}!\identifier{me}} for the creation
+of research papers, and the more recent \identifier{mom}
 \index{troff@\cliutil*{troff}!\identifier{mom}} for general typesetting tasks.
 Special markup invokes preprocessors that can be used for the typesetting of
 tables, equations, and vector graphics.
 
 \begin{figure}
   \fbox{\includegraphics[clip,trim=1.7cm 12.6cm 1.7cm 1.3cm,%
-    width=0.975\textwidth]{examples/02/poe-groff.pdf}}
+    width=0.975\textwidth]{examples/02/poe-groff.pdf}}\vspace{.9em}
   \inputcode[groff]{examples/02/poe.groff}
   \caption{An excerpt from the beginning of \person{Edgar Allen Poe}'s
-    \work*{Cask of Amontillado}\workindex{the Cask of Amontillado} formatted
-      through the \identifier{mom} macro package of \cliutil*{groff}. The
-      markup was borrowed from the web page of \identifier{mom}%
-      ~\cite{schaffter15}.}
+    \work*{Cask of Amontillado}\workindex{the Cask of Amontillado} as a
+    text marked up using the \identifier{mom} macro package of \cliutil*{groff}
+    (below) and the output document (above). The marked up text was borrowed
+    from the web page of \identifier{mom}~\cite{schaffter15}.}
   \label{fig:poe}
 \end{figure}
 
@@ -463,7 +465,7 @@ tables, equations, and vector graphics.
 %%%   <https://www.urz.uni-heidelberg.de/imperia/md/content/urz/programme/text/lout.pdf>
 
 Another notable free batch-oriented \acronym{DPS} is
-\TeX\index{TeX@\TeX}\footnote{
+\TeX\index{TeX@\TeX}\sidenote{
   The circumstances that led to the creation of \TeX\ and the surrounding tools
   are thoroughly documented in \citework{knuth98}.
 }, which was developed in the 1970s by an American professor of computer science
@@ -474,17 +476,19 @@ mathematics is a central theme in \TeX, rather than an afterthought, which
 differentiates it from most other \acropl{DPS} and which contributes to the
 massive popularity \TeX\ has enjoyed among academics. Much like in the case of
 \cliutil*{troff} and its derivatives, the language of \TeX\ contains only
-typographic and programming primitives, but the creation of logical markup is
-possible through user macros. A popular \TeX\ macro package that enables the
-creation of various types of documents with just logical markup is
-\LaTeX\index{LaTeX@\LaTeX}: the standard markup language for academic and
-technical documents.
+typographic and programming primitives, but the creation of logical
+markup\index{markup!logical} is possible through user macros. A popular \TeX\
+macro package that enables the creation of various types of documents with just
+logical markup is \LaTeX\index{LaTeX@\LaTeX}: the standard markup language for
+academic and technical documents.
 
 \begin{figure}
   \inputcode[tex]{examples/02/poe.tex}
-  \caption{The document from Figure \ref{fig:poe} reformulated in \TeX\ using
-    \hologo{plainTeX} macros and the primitives of \hologo{eTeX} and
-    \hologo{pdfTeX}}
+  \caption{The document from Figure \ref{fig:poe} reformulated in
+    \TeX\index{TeX@\TeX} using
+    \hologo{plainTeX}\index{plainTeX@\hologo{plainTeX}} macros and the
+    primitives of \hologo{eTeX}\index{eTeX@\hologo{eTeX}} and
+    \hologo{pdfTeX}\index{pdfTeX@\hologo{pdfTeX}}}
 \end{figure}
 
 \subsection{Interactive Systems}
@@ -501,10 +505,11 @@ refined control over the resulting page layout and the typesetting at the
 expense of a steeper learning curve.
 
 Most interactive \acropl{DPS} will provide a means to mark up sections of text.
-Presentation markup enables direct changes to the design, whereas logical markup
-enables the classification of sections of text with the ability to set up the
-design of each class later on. This decouples writing and markup from design and
-makes it easy to consistently change the design of an entire document.
+Presentation markup\index{markup!presentation} enables direct changes to the
+design, whereas logical markup\index{markup!logical} enables the classification
+of sections of text with the ability to set up the design of each class later
+on. This decouples writing and markup from design and makes it easy to
+consistently change the design of an entire document.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{examples/02/interactive-editors.png}
@@ -525,4 +530,4 @@ markup languages include \inx{Markdown}, \inx{Creole}, \inx{AsciiDoc},
 \inx{MakeDoc}, \inx{Setext}, and \inx{Wikicode}.  Lightweight markup languages
 are typically supplemented by tools that enable the conversion to more general
 markup languages, such as \acronym{HTML}. The more popular lightweight markup
-languages come in various flavors that represent their various use cases.
+languages come in various flavors that represent their use cases.

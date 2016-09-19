@@ -1,88 +1,93 @@
 \chapter{Design}
 After a manuscript has been written and marked up, it is time to create a visual
 system that will emphasize the internal structure and the character of the
-document. In print design, this involves the selection of one or several fonts
-that are well-suited to both the document and each other, the design and the
-positioning of the structural elements of the document---such as headings,
-tables, figures, and lists---and parts of the page---such as headers, footers,
-and page numbers---, and the choice of the paper size and the type area
-geometry. In web design, several visual systems may have to be created to
-accommodate for various display devices.
+document. In print design, this involves the selection of one or several
+typefaces that are well-suited to both the document and each other, the design
+and the positioning of the structural elements of the document---such as
+headings, tables, figures, and lists, and the choice of the paper size and the
+page layout. In web design and multi-target publishing, several visual systems
+may have to be created to accommodate for various display devices.
 
 \section{Fonts}
-When choosing fonts for a document, legibility should be of foremost concern.
-The main text should be set with a font at a size of at least 10\,pt, if the
-document is aimed at adult readers, or 12\,pt, if elementary-school children and
-people with weakened sight are a part of the
+When choosing \termpl{typeface} for a document, legibility should be of foremost
+concern. The \term{body text} should be set with a typeface at a size of at least
+10\,pt, if the document is aimed at adult readers, or 12\,pt, if visually
+impaired readers and elementary-school students are a part of the
 audience.~\cite[para.\,13--15]{kapr99}. The target medium also needs to be taken
 into consideration. A faithful copy of a typeface designed for the letterpress
 will look lighter than originally intended when printed digitally. This may
-hamper its legibility, if it contains hairline strokes due to its high contrast
-or due to its overall lightness~\cite[sec.~6.1.2]{bringhurst92}. In printed
-text, serified fonts are more familiar to the reader and therefore more suitable
-for long-distance reading than their sans serif counterparts. At
-small-resolution screens, however, simple low-contrast typefaces with slab or no
+hamper its legibility, if it contains hairline
+strokes~\cite[sec.~6.1.2]{bringhurst92}. In printed documents, typefaces with
+\termpl{serif} are more familiar to the reader and therefore more suitable for
+long-distance reading than their \term{sans-serif} counterparts. At
+low-resolution screens, however, simple low-contrast typefaces with slab or no
 serifs will often yield the best result.
 
-Beside being legible, a font should be sympathetic to the subject matter and
-compatible with the cultural and historical affiliations of the document. As
-\person{Robert Bringhurst} notes in \citework*()[sec.\,6.3.1]{bringhurst92}:
-\quote{There are books about the Renaissance set in faces that belong to the
-Baroque and books about the Baroque set in faces from the Renaissance.  To a
-good typographer, it is not enough merely to avoid these kinds of laughable
-contradictions. The typographer seeks to \emph{shed light} on the text, to
-generate insight and energy, by setting every text in a face and form in which
-it actually belongs.} In a more nuanced way, this also applies to modern
-documents with seemingly no historical affiliations.
+\begin{figure}
+  \fbox{\includegraphics[clip,trim=4.3cm 19.75cm 4.35cm 4.55cm,%
+    width=0.975\textwidth]{examples/03/cornford12.pdf}}\vspace{.9em}
+  \inputcode[latex]{examples/03/cornford12.tex}
+  \caption{An excerpt from \person{F. M. Cornford}'s \work{From Religion to
+    Philosophy: A Study in the Origins of Western Speculation} as a
+    text marked up in \TeX\index{TeX@\TeX} using \LaTeX{}\index{LaTeX@\LaTeX}
+    macros and the primitives of \Hologo{XeTeX}\index{XeTeX@\Hologo{XeTeX}}
+    (below) and the output document (above). Note that two typefaces are used:
+    the regular typeface of Alegreya Sans at the size of 11\,pt for the Latin
+    characters and the regular typeface of GFS Neohellenic at the size of
+    13.2\,pt for the Greek characters.}
+  \label{fig:cornford12}
+\end{figure}
 
-A font should also contain all the letters and symbols that will appear in
+\begin{figure}
+  \inputcode[html]{examples/03/cornford12.html}
+  \caption{The document from Figure \ref{fig:cornford12} reformulated in
+    \acronym{HTML}5 and \acronym{CSS}3}
+\end{figure}
+
+A typeface should also contain all the letters and symbols that will appear in
 the document. If the manuscript is multilingual and contains passages in both
 Latin and non-Latin writing systems, it may be necessary to combine several
 typefaces. If the multilingual manuscript only contains Latin characters, but
-several diacriticized characters are missing from the base font, they may be
-constructed by combining the base font with diacritical marks from another
-typeface. If certain punctuation marks and other symbols are missing from the
-base font, they may likewise be borrowed from other typefaces. In each of these
-cases, the typefaces should be consonant in their spirit and structure, unless
-the text would benefit from their dissimilarity.
+several accented characters are missing from the body text typeface, they may be
+constructed by combining the body text typeface with diacritical marks from
+another font family. If certain punctuation marks and other symbols are missing
+from the body text typeface, they may likewise be borrowed from other font
+families. The typefaces should be consonant in their spirit and structure,
+unless the text would benefit from the
+dissonance.~\cite[sec.\,5.1.2]{bringhurst92}
 
-Several fonts may appear in a document---a bold font, an italic font, or perhaps
-several sizes of the base font for use in some of the structural elements. The
-natural instinct is to pick these fonts from one typeface, but some typefaces
-may not offer all that the design requires. In that case, the fonts may again
-have to be borrowed from other typefaces.
-
-%%% unicode-range - CSS | MDN
-%%%   <https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range>
-%%%
-%%% Creating Custom Font Stacks with Unicode-Range
-%%%   <https://24ways.org/2011/creating-custom-font-stacks-with-unicode-range>
-%%%
-%%% Fallback fonts on special characters
-%%%   <http://stackoverflow.com/questions/11395584/fallback-fonts-on-special-characters>
+Beside the body text typeface, several other typefaces may appear in a
+document---a bold face, an italic face, or perhaps several sizes of the body
+text typeface for use in the structural elements. The natural instinct is to
+pick these typefaces from a single font family, but some families may not offer
+all typefaces that the design requires. In those case, the typefaces may again
+have to be borrowed from other font families.
 
 \section{Structural Elements}
-\subsection{Paragraphs}
-The base units of linguistic thought in prose, paragraphs slice the text into
-coherent bits that can be readily consumed by the reader. A line in a paragraph
-of the main text should be 45--75 characters long on a single-column page or
-40--50 characters long on a multi-column page and \term{justified} (spread
-horizontally to fit the column width). Extended passages of lines wider than 80
-characters strain the eye of the reader, whereas justified lines that are too
-narrow to accommodate 40 characters may make the word spacing entirely too
-loose. In the latter case, the text should be set \term{ragged} instead, as seen
-in the margin notes throughout this book~\cite[sec.\,2.1.2]{bringhurst92}.
+\subsection{Paragraphs and Stanzas}\label{sec:paragraphs}
+As the base units of linguistic thought in prose, \termpl{paragraph} split the
+text into coherent portions ready for consumption. A line in a paragraph of the
+body text should be 45--75 characters long on a single-column page or 40--50
+characters long on a multi-column page and
+\term*{justified}\index{alignment!justified}\index[see{alignment}]{justification}
+(spread horizontally to fit the column width). Extended passages of lines wider
+than 80 characters strain the eye of the reader, whereas justified lines that
+are too narrow to accommodate 40 characters may make the word spacing entirely
+too loose. In the latter case, the text should be set
+\term*{ragged}\index{alignment!ragged}\index[see{alignment}]{rag} instead, as
+seen in the sidenotes throughout this book~\cite[sec.\,2.1.2]{bringhurst92}.
 
 % LaTeX, Word and the justification of paragraphs
 % HTML, CSS and the justification and hyphenation of paragraphs
 
 Vertically, the lines of a paragraph should be separated by approximately twenty
-to forty-five percent of the font size~\cite{line-spacing}. If the size of the
-base font is 10\,pt, the line height (also known as the \emph{leading}) would be
-between 12 and 14.5\,pt, adding 1 to 2.25\,pt of lead above and below each line.
-As a general guideline, dark and bulky fonts require more leading, as do texts
+to forty-five percent of the typeface size~\cite{line-spacing}. If the size of
+the body text typeface is 10\,pt, then the body text \term{line height} (also
+known as the \term*{leading}\index[see{line spacing}]{leading}) would be between
+12 and 14.5\,pt, adding 1 to 2.25\,pt of lead above and below each line. As a
+general guideline, dark and bulky typefaces require more leading, as do texts
 riddled with accents, full capital letters, subscripts, and
-superscripts~\cite[sec.\,2.2.1]{bringhurst92}. The main text of this book is set
+superscripts~\cite[sec.\,2.2.1]{bringhurst92}. The body text of this book is set
 in 10\,pt Palatino with the leading of 12\,pt. To allow for such minimal
 leading, all acronyms and other strings of upper-case letters are set as
 \term{small capitals} (capital letters whose height matches the lower case).
@@ -91,47 +96,167 @@ leading, all acronyms and other strings of upper-case letters are set as
 
 Two adjacent paragraphs should be visibly separated without distracting the
 reader from the text. A predominant method is to indent the initial line of a
-paragraph with one half (1\,en) to three times (3\,em) the font
-size~\cite[sec.\,2.3.2]{bringhurst92}. \par\noindent\hskip-\parindent If the
-margins are ample, outdented paragraphs are an intriguing option as well.
-\ding{161} Paragraphs can also be separated by graphical symbols, such as
-pilcrows, bullets, or boxes.\hspace{3em}A plain horizontal space that is at
-least 3\,em wide can likewise act as a paragraph
-separator~\cite[ch.\,2,~p.\,16]{beran14}.\par\noindent Block paragraphs exchange
-indentation and horizontal separators for additional vertical space above and
-below the paragraph. In justified block paragraphs, this space can be omitted as
-well, although the typesetter then has to manually ensure that the last line of
-each paragraph offers enough horizontal space to act as a separator. In short
+paragraph with one half (1\,en) to three times (3\,em) the typeface
+size.\index{paragraph!indented} The indent is unnecessary when there is no
+ambiguity---such as in the first paragraph following a
+heading.~\cite[sec.\,2.3]{bringhurst92}
+
+\noindent\hskip-.95em If the margins are ample, outdented paragraphs are an
+intriguing option as well.\index{paragraph!outdented} \ding{161} Paragraphs can
+also be separated by graphical symbols, such as pilcrows, bullets, or
+boxes.\hspace{3em}A plain horizontal space that is at least 3\,em wide can
+likewise act as a paragraph separator.~\cite[ch.\,2,~p.\,16]{beran14}
+
+\noindent Block paragraphs\index{paragraphs!block} exchange indentation and
+horizontal separators for additional vertical space above and below the
+paragraph. In justified block paragraphs, this space can be omitted as well,
+although the typesetter then has to manually ensure that the last line of each
+paragraph offers enough horizontal space to act as a separator. In short
 documents and limited spans of text, block paragraphs are an attractive
-option~\cite[sec.\,2.3.2]{bringhurst92}.
+option.~\cite[sec.\,2.3.2]{bringhurst92}
 
 % Paragraph separation in LaTeX, Word, and CSS
 
-The poetry counterpart to the paragraph, the stanza is a collection of lines
-rather than sentences. Due to this structural difference, stanzas are typically
-only justified, when the individual lines are long enough to fill up the column,
-and ragged otherwise. Much like in the case of prose, short-form poetry benefits
-from having the stanzas set in block paragraph style.
+Being the verse counterpart to the paragraph, the stanza is a collection of
+lines rather than of sentences. Due to this structural difference, stanzas are
+typically only justified, when the individual lines are long enough to fill up
+the column, and ragged otherwise. Much like in the case of prose, short-form
+poetry benefits from having the stanzas set in block paragraph style.
 
 \subsection{Headings}
-Another fundamental structural element, which appears in both prose and fiction,
-is the heading. The function of a heading is to delimit and name the individual
-sections of a document. To alleviate navigation, headings should be a prominent
-presence on a page. This can be achieved by using a larger variant of the base
-font or by including the text of the latest heading in the margin or the header
-of the page~\cite[sec.\,4.2.1]{bringhurst92}, as seen throughout this book.
+Another fundamental structural element is the \term{heading}. The function of a
+heading is to delimit and name the individual sections of a document. To
+alleviate navigation, headings should be a prominent presence on a page. This
+can be achieved by using a larger variant of the body text typeface or by
+including the text of the latest heading in the margin or the header of the
+page~\cite[sec.\,4.2.1]{bringhurst92}, as seen throughout this book.
 
-The hierarchy of the headings can be expressed by the variation of fonts,
-indentation, alignment and numbering, although alternating the size of the base
-font is sufficient for many types of documents. In documents that are bound in
-codex form and read two pages at a time, the height of headings should be a
-whole multiple of the line height of the main text, so that the headings do not
-disrupt the alignment of lines on the facing pages~\Cite[para.\,33]{kapr99}.
+The hierarchy of the headings can be expressed through the variation of
+typefaces, indentation, alignment and numbering, although alternating the size
+of the body text typeface is sufficient for many types of documents. In
+documents that are bound in codex form and read two pages at a time, the height
+of headings should be a whole multiple of the line height of the body text, so
+that the headings do not disrupt the alignment of lines on the facing
+pages.~\cite[para.\,33]{kapr99}
 
 % Headings in LaTeX, Word and CSS
 
-\subsection{Tables}
-\subsection{Margin Notes}
+\subsection{Tables and Lists}
+\Termpl{table} and \termpl{list} are structural elements that should fit
+seamlessly into the surrounding text and avoid unnecessary visual clutter. Use
+the same typeface the surrounding text does, treat the columns of tables the
+same way you treat columns in the text, and keep the amount of rules, boxes,
+dots, and extraneous spacing to a bare minimum.~\cite[sec.\,2.1.10 and
+4.4]{bringhurst92}
 
-\section{Colors}
-\section{Page Geometry}
+% An example of a nice and simple figure
+% An example of a nice and simple list
+
+\subsection{Notes}
+\Termpl{note} provide commentary on a specified passage of the main text and can
+take three different forms:
+\begin{enumerate}
+  \item[1]\Termpl{sidenote} are displayed in the horizontal margins next to the
+    \sidenote{%
+      This is a sidenote. Sidenotes are ideal for short comments and are
+      easy for the reader to find.}
+    relevant passage of the main text, as seen throughout this book.  Unless the
+    horizontal margins are very wide, sidenotes are unsuitable for the inclusion
+    of bibliographical references---a common use for notes in academic writing.
+  \item[2]\Termpl{footnote} are delegated to the bottom of the page and linked
+    to the relevant passage of the main text through symbols or superscript
+    numbers.\kern-.3ex\footnote{%
+      This is a footnote. Due to their width, footnotes can
+      comfortably accommodate full bibliographical references, which makes them
+      popular in academic writing.
+      
+      A footnote can also contain multiple paragraphs of text, although long
+      footnotes are tedious to read if the size of the typeface is
+      small.~\cite[sec.\,4.3.1]{bringhurst92}}
+    Compared to side notes, they are more difficult for the reader to find.
+    Footnotes should align with the bottom of the text block, not stick out into
+    the bottom margin.~\cite[para.\,48]{kapr99}
+  \item[3]\Termpl{endnote} are delegated to the end of a section or the entire
+    document and are linked to the relevant passage of the body text through
+    superscript numbers. They are the easiest of the three to typeset, but also
+    the hardest for the reader to find.
+\end{enumerate}
+
+Notes are typically typeset in sizes from 8\,pt up to the body text typeface
+size depending on their frequency, importance, and average
+length.~\cite[sec.\,4.3]{bringhurst92} If several categories of notes are
+present in the document, it may be desirable to give each a different form.
+
+\subsection{Quotations}
+Quotations repeat what has already been expressed somewhere else before and can
+take two different forms:~\cite[sec.\,5.4]{bringhurst92}
+\begin{enumerate}
+  \item[1]\Termpl*{run-in quotation}\index{quotation!run-in}
+    are included directly into the paragraph and set off from the surrounding
+    text using quotation marks in accordance with the orthographic rules on the
+    use of punctuation in the language of the paragraph: \quote{Jesters do oft
+    prove prophets.}
+    
+    From the designer's viewpoint, run-in quotations require no special
+    treatment, although it is crucial that the body text typeface contains the
+    required quotation marks.
+  \item[2]\Termpl*{block quotation}\index{quotation!block}
+    are set as block paragraphs\index{paragraph!block} that are clearly
+    separated from the surrounding text. This involves adding a vertical space
+    above and below the block paragraphs and optionally also changing the
+    typeface, its size, or the indentation of the
+    paragraphs:~\cite[sec.\,2.3.3]{bringhurst92}\blockquote{%
+      This is the excellent foppery of the world that when we are sick in
+      fortune—often the surfeit of our own behavior—we make guilty of our
+      disasters the sun, the moon, and the stars, as if we were villains by
+      necessity, fools by heavenly compulsion, knaves, thieves, and treachers by
+      spherical predominance, drunkards, liars, and adulterers by an enforced
+      obedience of planetary influence, and all that we are evil in by a divine
+      thrusting-on. An admirable evasion of whoremaster man, to lay his goatish
+      disposition to the charge of a star!}{\person{William Shakespeare},
+      \work{King Lear}}
+    Block quotations are ideal for longer quotations and for quotations that
+    should carry more weight that run-in quotations.
+\end{enumerate}
+
+\section{Page Layout}
+The page consists of a textblock surrounded by margins. The text width
+area is largely determined by the number of columns and the body text size---as
+described in Section~\ref{sec:paragraphs}---as well as by our plans for the
+horizontal margins. A margin containing an occasional sidenote will require less
+space that a margin ripe with photographs, tables, and diagrams.
+
+The vertical margins may contain additional navigational aids, such as the page
+numbers and running headers in this book. If your feel the horizontal margins
+are underutilized, you may also use them for this
+purpose.~\cite[sec.\,8.5.2]{bringhurst92}
+
+In print design---and wherever else the page height is fixed---we need to also
+decide on the text height. The text height needs to be a multiple of the body
+text line height, so that it is possible to completely fill the text block with
+text.  It is typical to derive the text height from the text width to achieve
+proportions that work well with the proportions of the
+page.~\cite[sec.\,8.4.2]{bringhurst92}
+
+\section{Color}
+In both print and web design, it is perfectly reasonable to use either just the
+combination of black and white or shades of gray. A secondary color may be
+introduced to enliven the page if the design calls for such a measure;
+\textcolor{red}{\textbf{red}} has historically been used for this purpose (see
+Figure~\ref{fig:vulgate-bible}).  More than one hue of color may be introduced,
+although each additional one makes it more difficult to establish a visual
+system that is intelligible to the reader.
+
+The general guidelines are to only use colored typefaces for emphasis, not for
+the body text, and on backgrounds that are (ideally) colorless or of sufficient
+contrast with the typeface color. Distinct colors should stay distinct even for
+the color-blind reader, unless the lack of distinction between the colors does
+not impair understanding.
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{examples/03/1500-latin-vulgate}
+  \caption{An excerpt from the \work{Latin Vulgate Bible} printed by
+    the German goldsmith, printer, and publisher \person{Anton Koberger} in
+    1487}
+  \label{fig:vulgate-bible}
+\end{figure}

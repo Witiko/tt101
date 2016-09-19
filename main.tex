@@ -39,6 +39,7 @@
 \usepackage{varwidth}     % Variable-width minipages
 \usepackage{./main}       % Markup and design
 \input{./acronyms}        % Acronyms
+\includeonly{chapters/design}
 \begin{document}
 \frontmatter
 \title{Electronic Document Preparation\\Pocket Primer}
@@ -46,7 +47,7 @@
 \maketitle
 \tableofcontents
 \mainmatter
-\fakechapter{Foreword}
+\fakechapter{Introduction}
 With the advent of the digital age, typesetting has become available to
 virtually anyone equipped with a personal computer. Beautiful text documents can
 now be crafted using free and consumer-grade software, which often obviates the
@@ -83,11 +84,11 @@ environment---such as Cygwin for Windows---on their computer.
 
 % Acronyms
 \fakechapter{Acronyms}
+\def\index#1{} % Disable indexing of acronyms.
 \printacronyms[heading=none]
 
 % Index
 \cleardoublepage
 \def\index#1{} % Disable recursive indexing.
 \printindex    % Print the index.
-\faketoc{Index}
 \end{document}

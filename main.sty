@@ -10,8 +10,8 @@
 \let\displaykey\keys                               % A displayable keyboard key
 \newif\iflinuxfirst\linuxfirsttrue
 \def\Linux{%                                       % A shorthand for GNU/Linux
-    \acroshort{GNU}/Linux%
-    \acroindex[!Linux]{GNU}}
+  \acroshort{GNU}/Linux%
+  \acroindex[!Linux]{GNU}}
 \def\Unix{%                                        % A shorthand for Unix
   Unix and Unix-like operating system}
 \def\Unices{%                                      % A shorthand for Unices
@@ -41,27 +41,6 @@
   \setlength\oldbelowcaptionskip\belowcaptionskip  %% material both below and
   \setlength\belowcaptionskip\abovecaptionskip
   \caption{#1}\setlength\belowcaptionskip\oldbelowcaptionskip}
-\usepackage{ragged2e}
-\def\footnote#1{%                                  % Margin note
-  \marginpar[{\footnotesize\RaggedLeft#1}]%
-             {\footnotesize\RaggedRight#1}}%
-\def\lmarginpar#1{{%                               % A non-floating margin note
-  \footnotesize                                    %% ... in even page variant
-  \smash{\llap{\parbox[t]{\marginparwidth}
-  {\strut\raggedleft#1}\kern\marginparsep}}}}
-\def\rmarginpar#1{{%                               %% ... in odd page variant
-  \footnotesize
-  \smash{\rlap{\hspace*{\dimexpr\linewidth+\marginparsep}\parbox[t]%
-  {\marginparwidth}{\strut\raggedright#1}}}}}
-\usepackage{changepage}
-\strictpagecheck
-\def\ffootnote#1{%                 % A two-side aware non-floating margin note
-  \checkoddpage
-  \ifoddpage
-    \rmarginpar{#1}
-  \else
-    \lmarginpar{#1}
-  \fi}
 \let\filename\texttt                               % Filenames
 \newcommand\filenamecap[2][]{                      % Filenames in captions
   (\filename{#2}\ifx\empty#1\empty\else, #1\fi)}
@@ -109,8 +88,11 @@
   \citetitle{#3}~\cite[#2]{#3}}%                   %%%% #2: `\cite` opt-args
                                                    %%%% #3: `\cite` id
 %% Quotation macros
-\def\quote#1{``\emph{{\let\emph\textbf#1}}''}      % Any emphasis in a quote
-                                                   %% will be set in bold.
+\def\quote#1{“#1\kern-.3ex”}               % A quotation
+\def\blockquote#1#2{%                      % A block quotation
+  \\[1.2em]\emph{#1}%                      %% #1: the quotation
+  \\[0.6em]\hspace*{15pt}---#2\\[1.2em]}%  %% #2: the source
+
 %% Code
 \def\code@readhead:#1{%               % A helper macro that reads #1\relax and
   \if#1|%                             %% returns any tokens preceding a pipe (|)
@@ -218,6 +200,28 @@
 \usepackage{etoolbox}
 \preto\chapter\acresetall           % Consider acronyms forgotten after a chapter
 \preto\backmatter\acuseall          % Do not expand acronyms in the back matter
+%% Side Notes
+\usepackage{ragged2e}
+\def\sidenote#1{%                                  % Side note
+  \marginpar[{\footnotesize\RaggedLeft#1}]%
+             {\footnotesize\RaggedRight#1}}%
+\def\lmarginpar#1{{%                               % A non-floating margin note
+  \footnotesize                                    %% ... in even page variant
+  \smash{\llap{\parbox[t]{\marginparwidth}
+  {\strut\raggedleft#1}\kern\marginparsep}}}}
+\def\rmarginpar#1{{%                               %% ... in odd page variant
+  \footnotesize
+  \smash{\rlap{\hspace*{\dimexpr\linewidth+\marginparsep}\parbox[t]%
+  {\marginparwidth}{\strut\raggedright#1}}}}}
+\usepackage{changepage}
+\strictpagecheck
+\def\fsidenote#1{%                                 % Side note inside a float
+  \checkoddpage
+  \ifoddpage
+    \rmarginpar{#1}
+  \else
+    \lmarginpar{#1}
+  \fi}
 
 % Design
 %% Layout
@@ -229,12 +233,12 @@
 \setlength{\headsep}{4mm}
 \setlength{\textheight}{%
   \paperheight-\footskip-\headheight-\headsep-\topmargin-33mm}
-\setlength{\marginparsep}{4mm} %% ~1cc as per \citework[para.\,50]{kapr99}
+\setlength{\marginparsep}{5mm} %% ~1cc as per \citework[para.\,50]{kapr99}
 \setlength{\textwidth}{100mm} %% Set up a measure that yields ~66 chars per line
 \setlength{\marginparwidth}{\paperwidth-\textwidth-\marginparsep-18mm}
 \setlength{\oddsidemargin}{2mm}
 \setlength{\evensidemargin}{\marginparwidth+\marginparsep}
-%%% Running heads and page numbers
+%% Running heads and page numbers
 \usepackage{fancyhdr}
 \fancypagestyle{plain}{%             % The chapter opening page design
   \fancyhf{}%
@@ -249,16 +253,18 @@
   \fancyhead[RE]{\slshape\leftmark}%
   \fancyhead[LO]{\slshape\rightmark}%
   \fancyhead[LE,RO]{\thepage}}
-%%% Headings
+%% Headings
 \iffalse % Use the original headings for now
   \usepackage{titlesec}
   \titleformat{\section}[block]{\scshape}{\thesection\quad}{0pt}{}[]
   \titleformat{\subsection}[block]{\itshape}{\thesubsection\quad}{0pt}{}[]
 \fi
-%%% Index layout
+%% Index layout
 \usepackage[
   indentunit=\parindent,  % The basic unit of index layout as well as ...
-  columnsep=\parindent    %% ... the column separator is the paragraph indent
+  columnsep=\parindent,   %% ... the column separator is the paragraph indent
+  totoc,                  % The index will be included into the TOC.
+  indentunit=.7em         % The subitem indentation will be .7em.
 ]{idxlayout}
 \def\commaToSpacing, {\enspace} % Replace commas separating pages with spacing.
 \let\oldindex\index
@@ -268,16 +274,27 @@
   \else
     \oldindex{#2|#1}%
   \fi}
-
+\let\indexfont\footnotesize % Print the index with \footnotesize.
+\def\indexspace{% Separate the sections of the index with a dingbat ornament.
+  \mbox{\hspace*{3\ila@indentunit}\ding{167}}}
 %% Acronyms
 \acsetup{
   first-long-format=\itshape,  % The formatting of an expanded acronym
   short-format=\scshape,       %%              ... an unexpanded acronym
   list-caps=true}              % List definitions start with upper-case letters
 %% Lists
-%%% No vertical spacing and indentation in lists
 \usepackage{enumitem}
-\setlist{noitemsep,leftmargin=0cm}
+\setlist{%
+  itemsep=0cm, topsep=0cm, parsep=0cm, partopsep=0cm, % No vertical spacing.
+  leftmargin=0cm} % No indentation
+%% Footnotes
+\usepackage{scrextend}
+\deffootnote[0pt]{0pt}{15pt}{% Put the footnote mark into margin and ...
+  \thefootnotemark\hspace{\labelsep}} %% ... use no superscripts.
+%%% The `\labelsep` is borrowed ^ from the `enumitem` package and corresponds to
+%%% the amount of space between a list item label and the list item content.
+\renewcommand\footnoterule{} % Do not separate the footnotes with a rule.
+\footnotesep=0em % Separate the footnote by 1en
 %% Code
 \setminted{breaklines=true}
 \usemintedstyle{default}
@@ -302,11 +319,13 @@
   \input ushyphex
   \input ./hyphenation}
 %% Table of contents entries
+\newdimen\tocleftcolwidth
+\tocleftcolwidth=3.2em % The width of the column with section numbers
 \renewcommand*\l@chapter[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
     \vskip 1.0em \@plus\p@
-    \setlength\@tempdima{3.2em}%
+    \setlength\@tempdima{\tocleftcolwidth}%
     \begingroup
       \parindent \z@ \rightskip \@pnumwidth
       \leavevmode
@@ -328,8 +347,8 @@
      {#4}\nobreak{\normalfont\normalcolor\quad #5}%
      \par}%
   \fi}
-\renewcommand*\l@section{\@dottedtocline{1}{0em}{3.2em}}
-\renewcommand*\l@subsection{\@dottedtocline{2}{0em}{3.2em}}
+\renewcommand*\l@section{\@dottedtocline{1}{0em}{\tocleftcolwidth}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{0em}{\tocleftcolwidth}}
 %% Fonts
 \usepackage{fontspec}
 \usepackage{unicode-math}
@@ -342,11 +361,10 @@
   BoldItalicFeatures={ Renderer=Basic }
 ]{TeX Gyre Pagella}
 \setmonofont[
-  Ligatures=TeX,
   Scale=MatchLowercase,
   AutoFakeSlant, % Fake the slant on the typewriter font
   BoldItalicFeatures=FakeSlant
-]{Inconsolatazi4}
+]{DejaVu Sans Mono}
 \setsansfont[Scale=MatchLowercase]{Latin Modern Sans}
 %%% Set up TeX Gyre Pagella as the math font with old style digits from the
 %%%% base TeX Gyre Pagella font for inline mathematics.

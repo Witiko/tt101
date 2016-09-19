@@ -1,5 +1,5 @@
 {\input examples/01/vcs-definitions%
-\ffootnote{After a remote repository has been established, users download the
+\fsidenote{After a remote repository has been established, users download the
   latest version of the document and then \textcolor{\svncheckout}{keep
   downloading the latest changes by other users} and
   \textcolor{\svncommit}{uploading changes of their own}.}
@@ -26,5 +26,4 @@
               {\command{svn commit}} (A) (A) edge[\svncheckout,bend left=\bend, ->] (D)
         (B) edge[\svncommit] (A) (C) edge[\svncommit] (A) (D) edge[\svncommit] (A) (A)
             edge[\svncommit, ->] (E);
-\end{tikzpicture}
-\caption{The basic \acroshort{SVN} workflow}}
+\end{tikzpicture}}

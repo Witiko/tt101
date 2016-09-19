@@ -29,7 +29,7 @@ recognize these specifics.
 On top of grammar and orthographic rules stand \termpl{style guide}, which, in
 order to improve consistency, codify how common language patterns are encoded.
 More comprehensive style guides---such as \work{the Chicago Manual of Style} or
-\work{the Oxford Style Manual}\footnote{
+\work{the Oxford Style Manual}\sidenote{
   This document was prepared in accordance with \person{William Strunk}'s
   \work{Elements of Style}, an American English style guide for general use. 
 }---often go beyond writing and provide guidelines on design and typesetting as
@@ -53,7 +53,7 @@ Although computing at its most primal has no use for anything but numbers, it
 has nevertheless been accompanied by text from the very outset. Even the
 earliest computers from 1950s were programmed with both raw machine code and
 the text programming language of \acronym{FORTRAN}. The digital representation
-of letters, digits and other characters was initially closely tied\footnote{
+of letters, digits and other characters was initially closely tied\sidenote{
   \Acronym{EBCDIC} by \acronym{IBM} was the default encoding on
   \acroshort{IBM}'s System/\kern-.4pt360 mainframes and was in active use until
   the introduction of \acronym{PC} in 1981. In writing systems using Chinese
@@ -87,7 +87,7 @@ unlike control codes, are easy to read and write by humans.
 \begin{table}
   \input examples/01/ascii
   \caption{The \acronym{ASCII} encoding, as specified in the \citeyear{asa86}
-    revision of the standard \cite{asa86}.}
+    revision of the standard.~\cite{asa86}}
   \label{tab:ascii}
 \end{table}
 
@@ -206,30 +206,30 @@ numbers of the most common characters in the range from 0 to 65,535
 thematically related characters. \Acronym{UCS} encodings map code points to
 binary character codes and vise versa.
 
-Three major encodings\footnote{
+Three major encodings are specified in the \acronym{UCS} standard and its
+amendments~\cite{iso93:am1,iso93:am2}:
+\sidenote{%
   Notable are also the seven-bit encodings of \acroshort{UTF}-7
   \acroindex[!UTF-7@\acroshort{UTF}-7]{UTF} and \inx{Punycode}, which bring
   Unicode support to protocols that were designed with the seven-bit
   \acroshort{ASCII} in mind, such as e-mail.}
-are specified in the \acronym{UCS} standard and its
-amendments~\cite{iso93:am1,iso93:am2}:
-\begin{description}
-  \item[\acroshort{UTF}-32]\acroindex[!UTF-32@{\acroshort{UTF}-32}]{UTF}Directly
-    encodes \acronym{UCS} characters by transforming their code points to
-    four-byte integers. \acroshort{UTF}-32 is also known as
+\begin{enumerate}
+  \item[1]\acroshort{UTF}-32\acroindex[!UTF-32@{\acroshort{UTF}-32}]{UTF}
+    directly encodes \acronym{UCS} characters by transforming their code points
+    to four-byte integers. \acroshort{UTF}-32 is also known as
     \acroshort{UCS}-4\acroindex[!UCS-4@{\acroshort{UCS}-4}]{UCS}.
-  \item[\acroshort{UTF}-16]\acroindex[!UTF-16@{\acroshort{UTF}-16}]{UTF}
-    Directly encodes characters within \acronym{BMP} by transforming their code
+  \item[2]\acroshort{UTF}-16\acroindex[!UTF-16@{\acroshort{UTF}-16}]{UTF}
+    directly encodes characters within \acronym{BMP} by transforming their code
     points to two-byte integers. Code points in the range from 65,536 to
     1,114,111 (\mbox{\hexa{010000}--\hexa{10FFFF}}) are transformed into pairs
-    of two-byte integers, called \termpl{surrogate pair}, ranging from
-    55,296 to 57,343 (\mbox{\hexa{DC00}--\hexa{DFFF}}). To enable the
-    \acroshort{UTF}-16 encoding, the code points in the surrogate pair range
-    will never be assigned to characters~\cite[sec.\,3.4, D15]{unicode16}. The
-    same applies to code points above 1,114,111 (\hexa{10FFFF}), which allows
-    \acroshort{UTF}-16 to encode any \acroshort{UCS} character.
-  \item[\acroshort{UTF}-8]\acroindex[!UTF-8@{\acroshort{UTF}-8}]{UTF}
-    Directly transforms code points ranging from 0 to 127 (\hexa{7F}) to
+    of two-byte integers, called \termpl{surrogate pair}, ranging from 55,296 to
+    57,343 (\mbox{\hexa{DC00}--\hexa{DFFF}}). To enable the \acroshort{UTF}-16
+    encoding, the code points in this range will never be assigned to
+    characters~\cite[sec.\,3.4, D15]{unicode16}. The same is true of code points
+    above 1,114,111 (\hexa{10FFFF}), which allows \acroshort{UTF}-16 to encode
+    any \acroshort{UCS} character.
+  \item[3]\acroshort{UTF}-8\acroindex[!UTF-8@{\acroshort{UTF}-8}]{UTF}
+    directly transforms code points ranging from 0 to 127 (\hexa{7F}) to
     one-byte integers. Since the first \acroshort{UCS} block of the
     \acroshort{BMP} matches \acronym{ASCII}, any text encoded in eight-bit
     \acroshort{ASCII} is also encoded in \acroshort{UTF}-8. Code points in the
@@ -237,7 +237,8 @@ amendments~\cite{iso93:am1,iso93:am2}:
     transformed into two to four one-byte integers ranging from 128 to 253
     (\mbox{\hexa{80}--\hexa{FD}}). The encoding is illustrated in tables
     \ref{tab:utf8} and \ref{tab:utf8-example}.
-\end{description}
+\end{enumerate}
+
 \acroshort{UTF}-32 is primarily used for the fixed-space internal representation
 of individual \acronym{UCS} characters inside programs, \acroshort{UTF}-16
 fulfills a similar role in programs that only work with \acronym{BMP}, and
@@ -254,7 +255,7 @@ ch.\,4]{unicode16}---, various text processing algorithms, and implementation
 guidelines.
 
 \begin{figure}
-  \ffootnote{One of the design goals of \acroshort{UCS} was to avoid assigning
+  \fsidenote{One of the design goals of \acroshort{UCS} was to avoid assigning
     code points to different glyphs that carry the same meaning. As a result,
     the visually distinctive Han characters used in the East Asian countries
     of China, Japan, Korea, and Vietnam were merged into a set of 75,960
@@ -349,8 +350,8 @@ eight-bit encodings:
 
 \begin{figure}[p]
   \input examples/01/composeKey
-  \caption{The \key{Compose}\index{Compose@\displaykey{Compose}} key followed by
-    a mnemonic sequence of \acroshort{ASCII} characters produces a
+  \caption{The \key{Compose}\index{Compose key@\displaykey{Compose} key} key
+    followed by a mnemonic sequence of \acroshort{ASCII} characters produces a
     \acroshort{UCS} character. Although originally a physical key, \key{Compose}
     is not available on modern \acroshort{PC} and Apple keyboards and is usually
     mapped to the right \key{Ctrl} or \key{Super} key in software.
@@ -395,10 +396,10 @@ text files. Entry-level text editors are often distributed with an operating
 system and offer little beyond the ability to load, modify, and save text files
 in a text encoding of choice. Entry-level text editors with a \acronym{GUI}
 include the free \inx{Leafpad} for \Linux\ and \acronym{BSD} family of operating
-systems, and the proprietary \inx{Notepad} for Windows and \inx{TextEdit} (in
-plain text mode) for Mac OS. Entry-level text editors with a \acronym{CLI}
-include the free \cliutil{joe}, \acroshort{GNU}
-\cliutil*{nano}\acroindex[!nano]{GNU}, and \cliutil{pico}.
+systems, and the proprietary \inx{Notepad} for Windows and \inx{TextEdit} for
+Mac OS. Entry-level text editors with a \acronym{CLI} include the free
+\cliutil{joe}, \acroshort{GNU}
+\cliutil*{nano}\acroindex[!nano@\cliutil*{nano}]{GNU}, and \cliutil{pico}.
 
 More advanced text editors come with the support for \termpl{regular expression}
 and \term{version control}---which will be covered in sections \ref{sec:regexs}
@@ -413,10 +414,9 @@ exchange, they empower the users to perform complex text editing.
 Interactive \acropl{DPS}\acroindex[!interactive]{DPS} are a breed of text
 editors that produces fully-formatted text documents instead of (or along with)
 text files. The reader is advices to avoid interactive \acropl{DPS} that use
-proprietary, undocumented, and obscure file formats which lock the user into
-using the respective \acronym{DPS} to open the files reliably. Well-defined
-interactive \acronym{DPS} file formats include \acronym{PDF}, \acronym{OOXML},
-and \acronym{ODF}.
+proprietary, undocumented, or obscure file formats which lock the user into
+using the respective \acronym{DPS}. Well-defined interactive \acronym{DPS} file
+formats include \acronym{PDF}, \acronym{OOXML}, and \acronym{ODF}.
 
 The primary difference between text editors and \acropl{DPS} is the fact that
 the user is expected to use the \acronym{DPS} to mark up, design, and typeset the
@@ -431,13 +431,13 @@ Interactive \acropl{DPS} include the free \inx{Apache OpenOffice} and
 \inx{QuarkXPress}.
 
 \subsection{Regular Expressions}\label{sec:regexs}
-The \term{Chomsky hierarchy} is a classification of text production rules
-(called \termpl{formal grammar}), which was proposed \cite{chomsky56} in
-\citeyear{chomsky56} by the American linguist \person{Noam Chomsky} in his
-endeavor to discover a good formal model for the description of natural
-languages. The class of \termpl{regular grammar}, which is the least powerful
-of the proposed classes, and the related formal model of \termpl{regular
-expression} enable the writer to match patterns within text.
+The \term{Chomsky hierarchy}\index{Noam Chomsky!hierarchy} is a classification
+of text production rule sets (called \termpl{formal grammar}), which was
+proposed~\cite{chomsky56} in \citeyear{chomsky56} by the American linguist
+\person{Noam Chomsky} in his endeavor to discover a good formal model for the
+description of natural languages. The class of \termpl{regular grammar}, which
+is the least powerful of the proposed classes, and the related formal model of
+\termpl{regular expression} enable the writer to match patterns within text.
 
 Since regular expressions are just a formal model, a software implementation
 needs to settle on a concrete syntax. One of the earliest standard syntaxes are
@@ -449,15 +449,10 @@ More extensive syntaxes include the \acroshort{GNU} extensions of \acronym{BRE}
 and \acronym{ERE}, the regex syntax of the \inx{Perl} programming language, and
 their derivatives. For these syntaxes, the term \term*{regular} is a misnomer,
 as they can be used to describe formal grammars that, according to the Chomsky
-hierarchy, are stronger than regular.\footnote{
-  A curious reader with a background in formal language theory should direct
-  their attention to Perl self-referencing groups and look-aheads, which make it
-  a simple matter to create expressions that match non-context-free formal
-  languages.
-% It is easy to show that the Perl 5 regex of \code{(?=(a(?-1)?b)c)
-% a+(b(?-1)?c)} generates the context-sensitive language of $a^nb^nc^n$ for
-% arbitrary characters $a,b,c$ with superscripts denoting repetition.
-} To disambiguate the term, expressions in these syntaxes are often called
+hierarchy, are stronger than regular.\sidenote{
+  \citework{friedl06} by \person{Jeffrey E. F. Friedl} is an extensive resource
+  on regexes.}
+To disambiguate the term, expressions in these syntaxes are often called
 \termpl*[regexes]{regex}\index[see{regular expression}]{regex}.
 
 \begin{table}
@@ -496,22 +491,20 @@ other properties defined by Unicode, as shown in Table \ref{tab:unicode-regexs}.
 \end{table}
 
 The most elementary text processing \acroshort{CLI} program is \cliutil{grep}%
-\footnote{
+\sidenote{
   The authoritative resource on \cliutil{grep}, \cliutil{sed}, and \cliutil{awk}
   is \citework{dougherty97}, which explains each program as well as the
   \acroshort{BRE} and \acroshort{ERE} syntaxes in full detail.
 }, which makes it possible to search text files for fixed strings and regexes in
 default of an advanced text editor. Unless configured otherwise, the tool will
-present lines that contain one or more matches to the user.\footnote{%
-  For more information about regular expressions, consult \citework{friedl06}
-  by \person{\citeauthor{friedl06}}.}
-A more advanced text-processing \acroshort{CLI} program is \cliutil{sed}, which
-features a simple programming language that can be used to arbitrarily search
-and transform text files. \Cliutil{awk} is a \acroshort{CLI} program that also
-features a text-processing programming language, albeit a more advanced one
-than that of \cliutil{sed}. Originally developed for the Research Unix during
-1973--1977, \cliutil{grep}, \cliutil{sed}, and \cliutil{awk} are available in
-various flavors for most operating systems.
+present lines that contain one or more matches to the user. A more advanced
+text-processing \acroshort{CLI} program is \cliutil{sed}, which features a
+simple programming language that can be used to arbitrarily search and transform
+text files. \Cliutil{awk} is a \acroshort{CLI} program that also features a
+text-processing programming language, albeit a more advanced one than that of
+\cliutil{sed}. Originally developed for the Research Unix during 1973--1977,
+\cliutil{grep}, \cliutil{sed}, and \cliutil{awk} are available in various
+flavors for most operating systems.
 
 %%% The true power of regular expressions
 %%%   <https://nikic.github.io/2012/06/15/The-true-power-of-regular-expressions.html>
@@ -540,7 +533,7 @@ in a repository located on a remote server. Users send new versions to the
 server and retrieve existing versions using a client software. The client
 software is \term*{thin} in the sense that it does not store more than one
 version locally and its operation is fully dependent on the availability of the
-server. An example of centralized \acronym{VCS} is \acronym{SVN}\footnote{%
+server. An example of centralized \acronym{VCS} is \acronym{SVN}\sidenote{%
 	The authoritative resource on \acronym{SVN} is \citework{sussman02},
 	affectionately known as \work{the Subversion book}.}.
 
@@ -556,43 +549,42 @@ collisions. Examples of decentralized \acronym{VCS} include \inx{Git},
 
 \begin{figure}
   \input examples/01/svn
+  \caption{The basic \acroshort{SVN} workflow}
 \end{figure}
 
 \begin{figure}
-%  \ffootnote{Although it is typical to use a central repository, the
+%  \fsidenote{Although it is typical to use a central repository, the
 %    decentralized architecture of Git makes it possible for clients to exchange
 %    the contents of their repositories directly.  Multiple layers of
 %    repositories that automatically exchange the latest updates can also be
 %    created for backup and other purposes.}
   \input examples/01/git
+  \separatorcaption{The diagram above depicts the basic Git workflow. The
+    diagram below depicts the use of the Git program with an \acroshort{SVN}
+    repository; this bears all the advantages and disadvantages associated with
+    decentralized \acronym{VCS}.}
+  \input examples/01/git-svn
 \end{figure}
-
-%\begin{figure}
-%  \input examples/01/git-svn
-%\end{figure}
 
 Although \acronym{VCS} can be used to keep track of any kind of files, they are
 especially geared towards text files, which they can easily display along with
 changes. However, most interactive \acropl{DPS} do not produce text files, which
 can make version control challenging. As a solution, some \acropl{DPS} include
-an internal version control functionality that can record changes directly into
-output files. Other \acropl{DPS} provide an interface for external \acronym{VCS}
-to display changes between two versions of output documents produced by the
-\acropl{DPS}\footnote{%
+internal version control functionality that can record changes directly into
+output files. Other \acropl{DPS}\sidenote{%
   An example would be the graphical \acroshort{SVN} client \inx{Tortoise
   \acroshort{SVN}} that is able to display the changes between two versions
   of Microsoft Word documents using the interface provided by Microsoft Office.
-}. A category of its own are web services that enable real-time interactive
-collaboration---such as \inx{Word Online} or \inx{Google Documents}.
+} provide an interface for external \acronym{VCS} to display changes between two
+versions of output documents produced by the \acropl{DPS}. A category of its own
+form web services that enable real-time interactive collaboration---such as
+\inx{Word Online} or \inx{Google Documents}.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{examples/01/word.png}\nextimage
   \includegraphics[width=\textwidth]{examples/01/openoffice.png}
-  \caption{The built-in \acronym{VCS} of \inx{Microsoft Word} (top) and
+  \separatorcaption{The built-in \acronym{VCS} of \inx{Microsoft Word} (top) and
     \inx{Apache OpenOffice} (bottom)}
-\end{figure}
-
-\begin{figure}
   \includegraphics[width=\textwidth]{examples/01/tortoise-svn.png}
   \caption{\inx{Tortoise \acroshort{SVN}} is a graphical frontend for
     \acronym{SVN} with the ability to display the difference between two versions
