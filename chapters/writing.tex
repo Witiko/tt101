@@ -225,8 +225,8 @@ amendments~\cite{iso93:am1,iso93:am2}:
     of two-byte integers, called \termpl{surrogate pair}, ranging from
     55,296 to 57,343 (\mbox{\hexa{DC00}--\hexa{DFFF}}). To enable the
     \acroshort{UTF}-16 encoding, the code points in the surrogate pair range
-    will never be assigned~\cite[sec.\,3.4]{unicode15}. The same applies to code
-    points greater than 1,114,111 (\hexa{10FFFF}), which allows
+    will never be assigned to characters~\cite[sec.\,3.4, D15]{unicode16}. The
+    same applies to code points above 1,114,111 (\hexa{10FFFF}), which allows
     \acroshort{UTF}-16 to encode any \acroshort{UCS} character.
   \item[\acroshort{UTF}-8]\acroindex[!UTF-8@{\acroshort{UTF}-8}]{UTF}
     Directly transforms code points ranging from 0 to 127 (\hexa{7F}) to
@@ -250,7 +250,7 @@ merger with \acronym{UCS} in version 1.1 and since then, the standards have been
 kept closely synchronised. Unicode is a superset of \acronym{UCS} which defines
 additional information about \acronym{UCS} characters---such as their general
 category, directionality, case, or numeric value~\cite[sec.\,3.5 and
-ch.\,4]{unicode15}---, various text processing algorithms, and implementation
+ch.\,4]{unicode16}---, various text processing algorithms, and implementation
 guidelines.
 
 \begin{figure}
@@ -259,7 +259,7 @@ guidelines.
     the visually distinctive Han characters used in the East Asian countries
     of China, Japan, Korea, and Vietnam were merged into a set of 75,960
     ideograms in a process referred to as the \term{Han Unification}
-    \cite[sec.\,18.1]{unicode15}. This simplifies text processing, but also
+    \cite[sec.\,18.1]{unicode16}. This simplifies text processing, but also
     makes it impossible to encode a text in multiple East Asian languages
     without having to rely on external markup to select appropriate regional
     fonts. As a result, a derivative of \acronym{UCS} that doesn't implement the
@@ -280,16 +280,16 @@ eight-bit encodings:
     \acroshort{UTF}-16 and \acroshort{UTF}-32 encodings.
   \item Although character strings can not be collated by a simple character
     code comparison, a collation algorithm is defined in the Unicode
-    specification~\cite{unicode15:collation} and collation tables for major
-    locales~\cite{unicode15:cldr} are maintained by the Unicode Consortium.
+    specification~\cite{unicode16:collation} and collation tables for major
+    locales~\cite{unicode16:cldr} are maintained by the Unicode Consortium.
   \item Classes of characters---such as uppercase letters, lowercase letters,
     numbers, and punctuation---do not form contiguous ranges, but their position
-    is directly specified in the standard \cite[sec.\,4.5]{unicode15}.
+    is directly specified in the standard~\cite[sec.\,4.5]{unicode16}.
   \item Although idiosyncrasies---such as ligatures, invisible hyphenation
     hints, and combining characters---are present in \acronym{UCS}, explicit
     normalization algorithms for character string equivalence testing are
-    specified by the standard \cite[sec.\,2.12]{unicode15}. An algorithm
-    for case conversion is also specified \cite[sec.\,3.13]{unicode15}.
+    specified by the standard~\cite[sec.\,2.12]{unicode16}. An algorithm
+    for case conversion is also specified~\cite[sec.\,3.13]{unicode16}.
     \index{Unicode!normalization}\index{Unicode!case conversion}
   \item The \ucs[FEFF]{Byte Order Mark} character can be inserted at the
     beginning of a text as a signature of Unicode encodings. As the name
