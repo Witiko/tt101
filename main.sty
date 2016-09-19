@@ -260,6 +260,14 @@
   indentunit=\parindent,  % The basic unit of index layout as well as ...
   columnsep=\parindent    %% ... the column separator is the paragraph indent
 ]{idxlayout}
+\def\commaToSpacing, {\enspace} % Replace commas separating pages with spacing.
+\let\oldindex\index
+\renewcommand\index[2][]{%
+  \ifx\empty#1\empty
+    \oldindex{#2\protect\commaToSpacing}%
+  \else
+    \oldindex{#2|#1}%
+  \fi}
 
 %% Acronyms
 \acsetup{
