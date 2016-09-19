@@ -60,15 +60,15 @@ techniques tied with writing, designing, typesetting, and distributing text
 documents---one of the principal means of knowledge preservation and transfer
 known to man. Each chapter describes one discrete step of document preparation
 along with practical examples and references to literature for those interested
-in further study of the subject matter.
+in further study.
 
 The chapter are filled with examples that illustrate the subject matter. These
 should be consulted whenever the concepts described in the text are unclear to
 the reader. Although care was taken not to favor any computing environment,
-some examples feature Unix utilities that may or may not have a suitable
-counterpart in operating systems such as Windows. To try these examples out, the
-reader is advised to install a Unix-like environment---such as the Windows
-Cygwin---on their local machine.
+some examples feature utilities for \Unices. These utilities may or may not have
+a suitable counterpart in operating systems such as Windows; To try the
+corresponding examples out, the reader is advised to install a free Unix-like
+environment---such as Cygwin for Windows---on their computer.
 
 \include{chapters/writing}
 \include{chapters/markup}
@@ -78,7 +78,8 @@ Cygwin---on their local machine.
 \backmatter
 
 % Bibliography
-\printbibliography[heading=bibintoc]
+\def\cite#1{$\!$}                    % Disable recursive citing.
+\printbibliography[heading=bibintoc] % Print the bibliography.
 
 % Acronyms
 \fakechapter{Acronyms}
@@ -86,7 +87,7 @@ Cygwin---on their local machine.
 
 % Index
 \cleardoublepage
-\def\index#1{} % Disable indexing
-\printindex    % Print the index
+\def\index#1{} % Disable recursive indexing.
+\printindex    % Print the index.
 \faketoc{Index}
 \end{document}

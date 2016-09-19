@@ -10,14 +10,10 @@
 \let\displaykey\keys                               % A displayable keyboard key
 \newif\iflinuxfirst\linuxfirsttrue
 \def\Linux{%                                       % A shorthand for GNU/Linux
-  \iflinuxfirst
-    \acroshort{GNU}/Linux (Linux)%
-    \linuxfirstfalse
-  \else
-    Linux%
-  \fi\acroindex[!Linux]{GNU}}
+    \acroshort{GNU}/Linux%
+    \acroindex[!Linux]{GNU}}
 \def\Unix{%                                        % A shorthand for Unix
-  Unix or Unix-like operating system}
+  Unix and Unix-like operating system}
 \def\Unices{%                                      % A shorthand for Unices
   Unix and Unix-like operating systems}
 \DeclareRobustCommand{\foreign}[2][]{%             % A foreign language text
@@ -67,7 +63,8 @@
     \lmarginpar{#1}
   \fi}
 \let\filename\texttt                               % Filenames
-\def\filenamecap#1{ (\filename{#1})}               % Filenames in captions
+\newcommand\filenamecap[2][]{                      % Filenames in captions
+  (\filename{#2}\ifx\empty#1\empty\else, #1\fi)}
 \let\tblhead\textit                                % The table heading style
 \def\inx#1{#1\index{#1}}                           % Leaky indexing
 \let\person\inx                                    % Person names

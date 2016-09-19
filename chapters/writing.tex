@@ -19,12 +19,12 @@ rule}\index{writing rules!grammar}, which specify the structure of spoken
 language, and \termpl*{orthographic rule}\index{writing rules!ortography}, which
 impose additional requirements on written text. The complexity of either set of
 rules depends entirely on the language in question. Some writing systems, such
-as the Japanese kanji, are not phonographic and the correspondence between
-the spoken words and the written symbols needs to be memorized by the writer on
-a word-to-word basis. Other languages may use vastly different grammar rules for
-speaking and for writing, which means that a spoken sentence needs to be
-translated first before writing down. A writer needs to recognize these
-specifics.
+as those that incorporate Chinese characters, are not phonographic and the
+correspondence between the spoken words and the written symbols needs to be
+memorized by the writer on a word-to-word basis. Other languages may use vastly
+different grammar rules for speaking and for writing, which means that a spoken
+sentence needs to be translated first before writing down. A writer needs to
+recognize these specifics.
 
 On top of grammar and orthographic rules stand \termpl{style guide}, which, in
 order to improve consistency, codify how common language patterns are encoded.
@@ -43,7 +43,7 @@ that should be formed around the writing and not the other way around.
 
 \section{Text Processing}
 Originally the domain of the pen, the quill, the stylus, and the more recent
-typewriter machine, manuscripts of today are produced chiefly using the personal
+typewriter machine, manuscripts of today are produced mainly using the personal
 computer and stored in \termpl{text file}. The discipline of creating and
 manipulating digital text is called \term{text processing} and will be the focus
 of this section.
@@ -52,23 +52,23 @@ of this section.
 Although computing at its most primal has no use for anything but numbers, it
 has nevertheless been accompanied by text from the very outset. Even the
 earliest computers from 1950s were programmed with both raw machine code and
-the text programming languages of \acronym{FORTRAN} and \acronym{COBOL}. The
-digital representation of letters, digits and other characters was initially
-closely tied to each specific application and processor architecture, but with
-the advent of networking in 1960s, mutual intelligibility became a point of
-concern.\iffalse\footnote{
+the text programming language of \acronym{FORTRAN}. The digital representation
+of letters, digits and other characters was initially closely tied\footnote{
   \Acronym{EBCDIC} by \acronym{IBM} was the default encoding on
-  \acroshort{IBM}'s System/360 mainframes and was in active use until the
-  introduction of \acronym{PC} in 1981. In countries using Chinese ideographs,
-  special encodings, such as Big5, \acronym{JIS}, and \acronym{EUC}, are used to
-  this day. For brevity, the text focuses on the main stream of international
-  encodings.}\fi
-\ \quote{We had over sixty different ways to represent characters in
-computers. It was a real Tower of Babel,} explains \cite{brandel99}
-\person{Bob Berner}, an American computer scientist who worked at \acronym{IBM}
-during 1956--1962 and who drafted \acronym{ASCII}---a
-\term{character encoding} from \citeyear{asa63} that unified the industry and
-enabled computer networking on large scale.
+  \acroshort{IBM}'s System/\kern-.4pt360 mainframes and was in active use until
+  the introduction of \acronym{PC} in 1981. In writing systems using Chinese
+  characters, special encodings, such as Big5, \acronym{JIS}, and \acronym{EUC},
+  are used to this day. For brevity, the text focuses on the main stream of
+  international encodings.}
+to each specific application and processor architecture, but with the advent of
+computer networking in 1960s, mutual intelligibility became a point of concern.
+\quote{We had over sixty different ways to represent characters in
+computers. It was a real Tower of Babel,} explains \person{Bob
+Berner}~\cite{brandel99}, an American computer scientist who worked at
+\acronym{IBM} during 1956--1962 and who drafted \acronym{ASCII}---a
+\term{character encoding} from \citeyear{asa63} that unified the digital
+representation of text across the computer industry and enabled computer
+networking on a large scale.
 
 \subsubsection{ASCII}
 In \acronym{ASCII}, every character is represented by a number from zero to 127,
@@ -78,12 +78,11 @@ letters of the English alphabet, digits, punctuation, and other symbols---and
 \termpl{control code}, as depicted in Table \ref{tab:ascii}.  Unlike printable
 characters, control codes have no fixed visual representation and they were used
 to implement application-specific communication protocols and text formatting;
-their precise semantics were defined in the much later standard of
-\acroshort{ISO}~646 from \citeyear{iso72} \cite{iso72}. Unconstrained by the
-bandwidth and the storage limitations of the 1960s and 1970s, today's
-communication protocols and text formats gravitate towards markup constructed
-from printable characters, which, unlike control codes, are easy to read and
-write by humans.
+their precise semantics were defined in a much later standard from
+\citeyear{iso72}~\cite{iso72}. Unconstrained by the bandwidth and the storage
+limitations of the 1960s and 1970s, today's communication protocols and text
+formats gravitate towards markup constructed from printable characters, which,
+unlike control codes, are easy to read and write by humans.
 
 \begin{table}
   \input examples/01/ascii
@@ -140,7 +139,7 @@ strings encoded in \acronym{ASCII}:
   \item Characters are alphabetically ordered. Character strings can therefore
     be collated by comparing character code binary values.
   \item Lowercase and uppercase letters, digits and control codes form
-    contiguous ranges of character codes, simplifying classification.
+    contiguous ranges of character codes. This simplifies classification.
   \item There is precisely one way to encode any printable character. The
     conversion between the lower- and uppercase letters is a matter of
     inverting one bit.
@@ -149,16 +148,16 @@ This comes at the expense of support for non-English writing systems. As a
 temporary workaround, a set of \acroshort{ASCII} derivatives that replaced the
 less-needed characters of \# \$ @ [ \textbackslash\ ] \textasciicircum\ ` \{ |
 \} and \textasciitilde\ for international characters was specified in the
-\acroshort{ISO}~646 standard \cite{iso72} from \citeyear{iso72}.
+\acroshort{ISO}~646 standard from \citeyear{iso72}.~\cite{iso72}
 
 \subsubsection{Eight-bit Encodings}
 With the byte size stabilizing at eight bits, new character encodings emerged
 that were based on \acronym{ASCII} and used the additional bit to encode
 characters of non-English writing systems while retaining complete backwards
 compatibility with \acroshort{ASCII}. Beside the numerous vendor-specific
-encodings (called \termpl{code page}), a set of 15 eight-bit encodings covering
-all major modern writing systems whose characters fit within the space of 128
-additional combinations was standardized in the
+encodings (called \termpl{code page}), a set of fifteen eight-bit encodings
+covering all major modern writing systems whose characters fit within the space
+of 128 additional combinations was standardized in the
 \acroshort{ISO}/\acroshort{IEC}~8859 series released during 1986--2001.
 
   % Show a time diagram of Czech encodings
@@ -170,8 +169,7 @@ of complexity to text processing:
   \item Each character is exactly eight bits wide. The manipulation with strings
     is therefore as straightforward as with \acronym{ASCII}.
   \item Character strings can no longer be collated by character code
-    comparison. Each encoding requires a separate mapping from character codes
-    to sorting weights.
+    comparison. Each encoding requires separate collation tables.
   \item Classes of characters, such as uppercase and lowercase letters or
     punctuation, no longer form contiguous ranges and their position varies
     among encodings. This impedes character classification.
@@ -181,19 +179,20 @@ of complexity to text processing:
     among encodings.
   \item There exists no standard mechanism to detect which encoding is being
     used. The distinction needs to be done on the application level using either
-    heuristics or additional metadata. Consequently, no standard mechanism
-    exists to use different character encodings within a single text document.
+    heuristics, additional metadata, or human intervention. Consequently, no
+    standard mechanism exists to use different character encodings within a
+    single text document.
 \end{itemize}
 A portion of this complexity is inherent in the task of encoding the characters
 of all modern writing systems, but the overhead caused by the character encoding
 fragmentation proved to be unnecessary.
 
-\subsubsection{The Universal Character Set and Unicode}
+\subsubsection{The Universal Character Set and Unicode}\label{sec:ucs+unicode}
 In the early 1990s, the continual increase in the available bandwidth and
-storage led to the creation of the standards of Unicode
-\cite{unicode91,unicode92} and \acronym{UCS} in an attempt to create a text
-encoding that would contain the characters of all the world's living languages
-and succeed \acronym{ASCII} as the \foreign[italian]{lingua franca} of text
+storage led to the creation of the standards of
+Unicode~\cite{unicode91,unicode92} and \acronym{UCS} in an attempt to create a
+text encoding that would contain the characters of all the world's languages and
+succeed \acronym{ASCII} as the \foreign[italian]{lingua franca} of text
 interchange.
 
 \Acronym{UCS} is an ever-expanding catalogue of characters from writing systems
@@ -204,16 +203,16 @@ a \term{code point}, ranging from 0 to 2,147,483,647 (\hexa{7FFFFFFF}) with the
 numbers of the most common characters in the range from 0 to 65,535
 (\hexa{FFFF}) called \acronym{BMP}. The smallest unit of division in
 \acronym{UCS} are \termpl*{block}\acroindex[!block]{UCS}, which contain 256
-thematically related characters. \Acronym{UCS} encodings map character numbers
-to binary character codes.
+thematically related characters. \Acronym{UCS} encodings map code points to
+binary character codes and vise versa.
 
 Three major encodings\footnote{
   Notable are also the seven-bit encodings of \acroshort{UTF}-7
   \acroindex[!UTF-7@\acroshort{UTF}-7]{UTF} and \inx{Punycode}, which bring
   Unicode support to protocols that were designed with the seven-bit
   \acroshort{ASCII} in mind, such as e-mail.}
-are specified in the \acronym{UCS} standard and its amendments
-\cite{iso93:am1,iso93:am2}:
+are specified in the \acronym{UCS} standard and its
+amendments~\cite{iso93:am1,iso93:am2}:
 \begin{description}
   \item[\acroshort{UTF}-32]\acroindex[!UTF-32@{\acroshort{UTF}-32}]{UTF}Directly
     encodes \acronym{UCS} characters by transforming their code points to
@@ -226,7 +225,7 @@ are specified in the \acronym{UCS} standard and its amendments
     of two-byte integers, called \termpl{surrogate pair}, ranging from
     55,296 to 57,343 (\mbox{\hexa{DC00}--\hexa{DFFF}}). To enable the
     \acroshort{UTF}-16 encoding, the code points in the surrogate pair range
-    will never be assigned \cite[sec.\,3.4]{unicode15}. The same applies to code
+    will never be assigned~\cite[sec.\,3.4]{unicode15}. The same applies to code
     points greater than 1,114,111 (\hexa{10FFFF}), which allows
     \acroshort{UTF}-16 to encode any \acroshort{UCS} character.
   \item[\acroshort{UTF}-8]\acroindex[!UTF-8@{\acroshort{UTF}-8}]{UTF}
@@ -239,19 +238,20 @@ are specified in the \acronym{UCS} standard and its amendments
     (\mbox{\hexa{80}--\hexa{FD}}). The encoding is illustrated in tables
     \ref{tab:utf8} and \ref{tab:utf8-example}.
 \end{description}
-\acroshort{UTF}-32 is primarily used for the internal representation of
-individual \acronym{UCS} characters inside programs, \acroshort{UTF}-16 fulfills
-a similar role in applications that only work with \acronym{BMP}, and
+\acroshort{UTF}-32 is primarily used for the fixed-space internal representation
+of individual \acronym{UCS} characters inside programs, \acroshort{UTF}-16
+fulfills a similar role in programs that only work with \acronym{BMP}, and
 \acroshort{UTF}-8 is used for text storage and interchange. Since 2010, the
-majority of text content on the Web is encoded in \acroshort{ASCII} and
-\acroshort{UTF}-8 \cite{qsuccess15}.
+majority of text content on the Web has been encoded in \acroshort{ASCII} and
+\acroshort{UTF}-8.~\cite{qsuccess15}
 
-Originally a competing standard, Unicode underwent a merger with \acronym{UCS}
-in version 1.1 and since then, the standards have been kept closely
-synchronised. Unicode is a superset of \acronym{UCS}, which defines additional
-information about \acronym{UCS} characters---such as their general category,
-directionality, case, or numeric value \cite[sec.\,3.5 and ch.\,4]{unicode15}%
----, various text processing algorithms, and implementation guidelines.
+Unicode was a competing standard for universal text encoding that underwent a
+merger with \acronym{UCS} in version 1.1 and since then, the standards have been
+kept closely synchronised. Unicode is a superset of \acronym{UCS} which defines
+additional information about \acronym{UCS} characters---such as their general
+category, directionality, case, or numeric value~\cite[sec.\,3.5 and
+ch.\,4]{unicode15}---, various text processing algorithms, and implementation
+guidelines.
 
 \begin{figure}
   \ffootnote{One of the design goals of \acroshort{UCS} was to avoid assigning
@@ -280,11 +280,11 @@ eight-bit encodings:
     \acroshort{UTF}-16 and \acroshort{UTF}-32 encodings.
   \item Although character strings can not be collated by a simple character
     code comparison, a collation algorithm is defined in the Unicode
-    specification \cite{unicode15:collation} and collation tables for major
-    locales \cite{unicode15:cldr} are maintained by the Unicode Consortium.
+    specification~\cite{unicode15:collation} and collation tables for major
+    locales~\cite{unicode15:cldr} are maintained by the Unicode Consortium.
   \item Classes of characters---such as uppercase letters, lowercase letters,
     numbers, and punctuation---do not form contiguous ranges, but their position
-    is directly specified by the standard \cite[sec.\,4.5]{unicode15}.
+    is directly specified in the standard \cite[sec.\,4.5]{unicode15}.
   \item Although idiosyncrasies---such as ligatures, invisible hyphenation
     hints, and combining characters---are present in \acronym{UCS}, explicit
     normalization algorithms for character string equivalence testing are
@@ -340,7 +340,7 @@ eight-bit encodings:
   \centerline{\includegraphics[width=0.75\textwidth]%
     {examples/01/google-pinyin.png}}
   \caption{Text input methods are not limited to keyboard layouts. Software that
-    allows for the input of non-Latin characters on a keyboard through reversed
+    enables the input of non-Latin characters on a keyboard through reversed
     romanization can often be the best option for writing systems with a large
     number of characters. Above is the \inx{Google Pinyin} input method for the
     Android operating system, which makes it possible to input Chinese
@@ -353,7 +353,7 @@ eight-bit encodings:
     a mnemonic sequence of \acroshort{ASCII} characters produces a
     \acroshort{UCS} character. Although originally a physical key, \key{Compose}
     is not available on modern \acroshort{PC} and Apple keyboards and is usually
-    mapped to a less-used key, such as the right \key{Ctrl} or \key{Super} key.
+    mapped to the right \key{Ctrl} or \key{Super} key in software.
     \key{Compose} is natively supported on \Unices\ using the \inx{X Window
     System}. On other operating systems, support can be added by third-party
     software.}
@@ -387,26 +387,27 @@ support for all \acroshort{ASCII} characters. This doesn't apply to the much
 larger \acronym{UCS} and it is the task of an \acronym{IME} to provide a
 mechanism for the creation and selection of keyboard layouts that will allow the
 user to input any \acronym{UCS} character. Some programs may provide input
-methods of their own.
+methods of their own that are independent on the \acronym{IME}.
 
 \subsection{Text Editors}
-A \term{text editor} is an applications, which can be used to create and modify
+A \term{text editor} is an application that can be used to create and modify
 text files. Entry-level text editors are often distributed with an operating
-system and offer little beyond the ability to load, modify and save text files
+system and offer little beyond the ability to load, modify, and save text files
 in a text encoding of choice. Entry-level text editors with a \acronym{GUI}
-include the \inx{Windows Notepad}, the iOS \inx{TextEdit} in plain text mode,
-and \inx{Leafpad} for \Linux\ and \acronym{BSD}. Entry-level text editors with a
-\acronym{CLI} include \cliutil{joe}, \acroshort{GNU}
+include the free \inx{Leafpad} for \Linux\ and \acronym{BSD} family of operating
+systems, and the proprietary \inx{Notepad} for Windows and \inx{TextEdit} (in
+plain text mode) for Mac OS. Entry-level text editors with a \acronym{CLI}
+include the free \cliutil{joe}, \acroshort{GNU}
 \cliutil*{nano}\acroindex[!nano]{GNU}, and \cliutil{pico}.
 
 More advanced text editors come with the support for \termpl{regular expression}
 and \term{version control}---which will be covered in sections \ref{sec:regexs}
-and \ref{sec:vcs}---, as well as user modules that extend the base
-functionality.  Advanced \acronym{GUI} text editors include \inx{Sublime Text},
-\inx{Atom}, and \inx{PSPad}. Advanced \acronym{CLI} text editors include
-\cliutil{emacs}, \cliutil{vi}, and \cliutil{vim}. The presented \acronym{CLI}
-text editors are especially notorious for their learning curve, whose steepness
-is only matched by the power these editors grant to those who wield them.
+and \ref{sec:vcs}---and user modules that extend the base functionality.
+Advanced \acronym{GUI} text editors include the free \inx{Notepad++} and
+\inx{Atom}, and the proprietary \inx{Sublime Text}.  Advanced \acronym{CLI} text
+editors include the free \inx{Emacs}, \cliutil{vi}, and \cliutil{vim}. These
+\acronym{CLI} text editors are notorious for their steep learning curve; in
+exchange, they empower the users to perform complex text editing.
 
 \subsection{Interactive Document Preparation Systems}
 Interactive \acropl{DPS}\acroindex[!interactive]{DPS} are a breed of text
@@ -424,9 +425,10 @@ available at each step of the document preparation process. The self-sufficient
 nature of \acropl{DPS} may be a time-saving feature for simpler documents, but
 in the case of more complex documents, the markup and typesetting capabilities
 of a \acronym{DPS} may not be up to par with those of a dedicated tool.
-Interactive \acropl{DPS} include \inx{Apache OpenOffice}, \inx{TextEdit},
-\inx{Microsoft Word}, \inx{Scribus}, \inx{Adobe InDesign}, \inx{Adobe
-FrameMaker} and \inx{QuarkXPress}.
+Interactive \acropl{DPS} include the free \inx{Apache OpenOffice} and
+\inx{Scribus}, and the proprietary \inx{TextEdit}, \inx{Microsoft Word},
+\inx{Scribus}, \inx{Adobe InDesign}, \inx{Adobe FrameMaker}, and
+\inx{QuarkXPress}.
 
 \subsection{Regular Expressions}\label{sec:regexs}
 The \term{Chomsky hierarchy} is a classification of text production rules
@@ -434,21 +436,20 @@ The \term{Chomsky hierarchy} is a classification of text production rules
 \citeyear{chomsky56} by the American linguist \person{Noam Chomsky} in his
 endeavor to discover a good formal model for the description of natural
 languages. The class of \termpl{regular grammar}, which is the least powerful
-of the proposed classes, has properties that make it possible to determine the
-grammaticality of a text in constant time and space. \Termpl{regular
-expression} are a more intuitive reformulation of regular grammars that a writer
-can use to find and replace character strings within text.
+of the proposed classes, and the related formal model of \termpl{regular
+expression} enable the writer to match patterns within text.
 
 Since regular expressions are just a formal model, a software implementation
 needs to settle on a concrete syntax. One of the earliest standard syntaxes are
-\acronym{BRE} and \acronym{ERE} \cite[part~1,~ch.\,9]{iso93:posix2}, which are
-supported by most utilities using regular expressions on \Unices. Both syntaxes
-are described in Table \ref{tab:regexs}. More extensive syntaxes include the
-\acroshort{GNU} extensions of \acronym{BRE} and \acronym{ERE}, the regex syntag
-of the \inx{Perl} programming language, and their dialects and derivatives. For
-most of these extended syntaxes, the term \term*{regular} is a misnomer, as the
-expressions can be used to build grammars that, according to the Chomsky
-hierarchy, aren't regular.\footnote{
+\acronym{BRE} and \acronym{ERE} syntaxes~\cite[part~1,~ch.\,9]{iso93:posix2}
+described in Table \ref{tab:regexs}, which are supported by most text processing
+programs on \Unices.
+
+More extensive syntaxes include the \acroshort{GNU} extensions of \acronym{BRE}
+and \acronym{ERE}, the regex syntax of the \inx{Perl} programming language, and
+their derivatives. For these syntaxes, the term \term*{regular} is a misnomer,
+as they can be used to describe formal grammars that, according to the Chomsky
+hierarchy, are stronger than regular.\footnote{
   A curious reader with a background in formal language theory should direct
   their attention to Perl self-referencing groups and look-aheads, which make it
   a simple matter to create expressions that match non-context-free formal
@@ -456,7 +457,7 @@ hierarchy, aren't regular.\footnote{
 % It is easy to show that the Perl 5 regex of \code{(?=(a(?-1)?b)c)
 % a+(b(?-1)?c)} generates the context-sensitive language of $a^nb^nc^n$ for
 % arbitrary characters $a,b,c$ with superscripts denoting repetition.
-} To disambiguate the term, these expressions are often called
+} To disambiguate the term, expressions in these syntaxes are often called
 \termpl*[regexes]{regex}\index{regex|see{regular expression}}.
 
 \begin{table}
@@ -470,47 +471,47 @@ hierarchy, aren't regular.\footnote{
 Many regex syntaxes and the software that implements them were designed for the
 processing of \acronym{ASCII} text and may behave in surprising ways, when
 confronted with \acronym{UCS} characters. The software may assume that each
-character is exactly one byte long and fail to recognize any characters that
-occupy several bytes as a single character, or it may assume that all
-\acronym{UCS} characters fall within \acronym{BMP} and exhibit the same problem
-with characters outside \acronym{BMP}. More subtle, but no less precarious, can
-be the lack of support for Unicode case conversion and normalization algorithms,
-which makes it difficult to perform robust case-insensitive matching and the
-matching of characters that can be encoded in several different ways. The lack
-of awareness of the invisible characters that can appear in \acronym{UCS}
-text---such as the \ucs[200B]{zero width space}, \ucs[200C]{zero width
-non-joiner}, \ucs[200D]{zero width joiner}, and \ucs[FEFF]{zero width no-break
-space}---, is also problematic and can lead to false negative matches.
-Conversely, modern regex syntaxes that at least partially implement the Unicode
-standard for Regular Expressions \cite{unicode13}---such as those of Perl 5.2 or
-Java 7---are actively aware of \acronym{UCS} and provide features that enable
-the matching of characters based on their general category, numeric value,
-directionality, and other properties defined by Unicode, as shown in Table
-\ref{tab:unicode-regexs}.
+character is exactly one byte wide and fail to recognize any character that
+occupies several bytes. It may also assume that all \acronym{UCS} characters
+fall within \acronym{BMP} and exhibit the same problem with characters outside
+\acronym{BMP}. More subtle, but no less precarious, can be the lack of support
+for Unicode case conversion and normalization algorithms, which makes it
+difficult to perform robust case-insensitive matching and the matching of
+characters that can be encoded in several different ways. The lack of awareness
+of the invisible characters that can appear in \acronym{UCS} text---such as the
+\ucs[200B]{zero width space}, \ucs[200C]{zero width non-joiner}, \ucs[200D]{zero
+width joiner}, and \ucs[FEFF]{zero width no-break space}---, is also problematic
+and can lead to false negative matches. Conversely, modern regex syntaxes that
+at least partially implement the Unicode standard for Regular
+Expressions~\cite{unicode13}---such as those of Perl 5.2 or Java 7---are
+actively aware of \acronym{UCS} and provide features that enable the matching of
+characters based on their general category, numeric value, directionality, and
+other properties defined by Unicode, as shown in Table \ref{tab:unicode-regexs}.
 
 \begin{table}[!tb]
   \input examples/01/unicode-regexs
-  \caption{An overview of the elements of the Unicode regex syntax as
-    implemented by Perl 5.2 and Java 7. The list of Unicode character properties
-    is only demonstrative.}
+  \caption{The elements of the Unicode regex syntax implemented by Perl 5.2
+    and Java 7. The list of properties is not exhaustive.}
   \label{tab:unicode-regexs}
 \end{table}
 
-The most elementary text processing \acroshort{CLI} tool is \cliutil{grep}%
+The most elementary text processing \acroshort{CLI} program is \cliutil{grep}%
 \footnote{
   The authoritative resource on \cliutil{grep}, \cliutil{sed}, and \cliutil{awk}
-  is \citework{dougherty97}, which explains each tool as well as the
+  is \citework{dougherty97}, which explains each program as well as the
   \acroshort{BRE} and \acroshort{ERE} syntaxes in full detail.
 }, which makes it possible to search text files for fixed strings and regexes in
 default of an advanced text editor. Unless configured otherwise, the tool will
-present lines that contain one or more matches to the user. A more advanced
-text-processing \acroshort{CLI} tool is \cliutil{sed}, which features a simple
-programming language that can be used to arbitrarily transform text files.
-\Cliutil{awk} is a \acroshort{CLI} tool that also features a text-processing
-programming language, albeit a more advanced one than that of \cliutil{sed}.
-Originally developed for the Research Unix during 1973--1977, \cliutil{grep},
-\cliutil{sed}, and \cliutil{awk} are available in various flavors for most
-operating systems.
+present lines that contain one or more matches to the user.\footnote{%
+  For more information about regular expressions, consult \citework{friedl06}
+  by \person{\citeauthor{friedl06}}.}
+A more advanced text-processing \acroshort{CLI} program is \cliutil{sed}, which
+features a simple programming language that can be used to arbitrarily search
+and transform text files. \Cliutil{awk} is a \acroshort{CLI} program that also
+features a text-processing programming language, albeit a more advanced one
+than that of \cliutil{sed}. Originally developed for the Research Unix during
+1973--1977, \cliutil{grep}, \cliutil{sed}, and \cliutil{awk} are available in
+various flavors for most operating systems.
 
 %%% The true power of regular expressions
 %%%   <https://nikic.github.io/2012/06/15/The-true-power-of-regular-expressions.html>
@@ -522,37 +523,36 @@ operating systems.
 %%%   <https://mathiasbynens.be/notes/javascript-unicode>
 
 \section{Version Control}\label{sec:vcs}
-When writing a text document, it is ofter useful to have a backup of the
+When writing a text document, it is often useful to have a backup of the
 previous versions of files, so that undesirable changes can be reverted whenever
 necessary. If more than one person contributes to the document, the ability to
-track the authorship of these changes also becomes an asset. At its most
-rudimentary, \acronym{VCS} records changes along with a short description and
-information about their author. These changes can then be browsed, and reverted.
+track the authorship of these changes also becomes an asset. At their most
+rudimentary, \acronym{VCS} record changes along with their descriptions and
+authorship information. These changes can then be viewed, and reverted.
 With a single contributor, \acronym{VCS} are a convenient alternative to manual
-version archival. With several contributors, \acronym{VCS} becomes an essential
+version archival. With several contributors, \acronym{VCS} become an essential
 tool.
 
-\Acronym{VCS} can be dichotomized based on its architecture, which is either
+\Acronym{VCS} can be dichotomized based on their architecture, which is either
 \term*{centralized}\acroindex[!centralized]{VCS} or \term*{decentralized}
-\acroindex[!decentralized]{VCS}. Centralized \acronym{VCS} stores
-all versions in a repository located on a remote server. Users send new versions
-to the server and retrieve existing versions using a client software. The client
+\acroindex[!decentralized]{VCS}. Centralized \acronym{VCS} store all versions
+in a repository located on a remote server. Users send new versions to the
+server and retrieve existing versions using a client software. The client
 software is \term*{thin} in the sense that it does not store more than one
 version locally and its operation is fully dependent on the availability of the
-server. An example of centralized \acronym{VCS} is \acronym{SVN}\footnote{
-  The authoritative resource on \acronym{SVN} is \citework{sussman02},
-  affectionately known as \work{the Subversion book}.
-}.
+server. An example of centralized \acronym{VCS} is \acronym{SVN}\footnote{%
+	The authoritative resource on \acronym{SVN} is \citework{sussman02},
+	affectionately known as \work{the Subversion book}.}.
 
 By comparison, there is no designated server in decentralized \acronym{VCS} and
-the users can send and download new versions directly from one another. The
+the users can upload and download new versions directly from one another. The
 client software is \term*{thick} in the sense that all users have a local
-repository with every existing version, which they can browse and manipulate
-at any time. The disadvantages of decentralization include the more complex
-workflow, greater storage size requirements and the increased opportunity for
-the users not to share their local changes frequently enough, leading to an
-increased chance of collisions. Examples of decentralized \acronym{VCS} include
-\inx{Git}, \inx{Mercurial}, or \inx{Bazaar}.
+repository with every existing version, which they can view and manipulate
+at any time. The disadvantages include the more complex workflow, greater
+storage size requirements and the increased opportunity for the users not to
+share their local changes frequently enough, leading to an increased chance of
+collisions. Examples of decentralized \acronym{VCS} include \inx{Git},
+\inx{Mercurial}, or \inx{Bazaar}.
 
 \begin{figure}
   \input examples/01/svn
@@ -578,11 +578,11 @@ can make version control challenging. As a solution, some \acropl{DPS} include
 an internal version control functionality that can record changes directly into
 output files. Other \acropl{DPS} provide an interface for external \acronym{VCS}
 to display changes between two versions of output documents produced by the
-\acropl{DPS}\footnote{
+\acropl{DPS}\footnote{%
   An example would be the graphical \acroshort{SVN} client \inx{Tortoise
   \acroshort{SVN}} that is able to display the changes between two versions
   of Microsoft Word documents using the interface provided by Microsoft Office.
-}. A class of its own are web services that enable real-time interactive
+}. A category of its own are web services that enable real-time interactive
 collaboration---such as \inx{Word Online} or \inx{Google Documents}.
 
 \begin{figure}

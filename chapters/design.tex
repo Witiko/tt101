@@ -1,43 +1,39 @@
 \chapter{Design}
 After a manuscript has been written and marked up, it is time to create a visual
 system that will emphasize the internal structure and the character of the
-document. In book design, this involves the selection of one or several fonts
+document. In print design, this involves the selection of one or several fonts
 that are well-suited to both the document and each other, the design and the
-positioning of marked-up elements---such as headings, tables, figures, and
-lists---and parts of the page---such as headers, footers, and page numbers---,
-and the choice of the paper size and the type area geometry. In web design,
-several visual systems may have to be created to accommodate for various display
-devices.
+positioning of the structural elements of the document---such as headings,
+tables, figures, and lists---and parts of the page---such as headers, footers,
+and page numbers---, and the choice of the paper size and the type area
+geometry. In web design, several visual systems may have to be created to
+accommodate for various display devices.
 
 \section{Fonts}
 When choosing fonts for a document, legibility should be of foremost concern.
 The main text should be set with a font at a size of at least 10\,pt, if the
 document is aimed at adult readers, or 12\,pt, if elementary-school children and
-people with weakened sight are part of the audience
-\cite[para.\,13--15]{kapr99}. The target medium also needs to be taken into
-consideration. A faithful copy of a typeface designed for the letterpress will
-look lighter than originally intended when printed digitally. This may hamper
-its legibility, if it contains hairline strokes due to its high contrast or
-overall lightness \cite[sec.~6.1.2]{bringhurst92}. In printed text, serified
-fonts are more familiar to the reader and therefore more suitable for
-long-distance reading than their sans serif counterparts. At small-resolution
-screens, however, simple low-contrast typefaces with slab or no serifs will
-often yield the best result.
+people with weakened sight are a part of the
+audience.~\cite[para.\,13--15]{kapr99}. The target medium also needs to be taken
+into consideration. A faithful copy of a typeface designed for the letterpress
+will look lighter than originally intended when printed digitally. This may
+hamper its legibility, if it contains hairline strokes due to its high contrast
+or due to its overall lightness~\cite[sec.~6.1.2]{bringhurst92}. In printed
+text, serified fonts are more familiar to the reader and therefore more suitable
+for long-distance reading than their sans serif counterparts. At
+small-resolution screens, however, simple low-contrast typefaces with slab or no
+serifs will often yield the best result.
 
 Beside being legible, a font should be sympathetic to the subject matter and
 compatible with the cultural and historical affiliations of the document. As
-\person{Robert Bringhurst} writes in \citework*()[sec.\,6.3.1]{bringhurst92}:
+\person{Robert Bringhurst} notes in \citework*()[sec.\,6.3.1]{bringhurst92}:
 \quote{There are books about the Renaissance set in faces that belong to the
 Baroque and books about the Baroque set in faces from the Renaissance.  To a
 good typographer, it is not enough merely to avoid these kinds of laughable
 contradictions. The typographer seeks to \emph{shed light} on the text, to
 generate insight and energy, by setting every text in a face and form in which
 it actually belongs.} In a more nuanced way, this also applies to modern
-documents with seemingly no historical affiliations. It is typical to set
-scientific documents in neoclassical typefaces as an homage to the Age of
-Enlightenment, and modern day novels in renaissance typefaces as a reference to
-\person{Miguel de Cervantes Saavedra}'s \work{Don Quixote} and other early
-European novels.
+documents with seemingly no historical affiliations.
 
 A font should also contain all the letters and symbols that will appear in
 the document. If the manuscript is multilingual and contains passages in both
@@ -67,70 +63,70 @@ have to be borrowed from other typefaces.
 
 \section{Structural Elements}
 \subsection{Paragraphs}
-The base units of thought in prose, paragraphs slice the text into coherent bits
-ready to be consumed by the reader. A line in a paragraph of the main text
-should be 45--75 characters long on a single-column page or 40--50 characters
-long on a multi-column page and \term{justified} (spread horizontally to fit the
-column width). Extended passages of lines wider than 80 characters strain the
-eye of the reader, whereas justified lines that are too narrow to accommodate 40
-characters may make the word spacing entirely too loose. In the latter case, the
-text should be set \term{ragged} instead, as seen in the margin notes throughout
-this book \cite[sec.\,2.1.2]{bringhurst92}.
+The base units of linguistic thought in prose, paragraphs slice the text into
+coherent bits that can be readily consumed by the reader. A line in a paragraph
+of the main text should be 45--75 characters long on a single-column page or
+40--50 characters long on a multi-column page and \term{justified} (spread
+horizontally to fit the column width). Extended passages of lines wider than 80
+characters strain the eye of the reader, whereas justified lines that are too
+narrow to accommodate 40 characters may make the word spacing entirely too
+loose. In the latter case, the text should be set \term{ragged} instead, as seen
+in the margin notes throughout this book~\cite[sec.\,2.1.2]{bringhurst92}.
 
 % LaTeX, Word and the justification of paragraphs
 % HTML, CSS and the justification and hyphenation of paragraphs
 
 Vertically, the lines of a paragraph should be separated by approximately twenty
-to forty-five percent of the font size \cite{line-spacing}. If the size of the
+to forty-five percent of the font size~\cite{line-spacing}. If the size of the
 base font is 10\,pt, the line height (also known as the \emph{leading}) would be
 between 12 and 14.5\,pt, adding 1 to 2.25\,pt of lead above and below each line.
 As a general guideline, dark and bulky fonts require more leading, as do texts
-riddled with accents, full capital letters, subscripts, and superscripts
-\cite[sec.\,2.2.1]{bringhurst92}. The main text of this book is set in 10\,pt
-Palatino with the leading of 12\,pt. To allow for such minimal leading, all
-acronyms and other strings of upper-case letters are set as \term{small
-capitals} (capital letters whose height matches the lower case).
+riddled with accents, full capital letters, subscripts, and
+superscripts~\cite[sec.\,2.2.1]{bringhurst92}. The main text of this book is set
+in 10\,pt Palatino with the leading of 12\,pt. To allow for such minimal
+leading, all acronyms and other strings of upper-case letters are set as
+\term{small capitals} (capital letters whose height matches the lower case).
 
 % Leading in LaTeX, Word, and CSS
 
 Two adjacent paragraphs should be visibly separated without distracting the
 reader from the text. A predominant method is to indent the initial line of a
-paragraph with one half (1\,en) to three times (3\,em) the font size
-\cite[sec.\,2.3.2]{bringhurst92}. \par\noindent\hskip-\parindent If the margins
-are ample, outdented paragraphs are an intriguing option as well. \ding{161}
-Paragraphs can also be separated by graphical symbols, such as pilcrows, bullets,
-or boxes.\hspace{3em}A plain horizontal space that is at least 3\,em wide can
-likewise act as a paragraph separator
-\cite[ch.\,2,~p.\,16]{beran14}.\par\noindent Block paragraphs exchange
+paragraph with one half (1\,en) to three times (3\,em) the font
+size~\cite[sec.\,2.3.2]{bringhurst92}. \par\noindent\hskip-\parindent If the
+margins are ample, outdented paragraphs are an intriguing option as well.
+\ding{161} Paragraphs can also be separated by graphical symbols, such as
+pilcrows, bullets, or boxes.\hspace{3em}A plain horizontal space that is at
+least 3\,em wide can likewise act as a paragraph
+separator~\cite[ch.\,2,~p.\,16]{beran14}.\par\noindent Block paragraphs exchange
 indentation and horizontal separators for additional vertical space above and
 below the paragraph. In justified block paragraphs, this space can be omitted as
 well, although the typesetter then has to manually ensure that the last line of
 each paragraph offers enough horizontal space to act as a separator. In short
-documents and limited spans of text, block paragraphs are a breath of fresh air
-\cite[sec.\,2.3.2]{bringhurst92}.
+documents and limited spans of text, block paragraphs are an attractive
+option~\cite[sec.\,2.3.2]{bringhurst92}.
 
 % Paragraph separation in LaTeX, Word, and CSS
 
 The poetry counterpart to the paragraph, the stanza is a collection of lines
 rather than sentences. Due to this structural difference, stanzas are typically
-only justified, if the individual lines are long enough to fill up the column,
+only justified, when the individual lines are long enough to fill up the column,
 and ragged otherwise. Much like in the case of prose, short-form poetry benefits
 from having the stanzas set in block paragraph style.
 
 \subsection{Headings}
 Another fundamental structural element, which appears in both prose and fiction,
-is the heading, whose function is to delimit and name the individual sections of
-a document. To alleviate navigation, headings should be a prominent presence on
-a page. This can be achieved by using a larger variant of the base font or by
-including the text of the latest heading in the margin or the header of the page
-\cite[sec.\,4.2.1]{bringhurst92}, as seen throughout this book.
+is the heading. The function of a heading is to delimit and name the individual
+sections of a document. To alleviate navigation, headings should be a prominent
+presence on a page. This can be achieved by using a larger variant of the base
+font or by including the text of the latest heading in the margin or the header
+of the page~\cite[sec.\,4.2.1]{bringhurst92}, as seen throughout this book.
 
 The hierarchy of the headings can be expressed by the variation of fonts,
 indentation, alignment and numbering, although alternating the size of the base
-font is sufficient for many types of a document. In documents that are bound in
+font is sufficient for many types of documents. In documents that are bound in
 codex form and read two pages at a time, the height of headings should be a
 whole multiple of the line height of the main text, so that the headings do not
-disrupt the alignment of lines on the facing pages \cite[para.\,33]{kapr99}.
+disrupt the alignment of lines on the facing pages~\Cite[para.\,33]{kapr99}.
 
 % Headings in LaTeX, Word and CSS
 
