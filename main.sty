@@ -293,6 +293,35 @@
 \AtBeginDocument{%
   \input ushyphex
   \input ./hyphenation}
+%% Table of contents entries
+\renewcommand*\l@chapter[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \vskip 1.0em \@plus\p@
+    \setlength\@tempdima{3.2em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \leavevmode
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      \textbf{#1}\nobreak{\quad #2}\par
+      \penalty\@highpenalty
+    \endgroup
+  \fi}
+\def\@dottedtocline#1#2#3#4#5{%
+  \ifnum #1>\c@tocdepth \else
+    \vskip \z@ \@plus.2\p@
+    {\leftskip #2\relax \rightskip \@tocrmarg
+     \parindent #2\relax\@afterindenttrue
+     \interlinepenalty\@M
+     \leavevmode
+     \@tempdima #3\relax
+     \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
+     {#4}\nobreak{\normalfont\normalcolor\quad #5}%
+     \par}%
+  \fi}
+\renewcommand*\l@section{\@dottedtocline{1}{0em}{3.2em}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{0em}{3.2em}}
 %% Fonts
 \usepackage{fontspec}
 \usepackage{unicode-math}
