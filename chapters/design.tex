@@ -244,9 +244,7 @@ horizontal margins. A margin containing an occasional sidenote will require less
 space that a margin ripe with photographs, tables, and diagrams.
 
 The vertical margins may contain additional navigational aids, such as the page
-numbers and running headers in this book. If your feel the horizontal margins
-are gaping with emptiness, you may use them for this purpose as
-well.~\cite[sec.\,8.5.2]{bringhurst92}
+numbers and running headers in this book.~\cite[sec.\,8.5.2]{bringhurst92}
 
 In print design---and wherever else the page height is fixed---we need to also
 decide on the text height. The text height needs to be a multiple of the body
@@ -256,19 +254,40 @@ proportions that work well with the proportions of the
 page.~\cite[sec.\,8.4.2]{bringhurst92}
 
 \section{Color}
-In both print and web design, it is perfectly reasonable to use either just the
-combination of black and white or shades of gray. A secondary color may be
-introduced to enliven the page if the design calls for such a measure;
-\textcolor{red}{\textbf{red}} has historically been used for this purpose (see
-Figure~\ref{fig:vulgate-bible}).  More than one hue of color may be introduced,
-although each additional one makes it more difficult to establish a visual
-system that is intelligible to the reader.
+Three types of \termpl{cone cell}---S, M, and L---exist in the human eye, and
+each type is sensitive to a different range of the \term{visible light}.  The
+perception of the visible light is what is referred to as \term{color}. In this
+section, we will briefly overview the color theory as well as general
+guidelines with respect to color scheme design.
 
-The general guidelines are to only use colored typefaces for emphasis, not for
-the body text, and on backgrounds that are (ideally) colorless or of sufficient
-contrast with the typeface color. Distinct colors should stay distinct even for
-the color-blind reader, unless the lack of distinction between the colors does
-not impair understanding.
+\begin{figure}
+  \includegraphics[width=0.5\textwidth]{examples/03/rgb}%
+  \includegraphics[width=0.5\textwidth]{examples/03/cmy}
+  \caption{The additive $RGB$ color model (left), and the subtractive $CMY$
+    color model (right).}
+  \label{fig:color-models}
+\end{figure}
+
+\subsection{Theory}
+In \citeyear{cie32}, \acronym{CIE} defined the \term*{\acronym{CIE} $XYZ$ color
+space}\index{color space}\index{color space!$XYZ$}, which specifies how a
+\acronym{SPD} of the visible light relates to a set of three parameters ($X,
+Y,$ and $Z$) that specify a color. Since the $Y$ parameter is a measure of the
+\term{luminance} of a color, a two-dimensional color space called the
+\term*{\acronym{CIE} $xyY$ color space}\index{color space!$xyY$} can by derived
+from \acronym{CIE} $XYZ$ by disregarding the luminosity.
+A plot, where a point $(x, y)$ corresponds to a color in \acronym{CIE} $xyY$,
+is called a \term{chromacity diagram} (see Figure~\ref{fig:chromacity-diagram}).
+In theory, we can directly use the \acronym{CIE} color spaces to specify
+colors. In practice, there exists task-specific color spaces.
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{examples/03/CIExy1931}
+  \caption{A chromacity diagram, where the shark-fin-shaped \term{spectral locus}
+    corresponds to a narrow-band \acronym{SPD} with power at just a single
+    wavelength swept across the visible light (380–700\,nm).}
+  \label{fig:chromacity-diagram}
+\end{figure}
 
 \begin{figure}
   \includegraphics[width=\textwidth]{examples/03/1500-latin-vulgate}
@@ -277,3 +296,45 @@ not impair understanding.
     1487}
   \label{fig:vulgate-bible}
 \end{figure}
+
+Electronic screens use red, green, and blue sub-pixels, which gives rise to the
+additive \term*{$RGB$ color model}\index{color model!$RGB$}
+(see Figure~\ref{fig:color-models}). An \term*{$RGB$ color space}\index{color
+space!$RGB$} is then specified by the chromacities of its
+\termpl*[primaries]{primary}, and the \term{white point}. The extent of the
+colors that can be represented by an $RGB$ color space (its \term{gamut}) can
+be plotted in the chromacity diagram as a triangle whose vertices are the
+chromacities of the primaries. Standard $RGB$ color spaces include sRGB, Adobe
+RGB 1998, and ProPhoto RGB (see
+Figure~\ref{fig:chromacity-diagram})\index{color space!sRGB}\index{color
+space!Adobe RGB 1998}\index{color space!ProPhoto RGB}.
+There exists no single standard white point or primaries; if only the $RGB$
+coordinates of a color are given, the color cannot be accurately reproduced.
+For this reason, digital images often include an \acroshort{ICC} \term{color
+profile}, which fully describes the $RGB$ color space.
+
+Mixing cyan, magenta, and yellow inks gives rise to the subtractive
+\term*{$CMYK$ color}\index{color model!cmky} model. Although three colors ($C,
+M,$ and $Y$) are sufficient to describe a color, a black ink ($K$) is less
+expensive and dries more quickly than a combination of three colored inks.
+White color is provided by the paper. Similarly to the $RGB$ model, $CMYK$
+coordinates specify a color only if we specify a $CMYK$ color space\index{color
+space!$CMYK$} using an \acroshort{ICC} color profile. For printing text, it is
+often advantageous \emph{not} to specify a color profile, so that no inks other
+than $K$ are introduced in a \term{color conversion}. When an accurate
+reproduction of a color is desired, a color model must be specified.
+
+\subsection{Schemes}
+In both print and web design, it is perfectly reasonable to use either just the
+combination of black and white or shades of gray. A secondary color may be
+introduced to enliven the page if necessary; \textcolor{red}{\textbf{red}} has
+historically been used for this purpose (see Figure~\ref{fig:vulgate-bible}).
+More than a single hue of color may be introduced, although each additional one
+makes it more difficult to establish a visual system that is intelligible to
+the reader.
+
+You should only use colored typefaces for emphasis, not for the body text, and
+on backgrounds that are white or of sufficient contrast with the typeface
+color. Distinct colors should stay distinct even for the color-blind reader,
+unless the lack of distinction between the colors does not impair
+understanding.
