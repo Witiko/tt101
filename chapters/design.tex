@@ -272,24 +272,24 @@ guidelines with respect to color scheme design.
 In \citeyear{cie32}, \acronym{CIE} defined the \term*{\acronym{CIE} $XYZ$ color
 space}\index{color space}\index{color space!$XYZ$}, which specifies how a
 \acronym{SPD} of the visible light relates to a set of three parameters ($X,
-Y,$ and $Z$) that specify a color. Since the $Y$ parameter is a measure of the
+Y,$ and $Z$) that specify a color. Since the parameter $Y$ is a measure of the
 \term{luminance} of a color, a two-dimensional color space called the
 \term*{\acronym{CIE} $xyY$ color space}\index{color space!$xyY$} can by derived
 from \acronym{CIE} $XYZ$ by disregarding the luminosity.
 A plot, where a point $(x, y)$ corresponds to a color in \acronym{CIE} $xyY$,
 is called a \term{chromacity diagram} (see Figure~\ref{fig:chromacity-diagram}).
 In theory, we can directly use the \acronym{CIE} color spaces to specify
-colors. In practice, there exists task-specific color spaces.
+colors. In practice, there exist task-specific color spaces.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{examples/03/CIExy1931}
-  \caption{A chromacity diagram, where the shark-fin-shaped \term{spectral locus}
-    corresponds to a narrow-band \acronym{SPD} with power at just a single
-    wavelength swept across the visible light (380–700\,nm).}
+  \caption{A \acronym{CIE} $xyY$ chromacity diagram, where the shark-fin-shaped
+    \term{spectral locus} corresponds to a narrow-band \acronym{SPD} with power
+    at just a single wavelength swept across the visible light (380–700\,nm).}
   \label{fig:chromacity-diagram}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[b!]
   \includegraphics[width=\textwidth]{examples/03/1500-latin-vulgate}
   \caption{An excerpt from the \work{Latin Vulgate Bible} printed by
     the German goldsmith, printer, and publisher \person{Anton Koberger} in
@@ -297,24 +297,24 @@ colors. In practice, there exists task-specific color spaces.
   \label{fig:vulgate-bible}
 \end{figure}
 
-Electronic screens use red, green, and blue sub-pixels, which gives rise to the
+Electronic screens use red, green, and blue sub-pixels. This gives rise to the
 additive \term*{$RGB$ color model}\index{color model!$RGB$}
 (see Figure~\ref{fig:color-models}). An \term*{$RGB$ color space}\index{color
 space!$RGB$} is then specified by the chromacities of its
-\termpl*[primaries]{primary}, and the \term{white point}. The extent of the
-colors that can be represented by an $RGB$ color space (its \term{gamut}) can
-be plotted in the chromacity diagram as a triangle whose vertices are the
-chromacities of the primaries. Standard $RGB$ color spaces include sRGB, Adobe
-RGB 1998, and ProPhoto RGB (see
+\termpl{primary color} (\termpl*[primaries]{primary}), and by the \term{white
+point}. The extent of the colors that can be represented by an $RGB$ color
+space (its \term{gamut}) can be plotted in the chromacity diagram as a triangle
+whose vertices are the chromacities of the primaries. Standard $RGB$ color
+spaces include sRGB, Adobe RGB 1998, and ProPhoto RGB (see
 Figure~\ref{fig:chromacity-diagram})\index{color space!sRGB}\index{color
 space!Adobe RGB 1998}\index{color space!ProPhoto RGB}.
 There exists no single standard white point or primaries; if only the $RGB$
 coordinates of a color are given, the color cannot be accurately reproduced.
 For this reason, digital images often include an \acroshort{ICC} \term{color
-profile}, which fully describes the $RGB$ color space.
+profile}, which fully specifies a color space.
 
 Mixing cyan, magenta, and yellow inks gives rise to the subtractive
-\term*{$CMYK$ color}\index{color model!cmky} model. Although three colors ($C,
+\term*{$CMYK$ color model}\index{color model!$CMYK$}. Although three colors ($C,
 M,$ and $Y$) are sufficient to describe a color, a black ink ($K$) is less
 expensive and dries more quickly than a combination of three colored inks.
 White color is provided by the paper. Similarly to the $RGB$ model, $CMYK$
