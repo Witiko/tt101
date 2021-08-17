@@ -2,7 +2,7 @@
 
  [![actions-badge][]][actions]
 
-This repository contains [the PDF][latest] and the LaTeX source of the
+This repository contains [PDF][latest] and LaTeX source of
 *Electronic Document Preparation Pocket Primer* by Vít Novotný.
 
  ![banner][]
