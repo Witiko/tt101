@@ -24,8 +24,18 @@ $(SUBMAKEFILES):
 	make -C $@
 
 # Typeset the text.
-$(OUTPUT).pdf: $(SOURCES) Makefile
+$(OUTPUT).pdf: $(SOURCES) cc-by.pdf Makefile
 	latexmk -pdf $<
+
+# Download a CC-BY icon.
+# @requires: The debian `curl` package.
+cc-by.svg:
+	curl 'https://upload.wikimedia.org/wikipedia/commons/3/3c/Cc-by_new.svg' >$@
+
+# Convert the CC-BY icon to PDF.
+# @requires: The debian `inkscape` package.
+cc-by.pdf: cc-by.svg
+	inkscape --export-pdf=$@ $<
 
 # Remove auxiliary files and directories.
 clean:

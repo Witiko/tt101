@@ -9,7 +9,7 @@ jobs:
     name: Test the book
     runs-on: ubuntu-latest
     container:
-      image: texlive/texlive:TL2016-historic
+      image: texlive/texlive:TL2015-historic
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
@@ -18,7 +18,7 @@ jobs:
         run: |
           set -ex
           apt-get -qy update
-          apt-get -qy install groff-base groff python3-proselint python3-pygments trang
+          apt-get -qy install groff-base groff inkscape python3-proselint python3-pygments trang
 
       - name: Run Proselint
         run: make test
