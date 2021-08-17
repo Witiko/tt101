@@ -1,0 +1,27 @@
+name: Test
+on:
+  pull_request:
+  workflow_dispatch:
+env:
+  DEBIAN_FRONTEND: noninteractive
+jobs:
+  test:
+    name: Test the book
+    runs-on: ubuntu-latest
+    container:
+      image: texlive/texlive:TL2016-historic
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Install additional packages
+        run: |
+          set -ex
+          apt-get -qy update
+          apt-get -qy install groff-base groff python3-proselint python3-pygments trang
+
+      - name: Run Proselint
+        run: make test
+
+      - name: Typeset the book
+        run: make

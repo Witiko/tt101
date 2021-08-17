@@ -1,1 +1,1 @@
-consistency\.spacing|garner\.dates When specifying a date range, write 'from X to Y'\.|garner\.needless_variants Needless variant\. 'extendable' is the preferred form\.|leonard\.exclamation\.30ppm|twain\.damn
+consistency\.spacing|(garner\.dates|dates_times.dates) When specifying a date range, write 'from X to Y'\.|(garner\.needless_variants|needless_variants.misc) Needless variant\. 'extendable' is the preferred form\.|leonard\.exclamation\.30ppm
