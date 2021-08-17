@@ -1,7 +1,8 @@
 OUTPUT=main
 SOURCES=$(OUTPUT).tex $(OUTPUT).bib $(OUTPUT).sty acronyms.tex \
 	examples/*/* chapters/*.tex
-AUXFILES=$(OUTPUT).bbl $(OUTPUT).run.xml chapters/*.aux cc-by.pdf cc-by.svg
+AUXFILES=$(OUTPUT).bbl $(OUTPUT).run.xml chapters/*.aux \
+	cc-by.pdf cc-by.svg main.pyg main.out.pyg
 AUXDIRS=_minted-$(OUTPUT)
 SUBMAKEFILES=examples/*/
 
