@@ -9,7 +9,7 @@ jobs:
     name: Test the book
     runs-on: ubuntu-latest
     container:
-      image: texlive/texlive:TL2015-historic
+      image: texlive/texlive:TL2016-historic
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
