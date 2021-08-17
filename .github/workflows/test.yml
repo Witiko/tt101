@@ -18,7 +18,7 @@ jobs:
         run: |
           set -ex
           apt-get -qy update
-          apt-get -qy install groff-base groff inkscape python3-proselint python3-pygments trang
+          apt-get -qy install curl groff-base groff inkscape python3-proselint python3-pygments trang
 
       - name: Run Proselint
         run: make test
