@@ -1,7 +1,5 @@
 # Electronic Document Preparation Pocket Primer
 
- [![actions-badge][]][actions]
-
 This repository contains [PDF][latest] and LaTeX source of
 *Electronic Document Preparation Pocket Primer* by Vít Novotný.
 
